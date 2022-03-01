@@ -38,4 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         handler_splash.removeCallbacks(runnalbe_splash);
     }
+
+    //test
 }
