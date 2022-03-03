@@ -34,6 +34,4 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         handler_splash.removeCallbacks(runnalbe_splash);
     }
-
-    //Coder2534 Github Platfroming 30days token
 }
