@@ -24,11 +24,12 @@ public class LoginActivity extends AppCompatActivity {
 
     //계정 생성
     private void CreateAccount(String email, String password, String accessCode){
-        if(Variable.accessCode_All.contains(accessCode)){
+        if(Variable.accessCode_All.contains(accessCode) && !Variable.accessCode_Used.contains(accessCode)){
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        Variable.accessCode_Used.add(accessCode);
                         SendEmailVerification();
                     }else{
 
