@@ -39,5 +39,5 @@ public class MainActivity extends AppCompatActivity {
         handler_splash.removeCallbacks(runnalbe_splash);
     }
 
-    //test
+    //Coder2534 Github Platfroming 30days token
 }
