@@ -9,6 +9,12 @@
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_splash.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_loading.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_login.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_login.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_main.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_sign_in.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_email_verification.xml" value="0.23703703703703705" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_sign_in.xml" value="0.23703703703703705" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_sign_out.xml" value="0.23703703703703705" />
       </map>
     </option>
   </component>

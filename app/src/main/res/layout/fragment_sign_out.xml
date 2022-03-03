@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title_signOut"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="111dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/accessCode_signOut"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="318dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/password_signOut"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="240dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/email_signOut"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="175dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/confirm_signOut"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="448dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/register_signOut"
+        tools:layout_editor_absoluteX="294dp"
+        tools:layout_editor_absoluteY="671dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
