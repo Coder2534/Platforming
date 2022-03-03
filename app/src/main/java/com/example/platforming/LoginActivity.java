@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         SendEmailVerification();
                     }else{
-
+                        //test
                     }
                 }
             });
