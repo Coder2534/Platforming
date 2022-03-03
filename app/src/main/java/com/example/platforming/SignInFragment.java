@@ -11,17 +11,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 public class SignInFragment extends Fragment {
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    SignOutFragment signOutFragment;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         SetListener(view);
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        signOutFragment = new SignOutFragment();
         return view;
     }
 
@@ -46,6 +55,8 @@ public class SignInFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.w("LoginActivity", "signInWithEmailAndPassword Success");
+                    fragmentTransaction.replace(R.id.fragmentLayout_signIn, signOutFragment);
+                    fragmentTransaction.commit();
                 }else{
                     Log.w("LoginActivity", "signInWithEmailAndPassword Error");
                 }
