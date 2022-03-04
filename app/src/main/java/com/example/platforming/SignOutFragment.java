@@ -21,18 +21,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignOutFragment extends Fragment {
     FirebaseAuth firebaseAuth;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    EmailVerificationFragment emailVerificationFragment;
+    boolean sendEmail = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_out, container, false);
         firebaseAuth = Variable.firebaseAuth;
-        fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        emailVerificationFragment = new EmailVerificationFragment();
         SetListener(view);
         return view;
     }
@@ -78,8 +73,8 @@ public class SignOutFragment extends Fragment {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.w("LoginActivity", "sendEmailVerification Success");
-                    fragmentTransaction.replace(R.id.fragmentLayout_signIn, emailVerificationFragment);
-                    fragmentTransaction.commit();
+                    sendEmail = true;
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new EmailVerificationFragment()).addToBackStack(null).commit();
                 }else{
                     Log.w("LoginActivity", "sendEmailVerification Error");
                 }

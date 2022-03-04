@@ -1,5 +1,7 @@
 package com.example.platforming;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
