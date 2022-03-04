@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -40,17 +41,10 @@
 
     <Button
         android:id="@+id/confirm_signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
         tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="448dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        tools:layout_editor_absoluteY="418dp" />
 
-    <Button
-        android:id="@+id/register_signOut"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="671dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
