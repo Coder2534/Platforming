@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +29,7 @@ public class SignInFragment extends Fragment {
     //리스너 설정
     private void SetListener(View view){
         Button confirm = (Button)view.findViewById(R.id.confirm_signIn);
-        Button signOut = (Button)view.findViewById(R.id.signOut_signIn);
+        Button signOut = (Button)view.findViewById(R.id.signUp_signIn);
         TextView email = (TextView)view.findViewById(R.id.email_signIn);
         TextView password = (TextView)view.findViewById(R.id.password_signIn);
 
@@ -44,7 +42,7 @@ public class SignInFragment extends Fragment {
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignOutFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignUpFragment()).addToBackStack(null).commit();
             }
         });
     }

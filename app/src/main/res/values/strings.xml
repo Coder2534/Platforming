@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Platforming</string>
     <string name="app_title">Autonomy</string>
+    <string name="button_signUp"><u>회원가입</u></string>
+    <string name="button_findPassword"><u>비밀번호 찾기</u></string>
 </resources>

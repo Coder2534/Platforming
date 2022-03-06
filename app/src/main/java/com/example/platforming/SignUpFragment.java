@@ -11,22 +11,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignOutFragment extends Fragment {
+public class SignUpFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     boolean sendEmail = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sign_out, container, false);
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         firebaseAuth = Variable.firebaseAuth;
         SetListener(view);
         return view;
@@ -34,10 +32,10 @@ public class SignOutFragment extends Fragment {
 
     //리스너 설정
     private void SetListener(View view){
-        Button confirm = (Button)view.findViewById(R.id.confirm_signOut);
-        TextView email = (TextView)view.findViewById(R.id.email_signOut);
-        TextView password = (TextView)view.findViewById(R.id.password_signOut);
-        TextView accessCode = (TextView)view.findViewById(R.id.accessCode_signOut);
+        Button confirm = (Button)view.findViewById(R.id.confirm_signUp);
+        TextView email = (TextView)view.findViewById(R.id.email_signUp);
+        TextView password = (TextView)view.findViewById(R.id.password_signUp);
+        TextView accessCode = (TextView)view.findViewById(R.id.accessCode_signUp);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
