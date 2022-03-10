@@ -1,5 +1,6 @@
 package com.example.platforming;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class SignInFragment extends Fragment {
     private void SetListener(View view){
         Button confirm = (Button)view.findViewById(R.id.confirm_signIn);
         Button signOut = (Button)view.findViewById(R.id.signUp_signIn);
+
         TextView email = (TextView)view.findViewById(R.id.email_signIn);
         TextView password = (TextView)view.findViewById(R.id.password_signIn);
 

@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:text="프로필 선택"
         tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="546dp" />
+        tools:layout_editor_absoluteY="575dp" />
 
     <Button
         android:id="@+id/confirm_SIS"
@@ -123,5 +123,12 @@
         android:text="확인"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="649dp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="545dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
