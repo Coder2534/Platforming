@@ -40,4 +40,6 @@ public class UserInitialSettingFragment extends Fragment {
             }
         });
     }
+
+    //프로필 넘기기 == 스와이프 == 드래그
 }

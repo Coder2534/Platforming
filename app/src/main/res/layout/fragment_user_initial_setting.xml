@@ -104,17 +104,9 @@
         android:id="@+id/profile_SIS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="403dp"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="431dp"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/selectProfile_SIS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="프로필 선택"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="575dp" />
 
     <Button
         android:id="@+id/confirm_SIS"
@@ -122,13 +114,6 @@
         android:layout_height="wrap_content"
         android:text="확인"
         tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="649dp" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="545dp" />
+        tools:layout_editor_absoluteY="615dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

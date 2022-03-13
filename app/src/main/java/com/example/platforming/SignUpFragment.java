@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpFragment extends Fragment {
     FirebaseAuth firebaseAuth;
-    boolean sendEmail = false;
 
     @Nullable
     @Override
@@ -70,10 +69,17 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
+                    //로그 출력
                     Log.w("LoginActivity", "sendEmailVerification Success");
-                    sendEmail = true;
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new EmailVerificationFragment()).addToBackStack(null).commit();
+
+                    //Fragment 변경
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Type", "emailVerification");
+                    EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
+                    emailAlarmFragment.setArguments(bundle);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
                 }else{
+                    //로그 출력
                     Log.w("LoginActivity", "sendEmailVerification Error");
                 }
             }

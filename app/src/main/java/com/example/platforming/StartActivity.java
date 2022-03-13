@@ -23,6 +23,13 @@ public class StartActivity extends AppCompatActivity {
                 Intent loginIntent = new Intent(StartActivity.this, SignInActivity.class);
                 startActivity(loginIntent);
                 finish();
+
+                /*
+                MainActivity 확인
+                Intent mainIntent = new Intent(StartActivity.this, MainActivity.class);
+                startActivity(mainIntent);
+                finish();
+                 */
             }};
 
         handler_splash = new Handler();
