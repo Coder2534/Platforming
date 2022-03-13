@@ -49,9 +49,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID\n(Email)"
+        android:text="Username\n(Email)"
         android:textAlignment="center"
-        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteX="36dp"
         tools:layout_editor_absoluteY="175dp" />
 
     <TextView
