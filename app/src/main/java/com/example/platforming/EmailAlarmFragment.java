@@ -12,13 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class EmailAlarmFragment extends Fragment {
-    boolean checkEmail = false;
+    boolean deleteEmail = true;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_email_alarm, container, false);
-
+        Setting(view);
         return view;
     }
 
@@ -26,17 +26,18 @@ public class EmailAlarmFragment extends Fragment {
     private void Setting(View view){
         Button confirm = (Button) view.findViewById(R.id.confirm_emailVerification);
 
-        if(getArguments().getString("Type").equals("findPassword")){
+        if(getArguments().getString("Type").equals("emailVerification")){
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     CheckEmailVerification();
                 }
             });
-        }else if(getArguments().getString("Type").equals("emailVerification")){
+        }else if(getArguments().getString("Type").equals("findPassword")){
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    deleteEmail = false;
                     getActivity().onBackPressed();
                 }
             });
@@ -46,19 +47,17 @@ public class EmailAlarmFragment extends Fragment {
     //이메일 인증여부 확인
     private void CheckEmailVerification(){
         if(Variable.firebaseAuth.getCurrentUser().isEmailVerified()){
-            checkEmail = true;
+            deleteEmail = false;
             Intent mainIntent = new Intent(getContext(), MainActivity.class);
             getActivity().startActivity(mainIntent);
             getActivity().finish();
-        }else{
-
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(!checkEmail){
+        if(deleteEmail){
             Variable.firebaseAuth.getCurrentUser().delete();
         }
     }
