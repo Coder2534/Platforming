@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/title_emailVerification"
+        android:id="@+id/title_emailAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="101dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/detail_emailVerification"
-        android:layout_width="wrap_content"
+        android:id="@+id/message_emailAlarm"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="260dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_emailAlarm" />
 
     <Button
-        android:id="@+id/confirm_emailVerification"
+        android:id="@+id/confirm_emailAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="173dp"
-        tools:layout_editor_absoluteY="557dp" />
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="277dp"
+        android:text="확인"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_emailAlarm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

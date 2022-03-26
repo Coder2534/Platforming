@@ -3,4 +3,9 @@
     <string name="app_title">Autonomy</string>
     <string name="button_signUp"><u>회원가입</u></string>
     <string name="button_findPassword"><u>비밀번호 찾기</u></string>
+    <string name="facebook_app_id">527252608759050</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">27d364fed7b87a6bb57631b42045fd19</string>
+    <string name="firebase_web_client_id">651471541055-41nvju13976bkhqs475v97mvi3splu21.apps.googleusercontent.com</string>
+
 </resources>

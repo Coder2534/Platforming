@@ -2,7 +2,6 @@ package com.example.platforming;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,8 +72,7 @@ public class UserInitialSettingFragment extends Fragment {
 
         for (int i = 0; i < indicators.length; i++) {
             indicators[i] = new ImageView(getContext());
-            indicators[i].setImageDrawable(ContextCompat.getDrawable(getContext(),
-                    R.drawable.bg_indicator_inactive));
+            indicators[i].setImageDrawable(getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
             indicators[i].setLayoutParams(params);
             layoutIndicator.addView(indicators[i]);
         }
@@ -86,15 +84,9 @@ public class UserInitialSettingFragment extends Fragment {
         for (int i = 0; i < childCount; i++) {
             ImageView imageView = (ImageView) layoutIndicator.getChildAt(i);
             if (i == position) {
-                imageView.setImageDrawable(ContextCompat.getDrawable(
-                        getContext(),
-                        R.drawable.bg_indicator_active
-                ));
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
             } else {
-                imageView.setImageDrawable(ContextCompat.getDrawable(
-                        getContext(),
-                        R.drawable.bg_indicator_inactive
-                ));
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
             }
         }
     }

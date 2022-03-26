@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "651471541055",
+    "project_id": "platforming-8b4cd",
+    "storage_bucket": "platforming-8b4cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651471541055:android:a52c80be1d00e33749b98a",
+        "android_client_info": {
+          "package_name": "com.example.platforming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651471541055-41nvju13976bkhqs475v97mvi3splu21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAublYLB81SHrG2UA0NpveNUtOdswJEo4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651471541055-41nvju13976bkhqs475v97mvi3splu21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

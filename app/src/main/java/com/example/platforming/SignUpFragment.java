@@ -1,5 +1,6 @@
 package com.example.platforming;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpFragment extends Fragment {
     FirebaseAuth firebaseAuth;
@@ -34,33 +38,62 @@ public class SignUpFragment extends Fragment {
         Button confirm = (Button)view.findViewById(R.id.confirm_signUp);
         TextView email = (TextView)view.findViewById(R.id.email_signUp);
         TextView password = (TextView)view.findViewById(R.id.password_signUp);
+        TextView passwordCheck = (TextView)view.findViewById(R.id.passwordCheck_signUp);
         TextView accessCode = (TextView)view.findViewById(R.id.accessCode_signUp);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateAccount(email.getText().toString(), password.getText().toString(), accessCode.getText().toString());
+                CreateAccount(email.getText().toString(), password.getText().toString(), passwordCheck.getText().toString(), accessCode.getText().toString());
             }
         });
     }
 
     //계정 생성
-    private void CreateAccount(String email, String password, String accessCode){
-        if(Variable.accessCode_All.contains(accessCode)){
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        SendEmailVerification();
-                    }else{
-                        Log.w("LoginActivity", "createUserWithEmailAndPassword Error");
-                    }
+    private void CreateAccount(String email, String password, String passwordCheck, String accessCode){
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
+        Matcher matcher = pattern.matcher(email);
+        if(!matcher.find()){
+            Log.w("SignUpFragment", "password Error");
+            CustomDialog.ErrorDialog(getContext(), "이메일이 유효하지 않습니다.");
+            return;
+        }
+
+        //대문자, 소문자, 특수문자, 숫자 중 2가지 포함(8~20자)
+        pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[a-z!@#$%^&*])(?=.*[0-9!@#$%^&*])(?=.*[A-Z0-9])(?=.*[a-z0-9])(?=.*[A-Z!@#$%^&*]).{8,20}$");
+        matcher = pattern.matcher(password);
+        if(!matcher.find()){
+            Log.w("SignUpFragment", "password Error");
+            CustomDialog.ErrorDialog(getContext(), "비밀번호가 유효하지 않습니다.\n\n8자리 이상과 두 종류 이상의 문자구성\n※문자종류: 대문자, 소문자, 특수문자, 숫자");
+            return;
+        }
+
+        if(!password.equals(passwordCheck)){
+            Log.w("SignUpFragment", "passwordCheck Error");
+            CustomDialog.ErrorDialog(getContext(), "비밀번호가 일치하지 않습니다.");
+            return;
+        }
+
+        if(!Variable.accessCode_All.contains(accessCode)){
+            Log.w("SignUpFragment", "accessCode Error");
+            CustomDialog.ErrorDialog(getContext(), "학교코드가 유효하지 않습니다.");
+            return;
+        }
+
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    if(Variable.tempUser != null && !Variable.tempUser.isEmailVerified()) Variable.tempUser.delete();
+                    Variable.tempUser = firebaseAuth.getCurrentUser();
+                    SendEmailVerification();
+                }else{
+                    Log.w("SignUpFragment", "createUserWithEmailAndPassword Error");
+                    CustomDialog.ErrorDialog(getContext(), "이미 사용중인 이메일 입니다.");
                 }
-            });
-        }
-        else{
-            Log.w("LoginActivity", "accessCode Error");
-        }
+            }
+        });
     }
 
     //이메일 인증메일 전송
@@ -70,7 +103,7 @@ public class SignUpFragment extends Fragment {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     //로그 출력
-                    Log.w("LoginActivity", "sendEmailVerification Success");
+                    Log.w("SignUpFragment", "sendEmailVerification Success");
 
                     //Fragment 변경
                     Bundle bundle = new Bundle();
@@ -80,7 +113,7 @@ public class SignUpFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
                 }else{
                     //로그 출력
-                    Log.w("LoginActivity", "sendEmailVerification Error");
+                    Log.w("SignUpFragment", "sendEmailVerification Error");
                 }
             }
         });

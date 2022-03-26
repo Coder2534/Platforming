@@ -1,14 +1,23 @@
 package com.example.platforming;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class StartActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 1000;
     Handler handler_splash;
     Runnable runnalbe_splash;
 
@@ -16,6 +25,8 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         runnalbe_splash = new Runnable() {
             @Override
