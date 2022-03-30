@@ -1,5 +1,7 @@
 package com.example.platforming;
 
+import android.app.Activity;
+
 public class Person {
     String NAME;
     String NICKNAME;
@@ -10,6 +12,8 @@ public class Person {
     int NUMBER;
     String NOTE;
     int PROFILE;
+
+    boolean FIRST_LOGIN = true;
 
     public String getNAME() {
         return NAME;

@@ -1,8 +1,10 @@
 package com.example.platforming;
 
 import static com.example.platforming.Variable.firebaseAuth;
-import static com.example.platforming.Variable.mGoogleApiClient;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -26,8 +30,11 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -35,7 +42,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class SignInFragment extends Fragment {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class SignInFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,6 +92,7 @@ public class SignInFragment extends Fragment {
                 EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
                 emailAlarmFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+                PasswordResetDialog(getContext(), getActivity().getSupportFragmentManager());
             }
         });
     }
@@ -115,6 +126,7 @@ public class SignInFragment extends Fragment {
 
     //로그인(Google)
     private int RC_SIGN_IN = 9001;
+    GoogleApiClient mGoogleApiClient;
 
     protected void setGoogle(SignInButton signInButton, String buttonText) {
         // Find the TextView that is inside of the SignInButton and set its text
@@ -128,7 +140,16 @@ public class SignInFragment extends Fragment {
                 break;
             }
         }
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.firebase_web_client_id))
+                .requestEmail()
+                .build();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity(), this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        //mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,5 +258,71 @@ public class SignInFragment extends Fragment {
         Intent mainIntent = new Intent(getContext(), MainActivity.class);
         getActivity().startActivity(mainIntent);
         getActivity().finish();
+    }
+
+    //Dialog
+    public void PasswordResetDialog(Context context, FragmentManager fragmentManager){
+        final EditText editText = new EditText(context);
+
+        AlertDialog.Builder ad = new AlertDialog.Builder(context);
+        ad.setTitle("비밀번호 찾기");
+        ad.setMessage("비밀번호를 찾으실 이메일을 입력해 주세요.");
+        ad.setView(editText);
+        ad.setPositiveButton("입력", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String email= editText.getText().toString();
+
+                if(!PasswordResetEmail(context, email)) return;
+
+                Bundle bundle = new Bundle();
+                bundle.putString("Type", "findPassword");
+                bundle.putString("Email", email);
+                EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
+                emailAlarmFragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+            }
+        });
+        ad.setNegativeButton("최소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        ad.show();
+    }
+
+    //비밀번호 재설정 이메일 전송
+    boolean isSuccessful;
+    boolean PasswordResetEmail(Context context, String email){
+
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
+        Matcher matcher = pattern.matcher(email);
+
+        if(!matcher.find()){
+            Log.w("EmailAlarmFragment", "email form Error");
+            CustomDialog.ErrorDialog(context, "이메일이 유효하지 않습니다.");
+            return false;
+        }
+
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.w("EmailAlarmFragment", "sendPasswordResetEmail success");
+                    isSuccessful = true;
+                }else{
+                    Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
+                    isSuccessful = false;
+                }
+            }
+        });
+
+        return isSuccessful;
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
