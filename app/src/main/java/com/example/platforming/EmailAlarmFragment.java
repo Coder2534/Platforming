@@ -1,5 +1,8 @@
 package com.example.platforming;
 
+import static com.example.platforming.Variable.firebaseAuth;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class EmailAlarmFragment extends Fragment {
-    boolean deleteEmail = true;
 
     @Nullable
     @Override
@@ -34,34 +36,33 @@ public class EmailAlarmFragment extends Fragment {
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckEmailVerification();
+                    CheckEmailVerification(getActivity());
+                    getActivity().onBackPressed();
                 }
             });
             title.setText("이메일 인증");
-            message.setText("회원가입 시 입력하신 이메일("+Variable.firebaseAuth.getCurrentUser().getEmail()+")로 전송된 인증 메일을 확인해 주세요.");
+            message.setText("회원가입 시 입력하신 이메일("+ firebaseAuth.getCurrentUser().getEmail()+")로 전송된 인증 메일을 확인해 주세요.");
         }else if(getArguments().getString("Type").equals("findPassword")){
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteEmail = false;
                     getActivity().onBackPressed();
                 }
             });
             title.setText("비밀번호 재설정");
-            message.setText("입력하신 이메일("+Variable.firebaseAuth.getCurrentUser().getEmail()+")로 전송된 비밀번호 재설정 메일을 확인해 주세요.");
+            message.setText("입력하신 이메일("+ firebaseAuth.getCurrentUser().getEmail()+")로 전송된 비밀번호 재설정 메일을 확인해 주세요.");
         }
     }
 
     //이메일 인증여부 확인
-    private void CheckEmailVerification(){
-        Variable.firebaseAuth.getCurrentUser().reload();
-        Log.w("EmailAlarmFragment", "Verification" + Variable.firebaseAuth.getCurrentUser().isEmailVerified());
-        if(Variable.firebaseAuth.getCurrentUser().isEmailVerified()){
+    void CheckEmailVerification(Activity activity){
+        firebaseAuth.getCurrentUser().reload();
+        Log.w("EmailAlarmFragment", "Verification" + firebaseAuth.getCurrentUser().isEmailVerified());
+        if(firebaseAuth.getCurrentUser().isEmailVerified()){
             Log.w("EmailAlarmFragment", "Verification success");
-            deleteEmail = false;
-            Intent mainIntent = new Intent(getContext(), MainActivity.class);
-            getActivity().startActivity(mainIntent);
-            getActivity().finish();
+            Intent mainIntent = new Intent(activity, MainActivity.class);
+            activity.startActivity(mainIntent);
+            activity.finish();
         }
     }
 }

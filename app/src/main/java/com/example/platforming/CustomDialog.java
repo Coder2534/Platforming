@@ -3,7 +3,6 @@ package com.example.platforming;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.widget.EditText;
 
 public class CustomDialog {
     public static void ErrorDialog(Context context, String message){
