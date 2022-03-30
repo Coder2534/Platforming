@@ -2,6 +2,7 @@ package com.example.platforming;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,4 +17,6 @@ public class Variable {
     public static FirebaseAuth firebaseAuth;
 
     public static FirebaseUser tempUser = null;
+
+    public static GoogleApiClient mGoogleApiClient;;
 }
