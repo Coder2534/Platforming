@@ -25,9 +25,3 @@ public class SignInActivity extends AppCompatActivity{
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignInFragment()).commit();
     }
 }
-
-/*
-    로그인 방식
-    개인 이메일과 페스워드 + 구글 페북 애플
-     */
-

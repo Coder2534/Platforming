@@ -12,7 +12,5 @@ public class Variable {
     public static ArrayList<String> accessCode = new ArrayList<String>(){{
         add("1");
     }};
-
-    public static FirebaseUser tempUser = null;
     public static FirebaseAuth firebaseAuth;
 }

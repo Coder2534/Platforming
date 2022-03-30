@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,6 +51,7 @@ public class SignUpFragment extends Fragment {
     }
 
     //계정 생성
+    FirebaseUser tempUser;
     private void CreateAccount(String email, String password, String passwordCheck, String accessCode){
         Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
         Matcher matcher = pattern.matcher(email);
@@ -84,8 +87,8 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    if(Variable.tempUser != null && !Variable.tempUser.isEmailVerified()) Variable.tempUser.delete();
-                    Variable.tempUser = firebaseAuth.getCurrentUser();
+                    if(tempUser != null && !tempUser.isEmailVerified()) tempUser.delete();
+                    tempUser = firebaseAuth.getCurrentUser();
                     SendEmailVerification(getActivity().getSupportFragmentManager());
                 }else{
                     Log.w("SignUpFragment", "createUserWithEmailAndPassword Error");

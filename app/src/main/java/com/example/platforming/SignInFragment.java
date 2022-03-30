@@ -85,13 +85,6 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.sendPasswordResetEmail(email.getText().toString());
-
-                Bundle bundle = new Bundle();
-                bundle.putString("Type", "findPassword");
-                EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
-                emailAlarmFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
                 PasswordResetDialog(getContext(), getActivity().getSupportFragmentManager());
             }
         });
@@ -273,14 +266,7 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
             public void onClick(DialogInterface dialog, int which) {
                 String email= editText.getText().toString();
 
-                if(!PasswordResetEmail(context, email)) return;
-
-                Bundle bundle = new Bundle();
-                bundle.putString("Type", "findPassword");
-                bundle.putString("Email", email);
-                EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
-                emailAlarmFragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+                PasswordResetEmail(context, fragmentManager, email);
             }
         });
         ad.setNegativeButton("최소", new DialogInterface.OnClickListener() {
@@ -293,8 +279,7 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
     }
 
     //비밀번호 재설정 이메일 전송
-    boolean isSuccessful;
-    boolean PasswordResetEmail(Context context, String email){
+    void PasswordResetEmail(Context context, FragmentManager fragmentManager, String email){
 
         Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
         Matcher matcher = pattern.matcher(email);
@@ -302,7 +287,6 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
         if(!matcher.find()){
             Log.w("EmailAlarmFragment", "email form Error");
             CustomDialog.ErrorDialog(context, "이메일이 유효하지 않습니다.");
-            return false;
         }
 
         firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -310,15 +294,18 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.w("EmailAlarmFragment", "sendPasswordResetEmail success");
-                    isSuccessful = true;
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Type", "findPassword");
+                    bundle.putString("Email", email);
+                    EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
+                    emailAlarmFragment.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
                 }else{
                     Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
-                    isSuccessful = false;
                 }
             }
         });
-
-        return isSuccessful;
     }
 
     @Override

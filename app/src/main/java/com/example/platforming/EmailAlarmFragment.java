@@ -33,6 +33,9 @@ public class EmailAlarmFragment extends Fragment {
         TextView message = (TextView) view.findViewById(R.id.message_emailAlarm);
 
         if(getArguments().getString("Type").equals("emailVerification")){
+            title.setText("이메일 인증");
+            message.setText("회원가입 시 입력하신 이메일("+ firebaseAuth.getCurrentUser().getEmail()+")로 전송된 인증 메일을 확인해 주세요.");
+
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -40,17 +43,16 @@ public class EmailAlarmFragment extends Fragment {
                     getActivity().onBackPressed();
                 }
             });
-            title.setText("이메일 인증");
-            message.setText("회원가입 시 입력하신 이메일("+ firebaseAuth.getCurrentUser().getEmail()+")로 전송된 인증 메일을 확인해 주세요.");
         }else if(getArguments().getString("Type").equals("findPassword")){
+            title.setText("비밀번호 재설정");
+            message.setText("입력하신 이메일("+ getArguments().getString("Email") +")로 전송된 비밀번호 재설정 메일을 확인해 주세요.");
+
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getActivity().onBackPressed();
                 }
             });
-            title.setText("비밀번호 재설정");
-            message.setText("입력하신 이메일("+ firebaseAuth.getCurrentUser().getEmail()+")로 전송된 비밀번호 재설정 메일을 확인해 주세요.");
         }
     }
 
