@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,16 +43,14 @@ public class SignUpFragment extends Fragment {
         TextView passwordCheck = (TextView)view.findViewById(R.id.passwordCheck_signUp);
         TextView accessCode = (TextView)view.findViewById(R.id.accessCode_signUp);
 
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreateAccount(email.getText().toString(), password.getText().toString(), passwordCheck.getText().toString(), accessCode.getText().toString());
-            }
-        });
+        confirm.setOnClickListener(v -> CreateAccount(email.getText().toString(), password.getText().toString(), passwordCheck.getText().toString(), accessCode.getText().toString()));
     }
 
     //계정 생성
     FirebaseUser tempUser;
+    ArrayList<String> ACCESSCODE = new ArrayList<String>(){{
+        add("1");
+    }};
     private void CreateAccount(String email, String password, String passwordCheck, String accessCode){
         Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
         Matcher matcher = pattern.matcher(email);
@@ -76,47 +75,41 @@ public class SignUpFragment extends Fragment {
             return;
         }
 
-        if(!Variable.accessCode.contains(accessCode)){
+        if(!ACCESSCODE.contains(accessCode)){
             Log.w("SignUpFragment", "accessCode Error");
             CustomDialog.ErrorDialog(getContext(), "학교코드가 유효하지 않습니다.");
             return;
         }
 
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    if(tempUser != null && !tempUser.isEmailVerified()) tempUser.delete();
-                    tempUser = firebaseAuth.getCurrentUser();
-                    SendEmailVerification(getActivity().getSupportFragmentManager());
-                }else{
-                    Log.w("SignUpFragment", "createUserWithEmailAndPassword Error");
-                    CustomDialog.ErrorDialog(getContext(), "이미 사용중인 이메일 입니다.");
-                }
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                if(tempUser != null && !tempUser.isEmailVerified()) tempUser.delete();
+                tempUser = firebaseAuth.getCurrentUser();
+                SendEmailVerification(getActivity().getSupportFragmentManager());
+            }else{
+                Log.w("SignUpFragment", "createUserWithEmailAndPassword Error");
+                CustomDialog.ErrorDialog(getContext(), "이미 사용중인 이메일 입니다.");
             }
         });
     }
 
     //이메일 인증메일 전송
     void SendEmailVerification(FragmentManager fragmentManager){
-        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    //로그 출력
-                    Log.w("SignUpFragment", "sendEmailVerification success");
+        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                //로그 출력
+                Log.w("SignUpFragment", "sendEmailVerification success");
 
-                    //Fragment 변경
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Type", "emailVerification");
-                    EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
-                    emailAlarmFragment.setArguments(bundle);
-                    fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
-                }else{
-                    //로그 출력
-                    Log.w("SignUpFragment", "sendEmailVerification fail");
-                }
+                //Fragment 변경
+                Bundle bundle = new Bundle();
+                bundle.putString("Type", "emailVerification");
+                EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
+                emailAlarmFragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+            }else{
+                //로그 출력
+                Log.w("SignUpFragment", "sendEmailVerification fail");
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.example.platforming;
 
 import static com.example.platforming.Variable.firebaseAuth;
+import static com.example.platforming.Variable.db;
+import static com.example.platforming.Variable.person;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -41,11 +43,15 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SignInFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener{
+public class SignInFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +67,7 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
     }
 
     //리스너 설정
-    private void SetListener(View view){
+    void SetListener(View view){
         Button confirm = (Button)view.findViewById(R.id.confirm_signIn);
         Button signOut = (Button)view.findViewById(R.id.signUp_signIn);
         Button findPassword = (Button)view.findViewById(R.id.findPassword_singIn);
@@ -70,58 +76,39 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
         Switch autoSignIn = (Switch)view.findViewById(R.id.autoSignIn_signIn);
 
 
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SignIn(email.getText().toString(), password.getText().toString(), autoSignIn.isChecked());
-            }
-        });
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignUpFragment()).addToBackStack(null).commit();
-            }
-        });
-        findPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PasswordResetDialog(getContext(), getActivity().getSupportFragmentManager());
-            }
-        });
+        confirm.setOnClickListener(v -> SignIn(email.getText().toString(), password.getText().toString(), autoSignIn.isChecked()));
+        signOut.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignUpFragment()).addToBackStack(null).commit());
+        findPassword.setOnClickListener(v -> PasswordResetDialog(getContext(), getActivity().getSupportFragmentManager()));
     }
 
     //자동 로그인
-    private void AutoSignIn(){
+    void AutoSignIn(){
         if(firebaseAuth.getCurrentUser() != null){
-            toggleActivity();
+            getUserData();
         }
     }
 
     //로그인(Email)
-    private void SignIn(String email, String password, boolean autoSignIn){
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    //로그 출력
-                    Log.w("SignInFragment", "signInWithEmailAndPassword Success");
+    void SignIn(String email, String password, boolean autoSignIn){
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                //로그 출력
+                Log.w("SignInFragment", "signInWithEmailAndPassword Success");
 
-                    //Activity 변경
-                    toggleActivity();
-                }else{
-                    //로그 출력
-                    Log.w("SignInFragment", "signInWithEmailAndPassword Error");
-                    CustomDialog.ErrorDialog(getContext(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
-                }
+                //Activity 변경
+                getUserData();
+            }else{
+                //로그 출력
+                Log.w("SignInFragment", "signInWithEmailAndPassword Error");
+                CustomDialog.ErrorDialog(getContext(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
             }
         });
     }
 
     //로그인(Google)
-    private int RC_SIGN_IN = 9001;
-    GoogleApiClient mGoogleApiClient;
+    int RC_SIGN_IN = 9001;
 
-    protected void setGoogle(SignInButton signInButton, String buttonText) {
+    void setGoogle(SignInButton signInButton, String buttonText) {
         // Find the TextView that is inside of the SignInButton and set its text
         for (int i = 0; i < signInButton.getChildCount(); i++) {
             View v = signInButton.getChildAt(i);
@@ -133,41 +120,25 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
                 break;
             }
         }
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.firebase_web_client_id))
-                .requestEmail()
-                .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        //mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
+        signInButton.setOnClickListener(v -> {
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(((SignInActivity)getActivity()).getGoogleClient());
+            startActivityForResult(signInIntent, RC_SIGN_IN);
         });
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct){
+    void firebaseAuthWithGoogle(GoogleSignInAccount acct){
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(),null);
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Log.w("SignInActivity", "Google SignIn success");
-                            toggleActivity();
-                        }else{
-                            Log.w("SignInActivity", "Google SignIn fail");
-                        }
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        Log.w("SignInActivity", "Google SignIn success");
+                        getUserData();
+                    }else{
+                        Log.w("SignInActivity", "Google SignIn fail");
                     }
                 });
     }
-
 
     //로그인(Facebook)
     private CallbackManager callbackManager;
@@ -203,20 +174,17 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
         });
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
+    void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // 로그인 성공
-                            Log.w("SignInActivity", "Facebook SignIn success");
-                            toggleActivity();
-                        } else {
-                            // 로그인 실패
-                            Log.w("SignInActivity", "Facebook SignIn fail");
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // 로그인 성공
+                        Log.w("SignInActivity", "Facebook SignIn success");
+                        getUserData();
+                    } else {
+                        // 로그인 실패
+                        Log.w("SignInActivity", "Facebook SignIn fail");
                     }
                 });
     }
@@ -246,34 +214,21 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void toggleActivity(){
-
-        Intent mainIntent = new Intent(getContext(), MainActivity.class);
-        getActivity().startActivity(mainIntent);
-        getActivity().finish();
-    }
-
     //Dialog
-    public void PasswordResetDialog(Context context, FragmentManager fragmentManager){
+    void PasswordResetDialog(Context context, FragmentManager fragmentManager){
         final EditText editText = new EditText(context);
 
         AlertDialog.Builder ad = new AlertDialog.Builder(context);
         ad.setTitle("비밀번호 찾기");
         ad.setMessage("비밀번호를 찾으실 이메일을 입력해 주세요.");
         ad.setView(editText);
-        ad.setPositiveButton("입력", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String email= editText.getText().toString();
+        ad.setPositiveButton("입력", (dialog, which) -> {
+            String email= editText.getText().toString();
 
-                PasswordResetEmail(context, fragmentManager, email);
-            }
+            PasswordResetEmail(context, fragmentManager, email);
         });
-        ad.setNegativeButton("최소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        ad.setNegativeButton("최소", (dialog, which) -> {
 
-            }
         });
         ad.show();
     }
@@ -289,27 +244,49 @@ public class SignInFragment extends Fragment implements GoogleApiClient.OnConnec
             CustomDialog.ErrorDialog(context, "이메일이 유효하지 않습니다.");
         }
 
-        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.w("EmailAlarmFragment", "sendPasswordResetEmail success");
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Log.w("EmailAlarmFragment", "sendPasswordResetEmail success");
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Type", "findPassword");
-                    bundle.putString("Email", email);
-                    EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
-                    emailAlarmFragment.setArguments(bundle);
-                    fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
-                }else{
-                    Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
-                }
+                Bundle bundle = new Bundle();
+                bundle.putString("Type", "findPassword");
+                bundle.putString("Email", email);
+                EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
+                emailAlarmFragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+            }else{
+                Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
             }
         });
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    boolean getUserData(){
+        boolean result = true;
 
+        person = new Person();
+
+        DocumentReference documentReference = db.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+        //DocumentReference documentReference = db.collection("user").document("test");
+
+        documentReference.get().addOnCompleteListener(task -> {
+           if(task.isSuccessful()){
+               DocumentSnapshot documentSnapshot = task.getResult();
+               if(documentSnapshot.exists()){
+                   Log.w("getUserData", "Document exist",task.getException());
+               }else{
+                   Log.w("getUserData", "Document doesn't exist");
+
+               }
+           }else{
+               Log.w("getUserData", "Failed with: ",task.getException());
+           }
+        });
+        return result;
+    }
+
+    void toggleActivity(){
+        Intent mainIntent = new Intent(getContext(), MainActivity.class);
+        getActivity().startActivity(mainIntent);
+        getActivity().finish();
     }
 }

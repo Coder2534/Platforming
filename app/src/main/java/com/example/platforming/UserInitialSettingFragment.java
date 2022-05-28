@@ -45,13 +45,10 @@ public class UserInitialSettingFragment extends Fragment {
     private void SetListenr(View view){
         Button confirm = (Button)view.findViewById(R.id.confirm_UIS);
 
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(getContext(), MainActivity.class);
-                startActivity(mainIntent);
-                getActivity().finish();
-            }
+        confirm.setOnClickListener(v -> {
+            Intent mainIntent = new Intent(getContext(), MainActivity.class);
+            startActivity(mainIntent);
+            getActivity().finish();
         });
     }
 

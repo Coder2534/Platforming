@@ -1,7 +1,5 @@
 package com.example.platforming;
 
-import android.app.Activity;
-
 public class Person {
     String NAME;
     String NICKNAME;
