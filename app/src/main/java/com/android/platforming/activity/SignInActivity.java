@@ -1,18 +1,15 @@
-package com.example.platforming;
-
-import static com.example.platforming.Variable.firebaseAuth;
-import static com.example.platforming.Variable.db;
+package com.android.platforming.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.android.platforming.fragment.SignInFragment;
+import com.example.platforming.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -34,8 +31,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .build();
         //mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        db = FirebaseFirestore.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignInFragment()).commit();
     }
 

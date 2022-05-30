@@ -1,6 +1,6 @@
-package com.example.platforming;
+package com.android.platforming.fragment;
 
-import static com.example.platforming.Variable.firebaseAuth;
+import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.android.platforming.object.CustomDialog;
+import com.example.platforming.R;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -37,11 +35,11 @@ public class SignUpFragment extends Fragment {
 
     //리스너 설정
     private void SetListener(View view){
-        Button confirm = (Button)view.findViewById(R.id.confirm_signUp);
-        TextView email = (TextView)view.findViewById(R.id.email_signUp);
-        TextView password = (TextView)view.findViewById(R.id.password_signUp);
-        TextView passwordCheck = (TextView)view.findViewById(R.id.passwordCheck_signUp);
-        TextView accessCode = (TextView)view.findViewById(R.id.accessCode_signUp);
+        Button confirm = view.findViewById(R.id.confirm_signUp);
+        TextView email = view.findViewById(R.id.email_signUp);
+        TextView password = view.findViewById(R.id.password_signUp);
+        TextView passwordCheck = view.findViewById(R.id.passwordCheck_signUp);
+        TextView accessCode = view.findViewById(R.id.accessCode_signUp);
 
         confirm.setOnClickListener(v -> CreateAccount(email.getText().toString(), password.getText().toString(), passwordCheck.getText().toString(), accessCode.getText().toString()));
     }
@@ -51,6 +49,7 @@ public class SignUpFragment extends Fragment {
     ArrayList<String> ACCESSCODE = new ArrayList<String>(){{
         add("1");
     }};
+
     private void CreateAccount(String email, String password, String passwordCheck, String accessCode){
         Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
         Matcher matcher = pattern.matcher(email);
@@ -61,7 +60,7 @@ public class SignUpFragment extends Fragment {
         }
 
         //대문자, 소문자, 특수문자, 숫자 중 2가지 포함(8~20자)
-        pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[a-z!@#$%^&*])(?=.*[0-9!@#$%^&*])(?=.*[A-Z0-9])(?=.*[a-z0-9])(?=.*[A-Z!@#$%^&*]).{8,20}$");
+        pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[a-z!@#$%^&*=])(?=.*[0-9!@#$%^&*=])(?=.*[A-Z0-9])(?=.*[a-z0-9])(?=.*[A-Z!@#$%^&*=]).{8,20}$");
         matcher = pattern.matcher(password);
         if(!matcher.find()){
             Log.w("SignUpFragment", "password form Error");
@@ -82,10 +81,10 @@ public class SignUpFragment extends Fragment {
         }
 
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+        getFirebaseAuth().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 if(tempUser != null && !tempUser.isEmailVerified()) tempUser.delete();
-                tempUser = firebaseAuth.getCurrentUser();
+                tempUser = getFirebaseAuth().getCurrentUser();
                 SendEmailVerification(getActivity().getSupportFragmentManager());
             }else{
                 Log.w("SignUpFragment", "createUserWithEmailAndPassword Error");
@@ -96,7 +95,7 @@ public class SignUpFragment extends Fragment {
 
     //이메일 인증메일 전송
     void SendEmailVerification(FragmentManager fragmentManager){
-        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task -> {
+        getFirebaseAuth().getCurrentUser().sendEmailVerification().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 //로그 출력
                 Log.w("SignUpFragment", "sendEmailVerification success");

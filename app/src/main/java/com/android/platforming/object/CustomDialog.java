@@ -1,8 +1,10 @@
-package com.example.platforming;
+package com.android.platforming.object;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+
+import com.example.platforming.R;
 
 public class CustomDialog {
     public static void ErrorDialog(Context context, String message){

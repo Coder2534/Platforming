@@ -1,6 +1,6 @@
-package com.example.platforming;
+package com.android.platforming.fragment;
 
-import static com.example.platforming.Variable.firebaseAuth;
+import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.android.platforming.activity.MainActivity;
+import com.example.platforming.R;
 
 public class EmailAlarmFragment extends Fragment {
 
@@ -34,7 +37,7 @@ public class EmailAlarmFragment extends Fragment {
 
         if(getArguments().getString("Type").equals("emailVerification")){
             title.setText("이메일 인증");
-            message.setText("회원가입 시 입력하신 이메일("+ firebaseAuth.getCurrentUser().getEmail()+")로 전송된 인증 메일을 확인해 주세요.");
+            message.setText("회원가입 시 입력하신 이메일("+ getFirebaseAuth().getCurrentUser().getEmail()+")로 전송된 인증 메일을 확인해 주세요.");
 
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,9 +61,9 @@ public class EmailAlarmFragment extends Fragment {
 
     //이메일 인증여부 확인
     void CheckEmailVerification(Activity activity){
-        firebaseAuth.getCurrentUser().reload();
-        Log.w("EmailAlarmFragment", "Verification" + firebaseAuth.getCurrentUser().isEmailVerified());
-        if(firebaseAuth.getCurrentUser().isEmailVerified()){
+        getFirebaseAuth().getCurrentUser().reload();
+        Log.w("EmailAlarmFragment", "Verification" + getFirebaseAuth().getCurrentUser().isEmailVerified());
+        if(getFirebaseAuth().getCurrentUser().isEmailVerified()){
             Log.w("EmailAlarmFragment", "Verification success");
             Intent mainIntent = new Intent(activity, MainActivity.class);
             activity.startActivity(mainIntent);
