@@ -1,13 +1,14 @@
 package com.android.platforming.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,10 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.adapter.ImageSliderAdapter;
-import com.android.platforming.activity.MainActivity;
+import com.android.platforming.object.User;
 import com.example.platforming.R;
-
-import java.util.ArrayList;
 
 public class UserInitialSettingFragment extends Fragment {
     @Nullable
@@ -31,7 +30,7 @@ public class UserInitialSettingFragment extends Fragment {
         layoutIndicator = view.findViewById(R.id.layoutIndicators);
 
         sliderViewPager.setOffscreenPageLimit(1);
-        sliderViewPager.setAdapter(new ImageSliderAdapter(getContext(), drawables));
+        sliderViewPager.setAdapter(new ImageSliderAdapter(User.getProfiles()));
 
         sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -41,7 +40,7 @@ public class UserInitialSettingFragment extends Fragment {
             }
         });
 
-        setupIndicators(drawables.size());
+        setupIndicators(User.getProfiles().size());
 
         return view;
     }
@@ -51,16 +50,36 @@ public class UserInitialSettingFragment extends Fragment {
 
         confirm.setOnClickListener(v -> {
 
+            String userName = ((EditText)view.findViewById(R.id.userName_UIS)).getText().toString();
+            if(userName != ""){
+                return;
+            }
+
+            String nickName = ((EditText)view.findViewById(R.id.nickName_UIS)).getText().toString();
+            if(nickName != ""){
+                return;
+            }
+
+            String telephone = ((EditText)view.findViewById(R.id.telephone_UIS)).getText().toString();
+            if(telephone != ""){
+                return;
+            }
+
+            boolean isMale = ((RadioButton)view.findViewById(R.id.male_UIS)).isChecked();
+            boolean isFemale = ((RadioButton)view.findViewById(R.id.female_UIS)).isChecked();
+            if(!isMale && !isFemale){
+                return;
+            }
+
+
+
+
         });
     }
 
     //ViewPager
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
-
-    private ArrayList<Integer> drawables = new ArrayList<Integer>(){{
-        add(R.drawable.ic_launcher_foreground);
-    }};
 
     private void setupIndicators(int count) {
         ImageView[] indicators = new ImageView[count];

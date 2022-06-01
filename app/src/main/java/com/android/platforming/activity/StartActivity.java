@@ -39,7 +39,7 @@ public class StartActivity extends AppCompatActivity {
 
         if(getFirebaseAuth().getCurrentUser() != null){
             FirestoreManager firestoreManager = new FirestoreManager();
-            firestoreManager.setUserData(User.getUser(), new ListenerInterface() {
+            firestoreManager.readUserData(new ListenerInterface() {
                 AtomicBoolean timeout = StartActivity.this.timeout;
                 AtomicBoolean done = StartActivity.this.done;
 

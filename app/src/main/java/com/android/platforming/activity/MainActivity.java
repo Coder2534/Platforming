@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.android.platforming.fragment.MainPageFragment;
+import com.android.platforming.object.User;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
 
@@ -14,6 +16,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_main, new UserInitialSettingFragment()).commit();
+        if(User.getUser() == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_main, new UserInitialSettingFragment()).commit();
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_main, new MainPageFragment());
+        }
     }
 }

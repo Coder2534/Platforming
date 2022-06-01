@@ -14,11 +14,9 @@ import com.example.platforming.R;
 import java.util.ArrayList;
 
 public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.MyViewHolder> {
-    private Context context;
     private ArrayList<Integer> sliderImage;
 
-    public ImageSliderAdapter(Context context, ArrayList<Integer> sliderImage) {
-        this.context = context;
+    public ImageSliderAdapter(ArrayList<Integer> sliderImage) {
         this.sliderImage = sliderImage;
     }
 
