@@ -2,6 +2,8 @@ package com.android.platforming.object;
 
 import android.net.Uri;
 
+import java.util.Map;
+
 public class User {
 
     private static User user = null;
@@ -15,6 +17,33 @@ public class User {
     private int number;
     private String note;
     private Uri profile;
+
+    private enum key{
+        userName(String.class),
+        nickName(String.class),
+        point(int.class),
+        telephone(int.class),
+        grade(int.class),
+        room(int.class),
+        number(int.class),
+        note(String.class),
+        profileIndex(int.class);
+
+        private final Class clazz;
+
+        key(Class clazz){
+            this.clazz = clazz;
+        }
+
+        public Class getClazz(){
+            return clazz;
+        }
+    }
+
+    public User(Map<String, Object> datas){
+        key[] keys = key.values();
+        setUserName((keys[0].getClazz()) datas.get(keys[0].name()));
+    }
 
     public static User getUser() {
         return user;
