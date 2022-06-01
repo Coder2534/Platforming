@@ -26,7 +26,7 @@ public class FirestoreManager {
         FirestoreManager.firebaseAuth = firebaseAuth;
     }
 
-    public void setUserData(User user, ListenerInterface interfaze){
+    public void readUserData(ListenerInterface interfaze){
         DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
 
         documentReference.get().addOnCompleteListener(task -> {
@@ -35,14 +35,7 @@ public class FirestoreManager {
                 if(documentSnapshot.exists()){
                     Log.w("setUserData", "Document exist",task.getException());
                     Map<String, Object> datas = documentSnapshot.getData();
-                    user.setNickName((String)datas.get("nickName"));
-                    user.setUserName((String)datas.get("nickName"));
-                    user.setNickName((String)datas.get("nickName"));
-                    user.setNickName((String)datas.get("nickName"));
-                    user.setNickName((String)datas.get("nickName"));
-                    user.setNickName((String)datas.get("nickName"));
-                    user.setNickName((String)datas.get("nickName"));
-
+                    User.setUser(new User(datas));
                 }
                 else{
                     Log.w("setUserData", "Document doesn't exist");

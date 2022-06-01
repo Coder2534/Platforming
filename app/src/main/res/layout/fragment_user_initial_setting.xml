@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteY="127dp" />
 
     <EditText
-        android:id="@+id/name_UIS"
+        android:id="@+id/userName_UIS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
