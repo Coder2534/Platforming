@@ -21,9 +21,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.platforming.activity.StartActivity;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.object.CustomDialog;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.activity.SignInActivity;
+import com.android.platforming.object.FirestoreManager;
 import com.example.platforming.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -39,6 +42,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,7 +78,7 @@ public class SignInFragment extends Fragment{
         getFirebaseAuth().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Log.w("SignInFragment", "signInWithEmailAndPassword Success");
-                GetUserData();
+                ReadUserData();
             }else{
                 Log.w("SignInFragment", "signInWithEmailAndPassword Error");
                 CustomDialog.ErrorDialog(getContext(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
@@ -109,7 +113,7 @@ public class SignInFragment extends Fragment{
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         Log.w("SignInActivity", "Google SignIn success");
-                        GetUserData();
+                        ReadUserData();
                     }else{
                         Log.w("SignInActivity", "Google SignIn fail");
                     }
@@ -156,7 +160,7 @@ public class SignInFragment extends Fragment{
                     if (task.isSuccessful()) {
                         // 로그인 성공
                         Log.w("SignInActivity", "Facebook SignIn success");
-                        GetUserData();
+                        ReadUserData();
                     } else {
                         // 로그인 실패
                         Log.w("SignInActivity", "Facebook SignIn fail");
@@ -235,7 +239,21 @@ public class SignInFragment extends Fragment{
         });
     }
 
-    private void GetUserData(){
+    private void ReadUserData(){
+        FirestoreManager firestoreManager = new FirestoreManager();
+        firestoreManager.readUserData(new ListenerInterface() {
 
+            @Override
+            public void onSuccess() {
+                Intent mainIntent = new Intent(getContext(), MainActivity.class);
+                startActivity(mainIntent);
+                getActivity().finish();
+            }
+
+            @Override
+            public void onFail() {
+
+            }
+        });
     }
 }

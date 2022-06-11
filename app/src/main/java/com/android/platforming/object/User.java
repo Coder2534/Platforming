@@ -13,9 +13,9 @@ public class User {
     private static User user = null;
 
     private final static ArrayList<Integer> profiles = new ArrayList<Integer>(){{
-        add(R.drawable.ic_launcher_foreground);
-        add(R.drawable.ic_launcher_foreground);
-        add(R.drawable.ic_launcher_foreground);
+        add(R.drawable.ic_baseline_10mp_24);
+        add(R.drawable.ic_baseline_11mp_24);
+        add(R.drawable.ic_baseline_12mp_24);
     }};
 
     //personal info
@@ -44,6 +44,20 @@ public class User {
         point = (int)data.get("point");
         note = (String) data.get("note");
     }
+
+    public User(String userName, String nickName, String telephone, int sex, int grade, int room, int number, int profile){
+        this.userName = userName;
+        this.nickName = nickName;
+        this.telephone = telephone;
+        this.sex = sex;
+        this.grade = grade;
+        this.room = room;
+        this.number = number;
+        this.profile = profiles.get(profile);
+        this.point = 0;
+        this.note = "";
+    }
+
 
     public Map<String, Object> getDataMap(){
         HashMap<String, Object> data = new HashMap<String, Object>();

@@ -1,6 +1,8 @@
 package com.android.platforming.fragment;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +50,37 @@ public class UserInitialSettingFragment extends Fragment {
     }
 
     private void SetListenr(View view){
+        int grade;
+        int room;
+        int number;
+
+        EditText schoolInfo = view.findViewById(R.id.schoolInfo_editText_UIS);
+        schoolInfo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = s.toString();
+
+                TextView schoolInfo = view.findViewById(R.id.schoolInfo_textView_UIS);
+                schoolInfo.setText(s.toString());
+                if(s.length() >= 1)
+                    grade = Integer.parseInt(text.substring(0, 0));
+                else if(s.length() >= 3)
+                    Integer.parseInt(text.substring(1, 2));
+                else if(s.length() >= 5)
+                    Integer.parseInt(text.substring(3, 4));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         Button confirm = view.findViewById(R.id.confirm_UIS);
 
         confirm.setOnClickListener(v -> {
@@ -65,15 +100,20 @@ public class UserInitialSettingFragment extends Fragment {
                 return;
             }
 
+            int sex;
             boolean isMale = ((RadioButton)view.findViewById(R.id.male_UIS)).isChecked();
             boolean isFemale = ((RadioButton)view.findViewById(R.id.female_UIS)).isChecked();
             if(!isMale && !isFemale){
                 return;
             }
+            else if(isMale){
+                sex = 0;
+            }
+            else{
+                sex = 1;
+            }
 
-
-
-
+            // User.setUser(new User(userName, nickName, telephone, sex, , , , sliderViewPager.));
         });
     }
 
