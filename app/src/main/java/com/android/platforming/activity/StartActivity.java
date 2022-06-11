@@ -1,4 +1,4 @@
-package com.android.platforming.activity;//sdsdsdsdsdasdasdasdasdasdasd
+package com.android.platforming.activity;
 
 import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
 import static com.android.platforming.object.FirestoreManager.setFirebaseAuth;

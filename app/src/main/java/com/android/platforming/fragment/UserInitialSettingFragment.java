@@ -67,12 +67,12 @@ public class UserInitialSettingFragment extends Fragment {
 
                 TextView schoolInfo = view.findViewById(R.id.schoolInfo_textView_UIS);
                 schoolInfo.setText(s.toString());
-                if(s.length() >= 1)
-                    grade = Integer.parseInt(text.substring(0, 0));
+                /*if(s.length() >= 1)
+
                 else if(s.length() >= 3)
                     Integer.parseInt(text.substring(1, 2));
                 else if(s.length() >= 5)
-                    Integer.parseInt(text.substring(3, 4));
+                    Integer.parseInt(text.substring(3, 4));*/
             }
 
             @Override
