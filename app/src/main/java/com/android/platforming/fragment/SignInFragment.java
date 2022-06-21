@@ -2,8 +2,6 @@ package com.android.platforming.fragment;
 
 import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.object.CustomDialog;
@@ -48,7 +45,7 @@ public class SignInFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_signin, container, false);
 
-        setGoogle(view.findViewById(R.id.google_signIn), "Google로 계속하기");
+        setGoogle(view.findViewById(R.id.lbtn_signin_google), "Google로 계속하기");
         setFacebook(view);
         setListener(view);
 
@@ -57,15 +54,15 @@ public class SignInFragment extends Fragment{
 
     //리스너 설정
     private void setListener(View view){
-        Button confirm = view.findViewById(R.id.confirm_signIn);
-        Button signOut = view.findViewById(R.id.signUp_signIn);
-        Button findPassword = view.findViewById(R.id.findPassword_singIn);
-        TextView email = view.findViewById(R.id.email_signIn);
-        TextView password = view.findViewById(R.id.password_signIn);
+        Button confirm = view.findViewById(R.id.btn_signin_confirm);
+        Button signOut = view.findViewById(R.id.btn_signin_signup);
+        Button findPassword = view.findViewById(R.id.btn_signin_findpassword);
+        TextView email = view.findViewById(R.id.et_signin_email);
+        TextView password = view.findViewById(R.id.et_signin_password);
         Switch autoSignIn = view.findViewById(R.id.autoSignIn_signIn);
 
         confirm.setOnClickListener(v -> signInWithEmail(email.getText().toString(), password.getText().toString(), autoSignIn.isChecked()));
-        signOut.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, new SignUpFragment()).addToBackStack(null).commit());
+        signOut.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_signin, new SignUpFragment()).addToBackStack(null).commit());
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +94,7 @@ public class SignInFragment extends Fragment{
                                 bundle.putString("Email", email);
                                 EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
                                 emailAlarmFragment.setArguments(bundle);
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_signin, emailAlarmFragment).addToBackStack(null).commit();
                             }else{
                                 Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
                             }
@@ -168,7 +165,7 @@ public class SignInFragment extends Fragment{
         callbackManager = CallbackManager.Factory.create();
 
         //callbackManager
-        LoginButton loginButton = view.findViewById(R.id.facebook_signIn);
+        LoginButton loginButton = view.findViewById(R.id.lbtn_signin_facebook);
         loginButton.setFragment(this);// If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration

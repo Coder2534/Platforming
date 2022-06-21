@@ -21,15 +21,21 @@
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/ic_baseline_tag_faces_128.xml" value="0.1" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_login.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_main.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_sign.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_sign_in.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_signin.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_start.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_email_verification.xml" value="0.23703703703703705" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_emailalarm.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_main_page.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_sign_in.xml" value="0.23703703703703705" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_sign_out.xml" value="0.23703703703703705" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_sign_up.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_signin.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_user_initial_setting.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_userinitialsetting.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_slider.xml" value="0.2791666666666667" />
       </map>
     </option>

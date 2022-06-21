@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteY="127dp" />
 
     <EditText
-        android:id="@+id/userName_UIS"
+        android:id="@+id/et_initialsetting_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -36,7 +36,7 @@
         tools:layout_editor_absoluteY="191dp" />
 
     <EditText
-        android:id="@+id/nickName_UIS"
+        android:id="@+id/et_initialsetting_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -52,7 +52,7 @@
         tools:layout_editor_absoluteY="237dp" />
 
     <EditText
-        android:id="@+id/telephone_UIS"
+        android:id="@+id/et_initialsetting_telephone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -75,7 +75,7 @@
         tools:layout_editor_absoluteY="286dp">
 
         <RadioButton
-            android:id="@+id/male_UIS"
+            android:id="@+id/rbtn_initialsetting_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="남" />
@@ -86,7 +86,7 @@
             android:layout_weight="1" />
 
         <RadioButton
-            android:id="@+id/female_UIS"
+            android:id="@+id/rbtn_initialsetting_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="여" />
@@ -125,7 +125,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/confirm_UIS"
+        android:id="@+id/btn_initialsetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="확인"

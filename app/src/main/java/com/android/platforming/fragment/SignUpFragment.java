@@ -35,11 +35,11 @@ public class SignUpFragment extends Fragment {
 
     //리스너 설정
     private void setListener(View view){
-        Button confirm = view.findViewById(R.id.confirm_signUp);
-        TextView email = view.findViewById(R.id.email_signUp);
-        TextView password = view.findViewById(R.id.password_signUp);
-        TextView passwordCheck = view.findViewById(R.id.passwordCheck_signUp);
-        TextView accessCode = view.findViewById(R.id.accessCode_signUp);
+        Button confirm = view.findViewById(R.id.btn_signup);
+        TextView email = view.findViewById(R.id.et_signup_email);
+        TextView password = view.findViewById(R.id.et_signup_password);
+        TextView passwordCheck = view.findViewById(R.id.et_signup_passwordcheck);
+        TextView accessCode = view.findViewById(R.id.et_signup_accesscode);
 
         confirm.setOnClickListener(v -> createAccount(email.getText().toString(), password.getText().toString(), passwordCheck.getText().toString(), accessCode.getText().toString()));
     }
@@ -108,7 +108,7 @@ public class SignUpFragment extends Fragment {
                 bundle.putString("Type", "emailVerification");
                 EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
                 emailAlarmFragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.fragmentLayout_signIn, emailAlarmFragment).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.cl_signin, emailAlarmFragment).addToBackStack(null).commit();
             }else{
                 //로그 출력
                 Log.w("SignUpFragment", "sendEmailVerification fail");

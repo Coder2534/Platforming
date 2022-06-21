@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/email_signUp"
+        android:id="@+id/et_signup_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/password_signUp"
+        android:id="@+id/et_signup_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -35,10 +35,21 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/email_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_email" />
 
     <EditText
-        android:id="@+id/accessCode_signUp"
+        android:id="@+id/et_signup_passwordcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_password" />
+
+    <EditText
+        android:id="@+id/et_signup_accesscode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
@@ -46,17 +57,17 @@
         android:ems="10"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/passwordCheck_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_passwordcheck" />
 
     <Button
-        android:id="@+id/confirm_signUp"
+        android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
         android:layout_marginTop="9dp"
         android:text="회원가입"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accessCode_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_accesscode" />
 
     <TextView
         android:id="@+id/textView6"
@@ -77,7 +88,7 @@
         android:layout_marginTop="44dp"
         android:text="Password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_email" />
 
     <TextView
         android:id="@+id/textView9"
@@ -87,18 +98,7 @@
         android:layout_marginTop="32dp"
         android:text="학교 코드"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordCheck_signUp" />
-
-    <EditText
-        android:id="@+id/passwordCheck_signUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/password_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_passwordcheck" />
 
     <TextView
         android:id="@+id/textView8"
@@ -109,6 +109,6 @@
         android:text="Password\nCheck"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_signUp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

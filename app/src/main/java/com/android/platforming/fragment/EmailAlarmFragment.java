@@ -31,9 +31,9 @@ public class EmailAlarmFragment extends Fragment {
 
     //리스너&뷰 설정
     private void setListner(View view){
-        Button confirm = (Button) view.findViewById(R.id.confirm_emailAlarm);
-        TextView title = (TextView) view.findViewById(R.id.title_emailAlarm);
-        TextView message = (TextView) view.findViewById(R.id.message_emailAlarm);
+        Button confirm = (Button) view.findViewById(R.id.btn_emailalarm);
+        TextView title = (TextView) view.findViewById(R.id.tv_emailalarm_title);
+        TextView message = (TextView) view.findViewById(R.id.tv_emailalarm_description);
 
         if(getArguments().getString("Type").equals("emailVerification")){
             title.setText("이메일 인증");

@@ -23,7 +23,7 @@ public class UserInitialSettingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_userinitialsetting, container, false);
+        View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
         setListenr(view);
 
         sliderViewPager = view.findViewById(R.id.sliderViewPager);
@@ -46,27 +46,27 @@ public class UserInitialSettingFragment extends Fragment {
     }
 
     private void setListenr(View view){
-        Button confirm = view.findViewById(R.id.confirm_UIS);
+        Button confirm = view.findViewById(R.id.btn_initialsetting);
 
         confirm.setOnClickListener(v -> {
 
-            String userName = ((EditText)view.findViewById(R.id.userName_UIS)).getText().toString();
+            String userName = ((EditText)view.findViewById(R.id.et_initialsetting_username)).getText().toString();
             if(userName != ""){
                 return;
             }
 
-            String nickName = ((EditText)view.findViewById(R.id.nickName_UIS)).getText().toString();
+            String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
             if(nickName != ""){
                 return;
             }
 
-            String telephone = ((EditText)view.findViewById(R.id.telephone_UIS)).getText().toString();
+            String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
             if(telephone != ""){
                 return;
             }
 
-            boolean isMale = ((RadioButton)view.findViewById(R.id.male_UIS)).isChecked();
-            boolean isFemale = ((RadioButton)view.findViewById(R.id.female_UIS)).isChecked();
+            boolean isMale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_male)).isChecked();
+            boolean isFemale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_female)).isChecked();
             if(!isMale && !isFemale){
                 return;
             }

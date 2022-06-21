@@ -17,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(User.getUser() == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_main, new UserInitialSettingFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new UserInitialSettingFragment()).commit();
         }
         else{
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout_main, new MainPageFragment());
+            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment());
         }
     }
 }
