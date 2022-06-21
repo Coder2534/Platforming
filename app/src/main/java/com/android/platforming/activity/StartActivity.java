@@ -54,6 +54,11 @@ public class StartActivity extends AppCompatActivity {
                 }
 
                 @Override
+                public void onSuccess(String msg) {
+
+                }
+
+                @Override
                 public void onFail() {
 
                 }

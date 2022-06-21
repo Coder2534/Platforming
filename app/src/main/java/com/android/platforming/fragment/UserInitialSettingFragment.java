@@ -23,8 +23,8 @@ public class UserInitialSettingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_initial_setting, container, false);
-        SetListenr(view);
+        View view = inflater.inflate(R.layout.fragment_userinitialsetting, container, false);
+        setListenr(view);
 
         sliderViewPager = view.findViewById(R.id.sliderViewPager);
         layoutIndicator = view.findViewById(R.id.layoutIndicators);
@@ -45,7 +45,7 @@ public class UserInitialSettingFragment extends Fragment {
         return view;
     }
 
-    private void SetListenr(View view){
+    private void setListenr(View view){
         Button confirm = view.findViewById(R.id.confirm_UIS);
 
         confirm.setOnClickListener(v -> {

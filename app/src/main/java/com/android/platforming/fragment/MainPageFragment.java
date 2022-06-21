@@ -15,7 +15,7 @@ public class MainPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
 
         return view;
     }
