@@ -15,7 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.ImageSliderAdapter;
+import com.android.platforming.interfaze.ListenerInterface;
+import com.android.platforming.object.FirestoreManager;
 import com.android.platforming.object.User;
 import com.example.platforming.R;
 
@@ -71,8 +74,14 @@ public class UserInitialSettingFragment extends Fragment {
                 return;
             }
 
-
-
+            FirestoreManager firestoreManager = new FirestoreManager();
+            firestoreManager.writeUserData(new ListenerInterface() {
+                @Override
+                public void onSuccess() {
+                    ((MainActivity)getActivity()).setListner();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+                }
+            });
 
         });
     }
@@ -108,6 +117,4 @@ public class UserInitialSettingFragment extends Fragment {
             }
         }
     }
-
-    //프로필 넘기기 == 스와이프 == 드래그
 }

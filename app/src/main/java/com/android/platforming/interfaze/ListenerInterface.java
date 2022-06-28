@@ -1,7 +1,15 @@
 package com.android.platforming.interfaze;
 
 public interface ListenerInterface {
-    void onSuccess();
-    void onSuccess(String msg);
-    void onFail();
+    default void onSuccess() {
+
+    }
+
+    default void onSuccess(String msg) {
+
+    }
+
+    default void onFail() {
+
+    }
 }

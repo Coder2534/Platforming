@@ -23,21 +23,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(User.getUser() == null){
+        Toolbar toolbar = findViewById(R.id.tb_main);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
+
+        drawerLayout = findViewById(R.id.dl_main);
+        navigationView = findViewById(R.id.nv_main);
+
+        if(User.getUser() != null){
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new UserInitialSettingFragment()).commit();
         }
         else{
-            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment());
-
-            Toolbar toolbar = findViewById(R.id.tb_main);
-            setSupportActionBar(toolbar);
-
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
-
-            drawerLayout = (DrawerLayout)findViewById(R.id.dl_main);
-            navigationView = (NavigationView)findViewById(R.id.nv_main);
+            setListner();
+            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
         }
+    }
+
+    public void setListner(){
+        navigationView.setNavigationItemSelectedListener(menuItem -> {
+            menuItem.setChecked(true);
+            drawerLayout.closeDrawers();
+
+            int id = menuItem.getItemId();
+            String title = menuItem.getTitle().toString();
+
+            if(id == R.id.item_navigation_info){
+
+            }
+            else if(id == R.id.item_navigation_setting){
+
+            }
+            else if(id == R.id.item_navigation_report){
+
+            }
+
+            return true;
+        });
     }
 
     @Override

@@ -18,9 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.MainActivity;
+import com.android.platforming.activity.StartActivity;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.object.CustomDialog;
 import com.android.platforming.activity.SignInActivity;
+import com.android.platforming.object.FirestoreManager;
 import com.example.platforming.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -36,6 +39,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,9 +63,8 @@ public class SignInFragment extends Fragment{
         Button findPassword = view.findViewById(R.id.btn_signin_findpassword);
         TextView email = view.findViewById(R.id.et_signin_email);
         TextView password = view.findViewById(R.id.et_signin_password);
-        Switch autoSignIn = view.findViewById(R.id.autoSignIn_signIn);
 
-        confirm.setOnClickListener(v -> signInWithEmail(email.getText().toString(), password.getText().toString(), autoSignIn.isChecked()));
+        confirm.setOnClickListener(v -> signInWithEmail(email.getText().toString(), password.getText().toString()));
         signOut.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_signin, new SignUpFragment()).addToBackStack(null).commit());
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +72,6 @@ public class SignInFragment extends Fragment{
                 final EditText editText = new EditText(getContext());
                 CustomDialog customDialog = new CustomDialog();
                 customDialog.passwordResetDialog(getContext(), new ListenerInterface() {
-                    @Override
-                    public void onSuccess() {
-                    }
-
                     @Override
                     public void onSuccess(String msg) {
                         String email = msg;
@@ -100,22 +99,17 @@ public class SignInFragment extends Fragment{
                             }
                         });
                     }
-
-                    @Override
-                    public void onFail() {
-
-                    }
                 });
             }
         });
     }
 
     //로그인(Email)
-    private void signInWithEmail(String email, String password, boolean autoSignIn){
+    private void signInWithEmail(String email, String password){
         getFirebaseAuth().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Log.w("SignInFragment", "signInWithEmailAndPassword Success");
-                getUserData();
+                readUserData();
             }else{
                 Log.w("SignInFragment", "signInWithEmailAndPassword Error");
                 CustomDialog customDialog = new CustomDialog();
@@ -151,7 +145,7 @@ public class SignInFragment extends Fragment{
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         Log.w("SignInActivity", "Google SignIn success");
-                        getUserData();
+                        readUserData();
                     }else{
                         Log.w("SignInActivity", "Google SignIn fail");
                     }
@@ -198,7 +192,7 @@ public class SignInFragment extends Fragment{
                     if (task.isSuccessful()) {
                         // 로그인 성공
                         Log.w("SignInActivity", "Facebook SignIn success");
-                        getUserData();
+                        readUserData();
                     } else {
                         // 로그인 실패
                         Log.w("SignInActivity", "Facebook SignIn fail");
@@ -231,7 +225,27 @@ public class SignInFragment extends Fragment{
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void getUserData(){
 
+    private void readUserData(){
+        FirestoreManager firestoreManager = new FirestoreManager();
+        firestoreManager.readUserData(new ListenerInterface() {
+
+            @Override
+            public void onSuccess() {
+                Intent mainIntent = new Intent(getContext(), MainActivity.class);
+                startActivity(mainIntent);
+                getActivity().finish();
+            }
+
+            @Override
+            public void onSuccess(String msg) {
+
+            }
+
+            @Override
+            public void onFail() {
+
+            }
+        });
     }
 }
