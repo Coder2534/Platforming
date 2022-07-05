@@ -20,7 +20,10 @@ import com.android.platforming.adapter.ImageSliderAdapter;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.object.FirestoreManager;
 import com.android.platforming.object.User;
+import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
+
+import java.security.PrivateKey;
 
 public class UserInitialSettingFragment extends Fragment {
     @Nullable
@@ -29,21 +32,9 @@ public class UserInitialSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
         setListenr(view);
 
-        sliderViewPager = view.findViewById(R.id.sliderViewPager);
-        layoutIndicator = view.findViewById(R.id.layoutIndicators);
-
-        sliderViewPager.setOffscreenPageLimit(1);
-        sliderViewPager.setAdapter(new ImageSliderAdapter(User.getProfiles()));
-
-        sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                setCurrentIndicator(position);
-            }
-        });
-
-        setupIndicators(User.getProfiles().size());
+        ImageSlider imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.sliderViewPager), view.findViewById(R.id.layoutIndicators));
+        imageSlider.setAdapter(new ImageSliderAdapter(User.getProfiles()));
+        imageSlider.setIndicators(User.getProfiles().size());
 
         return view;
     }
@@ -84,37 +75,5 @@ public class UserInitialSettingFragment extends Fragment {
             });
 
         });
-    }
-
-    //ViewPager
-    private ViewPager2 sliderViewPager;
-    private LinearLayout layoutIndicator;
-
-    private void setupIndicators(int count) {
-        ImageView[] indicators = new ImageView[count];
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        params.setMargins(16, 8, 16, 8);
-
-        for (int i = 0; i < indicators.length; i++) {
-            indicators[i] = new ImageView(getContext());
-            indicators[i].setImageDrawable(getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
-            indicators[i].setLayoutParams(params);
-            layoutIndicator.addView(indicators[i]);
-        }
-        setCurrentIndicator(0);
-    }
-
-    private void setCurrentIndicator(int position) {
-        int childCount = layoutIndicator.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            ImageView imageView = (ImageView) layoutIndicator.getChildAt(i);
-            if (i == position) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
-            } else {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
-            }
-        }
     }
 }

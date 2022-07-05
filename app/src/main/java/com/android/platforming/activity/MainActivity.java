@@ -6,6 +6,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.android.platforming.fragment.MainPageFragment;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
 
-        if(User.getUser() != null){
+        if(User.getUser() == null){
+            Log.w("Debug", "user isEmpty");
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new UserInitialSettingFragment()).commit();
         }
         else{
