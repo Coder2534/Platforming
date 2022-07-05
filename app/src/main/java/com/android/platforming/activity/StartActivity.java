@@ -52,11 +52,6 @@ public class StartActivity extends AppCompatActivity {
                         finish();
                     }
                 }
-
-                @Override
-                public void onFail() {
-
-                }
             });
 
             runnalbe_splash = () -> {

@@ -2,12 +2,17 @@ package com.android.platforming.object;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.android.platforming.interfaze.ListenerInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FirestoreManager {
@@ -44,6 +49,21 @@ public class FirestoreManager {
             }else{
                 Log.w("setUserData", "Failed with: ",task.getException());
 
+                interfaze.onFail();
+            }
+        });
+    }
+
+    public void writeUserData(ListenerInterface interfaze){
+        HashMap<String, String> data = null;
+
+        DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+
+        documentReference.set(data).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                interfaze.onSuccess();
+            }
+            else{
                 interfaze.onFail();
             }
         });

@@ -1,8 +1,6 @@
 package com.android.platforming.fragment;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +9,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.ImageSliderAdapter;
+import com.android.platforming.interfaze.ListenerInterface;
+import com.android.platforming.object.FirestoreManager;
 import com.android.platforming.object.User;
 import com.example.platforming.R;
 
@@ -27,8 +26,8 @@ public class UserInitialSettingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_initial_setting, container, false);
-        SetListenr(view);
+        View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
+        setListenr(view);
 
         sliderViewPager = view.findViewById(R.id.sliderViewPager);
         layoutIndicator = view.findViewById(R.id.layoutIndicators);
@@ -49,71 +48,41 @@ public class UserInitialSettingFragment extends Fragment {
         return view;
     }
 
-    private void SetListenr(View view){
-        int grade;
-        int room;
-        int number;
-
-        EditText schoolInfo = view.findViewById(R.id.schoolInfo_editText_UIS);
-        schoolInfo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String text = s.toString();
-
-                TextView schoolInfo = view.findViewById(R.id.schoolInfo_textView_UIS);
-                schoolInfo.setText(s.toString());
-                /*if(s.length() >= 1)
-
-                else if(s.length() >= 3)
-                    Integer.parseInt(text.substring(1, 2));
-                else if(s.length() >= 5)
-                    Integer.parseInt(text.substring(3, 4));*/
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        Button confirm = view.findViewById(R.id.confirm_UIS);
+    private void setListenr(View view){
+        Button confirm = view.findViewById(R.id.btn_initialsetting);
 
         confirm.setOnClickListener(v -> {
 
-            String userName = ((EditText)view.findViewById(R.id.userName_UIS)).getText().toString();
+            String userName = ((EditText)view.findViewById(R.id.et_initialsetting_username)).getText().toString();
             if(userName != ""){
                 return;
             }
 
-            String nickName = ((EditText)view.findViewById(R.id.nickName_UIS)).getText().toString();
+            String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
             if(nickName != ""){
                 return;
             }
 
-            String telephone = ((EditText)view.findViewById(R.id.telephone_UIS)).getText().toString();
+            String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
             if(telephone != ""){
                 return;
             }
 
-            int sex;
-            boolean isMale = ((RadioButton)view.findViewById(R.id.male_UIS)).isChecked();
-            boolean isFemale = ((RadioButton)view.findViewById(R.id.female_UIS)).isChecked();
+            boolean isMale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_male)).isChecked();
+            boolean isFemale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_female)).isChecked();
             if(!isMale && !isFemale){
                 return;
             }
-            else if(isMale){
-                sex = 0;
-            }
-            else{
-                sex = 1;
-            }
 
-            // User.setUser(new User(userName, nickName, telephone, sex, , , , sliderViewPager.));
+            FirestoreManager firestoreManager = new FirestoreManager();
+            firestoreManager.writeUserData(new ListenerInterface() {
+                @Override
+                public void onSuccess() {
+                    ((MainActivity)getActivity()).setListner();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+                }
+            });
+
         });
     }
 
@@ -148,6 +117,4 @@ public class UserInitialSettingFragment extends Fragment {
             }
         }
     }
-
-    //프로필 넘기기 == 스와이프 == 드래그
 }
