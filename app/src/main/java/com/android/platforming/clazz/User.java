@@ -1,6 +1,4 @@
-package com.android.platforming.object;
-
-import android.net.Uri;
+package com.android.platforming.clazz;
 
 import com.example.platforming.R;
 
@@ -35,13 +33,13 @@ public class User {
         userName = (String)data.get("userName");
         nickName = (String)data.get("nickName");
         telephone = (String)data.get("telephone");
-        sex = (int)data.get("sex");
-        grade = (int)data.get("grade");
-        room = (int)data.get("room");
-        number = (int)data.get("number");
+        sex = Integer.parseInt(String.valueOf(data.get("sex")));
+        grade = Integer.parseInt(String.valueOf(data.get("grade")));
+        room = Integer.parseInt(String.valueOf(data.get("room")));
+        number = Integer.parseInt(String.valueOf(data.get("number")));
 
-        profile = profiles.get((int)data.get("profileIndex"));
-        point = (int)data.get("point");
+        profile = profiles.get(Integer.parseInt(String.valueOf(data.get("profileIndex"))));
+        point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
     }
 

@@ -130,6 +130,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:ems="10"
+            android:maxLength="5"
             android:inputType="number" />
 
     </RelativeLayout>

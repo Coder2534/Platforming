@@ -1,11 +1,9 @@
-package com.android.platforming.object;
+package com.android.platforming.clazz;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.EditText;
-
-import androidx.fragment.app.FragmentManager;
 
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;

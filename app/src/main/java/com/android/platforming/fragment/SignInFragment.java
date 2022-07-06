@@ -1,6 +1,6 @@
 package com.android.platforming.fragment;
 
-import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,11 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.activity.MainActivity;
-import com.android.platforming.activity.StartActivity;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.android.platforming.object.CustomDialog;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.activity.SignInActivity;
-import com.android.platforming.object.FirestoreManager;
+import com.android.platforming.clazz.FirestoreManager;
 import com.example.platforming.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -39,7 +37,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

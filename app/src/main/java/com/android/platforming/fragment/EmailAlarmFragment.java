@@ -1,6 +1,6 @@
 package com.android.platforming.fragment;
 
-import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
 import android.app.Activity;
 import android.content.Intent;

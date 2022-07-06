@@ -1,7 +1,6 @@
 package com.android.platforming.view;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,12 +8,12 @@ import android.widget.LinearLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.adapter.ImageSliderAdapter;
-import com.android.platforming.object.User;
 import com.example.platforming.R;
 
 public class ImageSlider {
 
     Context context;
+    int position;
 
     public ImageSlider(Context context, ViewPager2 sliderViewPager, LinearLayout layoutIndicator){
         this.context = context;
@@ -27,6 +26,7 @@ public class ImageSlider {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 setCurrentIndicator(position);
+                setPosition(position);
             }
         });
     }
@@ -65,5 +65,13 @@ public class ImageSlider {
                 imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.bg_indicator_inactive, null));
             }
         }
+    }
+
+    private void setPosition(int position){
+        this.position = position;
+    }
+
+    public int getPosition(){
+        return position;
     }
 }

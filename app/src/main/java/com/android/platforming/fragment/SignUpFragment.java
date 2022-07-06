@@ -1,6 +1,6 @@
 package com.android.platforming.fragment;
 
-import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.platforming.object.CustomDialog;
+import com.android.platforming.clazz.CustomDialog;
 import com.example.platforming.R;
 import com.google.firebase.auth.FirebaseUser;
 

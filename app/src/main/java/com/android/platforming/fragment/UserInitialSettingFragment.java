@@ -1,38 +1,38 @@
 package com.android.platforming.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.ImageSliderAdapter;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.android.platforming.object.FirestoreManager;
-import com.android.platforming.object.User;
+import com.android.platforming.clazz.FirestoreManager;
+import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
-import java.security.PrivateKey;
+import java.util.HashMap;
 
 public class UserInitialSettingFragment extends Fragment {
+    ImageSlider imageSlider;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
         setListenr(view);
 
-        ImageSlider imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.sliderViewPager), view.findViewById(R.id.layoutIndicators));
+        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.sliderViewPager), view.findViewById(R.id.layoutIndicators));
         imageSlider.setAdapter(new ImageSliderAdapter(User.getProfiles()));
         imageSlider.setIndicators(User.getProfiles().size());
 
@@ -44,29 +44,49 @@ public class UserInitialSettingFragment extends Fragment {
 
         confirm.setOnClickListener(v -> {
 
+            HashMap<String, Object> data = new HashMap<>();
             String userName = ((EditText)view.findViewById(R.id.et_initialsetting_username)).getText().toString();
-            if(userName != ""){
+            if(userName == ""){
                 return;
             }
+            data.put("userName", userName);
 
             String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
-            if(nickName != ""){
+            if(nickName == ""){
                 return;
             }
+            data.put("nickName", nickName);
 
             String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
-            if(telephone != ""){
+            if(telephone == ""){
                 return;
             }
+            data.put("telephone", telephone);
 
             boolean isMale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_male)).isChecked();
             boolean isFemale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_female)).isChecked();
             if(!isMale && !isFemale){
                 return;
             }
+            if(isMale)
+                data.put("sex", 0);
+            else
+                data.put("sex", 1);
+
+            String student = ((EditText)view.findViewById(R.id.et_initialsetting_student)).getText().toString();
+            if(student.length() != 5){
+                return;
+            }
+            data.put("grade", Integer.parseInt(String.valueOf(student.charAt(0))));
+            data.put("room", Integer.parseInt(student.substring(1, 3)));
+            data.put("number", Integer.parseInt(student.substring(3, 5)));
+
+            data.put("profileIndex", imageSlider.getPosition());
+
+            data.put("point", 0);
 
             FirestoreManager firestoreManager = new FirestoreManager();
-            firestoreManager.writeUserData(new ListenerInterface() {
+            firestoreManager.writeUserData(data, new ListenerInterface() {
                 @Override
                 public void onSuccess() {
                     ((MainActivity)getActivity()).setListner();

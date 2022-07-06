@@ -45,7 +45,14 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/layout_navigation_header"
-        app:menu="@menu/menu_navigation"
-        />
+        app:menu="@menu/menu_navigation">
 
+        <ExpandableListView
+            android:id="@+id/el_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/hei"
+            android:groupIndicator="@null" />
+
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,20 +1,17 @@
 package com.android.platforming.activity;
 
-import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
-import static com.android.platforming.object.FirestoreManager.setFirebaseAuth;
-import static com.android.platforming.object.FirestoreManager.setFirestore;
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.FirestoreManager.setFirebaseAuth;
+import static com.android.platforming.clazz.FirestoreManager.setFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.android.platforming.interfaze.ListenerInterface;
-import com.android.platforming.object.FirestoreManager;
-import com.android.platforming.object.User;
+import com.android.platforming.clazz.FirestoreManager;
 import com.example.platforming.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;

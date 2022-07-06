@@ -1,12 +1,8 @@
-package com.android.platforming.object;
+package com.android.platforming.clazz;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.android.platforming.interfaze.ListenerInterface;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -54,8 +50,7 @@ public class FirestoreManager {
         });
     }
 
-    public void writeUserData(ListenerInterface interfaze){
-        HashMap<String, String> data = null;
+    public void writeUserData(HashMap<String, Object> data, ListenerInterface interfaze){
 
         DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
 
