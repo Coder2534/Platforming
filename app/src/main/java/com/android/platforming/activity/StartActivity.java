@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.FirestoreManager;
@@ -34,7 +35,10 @@ public class StartActivity extends AppCompatActivity {
         setFirestore(FirebaseFirestore.getInstance());
         setFirebaseAuth(FirebaseAuth.getInstance());
 
-        if(getFirebaseAuth().getCurrentUser() != null){
+        Log.w("uuid", getFirebaseAuth().getUid());
+        Log.w("verified", Boolean.toString(getFirebaseAuth().getCurrentUser().isEmailVerified()));
+
+        if(getFirebaseAuth().getCurrentUser() != null && getFirebaseAuth().getCurrentUser().isEmailVerified()){
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.readUserData(new ListenerInterface() {
                 AtomicBoolean timeout = StartActivity.this.timeout;
@@ -61,6 +65,8 @@ public class StartActivity extends AppCompatActivity {
             };
         }
         else{
+            if(getFirebaseAuth().getCurrentUser() != null)
+                getFirebaseAuth().signOut();
             runnalbe_splash = () -> {
                 Intent loginIntent = new Intent(StartActivity.this, SignInActivity.class);
                 startActivity(loginIntent);

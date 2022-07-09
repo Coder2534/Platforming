@@ -33,8 +33,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             app:adSize="FULL_BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
-            />
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
     </RelativeLayout>
 
@@ -44,15 +43,20 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/layout_navigation_header"
-        app:menu="@menu/menu_navigation">
-
-        <ExpandableListView
-            android:id="@+id/el_main"
+        app:headerLayout="@layout/layout_navigation_header">
+        <RelativeLayout
+            android:id="@+id/ll_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/hei"
-            android:groupIndicator="@null" />
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/nv_header_height">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:textSize="20dp"
+                android:text="test"/>
+        </RelativeLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
