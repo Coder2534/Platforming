@@ -73,7 +73,7 @@ public class ExpandableList extends ExpandableListView {
 
         setAdapter(adapter);
     }
-
+    //test
     public void setListner(FragmentManager fragmentManager){
         setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
