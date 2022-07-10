@@ -35,9 +35,6 @@ public class StartActivity extends AppCompatActivity {
         setFirestore(FirebaseFirestore.getInstance());
         setFirebaseAuth(FirebaseAuth.getInstance());
 
-        Log.w("uuid", getFirebaseAuth().getUid());
-        Log.w("verified", Boolean.toString(getFirebaseAuth().getCurrentUser().isEmailVerified()));
-
         if(getFirebaseAuth().getCurrentUser() != null && getFirebaseAuth().getCurrentUser().isEmailVerified()){
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.readUserData(new ListenerInterface() {

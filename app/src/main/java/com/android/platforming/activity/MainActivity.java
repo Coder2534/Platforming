@@ -6,6 +6,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
+import com.android.platforming.interfaze.OnChildClickInterface;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -49,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new UserInitialSettingFragment()).commit();
         }
         else{
-            setHeader();
-            mainExpandableList.setListner(getSupportFragmentManager());
+            View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
+            TextView nav_header_id_text = nav_header_view.findViewById(R.id.tv_navigation_header_info);
+            nav_header_id_text.setText("Test");
+            mainExpandableList.setListner();
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
         }
     }
@@ -58,28 +66,46 @@ public class MainActivity extends AppCompatActivity {
     private void setListView(){
         RelativeLayout relativeLayout = findViewById(R.id.ll_main);
 
-        mainExpandableList = new ExpandableList(this);
+        mainExpandableList = new ExpandableList(this, getSupportFragmentManager());
         relativeLayout.addView(mainExpandableList, 0);
 
         mainExpandableList.addParent("내정보", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addChild(0, "내정보", new Fragment());
+        mainExpandableList.addChild(0, "나의 게시물", new Fragment());
+
+        mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addChild(1, "학교소개", new Fragment());
+        mainExpandableList.addChild(1, "전화번호", new Fragment());
+        mainExpandableList.addChild(1, "식단표", new Fragment());
+        mainExpandableList.addChild(1, "학사일정", new Fragment());
+
+        mainExpandableList.addParent("게시판", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addChild(2, "자유게시판", new Fragment());
+        mainExpandableList.addChild(2, "질문게시판", new Fragment());
+        mainExpandableList.addChild(2, "학습자료 공유", new Fragment());
 
         mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_dehaze_24);
-        mainExpandableList.addChild(1, "1학년", new Fragment());
-        mainExpandableList.addChild(1, "2학년", new Fragment());
-        mainExpandableList.addChild(1, "3학년", new Fragment());
+        mainExpandableList.addChild(3, "1학년", new Fragment());
+        mainExpandableList.addChild(3, "2학년", new Fragment());
+        mainExpandableList.addChild(3, "3학년", new Fragment());
+        mainExpandableList.addChild(3, "전체", new Fragment());
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_dehaze_24);
-        mainExpandableList.addChild(2, "꾸미기", new Fragment());
-        mainExpandableList.addChild(2, "기프티콘", new Fragment());
+        mainExpandableList.addChild(4, "디자인", new Fragment());
+        mainExpandableList.addChild(4, "기프티콘", new Fragment());
+
+        mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addChild(5, "공식 홈페이지", (groupPosition, childPosition) -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://school.gyo6.net/geumohs"));
+            startActivity(intent);
+        });
+
+        mainExpandableList.addChild(5, "리로스쿨", (groupPosition, childPosition) -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://geumo.riroschool.kr/"));
+            startActivity(intent);
+        });
 
         mainExpandableList.setAdapter();
-    }
-
-    public void setHeader(){
-        //View nav_header_view = navigationView.inflateHeaderView(R.layout.nav_header_main); //헤더 동적 생성
-        View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
-        TextView nav_header_id_text = nav_header_view.findViewById(R.id.tv_navigation_info);
-        nav_header_id_text.setText("Test");
     }
 
     @Override
@@ -100,5 +126,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public ExpandableList getMainExpandableList() {
+        return mainExpandableList;
     }
 }

@@ -103,20 +103,22 @@ public class ListviewAdapter extends BaseExpandableListAdapter {
         View v = convertView;
         Context context = parent.getContext();
 
-        if (v == null) {
-            if(childClasses.get(groupPosition).get(childPosition).equals("String")){
-                ExpandableListItem item = ExpandableListItem.class.cast(getChild(groupPosition, childPosition));
-
+        if(childClasses.get(groupPosition).get(childPosition).equals("String")){
+            ExpandableListItem item = ExpandableListItem.class.cast(getChild(groupPosition, childPosition));
+            if (v == null) {
                 LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = inflater.inflate(R.layout.item_listview_child, parent, false);
-                TextView title = v.findViewById(R.id.tv_listview_child_title);
-                title.setText(item.getTitle());
-                if(item.getCategory() != -1){
-                    ImageView imageView = v.findViewById(R.id.iv_listview_child_category);
-                    imageView.setImageResource(item.getCategory());
-                }
             }
-            else if(childClasses.get(groupPosition).get(childPosition).equals("ExpandableList")){
+
+            TextView title = v.findViewById(R.id.tv_listview_child_title);
+            title.setText(item.getTitle());
+            if(item.getCategory() != -1){
+                ImageView imageView = v.findViewById(R.id.iv_listview_child_category);
+                imageView.setImageResource(item.getCategory());
+            }
+        }
+        else if(childClasses.get(groupPosition).get(childPosition).equals("ExpandableList")){
+            if (v == null) {
                 parent.addView(ExpandableList.class.cast(childItems.get(groupPosition).get(childPosition)));
             }
         }
