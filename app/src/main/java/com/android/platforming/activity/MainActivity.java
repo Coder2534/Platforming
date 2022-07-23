@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
             TextView nav_header_id_text = nav_header_view.findViewById(R.id.tv_navigation_header_info);
             nav_header_id_text.setText("Test");
-            mainExpandableList.setListner();
+            mainExpandableList.setListner(getSupportFragmentManager());
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
         }
     }
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void setListView(){
         RelativeLayout relativeLayout = findViewById(R.id.ll_main);
 
-        mainExpandableList = new ExpandableList(this, getSupportFragmentManager());
+        mainExpandableList = new ExpandableList(this);
         relativeLayout.addView(mainExpandableList, 0);
 
         mainExpandableList.addParent("내정보", R.drawable.ic_baseline_dehaze_24);
@@ -75,15 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_dehaze_24);
         mainExpandableList.addChild(1, "학교소개", new Fragment());
-
-        ExpandableList telExpandableList = new ExpandableList(this, getSupportFragmentManager());
-        telExpandableList.addParent("전화번호", R.drawable.ic_baseline_dehaze_24);
-        telExpandableList.addChild(0, "1학년", new Fragment());
-        telExpandableList.addChild(0, "2학년", new Fragment());
-        telExpandableList.addChild(0, "3학년", new Fragment());
-        telExpandableList.addChild(0, "기타", new Fragment());
-
-        mainExpandableList.addChild(1, telExpandableList);
+        mainExpandableList.addChild(1, "전화번호", new Fragment());
         mainExpandableList.addChild(1, "식단표", new Fragment());
         mainExpandableList.addChild(1, "학사일정", new Fragment());
 
@@ -103,12 +95,12 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(4, "기프티콘", new Fragment());
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_dehaze_24);
-        mainExpandableList.addChild(5, "공식 홈페이지", (groupPosition, childPosition) -> {
+        mainExpandableList.addChild(5, "공식 홈페이지", () -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://school.gyo6.net/geumohs"));
             startActivity(intent);
         });
 
-        mainExpandableList.addChild(5, "리로스쿨", (groupPosition, childPosition) -> {
+        mainExpandableList.addChild(5, "리로스쿨", () -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://geumo.riroschool.kr/"));
             startActivity(intent);
         });

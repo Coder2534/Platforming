@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.ListviewAdapter;
+import com.android.platforming.interfaze.OnChildClickInterface;
 import com.example.platforming.R;
 
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ import java.util.ArrayList;
 public class ExpandableList extends ExpandableListView {
     ListviewAdapter adapter;
     ArrayList<ExpandableListItem> groupList = new ArrayList<>(); //부모 리스트
-    ArrayList<ArrayList<Object>> childList = new ArrayList<>(); //자식 리스트
+    ArrayList<ArrayList<ExpandableListItem>> childList = new ArrayList<>(); //자식 리스트
     ArrayList<ArrayList<String>> childClssList = new ArrayList<>();
+    ArrayList<ArrayList<OnChildClickInterface>> interfaceList = new ArrayList<>();
     ArrayList<ArrayList<Fragment>> fragmentList = new ArrayList<>();
 
     public ExpandableList(Context context){
@@ -36,6 +38,7 @@ public class ExpandableList extends ExpandableListView {
         groupList.add(new ExpandableListItem(title));
         childList.add(new ArrayList<>());
         childClssList.add(new ArrayList<>());
+        interfaceList.add(new ArrayList<>());
         fragmentList.add(new ArrayList<>());
     }
 
@@ -43,26 +46,40 @@ public class ExpandableList extends ExpandableListView {
         groupList.add(new ExpandableListItem(title, category));
         childList.add(new ArrayList<>());
         childClssList.add(new ArrayList<>());
+        interfaceList.add(new ArrayList<>());
         fragmentList.add(new ArrayList<>());
+    }
+
+    public void addChild(int parentIndex, String title, OnChildClickInterface onChildClickInterface){
+        ExpandableListItem item = new ExpandableListItem(title);
+        childList.get(parentIndex).add(item);
+        childClssList.get(parentIndex).add("String");
+        interfaceList.get(parentIndex).add(onChildClickInterface);
+        fragmentList.get(parentIndex).add(null);
+}
+
+    public void addChild(int parentIndex, String title, int category, OnChildClickInterface onChildClickInterface){
+        ExpandableListItem item = new ExpandableListItem(title, category);
+        childList.get(parentIndex).add(item);
+        childClssList.get(parentIndex).add("String");
+        interfaceList.get(parentIndex).add(onChildClickInterface);
+        fragmentList.get(parentIndex).add(null);
     }
 
     public void addChild(int parentIndex, String title, Fragment fragment){
         ExpandableListItem item = new ExpandableListItem(title);
         childList.get(parentIndex).add(item);
         childClssList.get(parentIndex).add("String");
+        interfaceList.get(parentIndex).add(null);
         fragmentList.get(parentIndex).add(fragment);
-}
+    }
 
     public void addChild(int parentIndex, String title, int category, Fragment fragment){
         ExpandableListItem item = new ExpandableListItem(title, category);
         childList.get(parentIndex).add(item);
         childClssList.get(parentIndex).add("String");
+        interfaceList.get(parentIndex).add(null);
         fragmentList.get(parentIndex).add(fragment);
-    }
-
-    public void addChild(int parentIndex, ExpandableList expandableList){
-        childList.get(parentIndex).add(expandableList);
-        childClssList.get(parentIndex).add("ExpandableList");
     }
 
     public void setAdapter() {
@@ -79,7 +96,10 @@ public class ExpandableList extends ExpandableListView {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if(childClssList.get(groupPosition).get(childPosition).equals("String")){
-                    fragmentManager.beginTransaction().replace(R.id.cl_main, fragmentList.get(groupPosition).get(childPosition)).addToBackStack(null).commit();
+                    if(interfaceList.get(groupPosition).get(childPosition) != null)
+                        interfaceList.get(groupPosition).get(childPosition).onClick();
+                    else
+                        fragmentManager.beginTransaction().replace(R.id.cl_main, fragmentList.get(groupPosition).get(childPosition)).addToBackStack(null).commit();
                 }
                 return true;
             }
