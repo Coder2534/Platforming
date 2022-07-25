@@ -23,9 +23,8 @@ public class ListviewAdapter extends BaseExpandableListAdapter {
         this.parentItems = parentItems;
     }
 
-    public void setChildItems(ArrayList<ArrayList<ExpandableListItem>> childItems, ArrayList<ArrayList<String>> childClasses){
+    public void setChildItems(ArrayList<ArrayList<ExpandableListItem>> childItems){
         this.childItems = childItems;
-        this.childClasses = childClasses;
     }
 
     //각 리스트의 크기 반환

@@ -7,19 +7,15 @@
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_start.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_sign_up.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_listview_parent.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_recyclerview_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_slider.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/layout_navigation_header.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/layout_navigation_menu.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar.xml" value="0.5536458333333333" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_setting.xml" value="0.335" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.2490740740740741" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_listview_parent.xml" value="0.2490740740740741" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_setting.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/layout_setting.xml" value="0.2791666666666667" />
       </map>
     </option>
   </component>

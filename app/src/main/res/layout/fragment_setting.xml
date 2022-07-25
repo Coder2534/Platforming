@@ -12,19 +12,12 @@
         android:textSize="30dp"
         android:text="설정" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="SpeakableTextPresentCheck">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
-
-
         </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
+
 </LinearLayout>

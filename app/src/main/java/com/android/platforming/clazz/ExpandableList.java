@@ -24,7 +24,6 @@ public class ExpandableList extends ExpandableListView {
     ListviewAdapter adapter;
     ArrayList<ExpandableListItem> groupList = new ArrayList<>(); //부모 리스트
     ArrayList<ArrayList<ExpandableListItem>> childList = new ArrayList<>(); //자식 리스트
-    ArrayList<ArrayList<String>> childClssList = new ArrayList<>();
     ArrayList<ArrayList<OnChildClickInterface>> interfaceList = new ArrayList<>();
     ArrayList<ArrayList<Fragment>> fragmentList = new ArrayList<>();
 
@@ -37,7 +36,6 @@ public class ExpandableList extends ExpandableListView {
     public void addParent(String title){
         groupList.add(new ExpandableListItem(title));
         childList.add(new ArrayList<>());
-        childClssList.add(new ArrayList<>());
         interfaceList.add(new ArrayList<>());
         fragmentList.add(new ArrayList<>());
     }
@@ -45,7 +43,6 @@ public class ExpandableList extends ExpandableListView {
     public void addParent(String title, int category){
         groupList.add(new ExpandableListItem(title, category));
         childList.add(new ArrayList<>());
-        childClssList.add(new ArrayList<>());
         interfaceList.add(new ArrayList<>());
         fragmentList.add(new ArrayList<>());
     }
@@ -53,7 +50,6 @@ public class ExpandableList extends ExpandableListView {
     public void addChild(int parentIndex, String title, OnChildClickInterface onChildClickInterface){
         ExpandableListItem item = new ExpandableListItem(title);
         childList.get(parentIndex).add(item);
-        childClssList.get(parentIndex).add("String");
         interfaceList.get(parentIndex).add(onChildClickInterface);
         fragmentList.get(parentIndex).add(null);
 }
@@ -61,7 +57,6 @@ public class ExpandableList extends ExpandableListView {
     public void addChild(int parentIndex, String title, int category, OnChildClickInterface onChildClickInterface){
         ExpandableListItem item = new ExpandableListItem(title, category);
         childList.get(parentIndex).add(item);
-        childClssList.get(parentIndex).add("String");
         interfaceList.get(parentIndex).add(onChildClickInterface);
         fragmentList.get(parentIndex).add(null);
     }
@@ -69,7 +64,6 @@ public class ExpandableList extends ExpandableListView {
     public void addChild(int parentIndex, String title, Fragment fragment){
         ExpandableListItem item = new ExpandableListItem(title);
         childList.get(parentIndex).add(item);
-        childClssList.get(parentIndex).add("String");
         interfaceList.get(parentIndex).add(null);
         fragmentList.get(parentIndex).add(fragment);
     }
@@ -77,7 +71,6 @@ public class ExpandableList extends ExpandableListView {
     public void addChild(int parentIndex, String title, int category, Fragment fragment){
         ExpandableListItem item = new ExpandableListItem(title, category);
         childList.get(parentIndex).add(item);
-        childClssList.get(parentIndex).add("String");
         interfaceList.get(parentIndex).add(null);
         fragmentList.get(parentIndex).add(fragment);
     }
@@ -86,7 +79,7 @@ public class ExpandableList extends ExpandableListView {
         //어댑터에 각각의 배열 등록
         adapter = new ListviewAdapter();
         adapter.setParentItems(groupList);
-        adapter.setChildItems(childList, childClssList);
+        adapter.setChildItems(childList);
 
         setAdapter(adapter);
     }
@@ -95,18 +88,12 @@ public class ExpandableList extends ExpandableListView {
         setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                if(childClssList.get(groupPosition).get(childPosition).equals("String")){
-                    if(interfaceList.get(groupPosition).get(childPosition) != null)
-                        interfaceList.get(groupPosition).get(childPosition).onClick();
-                    else
-                        fragmentManager.beginTransaction().replace(R.id.cl_main, fragmentList.get(groupPosition).get(childPosition)).addToBackStack(null).commit();
-                }
+                if(interfaceList.get(groupPosition).get(childPosition) != null)
+                    interfaceList.get(groupPosition).get(childPosition).onClick();
+                else
+                    fragmentManager.beginTransaction().replace(R.id.cl_main, fragmentList.get(groupPosition).get(childPosition)).addToBackStack(null).commit();
                 return true;
             }
         });
-        for(int i = 0; i < childClssList.size(); ++i)
-            for(int j = 0; j < childClssList.get(i).size(); ++j)
-                if(childClssList.get(i).get(j).equals("ExpandableList"))
-                    ExpandableList.class.cast(childList.get(i).get(j)).setListner(fragmentManager);
     }
 }

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
+import com.android.platforming.fragment.SettingFragment;
 import com.android.platforming.interfaze.OnChildClickInterface;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
             TextView nav_header_id_text = nav_header_view.findViewById(R.id.tv_navigation_header_info);
             nav_header_id_text.setText("Test");
-            mainExpandableList.setListner(getSupportFragmentManager());
+            setListener();
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
         }
     }
@@ -106,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mainExpandableList.setAdapter();
+    }
+
+    public void setListener(){
+        mainExpandableList.setListner(getSupportFragmentManager());
+        TextView setting = findViewById(R.id.tv_main_setting);
+        setting.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new SettingFragment()).commit());
     }
 
     @Override

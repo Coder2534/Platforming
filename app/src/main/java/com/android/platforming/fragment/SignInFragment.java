@@ -66,7 +66,7 @@ public class SignInFragment extends Fragment{
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EditText editText = new EditText(getContext());
+                //final EditText editText = new EditText(getContext());
                 CustomDialog customDialog = new CustomDialog();
                 customDialog.passwordResetDialog(getContext(), new ListenerInterface() {
                     @Override
