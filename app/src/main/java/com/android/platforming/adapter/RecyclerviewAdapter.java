@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,13 +24,10 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         public ImageView icon;
         public TextView title;
         public TextView description;
+        public LinearLayout layout;
 
         ViewHolder(View itemView) {
             super(itemView);
-
-            icon = itemView.findViewById(R.id.tv_recyclerview_setting_icon);
-            title = itemView.findViewById(R.id.tv_recyclerview_setting_title);
-            description = itemView.findViewById(R.id.tv_recyclerview_setting_description);
         }
     }
 
@@ -44,7 +42,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_recyclerview_setting, parent, false);
+        View view = inflater.inflate(R.layout.activity_main, parent, false);
 
         ViewHolder viewholder = new ViewHolder(view);
 

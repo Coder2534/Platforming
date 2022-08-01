@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.5005" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.5005" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_baseline_palette_24.xml" value="0.5005" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_start.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_schoolintroduce.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_sign_up.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.5536458333333333" />
@@ -16,6 +21,10 @@
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/layout_navigation_header.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/layout_navigation_menu.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar_main.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar_setting.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/xml/setting.xml" value="0.5536458333333333" />
       </map>
     </option>
   </component>

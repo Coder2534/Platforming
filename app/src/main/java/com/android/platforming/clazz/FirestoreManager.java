@@ -44,7 +44,6 @@ public class FirestoreManager {
                 interfaze.onSuccess();
             }else{
                 Log.w("setUserData", "Failed with: ",task.getException());
-
                 interfaze.onFail();
             }
         });

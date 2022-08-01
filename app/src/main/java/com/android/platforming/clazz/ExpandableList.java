@@ -84,7 +84,7 @@ public class ExpandableList extends ExpandableListView {
         setAdapter(adapter);
     }
     //test
-    public void setListner(FragmentManager fragmentManager){
+    public void setListner(FragmentManager fragmentManager, OnChildClickInterface interfaze){
         setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -92,6 +92,7 @@ public class ExpandableList extends ExpandableListView {
                     interfaceList.get(groupPosition).get(childPosition).onClick();
                 else
                     fragmentManager.beginTransaction().replace(R.id.cl_main, fragmentList.get(groupPosition).get(childPosition)).addToBackStack(null).commit();
+                interfaze.onClick();
                 return true;
             }
         });

@@ -2,31 +2,36 @@ package com.android.platforming.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
-import com.android.platforming.fragment.SettingFragment;
-import com.android.platforming.interfaze.OnChildClickInterface;
+import com.android.platforming.recevier.AlarmRecevier;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -42,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
 
@@ -70,37 +74,36 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList = new ExpandableList(this);
         relativeLayout.addView(mainExpandableList, 0);
 
-        mainExpandableList.addParent("내정보", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addParent("내정보", R.drawable.ic_baseline_person_24);
         mainExpandableList.addChild(0, "내정보", new Fragment());
         mainExpandableList.addChild(0, "나의 게시물", new Fragment());
 
-        mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_school_24);
         mainExpandableList.addChild(1, "학교소개", new Fragment());
         mainExpandableList.addChild(1, "전화번호", new Fragment());
         mainExpandableList.addChild(1, "식단표", new Fragment());
         mainExpandableList.addChild(1, "학사일정", new Fragment());
 
-        mainExpandableList.addParent("게시판", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
         mainExpandableList.addChild(2, "자유게시판", new Fragment());
         mainExpandableList.addChild(2, "질문게시판", new Fragment());
         mainExpandableList.addChild(2, "학습자료 공유", new Fragment());
 
-        mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_comment_24);
         mainExpandableList.addChild(3, "1학년", new Fragment());
         mainExpandableList.addChild(3, "2학년", new Fragment());
         mainExpandableList.addChild(3, "3학년", new Fragment());
         mainExpandableList.addChild(3, "전체", new Fragment());
 
-        mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(4, "디자인", new Fragment());
         mainExpandableList.addChild(4, "기프티콘", new Fragment());
 
-        mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_dehaze_24);
+        mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_home_24);
         mainExpandableList.addChild(5, "공식 홈페이지", () -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://school.gyo6.net/geumohs"));
             startActivity(intent);
         });
-
         mainExpandableList.addChild(5, "리로스쿨", () -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://geumo.riroschool.kr/"));
             startActivity(intent);
@@ -110,9 +113,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setListener(){
-        mainExpandableList.setListner(getSupportFragmentManager());
+        mainExpandableList.setListner(getSupportFragmentManager(), () -> drawerLayout.closeDrawer(GravityCompat.START));
+
         TextView setting = findViewById(R.id.tv_main_setting);
-        setting.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new SettingFragment()).commit());
+        setting.setOnClickListener(v -> {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(settingIntent);
+        });
     }
 
     @Override
@@ -133,9 +141,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    public ExpandableList getMainExpandableList() {
-        return mainExpandableList;
     }
 }
