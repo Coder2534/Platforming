@@ -19,6 +19,7 @@ import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.clazz.NotificationHelper;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
+import com.android.platforming.fragment.SchoolmealFragment;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_school_24);
         mainExpandableList.addChild(1, "학교소개", new Fragment());
         mainExpandableList.addChild(1, "전화번호", new Fragment());
-        mainExpandableList.addChild(1, "식단표", new Fragment());
+        mainExpandableList.addChild(1, "식단표", new SchoolmealFragment());
         mainExpandableList.addChild(1, "학사일정", new Fragment());
 
         mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
