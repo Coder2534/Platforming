@@ -48,11 +48,6 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
         }
 
         public void bindSliderImage(int drawable) {
-            /*
-            Glide.with(context)
-                    .load(imageURL)
-                    .into(mImageView);
-            */
             mImageView.setImageResource(drawable);
         }
     }

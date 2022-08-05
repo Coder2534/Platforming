@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/title_emailAlarm"
+        android:id="@+id/tv_emailalarm_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
@@ -16,22 +16,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/message_emailAlarm"
+        android:id="@+id/tv_emailalarm_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_emailAlarm" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_emailalarm_title" />
 
     <Button
-        android:id="@+id/confirm_emailAlarm"
+        android:id="@+id/btn_emailalarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="173dp"
-        android:layout_marginBottom="155dp"
+        android:layout_marginTop="277dp"
         android:text="확인"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_emailalarm_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

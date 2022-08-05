@@ -1,6 +1,6 @@
 package com.android.platforming.fragment;
 
-import static com.android.platforming.object.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,16 +24,16 @@ public class EmailAlarmFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_email_alarm, container, false);
-        Setting(view);
+        View view = inflater.inflate(R.layout.fragment_emailalarm, container, false);
+        setListner(view);
         return view;
     }
 
     //리스너&뷰 설정
-    private void Setting(View view){
-        Button confirm = (Button) view.findViewById(R.id.confirm_emailAlarm);
-        TextView title = (TextView) view.findViewById(R.id.title_emailAlarm);
-        TextView message = (TextView) view.findViewById(R.id.message_emailAlarm);
+    private void setListner(View view){
+        Button confirm = (Button) view.findViewById(R.id.btn_emailalarm);
+        TextView title = (TextView) view.findViewById(R.id.tv_emailalarm_title);
+        TextView message = (TextView) view.findViewById(R.id.tv_emailalarm_description);
 
         if(getArguments().getString("Type").equals("emailVerification")){
             title.setText("이메일 인증");
@@ -42,7 +42,7 @@ public class EmailAlarmFragment extends Fragment {
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckEmailVerification(getActivity());
+                    checkEmailVerification(getActivity());
                     getActivity().onBackPressed();
                 }
             });
@@ -60,7 +60,7 @@ public class EmailAlarmFragment extends Fragment {
     }
 
     //이메일 인증여부 확인
-    void CheckEmailVerification(Activity activity){
+    void checkEmailVerification(Activity activity){
         getFirebaseAuth().getCurrentUser().reload();
         Log.w("EmailAlarmFragment", "Verification" + getFirebaseAuth().getCurrentUser().isEmailVerified());
         if(getFirebaseAuth().getCurrentUser().isEmailVerified()){

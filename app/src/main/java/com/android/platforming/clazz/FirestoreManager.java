@@ -1,4 +1,4 @@
-package com.android.platforming.object;
+package com.android.platforming.clazz;
 
 import android.util.Log;
 
@@ -8,6 +8,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FirestoreManager {
@@ -43,7 +44,20 @@ public class FirestoreManager {
                 interfaze.onSuccess();
             }else{
                 Log.w("setUserData", "Failed with: ",task.getException());
+                interfaze.onFail();
+            }
+        });
+    }
 
+    public void writeUserData(HashMap<String, Object> data, ListenerInterface interfaze){
+
+        DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+
+        documentReference.set(data).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                interfaze.onSuccess();
+            }
+            else{
                 interfaze.onFail();
             }
         });
