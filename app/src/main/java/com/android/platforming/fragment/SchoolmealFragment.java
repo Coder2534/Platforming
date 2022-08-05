@@ -57,8 +57,8 @@ public class SchoolmealFragment extends Fragment {
 
         return view;
     }
-    //달력
 
+    //달력
     public void showFood(View view){
         ListView LV_FoodName = view.findViewById(R.id.lv_foodlist);
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
@@ -67,6 +67,7 @@ public class SchoolmealFragment extends Fragment {
         data.addAll(API.getResult());
         adapter.notifyDataSetChanged();
     }
+
     public void showDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
