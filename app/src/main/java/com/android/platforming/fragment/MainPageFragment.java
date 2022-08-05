@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.WebViewActivity;
 import com.example.platforming.R;
 
 public class MainPageFragment extends Fragment {
@@ -28,7 +29,8 @@ public class MainPageFragment extends Fragment {
         selfDiagnosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://hcs.eduro.go.kr/#/relogin"));
+                Intent intent = new Intent(getContext(), WebViewActivity.class);
+                intent.putExtra("workName", "self-diagnosis");
                 startActivity(intent);
             }
         });

@@ -7,15 +7,15 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
 import com.android.platforming.activity.MainActivity;
+import com.android.platforming.activity.WebViewActivity;
 import com.example.platforming.R;
-
-//https://8iggy.tistory.com/65?category=906411
-//https://zladnrms.tistory.com/157
 
 public class NotificationHelper extends ContextWrapper {
     private static final Integer WORK_A_NOTIFICATION_CODE = 0;
@@ -27,6 +27,19 @@ public class NotificationHelper extends ContextWrapper {
     public NotificationHelper(Context base) {
         super(base);
         mContext = base;
+    }
+
+    public static Boolean isNotificationChannelCreated(Context context) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                return notificationManager.getNotificationChannel(NOTIFICATION_CHANNEL_ID) != null;
+            }
+            return true;
+        } catch (NullPointerException nullException) {
+            Toast.makeText(context, "푸시 알림 기능에 문제가 발생했습니다. 앱을 재실행해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
     public static void createChannels(Context context){
@@ -46,12 +59,6 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public void createNotification(String workName) {
-        // 클릭 시 MainActivity 호출
-        Intent intent = new Intent(mContext, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         // Notificatoin을 이루는 공통 부분 정의
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID);
@@ -63,16 +70,27 @@ public class NotificationHelper extends ContextWrapper {
         if (workName.equals("self-diagnosis")) {
             // Notification 클릭 시 동작할 Intent 입력, 중복 방지를 위해 FLAG_CANCEL_CURRENT로 설정, CODE를 다르게하면 개별 생성
             // Code가 같으면 같은 알림으로 인식하여 갱신작업 진행
+            Intent intent = new Intent(mContext, WebViewActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.putExtra("workName", "self-diagnosis");
+
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_A_NOTIFICATION_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
             // Notification 제목, 컨텐츠 설정
-            notificationBuilder.setContentTitle("자가진단 확인").setContentText("금일 자가진단을 하셨나요? 안하셨다면 지금바로 확인하세요.")
+            notificationBuilder.setContentTitle("자가진단 확인").setContentText("금일 자가진단을 안하셨다면 지금바로 확인하세요.")
                     .setContentIntent(pendingIntent);
 
             if (notificationManager != null) {
                 notificationManager.notify(WORK_A_NOTIFICATION_CODE, notificationBuilder.build());
             }
         } else if (workName.equals("school-meal")) {
+            Intent intent = new Intent(mContext, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_B_NOTIFICATION_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
             notificationBuilder.setContentTitle("오늘의 급식").setContentText("set a Notification contents")

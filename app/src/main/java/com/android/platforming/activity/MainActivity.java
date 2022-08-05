@@ -2,14 +2,10 @@ package com.android.platforming.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.app.AlarmManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,18 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.platforming.clazz.ExpandableList;
+import com.android.platforming.clazz.NotificationHelper;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
-import com.android.platforming.recevier.AlarmRecevier;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -54,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nv_main);
 
         setListView();
+
+        NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
+        notificationHelper.createNotification("self-diagnosis");
 
         if(User.getUser() == null){
             Log.w("Debug", "user isEmpty");
@@ -101,11 +94,14 @@ public class MainActivity extends AppCompatActivity {
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_home_24);
         mainExpandableList.addChild(5, "공식 홈페이지", () -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://school.gyo6.net/geumohs"));
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtra("workName", "homepage");
             startActivity(intent);
         });
         mainExpandableList.addChild(5, "리로스쿨", () -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://geumo.riroschool.kr/"));
+
+            Intent intent = new Intent(this, WebViewActivity.class);
+            intent.putExtra("workName", "riroschool");
             startActivity(intent);
         });
 

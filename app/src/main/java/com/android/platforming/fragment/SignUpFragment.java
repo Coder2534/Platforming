@@ -108,7 +108,7 @@ public class SignUpFragment extends Fragment {
                 bundle.putString("Type", "emailVerification");
                 EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
                 emailAlarmFragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.cl_signin, emailAlarmFragment).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.cl_sign, emailAlarmFragment).addToBackStack(null).commit();
             }else{
                 //로그 출력
                 Log.w("SignUpFragment", "sendEmailVerification fail");

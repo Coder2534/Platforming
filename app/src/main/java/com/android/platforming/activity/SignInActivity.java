@@ -32,7 +32,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         //mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.cl_signin, new SignInFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.cl_sign, new SignInFragment()).commit();
     }
 
     public GoogleApiClient getGoogleClient(){

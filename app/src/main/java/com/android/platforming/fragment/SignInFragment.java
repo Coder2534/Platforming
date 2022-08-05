@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,7 +61,7 @@ public class SignInFragment extends Fragment{
         TextView password = view.findViewById(R.id.et_signin_password);
 
         confirm.setOnClickListener(v -> signInWithEmail(email.getText().toString(), password.getText().toString()));
-        signOut.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_signin, new SignUpFragment()).addToBackStack(null).commit());
+        signOut.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_sign, new SignUpFragment()).addToBackStack(null).commit());
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +89,7 @@ public class SignInFragment extends Fragment{
                                 bundle.putString("Email", email);
                                 EmailAlarmFragment emailAlarmFragment = new EmailAlarmFragment();
                                 emailAlarmFragment.setArguments(bundle);
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_signin, emailAlarmFragment).addToBackStack(null).commit();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_sign, emailAlarmFragment).addToBackStack(null).commit();
                             }else{
                                 Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
                             }
