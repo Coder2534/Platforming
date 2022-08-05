@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SchoolmealFragment extends Fragment {
-    SchoolApi API = new SchoolApi();
+    public static SchoolApi api;
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
@@ -44,7 +44,7 @@ public class SchoolmealFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schoolmeal, container, false);
         Button btn_calender = view.findViewById(R.id.btn_calender);
-        while (API.getResult() == null){
+        while (api.getResult() == null){
         }
         showFood(view);
 
@@ -64,7 +64,7 @@ public class SchoolmealFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
         LV_FoodName.setAdapter(adapter);
         data.clear();
-        data.addAll(API.getResult());
+        data.addAll(api.getResult());
         adapter.notifyDataSetChanged();
     }
 
@@ -79,7 +79,7 @@ public class SchoolmealFragment extends Fragment {
                 d = String.valueOf(dayOfMonth);
                 btn_calender.setText(y+"/"+m+"/"+d);
                 tv_date.setText((y+"년"+m+"월"+d+"일"));
-                API.schoolApi(Integer.parseInt(y+m+d));
+                api.schoolApi(Integer.parseInt(y+m+d));
             }
         },Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d));
         minDate.set(2020,0,1);
