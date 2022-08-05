@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SchoolApi extends Thread {
     List result;
-    String calenerTime = ;
+    String calenerTime;
     String key = "key=abfda37c182d43bb9fa4a7e698b91fbb";
     String Type = "&Type=json";
     String base_url = "https://open.neis.go.kr/hub/mealServiceDietInfo?";
@@ -22,9 +22,6 @@ public class SchoolApi extends Thread {
         calenerTime = String.valueOf(Time);
         result_URL = base_url + key + Type+"&Plndex=1&pSize=10"+ sub_url;
     }
-
-
-
 
     @Override
     public void run() {
