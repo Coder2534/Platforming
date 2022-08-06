@@ -9,21 +9,20 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-public class SchoolApi extends Thread {
+public class ShoolSchedule extends Thread{
     List result;
     String calenerTime;
     String key = "key=abfda37c182d43bb9fa4a7e698b91fbb";
     String Type = "&Type=json";
     String base_url = "https://open.neis.go.kr/hub/mealServiceDietInfo?";
-    String sub_schoolmeal_url;
+    String sub_schoolschedule_url = "&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750447&AA_YMD="+calenerTime;
     String result_URL;
 
-    public void schoolmealApi(String Time){
+    public void schoolscheduleApi(int Time){
         calenerTime = String.valueOf(Time);
-        sub_schoolmeal_url = "&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750447&MLSV_YMD="+calenerTime;
-        result_URL = base_url + key + Type+"&Plndex=1&pSize=10"+ sub_schoolmeal_url;
+        result_URL = base_url + key + Type+"&Plndex=1&pSize=10"+ sub_schoolschedule_url;
+        Log.d("schedule", result_URL);
     }
-
     @Override
     public void run() {
         Log.d("result_URL_School", result_URL);
@@ -54,9 +53,9 @@ public class SchoolApi extends Thread {
                         }
                         result = JsonParser.JsonParserSchoolmeal(line);
                         if(result == null){
-                            result = Collections.singletonList("등록된 식단이 없습니다.");
+                            result = Collections.singletonList("등록된 일정이 없습니다.");
                         }
-                        Log.d("result_School", String.valueOf(result));
+                        Log.d("result_S", String.valueOf(result));
                     }
                     bf.close();
                 }
@@ -69,5 +68,4 @@ public class SchoolApi extends Thread {
     public List<String> getResult(){
         return result;
     }
-
 }
