@@ -25,9 +25,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class SchoolmealFragment extends Fragment {
-    SchoolApi api = new SchoolApi();
-    long now = System.currentTimeMillis();
-    Date date = new Date(now);
+    private SchoolApi api;
+
+    Date date = new Date(System.currentTimeMillis());
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
     String y = dateFormat.format(date);
     SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
@@ -40,18 +40,26 @@ public class SchoolmealFragment extends Fragment {
     ArrayAdapter<String> adapter;
     ArrayList data = new ArrayList();
 
+    TextView tv_date;
+    ListView lv_foodName;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schoolmeal, container, false);
         Button btn_calender = view.findViewById(R.id.btn_calender);
-        TextView tv_date = view.findViewById(R.id.tv_date);
-        Log.d("Time",y+m+d);
-        api.schoolmealApi(y+m+d);
-        api.start();
-        tv_date.setText(y+"년"+m+"월"+d+"일");
-        while (api.getResult() == null);
-        showFood(view);
+        tv_date = view.findViewById(R.id.tv_date);
+        lv_foodName =view.findViewById(R.id.lv_foodlist);
+
+        tv_date.setText((y+"년"+m+"월"+d+"일"));
+        api = new SchoolApi();
+        try {
+            api.getSchoolMeal();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        showFood();
+
 
         btn_calender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +72,9 @@ public class SchoolmealFragment extends Fragment {
     }
 
     //달력
-    public void showFood(View view){
-        ListView LV_FoodName = view.findViewById(R.id.lv_foodlist);
+    public void showFood(){
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
-        LV_FoodName.setAdapter(adapter);
+        lv_foodName.setAdapter(adapter);
         data.clear();
         data.addAll(api.getResult());
         adapter.notifyDataSetChanged();
@@ -77,12 +84,21 @@ public class SchoolmealFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                TextView tv_date = view.findViewById(R.id.tv_date);
                 y = String.valueOf(year);
-                m = String.valueOf(month+1);
+                m = String.valueOf(month);
+                if(Integer.parseInt(m) < 10)
+                    m = "0" + m;
                 d = String.valueOf(dayOfMonth);
+                if(Integer.parseInt(d) < 10)
+                    d = "0" + d;
                 tv_date.setText((y+"년"+m+"월"+d+"일"));
-                api.schoolmealApi(y+m+d);
+                api = new SchoolApi();
+                try {
+                    api.getSchoolMeal(y+m+d);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                showFood();
             }
         },Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d));
         minDate.set(2020,0,1);

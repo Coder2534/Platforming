@@ -17,7 +17,7 @@ import java.util.List;
 
 public class JsonParser {
 
-    public static List JsonParserSchoolmeal(String resultJson) {
+    public List jsonParseMeal(String resultJson){
         try {
             String result;
             JSONObject jsonObject = new JSONObject(resultJson);
@@ -28,32 +28,31 @@ public class JsonParser {
 
 
             jsonArray = jsonObject.getJSONArray("mealServiceDietInfo");
-            Log.d("Array1_parser", String.valueOf(jsonArray));
+            Log.d("jsonParseMeal", String.valueOf(jsonArray));
             jsonObject2 = jsonArray.getJSONObject(1);
-            Log.d("Array2_parser", String.valueOf(jsonObject2));
+            Log.d("jsonParseMeal", String.valueOf(jsonObject2));
             jsonArray2 = jsonObject2.getJSONArray("row");
-            Log.d("Array3_parser", String.valueOf(jsonArray2));
+            Log.d("jsonParseMeal", String.valueOf(jsonArray2));
             jsonObject3 = jsonArray2.getJSONObject(0);
-            Log.d("Array4_parser", String.valueOf(jsonObject3));
+            Log.d("jsonParseMeal", String.valueOf(jsonObject3));
             result = jsonObject3.getString("DDISH_NM");
-            Log.d("Array5_parser", result);
+            Log.d("jsonParseMeal", result);
 
             String[] foodNames = result.split("<br/>");
             for (int i = 0; i < foodNames.length; ++i){
-                Log.d("foodNames_parser", foodNames[i]);
+                Log.d("jsonParseMeal", foodNames[i]);
             }
 
             List<String> list = Arrays.asList(foodNames);
             return list;
 
         } catch (JSONException e) {
-            Log.d("error_parser", e.getMessage());
+            Log.d("jsonParseMeal", e.getMessage());
         }
         return null;
     }
 
-
-    public static List JsonParserSchedule(String resultJson) {
+    public List jsonParseSchedule(String resultJson){
         try {
             String result;
             JSONObject jsonObject = new JSONObject(resultJson);
@@ -87,4 +86,5 @@ public class JsonParser {
         }
         return null;
     }
+
 }
