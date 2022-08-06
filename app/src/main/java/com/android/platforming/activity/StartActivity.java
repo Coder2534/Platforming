@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.android.platforming.clazz.SchoolApi;
+import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.FirestoreManager;
 import com.example.platforming.R;

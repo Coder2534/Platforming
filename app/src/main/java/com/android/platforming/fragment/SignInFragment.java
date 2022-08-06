@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.activity.MainActivity;
+import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.activity.SignInActivity;
@@ -105,7 +106,7 @@ public class SignInFragment extends Fragment{
         getFirebaseAuth().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Log.w("SignInFragment", "signInWithEmailAndPassword Success");
-                readUserData();
+                readData();
             }else{
                 Log.w("SignInFragment", "signInWithEmailAndPassword Error");
                 CustomDialog customDialog = new CustomDialog();
@@ -141,7 +142,7 @@ public class SignInFragment extends Fragment{
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         Log.w("SignInActivity", "Google SignIn success");
-                        readUserData();
+                        readData();
                     }else{
                         Log.w("SignInActivity", "Google SignIn fail");
                     }
@@ -188,7 +189,7 @@ public class SignInFragment extends Fragment{
                     if (task.isSuccessful()) {
                         // 로그인 성공
                         Log.w("SignInActivity", "Facebook SignIn success");
-                        readUserData();
+                        readData();
                     } else {
                         // 로그인 실패
                         Log.w("SignInActivity", "Facebook SignIn fail");
@@ -222,7 +223,7 @@ public class SignInFragment extends Fragment{
     }
 
 
-    private void readUserData(){
+    private void readData(){
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readUserData(new ListenerInterface() {
 
@@ -231,16 +232,6 @@ public class SignInFragment extends Fragment{
                 Intent mainIntent = new Intent(getContext(), MainActivity.class);
                 startActivity(mainIntent);
                 getActivity().finish();
-            }
-
-            @Override
-            public void onSuccess(String msg) {
-
-            }
-
-            @Override
-            public void onFail() {
-
             }
         });
     }
