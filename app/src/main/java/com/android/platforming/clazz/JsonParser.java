@@ -28,15 +28,15 @@ public class JsonParser {
 
 
             jsonArray = jsonObject.getJSONArray("mealServiceDietInfo");
-            Log.d("jsonParseMeal", String.valueOf(jsonArray));
+            Log.d("jsonParseMeal1", String.valueOf(jsonArray));
             jsonObject2 = jsonArray.getJSONObject(1);
-            Log.d("jsonParseMeal", String.valueOf(jsonObject2));
+            Log.d("jsonParseMeal2", String.valueOf(jsonObject2));
             jsonArray2 = jsonObject2.getJSONArray("row");
-            Log.d("jsonParseMeal", String.valueOf(jsonArray2));
+            Log.d("jsonParseMeal3", String.valueOf(jsonArray2));
             jsonObject3 = jsonArray2.getJSONObject(0);
-            Log.d("jsonParseMeal", String.valueOf(jsonObject3));
+            Log.d("jsonParseMeal4", String.valueOf(jsonObject3));
             result = jsonObject3.getString("DDISH_NM");
-            Log.d("jsonParseMeal", result);
+            Log.d("jsonParseMeal5", result);
 
             String[] foodNames = result.split("<br/>");
             for (int i = 0; i < foodNames.length; ++i){
@@ -47,13 +47,14 @@ public class JsonParser {
             return list;
 
         } catch (JSONException e) {
-            Log.d("jsonParseMeal", e.getMessage());
+            Log.d("error_parser_meal", e.getMessage());
         }
         return null;
     }
 
     public List jsonParseSchedule(String resultJson){
         try {
+            Log.d("check", "ok");
             String result;
             JSONObject jsonObject = new JSONObject(resultJson);
             JSONObject jsonObject2;
@@ -63,15 +64,15 @@ public class JsonParser {
 
 
             jsonArray = jsonObject.getJSONArray("SchoolSchedule");
-            Log.d("Array6_parser", String.valueOf(jsonArray));
+            Log.d("jsonParseSchedule1", String.valueOf(jsonArray));
             jsonObject2 = jsonArray.getJSONObject(1);
-            Log.d("Array7_parser", String.valueOf(jsonObject2));
+            Log.d("jsonParseSchedule2", String.valueOf(jsonObject2));
             jsonArray2 = jsonObject2.getJSONArray("row");
-            Log.d("Array8_parser", String.valueOf(jsonArray2));
+            Log.d("jsonParseSchedule3", String.valueOf(jsonArray2));
             jsonObject3 = jsonArray2.getJSONObject(0);
-            Log.d("Array9_parser", String.valueOf(jsonObject3));
-            result = jsonObject3.getString("DDISH_NM");
-            Log.d("Array10_parser", result);
+            Log.d("jsonParseSchedule4", String.valueOf(jsonObject3));
+            result = jsonObject3.getString("EVENT_NM");
+            Log.d("jsonParseSchedule5", result);
 
             String[] schedulenames = result.split("<br/>");
             for (int i = 0; i < schedulenames.length; ++i){
@@ -82,7 +83,7 @@ public class JsonParser {
             return list;
 
         } catch (JSONException e) {
-            Log.d("error_parser", e.getMessage());
+            Log.d("error_parser_schedule", e.getMessage());
         }
         return null;
     }
