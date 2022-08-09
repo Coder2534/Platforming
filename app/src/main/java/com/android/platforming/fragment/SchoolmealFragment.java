@@ -27,15 +27,6 @@ import java.util.Date;
 public class SchoolmealFragment extends Fragment {
     private SchoolApi api;
 
-    Date date = new Date(System.currentTimeMillis());
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-    String y = dateFormat.format(date);
-    SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
-    String m = dateFormat1.format(date);
-    SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd");
-    String d = dateFormat2.format(date);
-
-    Calendar calendar = Calendar.getInstance();
     Calendar minDate = Calendar.getInstance();
     ArrayAdapter<String> adapter;
     ArrayList data = new ArrayList();
@@ -51,10 +42,12 @@ public class SchoolmealFragment extends Fragment {
         tv_date = view.findViewById(R.id.tv_date);
         lv_foodName =view.findViewById(R.id.lv_foodlist);
 
-        tv_date.setText((y+"년"+m+"월"+d+"일"));
+
         api = new SchoolApi();
         try {
             api.getSchoolMeal();
+            tv_date.setText(api.getDate());
+            api.joinThreadMeal();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -76,7 +69,7 @@ public class SchoolmealFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
         lv_foodName.setAdapter(adapter);
         data.clear();
-        data.addAll(api.getMealResult());
+        data.addAll(api.getResult());
         adapter.notifyDataSetChanged();
     }
 
@@ -84,23 +77,18 @@ public class SchoolmealFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                y = String.valueOf(year);
-                m = String.valueOf(month);
-                if(Integer.parseInt(m) < 10)
-                    m = "0" + m;
-                d = String.valueOf(dayOfMonth);
-                if(Integer.parseInt(d) < 10)
-                    d = "0" + d;
-                tv_date.setText((y+"년"+m+"월"+d+"일"));
                 api = new SchoolApi();
                 try {
-                    api.getSchoolMeal(y+m+d);
+                    api.getSchoolMeal(Integer.toString(year), Integer.toString(month + 1), Integer.toString(dayOfMonth));
+                    tv_date.setText(api.getDate());
+                    api.joinThreadMeal();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 showFood();
             }
-        },Integer.parseInt(y),Integer.parseInt(m),Integer.parseInt(d));
+        }, Integer.parseInt(api.getYear()), Integer.parseInt(api.getMonth()) - 1, Integer.parseInt(api.getDay()));
+
         minDate.set(2020,0,1);
         datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
         datePickerDialog.setMessage("날짜선택");

@@ -87,9 +87,12 @@ public class NotificationHelper extends ContextWrapper {
             }
         } else if (workName.equals("schoolMeal")) {
             SchoolApi schoolApi = new SchoolApi();
+            String contentText = null;
             String bigText = null;
             try {
                 schoolApi.getSchoolMeal();
+                contentText = schoolApi.getDate();
+                schoolApi.joinThreadMeal();
                 StringBuilder stringBuilder = new StringBuilder();
                 for(String result : schoolApi.getResult()){
                     stringBuilder.append(result);
@@ -107,7 +110,7 @@ public class NotificationHelper extends ContextWrapper {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_B_NOTIFICATION_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-            notificationBuilder.setContentTitle("오늘의 급식").setContentText("set a Notification contents").setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
+            notificationBuilder.setContentTitle("오늘의 급식").setContentText(contentText).setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
                     .setContentIntent(pendingIntent);
 
             if (notificationManager != null) {

@@ -13,9 +13,48 @@ import java.util.List;
 
 public class SchoolApi {
 
-    List resultmeal;
-    public List<String> getMealResult(){
-        return resultmeal;
+    //global
+    List result;
+    public List<String> getResult(){
+        return result;
+    }
+
+    String year;
+    String month;
+    String day;
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getDate() {
+        return String.format("%s년 %s월 %s일",year, month, day);
+    }
+
+    public String fixDate(String date){
+        if(Integer.parseInt(date) < 10)
+            return "0" + date;
+        else
+            return date;
+    }
+
+    private String dateFormat(Date date){
+        SimpleDateFormat dateFormat_year = new SimpleDateFormat("yyyy");
+        year = dateFormat_year.format(date);
+        SimpleDateFormat dateFormat_month = new SimpleDateFormat("M");
+        month = dateFormat_month.format(date);
+        SimpleDateFormat dateFormat_day = new SimpleDateFormat("d");
+        day = dateFormat_day.format(date);
+
+        return year + month + day;
     }
 
     //schoolMeal
@@ -24,30 +63,33 @@ public class SchoolApi {
     String baseUrlMeal = "https://open.neis.go.kr/hub/mealServiceDietInfo?";
     String resultUrlMeal;
 
-    public void getSchoolMeal(String calenerTime) throws InterruptedException {
-        resultUrlMeal = getResultUrlMeal(calenerTime);
+    public void getSchoolMeal(String year, String month, String day) throws InterruptedException {
+        this.year = year;
+        this.month = month;
+        this.day = day;
 
+        String month_fix = fixDate(month);
+        String day_fix = fixDate(day);
+
+        resultUrlMeal = getResultUrlMeal(year + month_fix + day_fix);
+
+        threadMeal.setDaemon(true);
         threadMeal.start();
-        threadMeal.join();
     }
 
     public void getSchoolMeal() throws InterruptedException {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-        String y = dateFormat.format(date);
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
-        String m = dateFormat1.format(date);
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd");
-        String d = dateFormat2.format(date);
+        resultUrlMeal = getResultUrlMeal(dateFormat(new Date(System.currentTimeMillis())));
 
-        resultUrlMeal = getResultUrlMeal(y+m+d);
-
+        threadMeal.setDaemon(true);
         threadMeal.start();
+    }
+
+    public void joinThreadMeal() throws InterruptedException{
         threadMeal.join();
     }
 
-    private String getResultUrlMeal(String calenerTime){
-        String sub_url = "&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750447&MLSV_YMD="+calenerTime;
+    private String getResultUrlMeal(String date){
+        String sub_url = "&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750447&MLSV_YMD="+date;
         String result_URL = baseUrlMeal + keyMeal + TypeMeal +"&Plndex=1&pSize=10"+ sub_url;
         return result_URL;
     }
@@ -79,11 +121,11 @@ public class SchoolApi {
                             break;
                         }
                         JsonParser jsonParser = new JsonParser();
-                        resultmeal = jsonParser.jsonParseMeal(line);
-                        if(resultmeal == null){
-                            resultmeal = Collections.singletonList("등록된 식단이 없습니다.");
+                        result = jsonParser.jsonParseMeal(line);
+                        if(result == null){
+                            result = Collections.singletonList("등록된 식단이 없습니다.");
                         }
-                        Log.d("SchoolApi", String.valueOf(resultmeal));
+                        Log.d("SchoolApi", String.valueOf(result));
                     }
                     bf.close();
                 }
@@ -95,34 +137,33 @@ public class SchoolApi {
     });
 
     //schoolSchedule
-    List resultschedule;
-    public List<String> getScheduleResult(){
-        return resultschedule;
-    }
     String keySchedule = "key=abfda37c182d43bb9fa4a7e698b91fbb";
     String TypeSchedule = "&Type=json";
     String baseUrlSchedule = "https://open.neis.go.kr/hub/SchoolSchedule?";
     String resultUrlSchedule;
 
-    public void getSchoolSchedule(String calenerTime) throws InterruptedException {
-        resultUrlSchedule = getResultUrlSchedule(calenerTime);
+    public void getSchoolSchedule(String year, String month, String day) throws InterruptedException {
+        this.year = year;
+        this.month = month;
+        this.day = day;
 
+        String month_fix = fixDate(month);
+        String day_fix = fixDate(day);
+
+        resultUrlSchedule = getResultUrlSchedule(year + month_fix + day_fix);
+
+        threadSchedule.setDaemon(true);
         threadSchedule.start();
-        threadSchedule.join();
     }
 
     public void getSchoolSchedule() throws InterruptedException {
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
-        String y = dateFormat.format(date);
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM");
-        String m = dateFormat1.format(date);
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd");
-        String d = dateFormat2.format(date);
+        resultUrlSchedule = getResultUrlSchedule(dateFormat(new Date(System.currentTimeMillis())));
 
-        resultUrlSchedule = getResultUrlSchedule(y+m+d);
-
+        threadSchedule.setDaemon(true);
         threadSchedule.start();
+    }
+
+    public void joinThreadSchedule() throws InterruptedException{
         threadSchedule.join();
     }
 
@@ -160,11 +201,11 @@ public class SchoolApi {
                             break;
                         }
                         JsonParser jsonParser = new JsonParser();
-                        resultschedule = jsonParser.jsonParseSchedule(line);
-                        if(resultschedule == null){
-                            resultschedule = Collections.singletonList("등록된 일정이 없습니다.");
+                        result = jsonParser.jsonParseSchedule(line);
+                        if(result == null){
+                            result = Collections.singletonList("등록된 일정이 없습니다.");
                         }
-                        Log.d("result_SchoolSchedule", String.valueOf(resultschedule));
+                        Log.d("result_SchoolSchedule", String.valueOf(result));
                     }
                     bf.close();
                 }

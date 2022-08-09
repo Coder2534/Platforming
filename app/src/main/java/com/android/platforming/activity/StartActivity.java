@@ -24,6 +24,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StartActivity extends AppCompatActivity {
 
+    //startactivity에서 crash발생 2022-08-10
+
     private static int SPLASH_TIME_OUT = 1000;
     Handler handler_splash;
     Runnable runnalbe_splash;
@@ -32,6 +34,7 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("timeline", "StartActivity");
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_start);

@@ -3,6 +3,7 @@ package com.android.platforming;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -12,6 +13,7 @@ public class InitApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        Log.d("timeline", "initApplication");
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         if(pref.getBoolean("firstActivate", true)){
             Calendar calendar_timer = Calendar.getInstance();
