@@ -6,9 +6,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +23,7 @@ import com.android.platforming.clazz.NotificationHelper;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
 import com.android.platforming.fragment.SchoolmealFragment;
+import com.android.platforming.recevier.AlarmReceiver;
 import com.example.platforming.R;
 import com.android.platforming.fragment.UserInitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -46,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         setListView();
 
-        NotificationHelper notificationHelper = new NotificationHelper(getBaseContext());
-        notificationHelper.createNotification("self-diagnosis");
 
         if(User.getUser() == null){
             Log.w("Debug", "user isEmpty");

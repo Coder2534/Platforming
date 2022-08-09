@@ -67,14 +67,14 @@ public class NotificationHelper extends ContextWrapper {
                 .setAutoCancel(true); // 클릭 시 Notification 제거
 
         // A이벤트 알림을 생성한다면
-        if (workName.equals("self-diagnosis")) {
+        if (workName.equals("selfDiagnosis")) {
             // Notification 클릭 시 동작할 Intent 입력, 중복 방지를 위해 FLAG_CANCEL_CURRENT로 설정, CODE를 다르게하면 개별 생성
             // Code가 같으면 같은 알림으로 인식하여 갱신작업 진행
             Intent intent = new Intent(mContext, WebViewActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화
             intent.setAction(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            intent.putExtra("workName", "self-diagnosis");
+            intent.putExtra("workName", "selfDiagnosis");
 
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_A_NOTIFICATION_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
@@ -85,7 +85,21 @@ public class NotificationHelper extends ContextWrapper {
             if (notificationManager != null) {
                 notificationManager.notify(WORK_A_NOTIFICATION_CODE, notificationBuilder.build());
             }
-        } else if (workName.equals("school-meal")) {
+        } else if (workName.equals("schoolMeal")) {
+            SchoolApi schoolApi = new SchoolApi();
+            String bigText = null;
+            try {
+                schoolApi.getSchoolMeal();
+                StringBuilder stringBuilder = new StringBuilder();
+                for(String result : schoolApi.getResult()){
+                    stringBuilder.append(result);
+                    stringBuilder.append("\n");
+                }
+                bigText = stringBuilder.toString();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             Intent intent = new Intent(mContext, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화
             intent.setAction(Intent.ACTION_MAIN);
@@ -93,7 +107,7 @@ public class NotificationHelper extends ContextWrapper {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_B_NOTIFICATION_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-            notificationBuilder.setContentTitle("오늘의 급식").setContentText("set a Notification contents")
+            notificationBuilder.setContentTitle("오늘의 급식").setContentText("set a Notification contents").setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
                     .setContentIntent(pendingIntent);
 
             if (notificationManager != null) {

@@ -49,10 +49,10 @@ public class WebViewActivity extends AppCompatActivity {
                 loadWeb("http://geumo.riroschool.kr/");
             }
         }
-        else if(workName.equals("self-diagnosis")){
-            String self_diagnosisPackage = "kr.go.eduro.hcs";
+        else if(workName.equals("selfDiagnosis")){
+            String selfDiagnosisPackage = "kr.go.eduro.hcs";
             try{
-                startActivity(getPackageManager().getLaunchIntentForPackage(self_diagnosisPackage));
+                startActivity(getPackageManager().getLaunchIntentForPackage(selfDiagnosisPackage));
                 finish();
             }catch (Exception e){
                 setListener();

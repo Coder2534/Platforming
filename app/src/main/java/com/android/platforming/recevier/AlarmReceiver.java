@@ -3,27 +3,58 @@ package com.android.platforming.recevier;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.util.Log;
+
+import com.android.platforming.clazz.Alarm;
+import com.android.platforming.clazz.NotificationHelper;
+
+import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver {
-    Context context;
+    public static final String TAG = "AlarmReceiver";
+    public static final int NOTIFICATION_SELFDIAGNOSIS_ID = 0;
+    public static final int NOTIFICATION_SCHOOLMEAL_ID = 1;
+    public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        this.context = context;
-        // intent로부터 전달받은 string
-        String get_yout_string = intent.getExtras().getString("state");
-/*
-        // RingtonePlayingService 서비스 intent 생성
-        Intent service_intent = new Intent(context, RingtonePlayingService.class);
+        Log.d(TAG, "Received intent : " + intent);
+        int requestCode = intent.getIntExtra("workName", 0);
 
-        // RingtonePlayinService로 extra string값 보내기
-        service_intent.putExtra("state", get_yout_string);
-        // start the ringtone service
+        String workName = null;
+        String key = null;
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
-            this.context.startForegroundService(service_intent);
-        }else{
-            this.context.startService(service_intent);
-        }*/
+        switch (requestCode){
+            case NOTIFICATION_SELFDIAGNOSIS_ID:
+                workName = "selfDiagnosis";
+                key = "time_selfDiagnosis";
+                break;
+            case NOTIFICATION_SCHOOLMEAL_ID:
+                workName = "schoolMeal";
+                key = "time_schoolMeal";
+                break;
+        }
+
+        SharedPreferences preferenceManager = PreferenceManager.getDefaultSharedPreferences(context);
+        long timeMillis = preferenceManager.getLong(key, 0);
+        Calendar calendar_timer = Calendar.getInstance();
+        calendar_timer.setTimeInMillis(timeMillis);
+        Calendar calendar_now = Calendar.getInstance();
+        if(calendar_timer.before(calendar_now)){
+            SharedPreferences.Editor editor = preferenceManager.edit();
+            calendar_timer.set(Calendar.DATE, calendar_now.get(Calendar.DATE) + 1);
+            timeMillis = calendar_timer.getTimeInMillis();
+            editor.putLong(key, timeMillis).commit();
+        }
+
+        NotificationHelper.createChannels(context);
+        NotificationHelper notificationHelper = new NotificationHelper(context);
+        notificationHelper.createNotification(workName);
+
+        Alarm.cancelAlarm(context, requestCode);
+        Alarm.setAlarm(context, timeMillis, requestCode);
     }
 }

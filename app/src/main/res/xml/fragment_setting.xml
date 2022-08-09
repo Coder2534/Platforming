@@ -10,25 +10,29 @@
             <PreferenceScreen
                 android:title="자가진단 알림">
                 <SwitchPreference
-                    android:key="selfdiagnosis"
+                    android:key="selfDiagnosis"
                     android:title="자가진단 알림"
-                    android:summary="설정된 시간에 자가진단 확인 알림 발송"/>
+                    android:summary="설정된 시간에 자가진단 확인 알림 발송"
+                    android:defaultValue="true" />
 
                 <com.android.platforming.view.TimePreference
+                    android:key="time_selfDiagnosis"
                     android:title="시간"
-                    android:dependency="selfdiagnosis"/>
+                    android:dependency="selfDiagnosis" />
             </PreferenceScreen>
 
             <PreferenceScreen
                 android:title="오늘의 급식 알림">
                 <SwitchPreference
-                    android:key="schoolmeal"
+                    android:key="schoolMeal"
                     android:title="오늘의 급식 알림"
-                    android:summary="설정된 시간에 오늘의 급식 발송"/>
+                    android:summary="설정된 시간에 오늘의 급식 발송"
+                    android:defaultValue="true" />
 
                 <com.android.platforming.view.TimePreference
+                    android:key="time_schoolMeal"
                     android:title="시간"
-                    android:dependency="schoolmeal"/>
+                    android:dependency="schoolMeal"/>
             </PreferenceScreen>
         </PreferenceCategory>
 

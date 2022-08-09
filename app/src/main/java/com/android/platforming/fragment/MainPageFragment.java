@@ -30,7 +30,7 @@ public class MainPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("workName", "self-diagnosis");
+                intent.putExtra("workName", "selfDiagnosis");
                 startActivity(intent);
             }
         });

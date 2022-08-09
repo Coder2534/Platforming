@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -26,7 +27,6 @@ public class TimePreference extends DialogPreference {
 
     public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
         super(ctxt, attrs, defStyle);
-
         setPositiveButtonText("확인");
         setNegativeButtonText("취소");
         calendar = new GregorianCalendar();
@@ -52,6 +52,7 @@ public class TimePreference extends DialogPreference {
         if (positiveResult) {
             calendar.set(Calendar.HOUR_OF_DAY, picker.getCurrentHour());
             calendar.set(Calendar.MINUTE, picker.getCurrentMinute());
+            calendar.set(Calendar.SECOND, 0);
 
             setSummary(getSummary());
             if (callChangeListener(calendar.getTimeInMillis())) {
@@ -68,7 +69,6 @@ public class TimePreference extends DialogPreference {
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-
         if (restoreValue) {
             if (defaultValue == null) {
                 calendar.setTimeInMillis(getPersistedLong(System.currentTimeMillis()));
