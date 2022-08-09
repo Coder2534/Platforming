@@ -13,9 +13,9 @@ import java.util.List;
 
 public class SchoolApi {
 
-    List result;
-    public List<String> getResult(){
-        return result;
+    List resultmeal;
+    public List<String> getMealResult(){
+        return resultmeal;
     }
 
     //schoolMeal
@@ -79,11 +79,11 @@ public class SchoolApi {
                             break;
                         }
                         JsonParser jsonParser = new JsonParser();
-                        result = jsonParser.jsonParseMeal(line);
-                        if(result == null){
-                            result = Collections.singletonList("등록된 식단이 없습니다.");
+                        resultmeal = jsonParser.jsonParseMeal(line);
+                        if(resultmeal == null){
+                            resultmeal = Collections.singletonList("등록된 식단이 없습니다.");
                         }
-                        Log.d("SchoolApi", String.valueOf(result));
+                        Log.d("SchoolApi", String.valueOf(resultmeal));
                     }
                     bf.close();
                 }
@@ -95,9 +95,13 @@ public class SchoolApi {
     });
 
     //schoolSchedule
+    List resultschedule;
+    public List<String> getScheduleResult(){
+        return resultschedule;
+    }
     String keySchedule = "key=abfda37c182d43bb9fa4a7e698b91fbb";
     String TypeSchedule = "&Type=json";
-    String baseUrlSchedule = "https://open.neis.go.kr/hub/mealServiceDietInfo?";
+    String baseUrlSchedule = "https://open.neis.go.kr/hub/SchoolSchedule?";
     String resultUrlSchedule;
 
     public void getSchoolSchedule(String calenerTime) throws InterruptedException {
@@ -129,7 +133,7 @@ public class SchoolApi {
     }
 
     Thread threadSchedule = new Thread(() -> {
-        Log.d("SchoolApi", resultUrlSchedule);
+        Log.d("SchoolApi_Schedule", resultUrlSchedule);
         try {
             URL url = new URL(resultUrlSchedule);
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -156,11 +160,11 @@ public class SchoolApi {
                             break;
                         }
                         JsonParser jsonParser = new JsonParser();
-                        result = jsonParser.jsonParseSchedule(line);
-                        if(result == null){
-                            result = Collections.singletonList("등록된 일정이 없습니다.");
+                        resultschedule = jsonParser.jsonParseSchedule(line);
+                        if(resultschedule == null){
+                            resultschedule = Collections.singletonList("등록된 일정이 없습니다.");
                         }
-                        Log.d("result_School", String.valueOf(result));
+                        Log.d("result_SchoolSchedule", String.valueOf(resultschedule));
                     }
                     bf.close();
                 }

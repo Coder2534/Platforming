@@ -3,12 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.27" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_autonomy_background.xml" value="0.175" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.5005" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.5005" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_baseline_palette_24.xml" value="0.5005" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/drawable/ic_launcher_background.xml" value="0.27" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_sign.xml" value="0.5536458333333333" />
@@ -31,11 +28,6 @@
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar_main.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar_setting.xml" value="0.5536458333333333" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_autonomy.xml" value="0.27" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_autonomy_round.xml" value="0.27" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.27" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.27" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/mipmap-mdpi/ic_autonomy.xml" value="0.27" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/xml/setting.xml" value="0.5536458333333333" />
       </map>

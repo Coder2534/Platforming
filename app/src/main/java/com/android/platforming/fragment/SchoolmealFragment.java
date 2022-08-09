@@ -76,7 +76,7 @@ public class SchoolmealFragment extends Fragment {
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
         lv_foodName.setAdapter(adapter);
         data.clear();
-        data.addAll(api.getResult());
+        data.addAll(api.getMealResult());
         adapter.notifyDataSetChanged();
     }
 
