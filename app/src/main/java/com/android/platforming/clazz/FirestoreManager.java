@@ -33,6 +33,7 @@ public class FirestoreManager {
         documentReference.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 DocumentSnapshot documentSnapshot = task.getResult();
+
                 if(documentSnapshot.exists()){
                     Log.w("setUserData", "Document exist",task.getException());
                     Map<String, Object> datas = documentSnapshot.getData();
@@ -41,6 +42,7 @@ public class FirestoreManager {
                 else{
                     Log.w("setUserData", "Document doesn't exist");
                 }
+
                 interfaze.onSuccess();
             }else{
                 Log.w("setUserData", "Failed with: ",task.getException());
