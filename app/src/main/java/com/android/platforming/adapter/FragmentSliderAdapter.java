@@ -1,35 +1,41 @@
 package com.android.platforming.adapter;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class FragmentSliderAdapter extends FragmentStateAdapter {
-    public int mCount;
+import com.android.platforming.fragment.SchoolmealFragment;
+import com.android.platforming.fragment.ViewPagerSchoolMealFragment;
+import com.android.platforming.fragment.ViewPagerSchoolScheduleFragment;
+import com.android.platforming.fragment.ViewPagerTimetableFragment;
 
-    public FragmentSliderAdapter(FragmentActivity fa, int count) {
+import java.util.ArrayList;
+
+public class FragmentSliderAdapter extends FragmentStateAdapter {
+
+    ArrayList<Fragment> fragments = new ArrayList<>();
+
+    public FragmentSliderAdapter(FragmentActivity fa) {
         super(fa);
-        mCount = count;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        int index = getRealPosition(position);
-        /*
-        if(index==0) return new Fragment_1();
-        else if(index==1) return new Fragment_2();
-        else if(index==2) return new Fragment_3();
-        else return new Fragment_4();
-        */
-        return null;
+        Log.d("FragmentSliderAdapter", "count : " + position);
+        return fragments.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return 2000;
+        return 5;
     }
 
-    public int getRealPosition(int position) { return position % mCount; }
+    public void addFragment(Fragment fragment){
+        fragments.add(fragment);
+        notifyItemInserted(fragments.size() - 1);
+    }
 }

@@ -28,7 +28,7 @@ import java.util.Date;
 
 
 public class SchoolScheduleFragment extends Fragment {
-    private SchoolApi api;
+    SchoolApi api;
 
     ArrayAdapter<String> adapter;
     ArrayList data = new ArrayList();

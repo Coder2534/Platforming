@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(4, "디자인", new Fragment());
-        mainExpandableList.addChild(4, "기프티콘", new Fragment());
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_home_24);
         mainExpandableList.addChild(5, "공식 홈페이지", () -> {

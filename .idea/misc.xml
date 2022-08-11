@@ -12,13 +12,17 @@
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_start.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/activity_web_view.xml" value="0.5390625" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.5536458333333333" />
-        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.25" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_schoolintroduce.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_schoolmeal.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_sign_up.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_signin.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.5536458333333333" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_viewpager_schoolmeal.xml" value="0.5451282051282051" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_viewpager_schoolschedule.xml" value="0.5451282051282051" />
+        <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/fragment_viewpager_timetable.xml" value="0.5451282051282051" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_listview_parent.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/layout/item_recyclerview_setting.xml" value="0.5536458333333333" />

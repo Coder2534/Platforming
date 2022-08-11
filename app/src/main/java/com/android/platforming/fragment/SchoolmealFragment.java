@@ -64,7 +64,6 @@ public class SchoolmealFragment extends Fragment {
         return view;
     }
 
-    //달력
     public void showFood(){
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
         lv_foodName.setAdapter(adapter);
