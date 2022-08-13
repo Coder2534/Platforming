@@ -2,25 +2,18 @@ package com.android.platforming.activity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.platforming.adapter.CommunityAdapter;
-import com.android.platforming.clazz.ChatModel;
+
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.text.SimpleDateFormat;
 
@@ -42,7 +35,7 @@ public class CommunityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
-        myuid = String.valueOf(User.getUser().getDataMap());
+        myuid = User.getUser().getUid();
         Log.d("check_Uid",myuid);
     }
 }
