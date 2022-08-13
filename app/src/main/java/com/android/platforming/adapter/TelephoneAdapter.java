@@ -40,6 +40,7 @@ public class TelephoneAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.item_listview_telephone, viewGroup, false);
         }
+
         TextView tv_team = view.findViewById(R.id.tv_team);
         TextView tv_teacher = view.findViewById(R.id.tv_teacher);
         TextView tv_telephone = view.findViewById(R.id.tv_telephone);
