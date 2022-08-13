@@ -8,8 +8,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Document;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FirestoreManager {
@@ -38,7 +39,7 @@ public class FirestoreManager {
                 if(documentSnapshot.exists()){
                     Log.w("setUserData", "Document exist",task.getException());
                     Map<String, Object> datas = documentSnapshot.getData();
-                    User.setUser(new User(datas));
+                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), datas));
                 }
                 else{
                     Log.w("setUserData", "Document doesn't exist");
@@ -52,8 +53,7 @@ public class FirestoreManager {
         });
     }
 
-    public void writeUserData(HashMap<String, Object> data, ListenerInterface interfaze){
-
+    public void writeUserData(Map<String, Object> data, ListenerInterface interfaze){
         DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
 
         documentReference.set(data).addOnCompleteListener(task -> {
@@ -65,8 +65,17 @@ public class FirestoreManager {
             }
         });
     }
-    public void getUidCounter(){
-        firestore.collection("users").getId();
 
+    public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
+        DocumentReference documentReference = firestore.collection("noticeboard").document(workName).collection("post").document();
+
+        documentReference.set(data).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                interfaze.onSuccess();
+            }
+            else{
+                interfaze.onFail();
+            }
+        });
     }
 }
