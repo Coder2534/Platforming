@@ -32,7 +32,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_autonomy_round"/>
+            android:src="@drawable/ic_baseline_emoji_emotions_24" />
 
         <EditText
             android:id="@+id/et_chat"

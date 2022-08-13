@@ -9,6 +9,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FirestoreManager {
@@ -63,5 +64,9 @@ public class FirestoreManager {
                 interfaze.onFail();
             }
         });
+    }
+    public void getUidCounter(){
+        firestore.collection("users").getId();
+
     }
 }
