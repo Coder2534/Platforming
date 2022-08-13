@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_noticeboard_detail_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
+        <TextView
+            android:id="@+id/tv_noticeboard_detail_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_noticeboard_detail_profile"
+            android:layout_alignTop="@+id/iv_noticeboard_detail_profile"
+            android:textSize="20dp"
+            android:text="null"/>
+
+        <TextView
+            android:id="@+id/tv_noticeboard_detail_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_noticeboard_detail_profile"
+            android:layout_below="@id/tv_noticeboard_detail_nickname"
+            android:textSize="15dp"
+            android:text="08/11 21:22"/>
+
+        <TextView
+            android:id="@+id/tv_noticeboard_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/iv_noticeboard_detail_profile"
+            android:layout_below="@id/iv_noticeboard_detail_profile"
+            android:layout_marginTop="5dp"
+            android:textSize="25dp"
+            android:text="대충 제목이라는 글"/>
+
+        <TextView
+            android:id="@+id/tv_noticeboard_detail_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/iv_noticeboard_detail_profile"
+            android:layout_below="@+id/tv_noticeboard_detail_title"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:text="대충 글이라는 글"/>
+
+        <TextView
+            android:id="@+id/tv_noticeboard_detail_thumb_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/iv_noticeboard_detail_profile"
+            android:layout_below="@+id/tv_noticeboard_detail_detail"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_baseline_thumb_up_off_alt_24"
+            android:textSize="20dp"
+            android:text="0"/>
+
+        <TextView
+            android:id="@+id/tv_noticeboard_detail_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_noticeboard_detail_thumb_up"
+            android:layout_marginLeft="20dp"
+            android:layout_alignTop="@+id/tv_noticeboard_detail_thumb_up"
+            android:drawableLeft="@drawable/ic_baseline_comment_24"
+            android:textSize="20dp"
+            android:text="0"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_noticeboard_detail_coment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_round">
+
+        <EditText
+            android:id="@+id/et_noticeboard_detail_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="댓글을 입력하세요."/>
+
+        <ImageButton
+            android:id="@+id/btn_noticeboard_detail_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_send_24" />
+
+    </LinearLayout>
+</LinearLayout>

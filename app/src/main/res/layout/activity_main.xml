@@ -17,7 +17,15 @@
             android:layout_height="wrap_content"
             android:background="#FFAC07"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25dp"
+                android:text="Autonomy"/>
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_main"
