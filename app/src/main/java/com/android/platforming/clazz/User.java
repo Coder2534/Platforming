@@ -17,6 +17,7 @@ public class User {
     }};
 
     //personal info
+    private String uid;
     private String userName;
     private String nickName;
     private String telephone;
@@ -28,8 +29,10 @@ public class User {
     private int profile;
     private int point;
     private String note;
+    private int profileIndex;
 
-    public User(Map<String, Object> data){
+    public User(String uid, Map<String, Object> data){
+        this.uid = uid;
         userName = (String)data.get("userName");
         nickName = (String)data.get("nickName");
         telephone = (String)data.get("telephone");
@@ -37,8 +40,8 @@ public class User {
         grade = Integer.parseInt(String.valueOf(data.get("grade")));
         room = Integer.parseInt(String.valueOf(data.get("room")));
         number = Integer.parseInt(String.valueOf(data.get("number")));
-
-        profile = profiles.get(Integer.parseInt(String.valueOf(data.get("profileIndex"))));
+        profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
+        profile = profiles.get(profileIndex);
         point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
     }
@@ -70,6 +73,13 @@ public class User {
         data.put("point", point);
         data.put("note", note);
         return data;
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public static User getUser() {
@@ -160,7 +170,12 @@ public class User {
         return profile;
     }
 
-    public void setProfile(int profile) {
-        this.profile = profile;
+    public int getProfileIndex() {
+        return profileIndex;
+    }
+
+    public void setProfileIndex(int profileIndex) {
+        this.profileIndex = profileIndex;
+        profile = profiles.get(profileIndex);
     }
 }

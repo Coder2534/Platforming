@@ -22,6 +22,7 @@ import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserInitialSettingFragment extends Fragment {
     ImageSlider imageSlider;
@@ -44,7 +45,7 @@ public class UserInitialSettingFragment extends Fragment {
 
         confirm.setOnClickListener(v -> {
 
-            HashMap<String, Object> data = new HashMap<>();
+            Map<String, Object> data = new HashMap<>();
             String userName = ((EditText)view.findViewById(R.id.et_initialsetting_username)).getText().toString();
             if(userName == ""){
                 return;
