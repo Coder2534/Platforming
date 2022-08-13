@@ -14,7 +14,6 @@ import com.android.platforming.adapter.CommunityAdapter;
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
 
-
 import java.text.SimpleDateFormat;
 
 public class CommunityActivity extends AppCompatActivity {
@@ -35,7 +34,7 @@ public class CommunityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
-        myuid = User.getUser().getUid();
+        myuid = String.valueOf(User.getUser().getDataMap());
         Log.d("check_Uid",myuid);
     }
 }
