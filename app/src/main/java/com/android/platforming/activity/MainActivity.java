@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.clazz.NotificationHelper;
+import com.android.platforming.fragment.CommunitFragment;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
 import com.android.platforming.fragment.SchoolScheduleFragment;
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(3, "1학년", new Fragment());
         mainExpandableList.addChild(3, "2학년", new Fragment());
         mainExpandableList.addChild(3, "3학년", new Fragment());
-        mainExpandableList.addChild(3, "전체", new Fragment());
+        mainExpandableList.addChild(3, "전체", new CommunitFragment());
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(4, "디자인", new Fragment());

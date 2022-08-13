@@ -6,6 +6,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_start.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_web_view.xml" value="0.18819655521783182" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_communit.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_emailalarm.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.18819655521783182" />
@@ -18,6 +19,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/item_listview_parent.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/item_listview_telephone.xml" value="0.32653985507246375" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/item_recyclerview_rowdata.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/item_slider.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/layout_navigation_header.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/layout_navigation_menu.xml" value="0.18819655521783182" />
