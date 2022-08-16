@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(1, "학사일정", new SchoolScheduleFragment());
 
         mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
-        mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, "free"));
-        mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, "question"));
-        mainExpandableList.addChild(2, "학습자료 공유", toggleActivity(NoticeBoardActivity.class, "studyMaterial"));
+        mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, "free bulletin board"));
+        mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, "question bulletin board"));
+        mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
 
         mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_comment_24);
         mainExpandableList.addChild(3, "1학년", new Fragment());

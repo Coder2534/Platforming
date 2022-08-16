@@ -2,15 +2,23 @@ package com.android.platforming.clazz;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.android.platforming.interfaze.ListenerInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Document;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FirestoreManager {
@@ -38,8 +46,8 @@ public class FirestoreManager {
 
                 if(documentSnapshot.exists()){
                     Log.w("setUserData", "Document exist",task.getException());
-                    Map<String, Object> datas = documentSnapshot.getData();
-                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), datas));
+                    Map<String, Object> data = documentSnapshot.getData();
+                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), data));
                 }
                 else{
                     Log.w("setUserData", "Document doesn't exist");
@@ -66,10 +74,26 @@ public class FirestoreManager {
         });
     }
 
-    public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
-        DocumentReference documentReference = firestore.collection("noticeboard").document(workName).collection("post").document();
+    public void readPostData(String workName, ListenerInterface interfaze){
+        firestore.collection(workName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    ArrayList<Post> posts = new ArrayList<>();
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
+                    }
+                    Post.setPosts(posts);
+                    interfaze.onSuccess();
+                }
+            }
+        });
+    }
 
-        documentReference.set(data).addOnCompleteListener(task -> {
+    public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
+        ArrayList<Post> posts = Post.getPosts();
+
+        firestore.collection(workName).document(Integer.toString(Integer.parseInt(posts.get(posts.size() - 1).getId()) + 1)).set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 interfaze.onSuccess();
             }

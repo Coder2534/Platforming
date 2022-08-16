@@ -58,12 +58,12 @@
             android:id="@+id/tv_noticeboard_detail_thumb_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/iv_noticeboard_detail_profile"
             android:layout_below="@+id/tv_noticeboard_detail_detail"
+            android:layout_alignLeft="@+id/iv_noticeboard_detail_profile"
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_baseline_thumb_up_off_alt_24"
-            android:textSize="20dp"
-            android:text="0"/>
+            android:text="0"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tv_noticeboard_detail_comment"
