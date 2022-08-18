@@ -76,7 +76,7 @@ public class CommunityActivity extends AppCompatActivity {
             data.put("date",getNowTime());
             data.put("uid",User.getUser().getUid());
             data.put("nickname",User.getUser().getNickName());
-            data.put("count",);
+            data.put("count",0);
             data.put("profileIndex",User.getProfiles());
             firestoreManager.writeMagData("allchat", data, new ListenerInterface() {
                 @Override
