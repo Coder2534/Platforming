@@ -8,11 +8,10 @@ public class Post {
     private static ArrayList<Post> posts;
 
     String id;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     String uid;
     int profileIndex;
     String nickname;
-    String date;
+    long date;
     String title;
     String detail;
     int thumb_up;
@@ -23,7 +22,7 @@ public class Post {
         this.uid = (String) data.get("uid");
         this.profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         this.nickname = (String) data.get("name");
-        this.date = (String) data.get("name");
+        this.date = (long) data.get("name");
         this.title = (String) data.get("title");
         this.detail = (String) data.get("detail");
         this.thumb_up = Integer.parseInt(String.valueOf(data.get("thumb_up")));
@@ -53,7 +52,7 @@ public class Post {
         return nickname;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -67,5 +66,13 @@ public class Post {
 
     public int getThumb_up() {
         return thumb_up;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }

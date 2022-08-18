@@ -9,6 +9,10 @@ public interface ListenerInterface {
 
     }
 
+    default void onSuccess(int msg) {
+
+    }
+
     default void onFail() {
 
     }

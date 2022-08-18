@@ -1,9 +1,35 @@
 package com.android.platforming.clazz;
 
+import java.util.Map;
+
 public class Comment {
-    String UUID;
-    int profile;
+    String uid;
+    int profileIndex;
     String nickname;
-    String date;
+    long date;
     String comment;
+
+    public Comment(Map<String, Object> data){
+
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public int getProfileIndex() {
+        return profileIndex;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 }
