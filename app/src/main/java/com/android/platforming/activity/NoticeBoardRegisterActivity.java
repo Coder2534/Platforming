@@ -13,6 +13,8 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,16 +44,16 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", User.getUser().getUid());
                 data.put("profileIndex", User.getUser().getProfileIndex());
-                data.put("nickName", User.getUser().getNickName());
+                data.put("nickname", User.getUser().getNickName());
+                data.put("date", System.currentTimeMillis());
                 data.put("title", editText_title.getText().toString());
                 data.put("detal", editText_detail.getText().toString());
                 data.put("thumb_up", 0);
-                data.put("comment", 0);
                 FirestoreManager firestoreManager = new FirestoreManager();
                 firestoreManager.writePostData(workName, data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
-
+                        onBackPressed();
                     }
 
                     @Override

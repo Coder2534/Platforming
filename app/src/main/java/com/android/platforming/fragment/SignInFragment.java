@@ -140,6 +140,7 @@ public class SignInFragment extends Fragment{
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(),null);
         getFirebaseAuth().signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
+                    Log.w("SignInActivity", "Google SignIn with google");
                     if(task.isSuccessful()){
                         Log.w("SignInActivity", "Google SignIn success");
                         readData();
