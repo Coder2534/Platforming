@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(3, "1학년", new Fragment());
         mainExpandableList.addChild(3, "2학년", new Fragment());
         mainExpandableList.addChild(3, "3학년", new Fragment());
-        mainExpandableList.addChild(3, "전체", toggleActivity(CommunityActivity.class, "all"));
+        mainExpandableList.addChild(3, "전체", toggleActivity(CommunityActivity.class, "allchat"));
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(4, "디자인", new Fragment());

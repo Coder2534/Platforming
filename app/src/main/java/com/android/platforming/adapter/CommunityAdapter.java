@@ -39,6 +39,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         return comments.size();
     }
 
+
+
     class ViewHolder extends RecyclerView.ViewHolder
     {
         public TextView item_messagebox_tv_msg;

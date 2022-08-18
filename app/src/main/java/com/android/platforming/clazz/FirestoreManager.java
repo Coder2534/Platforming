@@ -52,6 +52,32 @@ public class FirestoreManager {
             }
         });
     }
+    public void readCommunityMsgCount(ListenerInterface interfaze ,String workName ,String count){
+        DocumentReference documentReference = firestore.collection("community").document(workName).collection("chat").document(count);
+
+        documentReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot documentSnapshot = task.getResult();
+
+                if(documentSnapshot.exists()){
+                    Log.w("MsgCountData", "Document exist",task.getException());
+                    Map<String, Object> datas = documentSnapshot.getData();
+                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), datas));
+                }
+                else{
+                    Log.w("MsgCountData", "Document doesn't exist");
+                }
+
+                interfaze.onSuccess();
+            }else{
+                Log.w("MsgCountData", "Failed with: ",task.getException());
+                interfaze.onFail();
+            }
+        });
+
+    }
+
+
 
     public void writeUserData(Map<String, Object> data, ListenerInterface interfaze){
         DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
@@ -78,4 +104,17 @@ public class FirestoreManager {
             }
         });
     }
-}
+
+
+    public void writeMagData(String workName, Map<String, Object> data, ListenerInterface interfaze){
+        DocumentReference documentReference = firestore.collection("community").document(workName).collection("chat").document();
+
+        documentReference.set(data).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                interfaze.onSuccess();
+            }
+            else{
+                interfaze.onFail();
+            }
+        });
+    }}
