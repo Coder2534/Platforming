@@ -21,6 +21,12 @@ import com.example.platforming.R;
 
 public class NoticeBoardActivity extends AppCompatActivity {
 
+    //1. 게시판, 댓글 두번 들어가야 뜸
+    //2. fragment 겹침
+    //3. comment 추가 이후 보여지지 않음
+    //4. docutment 자동완성시 순서개판
+    //5. 전제적인 크기조절
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +49,10 @@ public class NoticeBoardActivity extends AppCompatActivity {
                 NoticeBoardDetailFragment fragment = new NoticeBoardDetailFragment();
                 Bundle args = new Bundle();
                 args.putInt("postion", position);
+                args.putString("workName", workName);
                 fragment.setArguments(args);
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fl_noticeboard, fragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fl_noticeboard, fragment).addToBackStack(null).commit();
             }
         });
 
@@ -55,6 +62,8 @@ public class NoticeBoardActivity extends AppCompatActivity {
         firestoreManager.readPostData(workName, new ListenerInterface() {
             @Override
             public void onSuccess() {
+                postViewAdapter.notifyDataSetChanged();
+
                 Button button = findViewById(R.id.btn_noticeboard_post);
                 button.setOnClickListener(v -> {
                     postViewAdapter.notifyDataSetChanged();

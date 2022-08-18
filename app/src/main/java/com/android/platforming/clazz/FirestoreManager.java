@@ -120,6 +120,7 @@ public class FirestoreManager {
     }
 
     public void writeCommentData(String workName, String id, Map<String, Object> data, ListenerInterface listenerInterface){
+        Log.w("collection", "workName:" + workName + " | id:"+id);
         firestore.collection(workName).document(id).collection("comments").document().set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 listenerInterface.onSuccess();

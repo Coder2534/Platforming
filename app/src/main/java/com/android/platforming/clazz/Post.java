@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Post {
-    private static ArrayList<Post> posts;
+    private static ArrayList<Post> posts = new ArrayList<>();
 
     String id;
     String uid;
@@ -21,8 +21,8 @@ public class Post {
         this.id = id;
         this.uid = (String) data.get("uid");
         this.profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
-        this.nickname = (String) data.get("name");
-        this.date = (long) data.get("name");
+        this.nickname = (String) data.get("nickname");
+        this.date = (long) data.get("date");
         this.title = (String) data.get("title");
         this.detail = (String) data.get("detail");
         this.thumb_up = Integer.parseInt(String.valueOf(data.get("thumb_up")));

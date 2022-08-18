@@ -76,7 +76,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         holder.title.setText(mData.get(position).getTitle());
         holder.detail.setText(mData.get(position).getDetail());
         holder.info.setText(formatTimeString(mData.get(position).getDate()) + " | " + mData.get(position).getNickname());
-        holder.thumb_up.setText(mData.get(position).getThumb_up());
+        holder.thumb_up.setText(Integer.toString(mData.get(position).getThumb_up()));
         holder.comment.setText(mData.get(position).getTitle());
     }
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.adapter.CommentViewAdapter;
 import com.android.platforming.adapter.PostViewAdapter;
+import com.android.platforming.clazz.Comment;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.clazz.User;
@@ -39,7 +41,7 @@ public class NoticeBoardDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_noticeboard_detail, container, false);
         Bundle args = getArguments();
         post = Post.getPosts().get(args.getInt("position", 0));
-        workName = args.getString("workName", "");
+        workName = args.getString("workName", null);
 
         ImageView profile = view.findViewById(R.id.iv_noticeboard_detail_profile);
         profile.setImageResource(User.getProfiles().get(post.getProfileIndex()));
@@ -52,9 +54,9 @@ public class NoticeBoardDetailFragment extends Fragment {
         TextView detail = view.findViewById(R.id.tv_noticeboard_detail_detail);
         detail.setText(post.getDetail());
         TextView thumb_up = view.findViewById(R.id.tv_noticeboard_detail_thumb_up);
-        thumb_up.setText(post.getThumb_up());
+        thumb_up.setText(Integer.toString(post.getThumb_up()));
         TextView comment_count = view.findViewById(R.id.tv_noticeboard_detail_comment);
-        comment_count.setText(post.getComments().size());
+        comment_count.setText(Integer.toString(post.getComments().size()));
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_detail_coment);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -63,7 +65,15 @@ public class NoticeBoardDetailFragment extends Fragment {
 
         EditText comment = view.findViewById(R.id.et_noticeboard_detail_comment);
 
-        Button send = view.findViewById(R.id.btn_noticeboard_detail_send);
+        FirestoreManager firestoreManager = new FirestoreManager();
+        firestoreManager.readCommentData(workName, post, new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                commentViewAdapter.notifyDataSetChanged();
+            }
+        });
+
+        ImageButton send = view.findViewById(R.id.btn_noticeboard_detail_send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,8 +88,9 @@ public class NoticeBoardDetailFragment extends Fragment {
                 firestoreManager.writeCommentData(workName, post.getId(), data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
+                        post.getComments().add(new Comment(data));
                         commentViewAdapter.notifyDataSetChanged();
-                        comment.setText(post.getComments().size());
+                        comment.setText(Integer.toString(post.getComments().size()));
                     }
                 });
             }

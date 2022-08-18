@@ -10,7 +10,11 @@ public class Comment {
     String comment;
 
     public Comment(Map<String, Object> data){
-
+        uid = (String) data.get("uid");
+        profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
+        nickname = (String) data.get("nickname");
+        date = (long) data.get("date");
+        comment = (String) data.get("comment");
     }
 
     public String getUid() {
