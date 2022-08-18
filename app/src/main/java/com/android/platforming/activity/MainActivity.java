@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
+import com.android.platforming.fragment.SchoolIntroduceFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(0, "나의 게시물", new Fragment());
 
         mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_school_24);
-        mainExpandableList.addChild(1, "학교소개", new Fragment());
+        mainExpandableList.addChild(1, "학교소개", new SchoolIntroduceFragment());
         mainExpandableList.addChild(1, "전화번호", new TelephoneFragment());
         mainExpandableList.addChild(1, "식단표", new SchoolmealFragment());
         mainExpandableList.addChild(1, "학사일정", new SchoolScheduleFragment());
