@@ -14,8 +14,6 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +22,7 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notice_board_register);
+        setContentView(R.layout.activity_noticeboard_register);
 
         String workName = getIntent().getStringExtra("workName");
 
