@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -60,32 +61,6 @@ public class FirestoreManager {
             }
         });
     }
-    public void readCommunityMsgCount(ListenerInterface interfaze ,String workName ,String count){
-        DocumentReference documentReference = firestore.collection("community").document(workName).collection("chat").document(count);
-
-        documentReference.get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                DocumentSnapshot documentSnapshot = task.getResult();
-
-                if(documentSnapshot.exists()){
-                    Log.w("MsgCountData", "Document exist",task.getException());
-                    Map<String, Object> datas = documentSnapshot.getData();
-                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), datas));
-                }
-                else{
-                    Log.w("MsgCountData", "Document doesn't exist");
-                }
-
-                interfaze.onSuccess();
-            }else{
-                Log.w("MsgCountData", "Failed with: ",task.getException());
-                interfaze.onFail();
-            }
-        });
-
-    }
-
-
 
     public void writeUserData(Map<String, Object> data, ListenerInterface interfaze){
         DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
@@ -101,7 +76,7 @@ public class FirestoreManager {
     }
 
     public void readPostData(String workName, ListenerInterface interfaze){
-        firestore.collection(workName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection(workName).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -109,7 +84,8 @@ public class FirestoreManager {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
                     }
-                    Post.setPosts(posts);
+                    Post.getPosts().clear();
+                    Post.getPosts().addAll(posts);
                     interfaze.onSuccess();
                 }
             }
@@ -117,9 +93,7 @@ public class FirestoreManager {
     }
 
     public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
-        ArrayList<Post> posts = Post.getPosts();
-
-        firestore.collection(workName).document(Integer.toString(Integer.parseInt(posts.get(posts.size() - 1).getId()) + 1)).set(data).addOnCompleteListener(task -> {
+        firestore.collection(workName).document().set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 interfaze.onSuccess();
             }
@@ -129,16 +103,32 @@ public class FirestoreManager {
         });
     }
 
-
-    public void writeMagData(String workName, Map<String, Object> data, ListenerInterface interfaze){
-        DocumentReference documentReference = firestore.collection("community").document(workName).collection("chat").document();
-
-        documentReference.set(data).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                interfaze.onSuccess();
-            }
-            else{
-                interfaze.onFail();
+    public void readCommentData(String workName, Post post, ListenerInterface listenerInterface){
+        firestore.collection(workName).document(post.getId()).collection("comments").orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    ArrayList<Comment> comments = new ArrayList<>();
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                        comments.add(new Comment(documentSnapshot.getData()));
+                    }
+                    post.getComments().clear();
+                    post.getComments().addAll(comments);
+                    listenerInterface.onSuccess();
+                }
             }
         });
-    }}
+    }
+
+    public void writeCommentData(String workName, String id, Map<String, Object> data, ListenerInterface listenerInterface){
+        Log.w("collection", "workName:" + workName + " | id:"+id);
+        firestore.collection(workName).document(id).collection("comments").document().set(data).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                listenerInterface.onSuccess();
+            }
+            else{
+                listenerInterface.onFail();
+            }
+        });
+    }
+}
