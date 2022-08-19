@@ -3,21 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="학교소개"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:gravity="center" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <ImageButton
+            android:id="@+id/ibtn_schoolintroduce_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/img_school_symbol"
-            android:gravity="center"
+            android:src="@mipmap/img_map_schoolintroduce"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소:\n경상북도 구미시 박정희로25길 15"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             />
-
-
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="교훈:자율 , 정성 , 창의\n개교: 2001년\n설립형태: 공립"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:padding="15dp"/>
+
+
+    <ListView
+        android:id="@+id/lv_schoolintroduce"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

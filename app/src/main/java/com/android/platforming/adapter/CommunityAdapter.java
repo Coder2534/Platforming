@@ -11,14 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.ChatModel;
-
 import com.example.platforming.R;
 
-
 import java.util.ArrayList;
-
 import java.util.List;
-
 
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
     List<ChatModel.Comment> comments;
@@ -42,6 +38,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     public int getItemCount() {
         return comments.size();
     }
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder
     {
