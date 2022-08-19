@@ -77,7 +77,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         holder.detail.setText(mData.get(position).getDetail());
         holder.info.setText(formatTimeString(mData.get(position).getDate()) + " | " + mData.get(position).getNickname());
         holder.thumb_up.setText(Integer.toString(mData.get(position).getThumb_up()));
-        holder.comment.setText(mData.get(position).getTitle());
+        holder.comment.setText(Integer.toString(mData.get(position).getComments().size()));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

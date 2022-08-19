@@ -70,6 +70,7 @@ public class NoticeBoardDetailFragment extends Fragment {
             @Override
             public void onSuccess() {
                 commentViewAdapter.notifyDataSetChanged();
+                comment.setText(Integer.toString(post.getComments().size()));
             }
         });
 

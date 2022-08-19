@@ -1,6 +1,7 @@
 package com.android.platforming.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,9 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
                 firestoreManager.writePostData(workName, data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
+                        //refresh NoticeBoardListFragment
+                        Fragment fragment = getSupportFragmentManager().findFragmentByTag("NoticeBoardList");
+                        getSupportFragmentManager().beginTransaction().detach(fragment).attach(fragment).commit();
                         onBackPressed();
                     }
 

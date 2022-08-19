@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -75,7 +76,7 @@ public class FirestoreManager {
     }
 
     public void readPostData(String workName, ListenerInterface interfaze){
-        firestore.collection(workName).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection(workName).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -83,7 +84,8 @@ public class FirestoreManager {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
                     }
-                    Post.setPosts(posts);
+                    Post.getPosts().clear();
+                    Post.getPosts().addAll(posts);
                     interfaze.onSuccess();
                 }
             }
@@ -91,8 +93,6 @@ public class FirestoreManager {
     }
 
     public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
-        ArrayList<Post> posts = Post.getPosts();
-
         firestore.collection(workName).document().set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 interfaze.onSuccess();
@@ -104,7 +104,7 @@ public class FirestoreManager {
     }
 
     public void readCommentData(String workName, Post post, ListenerInterface listenerInterface){
-        firestore.collection(workName).document(post.getId()).collection("comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        firestore.collection(workName).document(post.getId()).collection("comments").orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -112,7 +112,8 @@ public class FirestoreManager {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
                         comments.add(new Comment(documentSnapshot.getData()));
                     }
-                    post.setComments(comments);
+                    post.getComments().clear();
+                    post.getComments().addAll(comments);
                     listenerInterface.onSuccess();
                 }
             }
