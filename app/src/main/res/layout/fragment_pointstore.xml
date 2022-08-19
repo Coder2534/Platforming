@@ -17,50 +17,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
+
         <Button
-
-            android:id="@+id/btnMainVideo"
-
-            android:text="Videos"
-
-            android:textColor="#ffffff"
-
-            android:textSize="36px"
-
-            android:paddingLeft="18dip"
-
-            android:drawableLeft="@drawable/ic_baseline_font_download_24"
-
-
-            android:drawablePadding="18dip"
-
-            android:gravity="center"
-
-            android:background="@color/black"
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"/>
-
-        <ImageButton
-            android:id="@+id/ibtn_pointstore_theme"
+            android:id="@+id/btn_pointstore_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_palette_24"
-            />
+            android:text="폰트"
+            android:textSize="35dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/ic_baseline_font_download_24"
+            android:gravity="center"/>
 
-        <ImageButton
-            android:id="@+id/ibtn_pointstore_font"
+        <Button
+            android:id="@+id/btn_pointstore_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_font_download_24" />
+            android:text="폰트"
+            android:textSize="35dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/ic_baseline_palette_24"
+            android:gravity="center"/>
 
-        <ImageButton
-            android:id="@+id/ibtn_pointstore_textcolor"
+        <Button
+            android:id="@+id/btn_pointstore_textcolor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_colorize_24" />
-
+            android:text="폰트"
+            android:textSize="35dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/ic_baseline_colorize_24"
+            android:gravity="center"/>
 
     </LinearLayout>
 

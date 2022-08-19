@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +18,7 @@ public class PointStoreFragment extends Fragment {
     Dialog themedialog;
     Dialog textcolordialog;
 
-    ImageButton ibtn_pointstore_theme,ibtn_pointstore_font,ibtn_pointstore_textcolor;
+    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_textcolor;
 
     @Nullable
     @Override
@@ -26,20 +26,20 @@ public class PointStoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pointstore, container, false);
         setview(view);
         setDialog();
-        ibtn_pointstore_font.setOnClickListener(new View.OnClickListener() {
+        btn_pointstore_font.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fontdialog.show();
             }
         });
-        ibtn_pointstore_theme.setOnClickListener(new View.OnClickListener() {
+        btn_pointstore_theme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 themedialog.show();
 
             }
         });
-        ibtn_pointstore_textcolor.setOnClickListener(new View.OnClickListener() {
+        btn_pointstore_textcolor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 textcolordialog.show();
@@ -59,8 +59,8 @@ public class PointStoreFragment extends Fragment {
         textcolordialog.setContentView(R.layout.dialog_pointstore_textcolor);
     }
     private void setview(View view){
-        ibtn_pointstore_font = view.findViewById(R.id.ibtn_pointstore_font);
-        ibtn_pointstore_theme = view.findViewById(R.id.ibtn_pointstore_theme);
-        ibtn_pointstore_textcolor = view.findViewById(R.id.ibtn_pointstore_textcolor);
+        btn_pointstore_font = view.findViewById(R.id.btn_pointstore_font);
+        btn_pointstore_theme = view.findViewById(R.id.btn_pointstore_theme);
+        btn_pointstore_textcolor = view.findViewById(R.id.btn_pointstore_textcolor);
     }
 }
