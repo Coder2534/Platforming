@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -11,28 +12,57 @@
         android:textColor="@color/black"
         android:gravity="center"/>
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
         <Button
+
+            android:id="@+id/btnMainVideo"
+
+            android:text="Videos"
+
+            android:textColor="#ffffff"
+
+            android:textSize="36px"
+
+            android:paddingLeft="18dip"
+
+            android:drawableLeft="@drawable/ic_baseline_font_download_24"
+
+
+            android:drawablePadding="18dip"
+
+            android:gravity="center"
+
+            android:background="@color/black"
+
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="1"/>
-        <Button
+
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/ibtn_pointstore_theme"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="1"/>
-        <Button
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_palette_24"
+            />
+
+        <ImageButton
+            android:id="@+id/ibtn_pointstore_font"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_font_download_24" />
+
+        <ImageButton
+            android:id="@+id/ibtn_pointstore_textcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_colorize_24" />
+
+
     </LinearLayout>
-
-
-
-
 
 
 </LinearLayout>
