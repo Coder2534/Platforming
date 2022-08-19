@@ -60,7 +60,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
         Bundle args = new Bundle();
         args.putString("workName", workName);
         fragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList");
+        getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").commit();
     }
 
     @Override

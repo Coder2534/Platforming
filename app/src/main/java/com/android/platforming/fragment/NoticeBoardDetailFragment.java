@@ -70,7 +70,7 @@ public class NoticeBoardDetailFragment extends Fragment {
             @Override
             public void onSuccess() {
                 commentViewAdapter.notifyDataSetChanged();
-                comment.setText(Integer.toString(post.getComments().size()));
+                comment_count.setText(Integer.toString(post.getComments().size()));
             }
         });
 
@@ -89,9 +89,14 @@ public class NoticeBoardDetailFragment extends Fragment {
                 firestoreManager.writeCommentData(workName, post.getId(), data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
-                        post.getComments().add(new Comment(data));
-                        commentViewAdapter.notifyDataSetChanged();
-                        comment.setText(Integer.toString(post.getComments().size()));
+                        firestoreManager.readCommentData(workName, post, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                commentViewAdapter.notifyDataSetChanged();
+                                comment_count.setText(Integer.toString(post.getComments().size()));
+                                comment.setText("");
+                            }
+                        });
                     }
                 });
             }
