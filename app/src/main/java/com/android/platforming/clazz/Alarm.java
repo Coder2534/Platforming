@@ -16,6 +16,10 @@ public class Alarm {
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     }
 
+    public static AlarmManager getAlarmManager() {
+        return alarmManager;
+    }
+
     public static void setAlarm(Context context, long timeInMillis, int requestCode){
         if(alarmManager == null)
             setAlarmManager(context);

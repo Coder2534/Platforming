@@ -77,8 +77,8 @@
             android:text="0"/>
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/lv_noticeboard_detail_coment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_noticeboard_detail_coment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"

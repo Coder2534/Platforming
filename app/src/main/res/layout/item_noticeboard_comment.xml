@@ -32,12 +32,12 @@
         android:layout_marginTop="5dp"/>
 
     <TextView
-        android:id="@+id/tv_noticeboard_detail_date"
+        android:id="@+id/tv_noticeboard_comment_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/iv_noticeboard_comment_profile"
         android:layout_below="@id/tv_noticeboard_comment_comment"
+        android:layout_alignLeft="@+id/iv_noticeboard_comment_profile"
         android:layout_marginTop="5dp"
-        android:textSize="15dp"
-        android:text="08/11 21:22"/>
+        android:text="08/11 21:22"
+        android:textSize="15dp" />
 </RelativeLayout>

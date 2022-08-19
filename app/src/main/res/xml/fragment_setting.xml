@@ -13,7 +13,7 @@
                     android:key="selfDiagnosis"
                     android:title="자가진단 알림"
                     android:summary="설정된 시간에 자가진단 확인 알림 발송"
-                    android:defaultValue="true" />
+                    android:defaultValue="false" />
 
                 <com.android.platforming.view.TimePreference
                     android:key="time_selfDiagnosis"
@@ -27,7 +27,7 @@
                     android:key="schoolMeal"
                     android:title="오늘의 급식 알림"
                     android:summary="설정된 시간에 오늘의 급식 발송"
-                    android:defaultValue="true" />
+                    android:defaultValue="false" />
 
                 <com.android.platforming.view.TimePreference
                     android:key="time_schoolMeal"
