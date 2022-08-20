@@ -23,7 +23,7 @@
         android:layout_marginRight="10dp"
         android:background="@color/black"
         android:scaleType="fitXY"
-        android:src="@drawable/img_self_diagnosis_banner" />
+        android:src="@drawable/img_self_diagnosis_banner_invisible" />
 
 
 </RelativeLayout>
