@@ -12,9 +12,9 @@ public class User {
     private static User user = null;
 
     private final static ArrayList<Integer> profiles = new ArrayList<Integer>(){{
-        add(R.drawable.ic_baseline_10mp_24);
-        add(R.drawable.ic_baseline_11mp_24);
-        add(R.drawable.ic_baseline_12mp_24);
+        add(R.mipmap.ic_profile_dog_round);
+        add(R.mipmap.ic_profile_cat_round);
+        add(R.mipmap.ic_profile_rabbit_round);
     }};
 
     //personal info
@@ -86,11 +86,11 @@ public class User {
         User.user = user;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUserName(String userName) {
+    public void setUsername(String userName) {
         this.username = userName;
     }
 
@@ -169,5 +169,17 @@ public class User {
     public void setProfileIndex(int profileIndex) {
         this.profileIndex = profileIndex;
         profile = profiles.get(profileIndex);
+    }
+
+    public List<Integer> getFonts() {
+        return fonts;
+    }
+
+    public List<Integer> getThemes() {
+        return themes;
+    }
+
+    public List<Integer> getTextColors() {
+        return textColors;
     }
 }
