@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="폰트"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="170dp"/>
+        <TextView
+            android:id="@+id/tv_pointstore_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0포인트"
+            android:textSize="25dp"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/et_pointstore_testtext"
+        android:layout_width="412dp"
+        android:layout_height="350dp"
+        android:hint="시험 텍스트를 입력해보세요"
+        android:textSize="40dp"
+        android:typeface="normal"
+        android:gravity="left"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_pointstore_font_slow"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text="나눔손글씨 느릿느릿체"
+                android:textSize="20dp"
+                android:fontFamily="@font/nanum_handwriting_slow"/>
+
+            <Button
+                android:id="@+id/btn_pointstore_font_again"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text="나눔손글씨 다시시작해"
+                android:textSize="20dp"
+                android:fontFamily="@font/nanum_handwriting_again"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_pointstore_font_Baedalofrace"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/baedalofrace"
+                android:text="배달의 민족 주아체"
+                android:layout_marginTop="-3dp"/>
+
+            <Button
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text="나눔손글씨 다시시작해"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_pointstore_buyfont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="구매하기"/>
+        <Button
+            android:id="@+id/btn_pointstore_savefont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장하기"
+            android:layout_marginLeft="150dp"/>
+
+        <Button
+            android:id="@+id/btn_pointstore_getout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나가기"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
