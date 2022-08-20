@@ -4,6 +4,7 @@ import com.example.platforming.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -18,8 +19,8 @@ public class User {
 
     //personal info
     private String uid;
-    private String userName;
-    private String nickName;
+    private String username;
+    private String nickname;
     private String telephone;
     private int sex; //0: male 1: female
     private int grade;
@@ -30,11 +31,14 @@ public class User {
     private int point;
     private String note;
     private int profileIndex;
+    private List<Integer> fonts;
+    private List<Integer> themes;
+    private List<Integer> textColors;
 
     public User(String uid, Map<String, Object> data){
         this.uid = uid;
-        userName = (String)data.get("userName");
-        nickName = (String)data.get("nickName");
+        username = (String)data.get("username");
+        nickname = (String)data.get("nickname");
         telephone = (String)data.get("telephone");
         sex = Integer.parseInt(String.valueOf(data.get("sex")));
         grade = Integer.parseInt(String.valueOf(data.get("grade")));
@@ -44,11 +48,14 @@ public class User {
         profile = profiles.get(profileIndex);
         point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
+        themes = (List<Integer>) data.get("themes");
+        fonts = (List<Integer>) data.get("fonts");
+        textColors = (List<Integer>) data.get("textColors");
     }
 
-    public User(String userName, String nickName, String telephone, int sex, int grade, int room, int number, int profile){
-        this.userName = userName;
-        this.nickName = nickName;
+    public User(String username, String nickname, String telephone, int sex, int grade, int room, int number, int profile){
+        this.username = username;
+        this.nickname = nickname;
         this.telephone = telephone;
         this.sex = sex;
         this.grade = grade;
@@ -59,21 +66,6 @@ public class User {
         this.note = "";
     }
 
-
-    public Map<String, Object> getDataMap(){
-        HashMap<String, Object> data = new HashMap<String, Object>();
-        data.put("userName", userName);
-        data.put("nickName", userName);
-        data.put("telephone", userName);
-        data.put("sex", userName);
-        data.put("grade", userName);
-        data.put("number", userName);
-
-        data.put("profileIndex", profiles.indexOf(profile));
-        data.put("point", point);
-        data.put("note", note);
-        return data;
-    }
     public String getUid() {
         return uid;
     }
@@ -95,19 +87,19 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getNickName() {
-        return nickName;
+        return nickname;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickname = nickName;
     }
 
     public int getSex() {

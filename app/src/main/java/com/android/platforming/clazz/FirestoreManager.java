@@ -75,6 +75,18 @@ public class FirestoreManager {
         });
     }
 
+    public void updateUserData(Map<String, Object> data, ListenerInterface interfaze){
+        DocumentReference documentReference = firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid());
+        documentReference.update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    interfaze.onSuccess();
+                }
+            }
+        });
+    }
+
     public void readPostData(String workName, ListenerInterface interfaze){
         firestore.collection(workName).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

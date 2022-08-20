@@ -21,7 +21,10 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserInitialSettingFragment extends Fragment {
@@ -50,13 +53,13 @@ public class UserInitialSettingFragment extends Fragment {
             if(userName == ""){
                 return;
             }
-            data.put("userName", userName);
+            data.put("username", userName);
 
             String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
             if(nickName == ""){
                 return;
             }
-            data.put("nickName", nickName);
+            data.put("nickname", nickName);
 
             String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
             if(telephone == ""){
@@ -85,6 +88,11 @@ public class UserInitialSettingFragment extends Fragment {
             data.put("profileIndex", imageSlider.getPosition());
 
             data.put("point", 0);
+
+            List<Integer> list = Arrays.asList(0);
+            data.put("themes", list);
+            data.put("fonts", list);
+            data.put("textColor", list);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {
