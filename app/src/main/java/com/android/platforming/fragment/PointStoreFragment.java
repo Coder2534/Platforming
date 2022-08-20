@@ -44,7 +44,7 @@ public class PointStoreFragment extends Fragment {
                 fontdialog.show();
                 setFontdialogview();
                 point = User.getUser().getPoint();
-                tv_pointstore_point.setText(point);
+                tv_pointstore_point.setText(Integer.toString(point)+ "포인트");
 
                 btn_pointstore_font_slow.setOnClickListener(new View.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
