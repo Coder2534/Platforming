@@ -36,7 +36,7 @@ public class UserInitialSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
         setListenr(view);
 
-        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.sliderViewPager), view.findViewById(R.id.layoutIndicators));
+        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.vp_initialsetting_profile), view.findViewById(R.id.layoutIndicators));
         imageSlider.setAdapter(new ImageSliderAdapter(User.getProfiles()));
         imageSlider.setIndicators(User.getProfiles().size());
 

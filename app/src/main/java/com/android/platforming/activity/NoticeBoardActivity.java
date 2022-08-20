@@ -1,7 +1,9 @@
 package com.android.platforming.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,10 +30,14 @@ public class NoticeBoardActivity extends AppCompatActivity {
     //4. docutment 자동완성시 순서개판 - 수정
     //5. 전제적인 크기조절
 
+    private static AppCompatActivity activity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeboard);
+
+        activity = this;
 
         String workName = getIntent().getStringExtra("workName");
 
@@ -60,7 +66,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
         Bundle args = new Bundle();
         args.putString("workName", workName);
         fragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").addToBackStack(null).commit();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").commit();
     }
 
     @Override
@@ -78,5 +84,9 @@ public class NoticeBoardActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static AppCompatActivity getActivity() {
+        return activity;
     }
 }

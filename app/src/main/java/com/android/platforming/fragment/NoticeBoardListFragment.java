@@ -1,5 +1,6 @@
 package com.android.platforming.fragment;
 
+import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,7 +27,12 @@ import com.example.platforming.R;
 
 public class NoticeBoardListFragment extends Fragment {
 
+    private ActivityResultLauncher<Intent> resultLauncher;
+
     String workName;
+    PostViewAdapter postViewAdapter;
+    Button write;
+    ListenerInterface listenerInterface;
 
     @Nullable
     @Override
@@ -33,9 +41,21 @@ public class NoticeBoardListFragment extends Fragment {
         Bundle args = getArguments();
         workName = args.getString("workName", null);
 
+        resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if(result.getResultCode() == RESULT_OK){
+                listenerInterface = new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+                        postViewAdapter.notifyDataSetChanged();
+                    }
+                };
+                refreshPostList();
+            }
+        });
+
         RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_list_post);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        PostViewAdapter postViewAdapter = new PostViewAdapter(Post.getPosts());
+        postViewAdapter = new PostViewAdapter(Post.getPosts());
         postViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
@@ -45,28 +65,32 @@ public class NoticeBoardListFragment extends Fragment {
                 args.putString("workName", workName);
                 fragment.setArguments(args);
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
             }
         });
 
         recyclerView.setAdapter(postViewAdapter);
 
-        FirestoreManager firestoreManager = new FirestoreManager();
-        firestoreManager.readPostData(workName, new ListenerInterface() {
+        write = view.findViewById(R.id.btn_noticeboard_list_write);
+        listenerInterface = new ListenerInterface() {
             @Override
             public void onSuccess() {
                 postViewAdapter.notifyDataSetChanged();
-
-                Button button = view.findViewById(R.id.btn_noticeboard_list_write);
-                button.setOnClickListener(v -> {
+                write.setOnClickListener(v -> {
                     Intent intent = new Intent(getApplicationContext(), NoticeBoardRegisterActivity.class);
                     intent.putExtra("workName", workName);
-                    startActivity(intent);
+                    resultLauncher.launch(intent);
                     getActivity().overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
                 });
             }
-        });
+        };
+        refreshPostList();
 
         return view;
+    }
+
+    private void refreshPostList(){
+        FirestoreManager firestoreManager = new FirestoreManager();
+        firestoreManager.readPostData(workName, listenerInterface);
     }
 }
