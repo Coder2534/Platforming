@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <EditText
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--<LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:hint="시험 텍스트를 입력해보세요"
-        android:textSize="50dp"
-        android:font=""
-        android:gravity="left"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="bottom">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테마"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="170dp"/>
+        <TextView
+            android:id="@+id/tv_pointstore_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0포인트"
+            android:textSize="25dp"
+            android:gravity="right"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            src
+    </LinearLayout>-->
+
+
 
 </LinearLayout>
