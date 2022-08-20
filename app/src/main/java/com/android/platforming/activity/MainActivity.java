@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
 
         /*
+        커뮤니티 보류
         mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_comment_24);
         mainExpandableList.addChild(3, "1학년", new Fragment());
         mainExpandableList.addChild(3, "2학년", new Fragment());
