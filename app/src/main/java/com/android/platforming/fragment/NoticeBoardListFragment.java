@@ -65,7 +65,7 @@ public class NoticeBoardListFragment extends Fragment {
                 args.putString("workName", workName);
                 fragment.setArguments(args);
 
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
             }
         });
 
