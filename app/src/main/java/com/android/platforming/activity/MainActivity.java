@@ -22,6 +22,7 @@ import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.clazz.NotificationHelper;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
+import com.android.platforming.fragment.MyInfoFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout.addView(mainExpandableList, 0);
 
         mainExpandableList.addParent("내정보", R.drawable.ic_baseline_person_24);
-        mainExpandableList.addChild(0, "내정보", new Fragment());
+        mainExpandableList.addChild(0, "내정보", new MyInfoFragment());
         mainExpandableList.addChild(0, "나의 게시물", new Fragment());
 
         mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_school_24);
