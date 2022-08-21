@@ -4,6 +4,7 @@ import com.example.platforming.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -11,14 +12,15 @@ public class User {
     private static User user = null;
 
     private final static ArrayList<Integer> profiles = new ArrayList<Integer>(){{
-        add(R.drawable.ic_baseline_10mp_24);
-        add(R.drawable.ic_baseline_11mp_24);
-        add(R.drawable.ic_baseline_12mp_24);
+        add(R.mipmap.ic_profile_dog_round);
+        add(R.mipmap.ic_profile_cat_round);
+        add(R.mipmap.ic_profile_rabbit_round);
     }};
 
     //personal info
-    private String userName;
-    private String nickName;
+    private String uid;
+    private String username;
+    private String nickname;
     private String telephone;
     private int sex; //0: male 1: female
     private int grade;
@@ -28,24 +30,32 @@ public class User {
     private int profile;
     private int point;
     private String note;
+    private int profileIndex;
+    private List<Integer> fonts;
+    private List<Integer> themes;
+    private List<Integer> textColors;
 
-    public User(Map<String, Object> data){
-        userName = (String)data.get("userName");
-        nickName = (String)data.get("nickName");
+    public User(String uid, Map<String, Object> data){
+        this.uid = uid;
+        username = (String)data.get("username");
+        nickname = (String)data.get("nickname");
         telephone = (String)data.get("telephone");
         sex = Integer.parseInt(String.valueOf(data.get("sex")));
         grade = Integer.parseInt(String.valueOf(data.get("grade")));
         room = Integer.parseInt(String.valueOf(data.get("room")));
         number = Integer.parseInt(String.valueOf(data.get("number")));
-
-        profile = profiles.get(Integer.parseInt(String.valueOf(data.get("profileIndex"))));
+        profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
+        profile = profiles.get(profileIndex);
         point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
+        themes = (List<Integer>) data.get("themes");
+        fonts = (List<Integer>) data.get("fonts");
+        textColors = (List<Integer>) data.get("textColors");
     }
 
-    public User(String userName, String nickName, String telephone, int sex, int grade, int room, int number, int profile){
-        this.userName = userName;
-        this.nickName = nickName;
+    public User(String username, String nickname, String telephone, int sex, int grade, int room, int number, int profile){
+        this.username = username;
+        this.nickname = nickname;
         this.telephone = telephone;
         this.sex = sex;
         this.grade = grade;
@@ -56,20 +66,12 @@ public class User {
         this.note = "";
     }
 
+    public String getUid() {
+        return uid;
+    }
 
-    public Map<String, Object> getDataMap(){
-        HashMap<String, Object> data = new HashMap<String, Object>();
-        data.put("userName", userName);
-        data.put("nickName", userName);
-        data.put("telephone", userName);
-        data.put("sex", userName);
-        data.put("grade", userName);
-        data.put("number", userName);
-
-        data.put("profileIndex", profiles.indexOf(profile));
-        data.put("point", point);
-        data.put("note", note);
-        return data;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public static User getUser() {
@@ -84,20 +86,20 @@ public class User {
         User.user = user;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getNickName() {
-        return nickName;
+        return nickname;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickname = nickName;
     }
 
     public int getSex() {
@@ -160,7 +162,24 @@ public class User {
         return profile;
     }
 
-    public void setProfile(int profile) {
-        this.profile = profile;
+    public int getProfileIndex() {
+        return profileIndex;
+    }
+
+    public void setProfileIndex(int profileIndex) {
+        this.profileIndex = profileIndex;
+        profile = profiles.get(profileIndex);
+    }
+
+    public List<Integer> getFonts() {
+        return fonts;
+    }
+
+    public List<Integer> getThemes() {
+        return themes;
+    }
+
+    public List<Integer> getTextColors() {
+        return textColors;
     }
 }

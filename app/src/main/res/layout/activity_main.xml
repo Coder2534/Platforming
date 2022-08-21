@@ -15,26 +15,23 @@
             android:id="@+id/tb_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFAC07"
+            android:background="#7A4495"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25dp"
+                android:text="Autonomy"/>
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/ad_main"
             android:layout_below="@+id/tb_main" />
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/ad_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            app:adSize="FULL_BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
-
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

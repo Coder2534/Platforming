@@ -3,26 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_mainpage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_height="300dp" />
 
     <ImageView
         android:id="@+id/iv_mainpage_selfdiagnosis"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/vp_mainpage"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/black"
-        android:src="@drawable/img_self_diagnosis" />
+        android:scaleType="fitXY"
+        android:src="@drawable/img_self_diagnosis_banner_invisible" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/iv_mainpage_selfdiagnosis"
+        android:layout_marginTop="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/bg_round">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="새 게시물"
+            android:textSize="30dp" />
+    </RelativeLayout>
 </RelativeLayout>

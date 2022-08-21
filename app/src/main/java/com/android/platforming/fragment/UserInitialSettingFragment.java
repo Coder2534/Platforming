@@ -21,7 +21,11 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class UserInitialSettingFragment extends Fragment {
     ImageSlider imageSlider;
@@ -32,7 +36,7 @@ public class UserInitialSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
         setListenr(view);
 
-        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.sliderViewPager), view.findViewById(R.id.layoutIndicators));
+        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.vp_initialsetting_profile), view.findViewById(R.id.layoutIndicators));
         imageSlider.setAdapter(new ImageSliderAdapter(User.getProfiles()));
         imageSlider.setIndicators(User.getProfiles().size());
 
@@ -44,18 +48,18 @@ public class UserInitialSettingFragment extends Fragment {
 
         confirm.setOnClickListener(v -> {
 
-            HashMap<String, Object> data = new HashMap<>();
+            Map<String, Object> data = new HashMap<>();
             String userName = ((EditText)view.findViewById(R.id.et_initialsetting_username)).getText().toString();
             if(userName == ""){
                 return;
             }
-            data.put("userName", userName);
+            data.put("username", userName);
 
             String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
             if(nickName == ""){
                 return;
             }
-            data.put("nickName", nickName);
+            data.put("nickname", nickName);
 
             String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
             if(telephone == ""){
@@ -84,6 +88,11 @@ public class UserInitialSettingFragment extends Fragment {
             data.put("profileIndex", imageSlider.getPosition());
 
             data.put("point", 0);
+
+            List<Integer> list = Arrays.asList(0);
+            data.put("themes", list);
+            data.put("fonts", list);
+            data.put("textColor", list);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {

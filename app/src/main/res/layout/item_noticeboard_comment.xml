@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/bg_round">
+
+    <ImageView
+        android:id="@+id/iv_noticeboard_comment_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/ic_baseline_account_circle_24" />
+
+    <TextView
+        android:id="@+id/tv_noticeboard_comment_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv_noticeboard_comment_profile"
+        android:layout_alignTop="@+id/iv_noticeboard_comment_profile"
+        android:text="null"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/tv_noticeboard_comment_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="대충 댓글이라는 글"
+        android:layout_alignLeft="@+id/iv_noticeboard_comment_profile"
+        android:layout_below="@+id/iv_noticeboard_comment_profile"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_noticeboard_comment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_noticeboard_comment_comment"
+        android:layout_alignLeft="@+id/iv_noticeboard_comment_profile"
+        android:layout_marginTop="5dp"
+        android:text="08/11 21:22"
+        android:textSize="15dp" />
+</RelativeLayout>

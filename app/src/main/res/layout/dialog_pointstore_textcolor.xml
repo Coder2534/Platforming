@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="글자색"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="170dp"/>
+        <TextView
+            android:id="@+id/tv_pointstore_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0포인트"
+            android:textSize="25dp"
+            android:gravity="right"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_pointstore_textcolor_"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="20dp"
+                android:fontFamily="@font/nanum_handwriting_slow"/>
+
+            <Button
+                android:id="@+id/btn_pointstore_textcolor_"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textSize="20dp"
+                android:fontFamily="@font/nanum_handwriting_again"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_pointstore_textcolor_"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text=""
+                android:layout_marginTop="-3dp"/>
+
+            <Button
+                android:id="@+id/btn_pointstore_textcolor_"
+                android:layout_width="400dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:text=""/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_pointstore_buyfont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="구매하기" />
+
+        <Button
+            android:id="@+id/btn_pointstore_savefont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:text="저장하기" />
+
+        <Button
+            android:id="@+id/btn_pointstore_getout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나가기" />-->
+
+
+    </LinearLayout>

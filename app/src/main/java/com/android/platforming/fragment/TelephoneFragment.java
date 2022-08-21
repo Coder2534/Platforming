@@ -26,7 +26,6 @@ import java.util.List;
 public class TelephoneFragment extends Fragment {
 
     TelephoneAdapter adapter;
-    ArrayList data = new ArrayList();
 
     ListView lv_info;
     TextView tv_class;
