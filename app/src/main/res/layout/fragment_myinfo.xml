@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="내 정보"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_myinfo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="75dp"
+        android:gravity="center_horizontal"
+        android:textSize="35sp" />
+
+    <ImageButton
+        android:id="@+id/ibtn_myinfo_profile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="55dp"
+        android:background="#00000000"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_account_circle_24" />
+
+    <EditText
+        android:id="@+id/et_myinfo_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="120dp"
+        android:gravity="center_horizontal"
+        android:hint="닉네임적는곳"
+        android:enabled="false"
+        android:maxLength="10"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/et_myinfo_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="175dp"
+        android:hint="금오고등학교 @학년 @반 @번"
+        android:textSize="22dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="350dp"
+        android:text="이메일"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/tv_myinfo_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="350dp"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="400dp"
+        android:text="전화번호"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/et_myinfo_phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="394dp"
+        android:hint="입력해주세요" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="323dp"
+        android:layout_marginTop="87dp"
+        android:text="P"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_myinfo_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="305dp"
+        android:layout_marginTop="70dp"
+        android:text="0"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/btn_myinfo_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_above="@id/ibtn_myinfo_rivise"
+        android:layout_alignRight="@id/ibtn_myinfo_rivise"
+        android:text="완료"
+        android:textSize="20dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_myinfo_revise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ibtn_myinfo_rivise"
+        android:gravity="center"
+        android:textSize="40dp" />
+
+    <ImageButton
+        android:id="@+id/ibtn_myinfo_rivise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_baseline_edit_24" />
+
+</RelativeLayout>
