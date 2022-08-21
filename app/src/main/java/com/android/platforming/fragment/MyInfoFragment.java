@@ -54,7 +54,7 @@ public class MyInfoFragment extends Fragment {
         et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
         et_myinfo_phonenumber = view.findViewById(R.id.et_myinfo_phonenumber);
 
-        tv_myinfo_name.setText(User.getUser().getUserName());
+        tv_myinfo_name.setText(User.getUser().getUsername());
         tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
         tv_myinfo_point.setText(Integer.toString(User.getUser().getPoint()));
 
@@ -116,25 +116,8 @@ public class MyInfoFragment extends Fragment {
 
                     }
                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         });
-
-
 
         return view;
 
