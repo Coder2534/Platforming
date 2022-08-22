@@ -15,24 +15,24 @@
                     android:summary="설정된 시간에 자가진단 확인 알림 발송"
                     android:defaultValue="false" />
 
-                <com.android.platforming.view.TimePreference
+                <com.android.platforming.view.TimePreferenceAndroidx
+                    android:dependency="selfDiagnosis"
                     android:key="time_selfDiagnosis"
-                    android:title="시간"
-                    android:dependency="selfDiagnosis" />
+                    android:title="시간" />
             </PreferenceScreen>
 
             <PreferenceScreen
                 android:title="오늘의 급식 알림">
                 <SwitchPreference
+                    android:defaultValue="false"
                     android:key="schoolMeal"
-                    android:title="오늘의 급식 알림"
                     android:summary="설정된 시간에 오늘의 급식 발송"
-                    android:defaultValue="false" />
+                    android:title="오늘의 급식 알림" />
 
-                <com.android.platforming.view.TimePreference
+                <com.android.platforming.view.TimePreferenceAndroidx
+                    android:dependency="schoolMeal"
                     android:key="time_schoolMeal"
-                    android:title="시간"
-                    android:dependency="schoolMeal"/>
+                    android:title="시간" />
             </PreferenceScreen>
         </PreferenceCategory>
 

@@ -2,63 +2,33 @@ package com.android.platforming.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.DialogPreference;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TimePicker;
 
+import androidx.preference.DialogPreference;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class TimePreference extends DialogPreference {
+public class TimePreferenceAndroidx extends DialogPreference {
     private Calendar calendar;
-    private TimePicker picker = null;
 
-    public TimePreference(Context ctxt) {
+    public TimePreferenceAndroidx(Context ctxt) {
         this(ctxt, null);
     }
 
-    public TimePreference(Context ctxt, AttributeSet attrs) {
+    public TimePreferenceAndroidx(Context ctxt, AttributeSet attrs) {
         this(ctxt, attrs, android.R.attr.dialogPreferenceStyle);
     }
 
-    public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
+    public TimePreferenceAndroidx(Context ctxt, AttributeSet attrs, int defStyle) {
         super(ctxt, attrs, defStyle);
         setPositiveButtonText("확인");
         setNegativeButtonText("취소");
         calendar = new GregorianCalendar();
-    }
-
-    @Override
-    protected View onCreateDialogView() {
-        picker = new TimePicker(getContext());
-        return (picker);
-    }
-
-    @Override
-    protected void onBindDialogView(View v) {
-        super.onBindDialogView(v);
-        picker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-        picker.setCurrentMinute(calendar.get(Calendar.MINUTE));
-    }
-
-    @Override
-    protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
-
-        if (positiveResult) {
-            calendar.set(Calendar.HOUR_OF_DAY, picker.getCurrentHour());
-            calendar.set(Calendar.MINUTE, picker.getCurrentMinute());
-            calendar.set(Calendar.SECOND, 0);
-
-            setSummary(getSummary());
-            if (callChangeListener(calendar.getTimeInMillis())) {
-                persistLong(calendar.getTimeInMillis());
-                notifyChanged();
-            }
-        }
     }
 
     @Override
@@ -90,5 +60,14 @@ public class TimePreference extends DialogPreference {
             return null;
         }
         return DateFormat.getTimeFormat(getContext()).format(new Date(calendar.getTimeInMillis()));
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void putLong(long value){
+        persistLong(value);
+        notifyChanged();
     }
 }
