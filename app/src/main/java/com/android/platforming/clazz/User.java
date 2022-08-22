@@ -23,11 +23,9 @@ public class User {
     private String nickname;
     private String telephone;
     private int sex; //0: male 1: female
-    private int grade;
-    private int room;
-    private int number;
+    private String studentId;
+
     //etc
-    private int profile;
     private int point;
     private String note;
     private int profileIndex;
@@ -41,29 +39,13 @@ public class User {
         nickname = (String)data.get("nickname");
         telephone = (String)data.get("telephone");
         sex = Integer.parseInt(String.valueOf(data.get("sex")));
-        grade = Integer.parseInt(String.valueOf(data.get("grade")));
-        room = Integer.parseInt(String.valueOf(data.get("room")));
-        number = Integer.parseInt(String.valueOf(data.get("number")));
+        studentId = (String)data.get("studentId");
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
-        profile = profiles.get(profileIndex);
         point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
         themes = (List<Integer>) data.get("themes");
         fonts = (List<Integer>) data.get("fonts");
         textColors = (List<Integer>) data.get("textColors");
-    }
-
-    public User(String username, String nickname, String telephone, int sex, int grade, int room, int number, int profile){
-        this.username = username;
-        this.nickname = nickname;
-        this.telephone = telephone;
-        this.sex = sex;
-        this.grade = grade;
-        this.room = room;
-        this.number = number;
-        this.profile = profiles.get(profile);
-        this.point = 0;
-        this.note = "";
     }
 
     public String getUid() {
@@ -94,7 +76,7 @@ public class User {
         this.username = userName;
     }
 
-    public String getNickName() {
+    public String getNickname() {
         return nickname;
     }
 
@@ -126,28 +108,12 @@ public class User {
         this.telephone = telephone;
     }
 
-    public int getGrade() {
-        return grade;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
-
-    public int getRoom() {
-        return room;
-    }
-
-    public void setRoom(int room) {
-        this.room = room;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public String getNote() {
@@ -159,7 +125,7 @@ public class User {
     }
 
     public int getProfile() {
-        return profile;
+        return profiles.get(profileIndex);
     }
 
     public int getProfileIndex() {
@@ -168,7 +134,6 @@ public class User {
 
     public void setProfileIndex(int profileIndex) {
         this.profileIndex = profileIndex;
-        profile = profiles.get(profileIndex);
     }
 
     public List<Integer> getFonts() {

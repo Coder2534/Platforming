@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserInitialSettingFragment extends Fragment {
+public class InitialSettingFragment extends Fragment {
     ImageSlider imageSlider;
 
     @Nullable
@@ -77,13 +77,11 @@ public class UserInitialSettingFragment extends Fragment {
             else
                 data.put("sex", 1);
 
-            String student = ((EditText)view.findViewById(R.id.et_initialsetting_student)).getText().toString();
-            if(student.length() != 5){
+            String studentId = ((EditText)view.findViewById(R.id.et_initialsetting_studentid)).getText().toString();
+            if(studentId.length() != 5){
                 return;
             }
-            data.put("grade", Integer.parseInt(String.valueOf(student.charAt(0))));
-            data.put("room", Integer.parseInt(student.substring(1, 3)));
-            data.put("number", Integer.parseInt(student.substring(3, 5)));
+            data.put("studentId", studentId);
 
             data.put("profileIndex", imageSlider.getPosition());
 

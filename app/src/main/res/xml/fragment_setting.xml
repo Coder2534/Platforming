@@ -56,7 +56,6 @@
         android:title="디자인"
         android:summary="테마, 폰트"
         android:icon="@drawable/ic_baseline_palette_24">
-
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -64,13 +63,13 @@
         android:summary="이메일, 비밀번호 변경, 로그아웃 등"
         android:icon="@drawable/ic_baseline_account_circle_24">
         <PreferenceScreen
-            android:title="UUID"
-            android:summary="null"
+            android:key="uid"
+            android:title="UID"
             />
 
         <PreferenceScreen
+            android:key="email"
             android:title="이메일"
-            android:summary="test@gmail.com"
             />
         <PreferenceScreen
             android:title="비밀번호 변경"

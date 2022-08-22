@@ -58,14 +58,17 @@
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/ic_baseline_emoji_emotions_24.xml" value="0.1505" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1505" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_community.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_main.xml" value="0.35125115848007415" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_notice_board.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_noticeboard.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_setting.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_detail.xml" value="0.49514563106796117" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_list.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_rowdata.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/layout_navigation_header.xml" value="0.25" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/view_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.2791666666666667" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_round.xml" value="0.141" />
