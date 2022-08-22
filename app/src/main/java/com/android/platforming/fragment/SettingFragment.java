@@ -3,9 +3,12 @@ package com.android.platforming.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -17,6 +20,8 @@ import com.android.platforming.clazz.Alarm;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.android.platforming.recevier.AlarmReceiver;
+import com.android.platforming.view.TimePreference;
+import com.android.platforming.view.TimePreferenceAndroidx;
 import com.android.platforming.view.TimePreferenceCompat;
 import com.example.platforming.R;
 
@@ -27,28 +32,22 @@ public class SettingFragment extends PreferenceFragmentCompat {
     Context context;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         addPreferencesFromResource(R.xml.fragment_setting);
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getActivity().getBaseContext();
-
-        TimePreferenceCompat compat = new TimePreferenceCompat();
-
-        PreferenceScreen uid = (PreferenceScreen) findPreference("uid");
-        uid.setSummary(User.getUser().getUid());
-        PreferenceScreen email = (PreferenceScreen) findPreference("email");
-        email.setSummary(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
-    }
-
-    @Override
-    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
-
     }
 
     @Override
     public void onDisplayPreferenceDialog(@NonNull Preference preference) {
-        super.onDisplayPreferenceDialog(preference);
+        Toast.makeText(getContext(), "onDisplayPreferenceDialog", Toast.LENGTH_SHORT).show();
+        if(preference instanceof TimePreferenceAndroidx){
+            DialogFragment dialogFragment = TimePreferenceCompat.newInstance(preference.getKey());
+            dialogFragment.setTargetFragment(this, 0);
+            dialogFragment.show(getFragmentManager(), null);
+        } else{
+            super.onDisplayPreferenceDialog(preference);
+        }
     }
 
     @Override
