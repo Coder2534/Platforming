@@ -45,12 +45,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
 
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
 
+        setListView();
+        setListener();
+
+        if(User.getUser() == null){
+            Log.w("Debug", "user isEmpty");
+            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
+        }
+        else{
+            setting();
+        }
+    }
+
+    public void setting(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
+        setHeader();
+        getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+    }
+
+    private void setHeader(){
         View header = navigationView.getHeaderView(0);
         ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
         profile.setImageResource(User.getUser().getProfile());
@@ -61,20 +79,6 @@ public class MainActivity extends AppCompatActivity {
         TextView info = header.findViewById(R.id.tv_navigation_header_info);
         String studentId = User.getUser().getStudentId();
         info.setText(String.format("%c학년 %c반 %c번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
-
-        setListView();
-
-        if(User.getUser() == null){
-            Log.w("Debug", "user isEmpty");
-            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
-        }
-        else{
-            View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
-            TextView nav_header_id_text = nav_header_view.findViewById(R.id.tv_navigation_header_info);
-            nav_header_id_text.setText("Test");
-            setListener();
-            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
-        }
     }
 
     private void setListView(){
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setListener(){
+    private void setListener(){
         mainExpandableList.setListner(getSupportFragmentManager(), () -> drawerLayout.closeDrawer(GravityCompat.START));
 
         TextView setting = findViewById(R.id.tv_main_setting);

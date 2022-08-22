@@ -15,7 +15,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fm_setting"
         android:name="com.android.platforming.fragment.SettingFragment"
         android:layout_width="match_parent"

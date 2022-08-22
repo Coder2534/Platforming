@@ -51,9 +51,7 @@ public class TelephoneFragment extends Fragment {
     private void showTelephone(){
         adapter = new TelephoneAdapter();
         lv_info.setAdapter(adapter);
-        getTelephone(User.getUser().getGrade());
-        Log.d("grade", String.valueOf(User.getUser().getGrade()));
-
+        getTelephone(User.getUser().getStudentId().charAt(0));
     }
 
     public void getTelephone(int grade){

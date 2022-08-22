@@ -6,7 +6,6 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.DialogPreference;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,7 +32,7 @@ public class TimePreferenceCompat extends androidx.preference.PreferenceDialogFr
     @Nullable
     @Override
     protected View onCreateDialogView(@NonNull Context context) {
-        TimePreferenceAndroidx preference = getPreference();
+        preference = getPreference();
         calendar = getPreference().getCalendar();
         timePicker = new TimePicker(getContext());
         return (timePicker);
