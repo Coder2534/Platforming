@@ -6,29 +6,28 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.platforming.clazz.Alarm;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
+import com.android.platforming.fragment.MyInfoFragment;
 import com.android.platforming.fragment.PointStoreFragment;
 import com.android.platforming.fragment.SchoolIntroduceFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
 import com.android.platforming.interfaze.OnChildClickInterface;
-import com.android.platforming.recevier.AlarmReceiver;
 import com.example.platforming.R;
-import com.android.platforming.fragment.UserInitialSettingFragment;
+import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ExpandableList mainExpandableList;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
@@ -51,11 +51,22 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
 
+        View header = navigationView.getHeaderView(0);
+        ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
+        profile.setImageResource(User.getUser().getProfile());
+        TextView point = header.findViewById(R.id.tv_navigation_header_point);
+        point.setText(User.getUser().getPoint() + "p");
+        TextView username = header.findViewById(R.id.tv_navigation_header_username);
+        username.setText(User.getUser().getUsername());
+        TextView info = header.findViewById(R.id.tv_navigation_header_info);
+        String studentId = User.getUser().getStudentId();
+        info.setText(String.format("%c학년 %c반 %c번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
+
         setListView();
 
         if(User.getUser() == null){
             Log.w("Debug", "user isEmpty");
-            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new UserInitialSettingFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
         }
         else{
             View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
@@ -73,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout.addView(mainExpandableList, 0);
 
         mainExpandableList.addParent("내정보", R.drawable.ic_baseline_person_24);
-        mainExpandableList.addChild(0, "내정보", new Fragment());
+        mainExpandableList.addChild(0, "내정보", new MyInfoFragment());
         mainExpandableList.addChild(0, "나의 게시물", new Fragment());
 
         mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_school_24);
@@ -88,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
 
         /*
+        커뮤니티 보류
         mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_comment_24);
         mainExpandableList.addChild(3, "1학년", new Fragment());
         mainExpandableList.addChild(3, "2학년", new Fragment());
@@ -129,11 +141,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {// 왼쪽 상단 버튼 눌렀을 때
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -21,10 +21,13 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class UserInitialSettingFragment extends Fragment {
+public class InitialSettingFragment extends Fragment {
     ImageSlider imageSlider;
 
     @Nullable
@@ -33,7 +36,7 @@ public class UserInitialSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_initialsetting, container, false);
         setListenr(view);
 
-        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.sliderViewPager), view.findViewById(R.id.layoutIndicators));
+        imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.vp_initialsetting_profile), view.findViewById(R.id.layoutIndicators));
         imageSlider.setAdapter(new ImageSliderAdapter(User.getProfiles()));
         imageSlider.setIndicators(User.getProfiles().size());
 
@@ -50,13 +53,13 @@ public class UserInitialSettingFragment extends Fragment {
             if(userName == ""){
                 return;
             }
-            data.put("userName", userName);
+            data.put("username", userName);
 
             String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
             if(nickName == ""){
                 return;
             }
-            data.put("nickName", nickName);
+            data.put("nickname", nickName);
 
             String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
             if(telephone == ""){
@@ -74,17 +77,20 @@ public class UserInitialSettingFragment extends Fragment {
             else
                 data.put("sex", 1);
 
-            String student = ((EditText)view.findViewById(R.id.et_initialsetting_student)).getText().toString();
-            if(student.length() != 5){
+            String studentId = ((EditText)view.findViewById(R.id.et_initialsetting_studentid)).getText().toString();
+            if(studentId.length() != 5){
                 return;
             }
-            data.put("grade", Integer.parseInt(String.valueOf(student.charAt(0))));
-            data.put("room", Integer.parseInt(student.substring(1, 3)));
-            data.put("number", Integer.parseInt(student.substring(3, 5)));
+            data.put("studentId", studentId);
 
             data.put("profileIndex", imageSlider.getPosition());
 
             data.put("point", 0);
+
+            List<Integer> list = Arrays.asList(0);
+            data.put("themes", list);
+            data.put("fonts", list);
+            data.put("textColor", list);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {

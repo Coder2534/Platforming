@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.android.platforming.clazz.Alarm;
+import com.android.platforming.clazz.FirestoreManager;
+import com.android.platforming.clazz.User;
 import com.android.platforming.recevier.AlarmReceiver;
 import com.example.platforming.R;
 
@@ -29,6 +32,11 @@ public class SettingFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.fragment_setting);
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getActivity().getBaseContext();
+
+        PreferenceScreen uid = (PreferenceScreen) findPreference("uid");
+        uid.setSummary(User.getUser().getUid());
+        PreferenceScreen email = (PreferenceScreen) findPreference("email");
+        email.setSummary(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
     }
 
     @Override
