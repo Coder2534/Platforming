@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setListener();
 
         if(User.getUser() == null){
-            Log.w("Debug", "user isEmpty");
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
         }
         else{
