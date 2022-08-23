@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static MainActivity mainActivity;
 
+    boolean mainPage = false;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
 
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
@@ -67,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setting(){
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         setHeader();
+        mainPage = true;
         getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
     }
 
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout != null && mainPage && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
