@@ -17,6 +17,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.platforming.activity.SignInActivity;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.User;
 import com.android.platforming.view.PasswordPreference;
 import com.android.platforming.view.TimePreference;
@@ -84,10 +85,8 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
 
             }
             else if(key.equals("signOut")) {
-                getFirebaseAuth().signOut();
-                Intent loginIntent = new Intent(getContext(), SignInActivity.class);
-                startActivity(loginIntent);
-                getActivity().finish();
+                CustomDialog customDialog = new CustomDialog();
+                customDialog.changeOfPasswordDialog(getActivity());
             }
         }
     };
