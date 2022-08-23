@@ -5,6 +5,7 @@ import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,11 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.platforming.activity.SignInActivity;
 import com.android.platforming.clazz.User;
+import com.android.platforming.view.PasswordPreference;
 import com.android.platforming.view.TimePreference;
 import com.android.platforming.view.TimePreferenceCompat;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class AccountPreferenceFragment extends PreferenceFragmentCompat {
 
@@ -28,23 +32,37 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
 
-        PreferenceScreen uid = findPreference("uid");
+        Preference uid = findPreference("uid");
+        Preference email = findPreference("email");
+        Preference changOfPassword = findPreference("changOfPassword");
+        Preference signOut = findPreference("signOut");
+
         uid.setSummary(User.getUser().getUid());
-
-        PreferenceScreen email = findPreference("email");
         email.setSummary(User.getUser().getEmail());
-    }
 
-    @Override
-    public void onDisplayPreferenceDialog(@NonNull Preference preference) {
-        Toast.makeText(getContext(), "onDisplayPreferenceDialog", Toast.LENGTH_SHORT).show();
-        if(preference instanceof TimePreference){
-            DialogFragment dialogFragment = TimePreferenceCompat.newInstance(preference.getKey());
-            dialogFragment.setTargetFragment(this, 0); //deprecated
-            dialogFragment.show(requireActivity().getSupportFragmentManager(), null);
-        } else{
-            super.onDisplayPreferenceDialog(preference);
+        String provider = getFirebaseAuth().getCurrentUser().getProviderData().get(0).getProviderId();
+        Log.d("FirebaseAuth","provider: "+provider);
+        if(!provider.equals("password")){
+            PreferenceScreen account = findPreference("account");
+            account.removePreference(changOfPassword);
+            }
+        else{
+            changOfPassword.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull Preference preference) {
+
+                    return true;
+                }
+            });
         }
+
+        signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(@NonNull Preference preference) {
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -62,7 +80,10 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if(key.equals("signOut")) {
+            if(key.equals("changOfPassword")){
+
+            }
+            else if(key.equals("signOut")) {
                 getFirebaseAuth().signOut();
                 Intent loginIntent = new Intent(getContext(), SignInActivity.class);
                 startActivity(loginIntent);
