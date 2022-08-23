@@ -1,56 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceScreen
+    <Preference
+        android:key="notification"
         android:title="알림"
         android:summary="자가진단, 오늘의 급식, 공지, 게시물"
-        android:icon="@drawable/ic_baseline_notifications_24">
-        <PreferenceCategory
-            android:title="학교알림">
-            <PreferenceScreen
-                android:title="자가진단 알림">
-                <SwitchPreference
-                    android:key="selfDiagnosis"
-                    android:title="자가진단 알림"
-                    android:summary="설정된 시간에 자가진단 확인 알림 발송"
-                    android:defaultValue="false" />
-
-                <com.android.platforming.view.TimePreferenceAndroidx
-                    android:dependency="selfDiagnosis"
-                    android:key="time_selfDiagnosis"
-                    android:title="시간" />
-            </PreferenceScreen>
-
-            <PreferenceScreen
-                android:title="오늘의 급식 알림">
-                <SwitchPreference
-                    android:defaultValue="false"
-                    android:key="schoolMeal"
-                    android:summary="설정된 시간에 오늘의 급식 발송"
-                    android:title="오늘의 급식 알림" />
-
-                <com.android.platforming.view.TimePreferenceAndroidx
-                    android:dependency="schoolMeal"
-                    android:key="time_schoolMeal"
-                    android:title="시간" />
-            </PreferenceScreen>
-        </PreferenceCategory>
-
-        <PreferenceCategory
-            android:title="앱 알림">
-            <SwitchPreference
-                android:title="공지 알림"
-                android:summary="공지가 올라올 시 알림 발송"/>
-            <PreferenceScreen
-                android:title="게시물 알림"
-                android:summary="좋아요, 댓글">
-                <SwitchPreference
-                    android:title="좋아요" />
-                <SwitchPreference
-                    android:title="댓글" />
-            </PreferenceScreen>
-        </PreferenceCategory>
-    </PreferenceScreen>
+        android:icon="@drawable/ic_baseline_notifications_24"
+        app:fragment="com.android.platforming.fragment.NotificationPreferenceFragment">
+    </Preference>
 
     <PreferenceScreen
         android:title="디자인"
@@ -58,27 +16,12 @@
         android:icon="@drawable/ic_baseline_palette_24">
     </PreferenceScreen>
 
-    <PreferenceScreen
+    <Preference
         android:title="계정"
         android:summary="이메일, 비밀번호 변경, 로그아웃 등"
-        android:icon="@drawable/ic_baseline_account_circle_24">
-        <PreferenceScreen
-            android:key="uid"
-            android:title="UID"
-            />
-
-        <PreferenceScreen
-            android:key="email"
-            android:title="이메일"
-            />
-        <PreferenceScreen
-            android:title="비밀번호 변경"
-            android:summary="현재 사용중인 계정의 비밀번호를 변경(이메일 로그인 한정)"
-            />
-        <PreferenceScreen
-            android:title="로그아웃"
-            />
-    </PreferenceScreen>
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        app:fragment="com.android.platforming.fragment.AccountPreferenceFragment">
+    </Preference>
 
     <PreferenceScreen
         android:title="소프트웨어 버전"

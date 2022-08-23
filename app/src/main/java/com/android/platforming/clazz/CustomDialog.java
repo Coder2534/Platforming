@@ -1,10 +1,15 @@
 package com.android.platforming.clazz;
 
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.widget.EditText;
 
+import com.android.platforming.activity.SignInActivity;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
@@ -36,6 +41,22 @@ public class CustomDialog {
         });
         ad.setNegativeButton("최소", (dialog, which) -> {
             listenerInterface.onFail();
+        });
+        ad.show();
+    }
+
+    public void changeOfPasswordDialog(Activity activity){
+        AlertDialog.Builder ad = new AlertDialog.Builder(activity);
+        ad.setTitle("로그아웃");
+        ad.setMessage("계속하시겠습니까?");
+        ad.setPositiveButton("확인", (dialog, which) -> {
+            getFirebaseAuth().signOut();
+            Intent loginIntent = new Intent(activity, SignInActivity.class);
+            activity.startActivity(loginIntent);
+            activity.finish();
+        });
+        ad.setNegativeButton("최소", (dialog, which) -> {
+
         });
         ad.show();
     }

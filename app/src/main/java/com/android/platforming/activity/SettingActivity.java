@@ -7,6 +7,7 @@ import androidx.core.view.GravityCompat;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.android.platforming.fragment.SettingFragment;
 import com.example.platforming.R;
 
 public class SettingActivity extends AppCompatActivity {
@@ -21,6 +22,8 @@ public class SettingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24); //왼쪽 상단 버튼 아이콘 지정
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fcv_setting, new SettingFragment()).commit();
     }
 
     @Override

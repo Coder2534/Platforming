@@ -48,7 +48,7 @@ public class FirestoreManager {
                 if(documentSnapshot.exists()){
                     Log.w("setUserData", "Document exist",task.getException());
                     Map<String, Object> data = documentSnapshot.getData();
-                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), data));
+                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getEmail(), data));
                 }
                 else{
                     Log.w("setUserData", "Document doesn't exist");

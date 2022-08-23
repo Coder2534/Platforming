@@ -19,6 +19,7 @@ public class User {
 
     //personal info
     private String uid;
+    private String email;
     private String username;
     private String nickname;
     private String telephone;
@@ -33,8 +34,9 @@ public class User {
     private List<Integer> themes;
     private List<Integer> textColors;
 
-    public User(String uid, Map<String, Object> data){
+    public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
+        this.email = email;
         username = (String)data.get("username");
         nickname = (String)data.get("nickname");
         telephone = (String)data.get("telephone");
@@ -54,6 +56,10 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public static User getUser() {

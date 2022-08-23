@@ -96,7 +96,7 @@ public class InitialSettingFragment extends Fragment {
             firestoreManager.writeUserData(data, new ListenerInterface() {
                 @Override
                 public void onSuccess() {
-                    ((MainActivity)getActivity()).setListener();
+                    ((MainActivity)getActivity()).setting();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
                 }
             });
