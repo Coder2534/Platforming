@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceScreen
+        android:key="uid"
+        android:title="UID" />
+
+    <PreferenceScreen
+        android:key="email"
+        android:title="이메일" />
+
+    <com.android.platforming.view.PasswordPreference
+        android:key="changOfPassword"
+        android:title="비밀번호 변경"
+        android:summary="현재 사용중인 계정의 비밀번호를 변경(이메일 로그인 한정)" />
+
+    <PreferenceScreen
+        android:key="signOut"
+        android:title="로그아웃" />
+</PreferenceScreen>

@@ -16,27 +16,12 @@
         android:icon="@drawable/ic_baseline_palette_24">
     </PreferenceScreen>
 
-    <PreferenceScreen
+    <Preference
         android:title="계정"
         android:summary="이메일, 비밀번호 변경, 로그아웃 등"
-        android:icon="@drawable/ic_baseline_account_circle_24">
-        <PreferenceScreen
-            android:key="uid"
-            android:title="UID"
-            />
-
-        <PreferenceScreen
-            android:key="email"
-            android:title="이메일"
-            />
-        <PreferenceScreen
-            android:title="비밀번호 변경"
-            android:summary="현재 사용중인 계정의 비밀번호를 변경(이메일 로그인 한정)"
-            />
-        <PreferenceScreen
-            android:title="로그아웃"
-            />
-    </PreferenceScreen>
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        app:fragment="com.android.platforming.fragment.AccountPreferenceFragment">
+    </Preference>
 
     <PreferenceScreen
         android:title="소프트웨어 버전"
