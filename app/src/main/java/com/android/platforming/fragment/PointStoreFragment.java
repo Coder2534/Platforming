@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,20 +25,21 @@ public class PointStoreFragment extends Fragment {
     Dialog themedialog;
     Dialog textcolordialog;
 
-    TextView tv_pointstore_point;
+    TextView tv_pointstore_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
-    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_textcolor,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_Baedalofrace,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_savefont;
+    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_textcolor,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_Baedalofrace,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_savefont,btn_pointstore_buytheme,btn_pointstore_savetheme,btn_pointstore_theme_getout;
+    ImageButton ibtn_pointstore_theme_pink,ibtn_pointstore_theme_bule, ibtn_pointstore_theme_green, ibtn_pointstore_theme_black;
 
 
-    Typeface font;
     int point;
+    Typeface font;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pointstore, container, false);
         setView(view);
         setDialog();
-
+        //폰트 다이얼 로그
         btn_pointstore_font.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,11 +98,54 @@ public class PointStoreFragment extends Fragment {
 
             }
         });
+        //테마 다이얼로그
         btn_pointstore_theme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 themedialog.show();
                 setThemedialogView();
+                ibtn_pointstore_theme_pink.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+                    }
+                });
+                ibtn_pointstore_theme_bule.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+                    }
+                });
+                ibtn_pointstore_theme_green.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+                    }
+                });
+                ibtn_pointstore_theme_black.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+                    }
+                });
+                btn_pointstore_buytheme.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //파이어 베이스 형
+                    }
+                });
+                btn_pointstore_savetheme.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //파이어 베이스  형
+                    }
+                });
+                btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        themedialog.dismiss();
+                    }
+                });
 
             }
         });
@@ -111,8 +156,6 @@ public class PointStoreFragment extends Fragment {
                 setTextcolordialogView();
             }
         });
-
-
 
     return view;
     }
@@ -138,10 +181,18 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
         btn_pointstore_savefont = fontdialog.findViewById(R.id.btn_pointstore_savefont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);
-        tv_pointstore_point = fontdialog.findViewById(R.id.tv_pointstore_point);
+        tv_pointstore_point = fontdialog.findViewById(R.id.tv_pointstore_font_point);
 
     }
     private void setThemedialogView(){
+        tv_pointstore_theme_point = themedialog.findViewById(R.id.tv_pointstore_theme_point);
+        ibtn_pointstore_theme_pink = themedialog.findViewById(R.id.ibtn_pointstore_theme_pink);
+        ibtn_pointstore_theme_bule = themedialog.findViewById(R.id.ibtn_pointstore_theme_bule);
+        ibtn_pointstore_theme_green = themedialog.findViewById(R.id.ibtn_pointstore_theme_green);
+        ibtn_pointstore_theme_black = themedialog.findViewById(R.id.ibtn_pointstore_theme_black);
+        btn_pointstore_buytheme = themedialog.findViewById(R.id.btn_pointstore_buytheme);
+        btn_pointstore_savetheme = themedialog.findViewById(R.id.btn_pointstore_savetheme);
+        btn_pointstore_theme_getout = themedialog.findViewById(R.id.btn_pointstore_theme_getout);
 
     }
     private void setTextcolordialogView(){
