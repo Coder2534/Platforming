@@ -65,5 +65,6 @@ public class CustomDialog {
 
     public void changeOfPasswordDialog(Context context){
         AlertDialog.Builder ad = new AlertDialog.Builder(context, R.layout.dialog_setting_changeofpassword);
+
     }
 }

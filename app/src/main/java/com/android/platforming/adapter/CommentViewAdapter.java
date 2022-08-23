@@ -21,6 +21,11 @@ import java.util.ArrayList;
 
 public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.ViewHolder> {
 
+
+    //게시판 좋아요, 삭제
+    //댓글 삭제
+
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
     private ArrayList<Comment> mData = null ;
 
