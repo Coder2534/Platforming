@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 //
 public class PointStoreFragment extends Fragment {
     Dialog fontdialog,themedialog,textcolordialog;
@@ -31,6 +37,7 @@ public class PointStoreFragment extends Fragment {
 
     int point;
     Typeface font;
+    List<Integer> applyfont;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +80,13 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Map<String, Typeface> storemap = new HashMap<>();
+                        storemap.put("font",font);
+                        applyfont = User.getUser().getFonts();
+                        Log.d("apply", String.valueOf(applyfont));
+                        if(font != applyfont){
+                            
+                        }
                         //파이어 베이스에 구매되있는지확인 안되있으면 font변수에 담아져 있는걸로 사고 사져있으면 토스트로 띄우기?
                         //사고 포인트 띄우는거도 해주세용  point 변수 있어요
                         // 대충 형이 구현 해주세요
