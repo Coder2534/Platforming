@@ -38,6 +38,7 @@ public class PointStoreFragment extends Fragment {
         setView(view);
         setDialog();
 
+
         btn_pointstore_font.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,7 +139,7 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
         btn_pointstore_savefont = fontdialog.findViewById(R.id.btn_pointstore_savefont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);
-        tv_pointstore_point = fontdialog.findViewById(R.id.tv_pointstore_point);
+        tv_pointstore_point = fontdialog.findViewById(R.id.tv_pointstore_font_point);
 
     }
     private void setThemedialogView(){

@@ -100,27 +100,28 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_pointstore_buyfont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="구매하기"/>
+            android:text="구매하기"
+            android:layout_gravity="bottom" />
         <Button
             android:id="@+id/btn_pointstore_savefont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저장하기"
-            android:layout_marginLeft="150dp"/>
+            android:layout_marginLeft="150dp"
+            android:layout_gravity="bottom" />
 
         <Button
             android:id="@+id/btn_pointstore_getout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="나가기"
-            />
+            android:layout_gravity="bottom" />
     </LinearLayout>
 
 </LinearLayout>
