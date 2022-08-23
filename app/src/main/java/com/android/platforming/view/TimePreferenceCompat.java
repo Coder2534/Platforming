@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
+import com.example.platforming.R;
+
 import java.util.Calendar;
 
 public class TimePreferenceCompat extends androidx.preference.PreferenceDialogFragmentCompat {
@@ -32,10 +34,11 @@ public class TimePreferenceCompat extends androidx.preference.PreferenceDialogFr
         Log.d("Test","testeat");
         preference = getPreference();
         calendar = getPreference().getCalendar();
-        timePicker = new TimePicker(getContext());
+        timePicker = v.findViewById(R.id.tp_preference_timepicker);
         timePicker.setIs24HourView(true);
         timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
         timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+
     }
 
     @Override

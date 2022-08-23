@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 
 import androidx.preference.DialogPreference;
 
+import com.example.platforming.R;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -27,6 +29,11 @@ public class TimePreference extends DialogPreference {
         setPositiveButtonText("확인");
         setNegativeButtonText("취소");
         calendar = new GregorianCalendar();
+    }
+
+    @Override
+    public int getDialogLayoutResource() {
+        return R.layout.preference_timepicker;
     }
 
     @Override

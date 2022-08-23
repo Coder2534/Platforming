@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.EditText;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.activity.SignInActivity;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
@@ -45,7 +46,7 @@ public class CustomDialog {
         ad.show();
     }
 
-    public void changeOfPasswordDialog(Activity activity){
+    public void signOutDialog(Activity activity){
         AlertDialog.Builder ad = new AlertDialog.Builder(activity);
         ad.setTitle("로그아웃");
         ad.setMessage("계속하시겠습니까?");
@@ -54,10 +55,15 @@ public class CustomDialog {
             Intent loginIntent = new Intent(activity, SignInActivity.class);
             activity.startActivity(loginIntent);
             activity.finish();
+            MainActivity.getActivity().finish();
         });
         ad.setNegativeButton("최소", (dialog, which) -> {
 
         });
         ad.show();
+    }
+
+    public void changeOfPasswordDialog(Context context){
+        AlertDialog.Builder ad = new AlertDialog.Builder(context, R.layout.dialog_setting_changeofpassword);
     }
 }

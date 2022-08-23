@@ -22,6 +22,7 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.view.PasswordPreference;
 import com.android.platforming.view.TimePreference;
 import com.android.platforming.view.TimePreferenceCompat;
+import com.example.platforming.R;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 
@@ -31,7 +32,7 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
-        pref = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        setPreferencesFromResource(R.xml.preference_account, rootKey);
 
         Preference uid = findPreference("uid");
         Preference email = findPreference("email");
@@ -46,12 +47,12 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
         if(!provider.equals("password")){
             PreferenceScreen account = findPreference("account");
             account.removePreference(changOfPassword);
-            }
-        else{
+        } else{
             changOfPassword.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
-
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.changeOfPasswordDialog(getContext());
                     return true;
                 }
             });
@@ -60,34 +61,10 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
         signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-
+                CustomDialog customDialog = new CustomDialog();
+                customDialog.signOutDialog(getActivity());
                 return true;
             }
         });
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        pref.unregisterOnSharedPreferenceChangeListener(listener);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        pref.unregisterOnSharedPreferenceChangeListener(listener);
-    }
-
-    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if(key.equals("changOfPassword")){
-
-            }
-            else if(key.equals("signOut")) {
-                CustomDialog customDialog = new CustomDialog();
-                customDialog.changeOfPasswordDialog(getActivity());
-            }
-        }
-    };
 }
