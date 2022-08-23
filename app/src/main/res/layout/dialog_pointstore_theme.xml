@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">//
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,19 +28,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
+        <Button
             android:id="@+id/ibtn_pointstore_theme_pink"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:src="" />
+            android:text="핑크테마"
+            android:backgroundTint="@color/pink"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/ibtn_pointstore_theme_bule"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:src=""
+            android:text="블루테마"
+            android:backgroundTint="@color/bule"
             />
 
     </LinearLayout>
@@ -48,20 +50,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageButton
+        <Button
             android:id="@+id/ibtn_pointstore_theme_green"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:src=""
-            />
-        <ImageButton
+            android:text="그린테마"
+            android:backgroundTint="@color/darkgreen"/>
+        <Button
             android:id="@+id/ibtn_pointstore_theme_black"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:src=""
-            />
+            android:text="다크테마"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//
 public class PointStoreFragment extends Fragment {
     Dialog fontdialog,themedialog,textcolordialog;
 
@@ -85,7 +84,7 @@ public class PointStoreFragment extends Fragment {
                         applyfont = User.getUser().getFonts();
                         Log.d("apply", String.valueOf(applyfont));
                         if(font != applyfont){
-                            
+
                         }
                         //파이어 베이스에 구매되있는지확인 안되있으면 font변수에 담아져 있는걸로 사고 사져있으면 토스트로 띄우기?
                         //사고 포인트 띄우는거도 해주세용  point 변수 있어요
