@@ -19,11 +19,9 @@ import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
-
+//
 public class PointStoreFragment extends Fragment {
-    Dialog fontdialog;
-    Dialog themedialog;
-    Dialog textcolordialog;
+    Dialog fontdialog,themedialog,textcolordialog;
 
     TextView tv_pointstore_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
