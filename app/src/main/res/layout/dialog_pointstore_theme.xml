@@ -29,13 +29,14 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-
+            android:id="@+id/ibtn_pointstore_theme_pink"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
             android:src="" />
 
         <ImageButton
+            android:id="@+id/ibtn_pointstore_theme_bule"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
@@ -48,12 +49,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageButton
+            android:id="@+id/ibtn_pointstore_theme_green"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
             android:src=""
             />
         <ImageButton
+            android:id="@+id/ibtn_pointstore_theme_black"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"

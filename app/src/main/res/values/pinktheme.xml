@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="pinktheme">
+    <style name="PinkTheme">
         <item name="android:textColor">#FF8FB1</item>
         <item name="android:button">#FFD8D8</item>
         <item name="android:colorPrimary">#FF8FB1</item>
