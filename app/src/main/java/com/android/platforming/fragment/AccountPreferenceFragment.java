@@ -52,7 +52,7 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
                     CustomDialog customDialog = new CustomDialog();
-                    customDialog.changeOfPasswordDialog(getContext());
+                    customDialog.changeOfPasswordDialog(getActivity());
                     return true;
                 }
             });
