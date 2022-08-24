@@ -130,6 +130,13 @@ public class MyInfoFragment extends Fragment {
             et_myinfo_phonenumber.setFocusableInTouchMode(true);
             et_myinfo_phonenumber.setFocusable(true);
 
+            ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setDialog(getActivity());
+                }
+            });
+
             btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
