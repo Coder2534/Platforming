@@ -6,17 +6,16 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.platforming.clazz.Alarm;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
@@ -27,9 +26,8 @@ import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
 import com.android.platforming.interfaze.OnChildClickInterface;
-import com.android.platforming.recevier.AlarmReceiver;
 import com.example.platforming.R;
-import com.android.platforming.fragment.UserInitialSettingFragment;
+import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,34 +35,56 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ExpandableList mainExpandableList;
 
+    private static MainActivity mainActivity;
+
+    boolean mainPage = false;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainActivity = this;
+
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
 
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
 
         setListView();
+        setListener();
 
         if(User.getUser() == null){
-            Log.w("Debug", "user isEmpty");
-            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new UserInitialSettingFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
         }
         else{
-            View nav_header_view = navigationView.getHeaderView(0); //헤더 가져오기
-            TextView nav_header_id_text = nav_header_view.findViewById(R.id.tv_navigation_header_info);
-            nav_header_id_text.setText("Test");
-            setListener();
-            getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+            setting();
         }
+    }
+
+    public void setting(){
+        setHeader();
+        mainPage = true;
+        getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+    }
+
+    private void setHeader(){
+        View header = navigationView.getHeaderView(0);
+        ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
+        profile.setImageResource(User.getUser().getProfile());
+        TextView point = header.findViewById(R.id.tv_navigation_header_point);
+        point.setText(User.getUser().getPoint() + "p");
+        TextView username = header.findViewById(R.id.tv_navigation_header_username);
+        username.setText(User.getUser().getUsername());
+        TextView info = header.findViewById(R.id.tv_navigation_header_info);
+        String studentId = User.getUser().getStudentId();
+        info.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
     }
 
     private void setListView(){
@@ -88,15 +108,6 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, "question bulletin board"));
         mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
 
-        /*
-        커뮤니티 보류
-        mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_comment_24);
-        mainExpandableList.addChild(3, "1학년", new Fragment());
-        mainExpandableList.addChild(3, "2학년", new Fragment());
-        mainExpandableList.addChild(3, "3학년", new Fragment());
-        mainExpandableList.addChild(3, "전체", toggleActivity(CommunityActivity.class, "all"));
-         */
-
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
 
@@ -118,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setListener(){
+    private void setListener(){
         mainExpandableList.setListner(getSupportFragmentManager(), () -> drawerLayout.closeDrawer(GravityCompat.START));
 
         TextView setting = findViewById(R.id.tv_main_setting);
@@ -131,21 +142,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ // 왼쪽 상단 버튼 눌렀을 때
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {// 왼쪽 상단 버튼 눌렀을 때
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout != null && mainPage && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
+    }
+
+    public static MainActivity getActivity(){
+        return mainActivity;
     }
 }

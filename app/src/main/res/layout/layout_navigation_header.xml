@@ -16,23 +16,21 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/tv_navigation_header_name"
+        android:id="@+id/tv_navigation_header_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/iv_navigation_header_profile"
         android:layout_alignTop="@+id/iv_navigation_header_profile"
         android:layout_marginLeft="20dp"
-        android:text ="홍길동"
         android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/tv_navigation_header_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_navigation_header_name"
+        android:layout_below="@id/tv_navigation_header_username"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/iv_navigation_header_profile"
-        android:text="2학년 8반 1번"
         android:textSize="14sp" />
 
     <TextView
@@ -42,7 +40,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
-        android:text="0p" />
+        android:layout_marginBottom="10dp" />
 
 </RelativeLayout>

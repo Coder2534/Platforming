@@ -46,7 +46,7 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", User.getUser().getUid());
                 data.put("profileIndex", User.getUser().getProfileIndex());
-                data.put("nickname", User.getUser().getNickName());
+                data.put("nickname", User.getUser().getNickname());
                 data.put("date", System.currentTimeMillis());
                 data.put("title", editText_title.getText().toString());
                 data.put("detail", editText_detail.getText().toString());
