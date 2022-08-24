@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.media.Image;
 import android.os.Bundle;
@@ -32,10 +34,33 @@ public class MyInfoFragment extends Fragment {
     EditText et_myinfo_nickname,et_myinfo_class,et_myinfo_phonenumber;
     Button btn_myinfo_finish;
 
-    Dialog dialog;
-    private void setDialog() {
-        dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.customdialog_profile);
+    AlertDialog dialog;
+    private void setDialog(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.customdialog_profile, null);
+
+        ImageButton profile1 = view.findViewById(R.id.ibtn_profile_1);
+        profile1.setImageResource(User.getProfiles().get(0));
+
+        ImageButton profile2 = view.findViewById(R.id.ibtn_profile_1);
+        profile2.setImageResource(User.getProfiles().get(1));
+
+        ImageButton profile3 = view.findViewById(R.id.ibtn_profile_1);
+        profile3.setImageResource(User.getProfiles().get(2));
+
+        Button confirm = view.findViewById(R.id.btn_message_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
         dialog.show();
     }
 
@@ -61,6 +86,7 @@ public class MyInfoFragment extends Fragment {
         tv_myinfo_name.setText(User.getUser().getUsername());
         tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
         tv_myinfo_point.setText(Integer.toString(User.getUser().getPoint()));
+        ibtn_myinfo_profile.setImageResource(User.getUser().getProfile());
 
         et_myinfo_nickname.setClickable(false);
         et_myinfo_nickname.setFocusable(false);
@@ -85,7 +111,7 @@ public class MyInfoFragment extends Fragment {
                 ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        setDialog();
+                        setDialog(getActivity());
                         ibtn_profile_1 = dialog.findViewById(R.id.ibtn_profile_1);
                         ibtn_profile_2 = dialog.findViewById(R.id.ibtn_profile_2);
                         ibtn_profile_3 = dialog.findViewById(R.id.ibtn_profile_3);
@@ -93,21 +119,21 @@ public class MyInfoFragment extends Fragment {
                         ibtn_profile_1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                ibtn_myinfo_profile.setImageResource(R.drawable.ic_baseline_10mp_24);
+                                ibtn_myinfo_profile.setImageResource(User.getProfiles().get(0));
                                 dialog.dismiss();
                             }
                         });
                         ibtn_profile_2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                ibtn_myinfo_profile.setImageResource(R.drawable.ic_baseline_11mp_24);
+                                ibtn_myinfo_profile.setImageResource(User.getProfiles().get(1));
                                 dialog.dismiss();
                             }
                         });
                         ibtn_profile_3.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                ibtn_myinfo_profile.setImageResource(R.drawable.ic_baseline_12mp_24);
+                                ibtn_myinfo_profile.setImageResource(User.getProfiles().get(2));
                                 dialog.dismiss();
                             }
                         });
