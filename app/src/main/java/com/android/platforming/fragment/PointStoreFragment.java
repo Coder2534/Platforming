@@ -30,7 +30,7 @@ import com.example.platforming.R;
 import java.util.List;
 
 public class PointStoreFragment extends Fragment {
-    Dialog fontdialog,themedialog,textcolordialog;
+    Dialog fontdialog,themedialog;
 
     TextView tv_pointstore_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
@@ -39,7 +39,7 @@ public class PointStoreFragment extends Fragment {
     FirestoreManager firestoreManager = new FirestoreManager();
     int point;
     int checkfont;
-    List<Integer> boughtfont;
+    List<Long> boughtfont;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,18 +53,20 @@ public class PointStoreFragment extends Fragment {
             public void onClick(View view) {
                 setFontdialogview();
                 boughtfont = User.getUser().getFonts();
-                for (int i=0; i<boughtfont.toArray().length ;++i){
-                    if (boughtfont.get(i)==0){
-                        btn_pointstore_font_slow.setTextColor(Color.GREEN);
+                Log.d("check_font1", String.valueOf(boughtfont.get(0)));
+                for (int i=0; i<boughtfont.size();++i){
+                    Log.d("check_font2", String.valueOf((boughtfont.get(0))));
+                    if (boughtfont.get(i).equals(0)){
+                        btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.green));
                     }
-                    if(boughtfont.get(i)==1){
-                        btn_pointstore_font_again.setTextColor(Color.GREEN);
+                    else if(boughtfont.get(i)==1){
+                        btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.green));
                     }
-                    if(boughtfont.get(i)==2){
-                        btn_pointstore_font_noting1.setTextColor(Color.GREEN);
+                    else if(boughtfont.get(i)==2){
+                        btn_pointstore_font_noting1.setTextColor(getResources().getColor(R.color.green));
                     }
-                    if(boughtfont.get(i)==3){
-                        btn_pointstore_font_noting.setTextColor(Color.GREEN);
+                    else if(boughtfont.get(i)==3){
+                        btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.green));
                     }
                 }
                 fontdialog.show();
@@ -100,19 +102,17 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Log.d("apply", String.valueOf(boughtfont));
-                        for(int i=0;i<boughtfont.toArray().length;++i){
+                        for(int i=0;i<boughtfont.size();++i){
                             if(boughtfont.get(i).equals(checkfont)){
                                 Toast.makeText(getContext(), "이미 구매하였습니다", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 point -= 100;
-                                boughtfont.add(i);
+                                boughtfont.add((long) i);
                                 //파베 올리기
                             }
 
                         }
-                        // 대충 형이 구현 해주세요
-                        //그리고 구매 안되있는거랑 되있는거 구분을 해야하는데 이미지로 하면 좀 귀찮으니까 색깔로 구별 어때요
                     }
                 });
                 btn_pointstore_savefont.setOnClickListener(new View.OnClickListener() {
@@ -195,6 +195,8 @@ public class PointStoreFragment extends Fragment {
         switch (i){
             case 0:checkfont = 0;  return getResources().getFont(R.font.nanum_handwriting_slow0);
             case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_again1);
+            case 2:checkfont = 2;  return null;
+            case 3:checkfont = 3;  return null;
         }
         return null;
     }

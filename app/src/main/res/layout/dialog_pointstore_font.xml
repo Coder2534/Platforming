@@ -95,36 +95,32 @@
         </LinearLayout>
 
 
-
-
-
-
-
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
         <Button
             android:id="@+id/btn_pointstore_buyfont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="구매하기"
-            android:layout_gravity="bottom" />
+            android:layout_alignParentBottom="true"/>
+
         <Button
             android:id="@+id/btn_pointstore_savefont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장하기"
-            android:layout_marginLeft="150dp"
-            android:layout_gravity="bottom" />
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/btn_pointstore_getout"
+            android:text="저장하기" />
 
         <Button
             android:id="@+id/btn_pointstore_getout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="나가기"
-            android:layout_gravity="bottom" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
 </LinearLayout>
