@@ -29,18 +29,21 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/ibtn_pointstore_theme_pink"
+            android:id="@+id/btn_pointstore_theme_pink"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
             android:text="핑크테마"
+            android:textColor="@color/red"
             android:backgroundTint="@color/pink"/>
 
         <Button
-            android:id="@+id/ibtn_pointstore_theme_bule"
+            android:id="@+id/btn_pointstore_theme_bule"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
+            android:textColor="@color/red"
+
             android:text="블루테마"
             android:backgroundTint="@color/bule"
             />
@@ -51,19 +54,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/ibtn_pointstore_theme_green"
+            android:id="@+id/btn_pointstore_theme_green"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
+            android:textColor="@color/red"
             android:text="그린테마"
             android:backgroundTint="@color/darkgreen"/>
         <Button
-            android:id="@+id/ibtn_pointstore_theme_black"
+            android:id="@+id/btn_pointstore_theme_black"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
+            android:textColor="@color/red"
             android:text="다크테마"
-            android:textColor="@color/white"
             android:backgroundTint="@color/black"/>
     </LinearLayout>
     <LinearLayout
