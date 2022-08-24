@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_newpassword_newpassword"
+        android:id="@+id/tv_message_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="message"
@@ -15,11 +15,12 @@
         android:textSize="20dp" />
 
     <Button
-        android:id="@+id/btn_newpassword_change"
+        android:id="@+id/btn_message_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginTop="20dp"
         android:backgroundTint="#499C54"
+        android:textColor="@color/white"
         android:text="확인"/>
 </LinearLayout>
