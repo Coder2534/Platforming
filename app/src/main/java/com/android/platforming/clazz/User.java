@@ -30,9 +30,9 @@ public class User {
     private int point;
     private String note;
     private int profileIndex;
-    private List<Integer> fonts;
-    private List<Integer> themes;
-    private List<Integer> textColors;
+    private List<Long> fonts;
+    private List<Long> themes;
+    private List<Long> textColors;
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -45,9 +45,9 @@ public class User {
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
-        themes = (List<Integer>) data.get("themes");
-        fonts = (List<Integer>) data.get("fonts");
-        textColors = (List<Integer>) data.get("textColors");
+        themes = (List<Long>) data.get("themes");
+        fonts = (List<Long>) data.get("fonts");
+        textColors = (List<Long>) data.get("textColors");
     }
 
     public String getUid() {
@@ -142,15 +142,15 @@ public class User {
         this.profileIndex = profileIndex;
     }
 
-    public List<Integer> getFonts() {
+    public List<Long> getFonts() {
         return fonts;
     }
 
-    public List<Integer> getThemes() {
+    public List<Long> getThemes() {
         return themes;
     }
 
-    public List<Integer> getTextColors() {
+    public List<Long> getTextColors() {
         return textColors;
     }
 }
