@@ -1,29 +1,32 @@
 package com.android.platforming.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PointStoreFragment extends Fragment {
     Dialog fontdialog,themedialog,textcolordialog;
@@ -33,10 +36,10 @@ public class PointStoreFragment extends Fragment {
     Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_textcolor,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_Baedalofrace,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_savefont,btn_pointstore_buytheme,btn_pointstore_savetheme,btn_pointstore_theme_getout;
     ImageButton ibtn_pointstore_theme_pink,ibtn_pointstore_theme_bule, ibtn_pointstore_theme_green, ibtn_pointstore_theme_black;
 
-
+    FirestoreManager firestoreManager = new FirestoreManager();
     int point;
-    Typeface font;
-    List<Integer> applyfont;
+    int checkfont;
+    List<Integer> boughtfont;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class PointStoreFragment extends Fragment {
         setDialog();
         //폰트 다이얼 로그
         btn_pointstore_font.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 fontdialog.show();
@@ -53,38 +57,35 @@ public class PointStoreFragment extends Fragment {
                 tv_pointstore_point.setText(Integer.toString(point)+ "포인트");
 
                 btn_pointstore_font_slow.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        font = getResources().getFont(R.font.nanum_handwriting_slow);
-                        et_pointstore_testtext.setTypeface(font);
+                        et_pointstore_testtext.setTypeface(getFont(0));
+
                     }
                 });
                 btn_pointstore_font_again.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        font = getResources().getFont(R.font.nanum_handwriting_again);
-                        et_pointstore_testtext.setTypeface(font);
+                        et_pointstore_testtext.setTypeface(getFont(1));
+
                     }
                 });
                 btn_pointstore_font_Baedalofrace.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        font = getResources().getFont(R.font.baedalofrace);
-                        et_pointstore_testtext.setTypeface(font);
+                        et_pointstore_testtext.setTypeface(getFont(2));
                     }
                 });
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Map<String, Typeface> storemap = new HashMap<>();
-                        storemap.put("font",font);
-                        applyfont = User.getUser().getFonts();
-                        Log.d("apply", String.valueOf(applyfont));
-                        if(font != applyfont){
 
+                        boughtfont = User.getUser().getFonts();
+                        Log.d("apply", String.valueOf(boughtfont));
+                        for(int i=0;i<boughtfont.toArray().length;++i){
+                            if(boughtfont.get(i).equals(checkfont)){
+                                Toast.makeText(getContext(), "이미 구매하였습니다", Toast.LENGTH_SHORT).show();
+                            }
                         }
                         //파이어 베이스에 구매되있는지확인 안되있으면 font변수에 담아져 있는걸로 사고 사져있으면 토스트로 띄우기?
                         //사고 포인트 띄우는거도 해주세용  point 변수 있어요
@@ -119,6 +120,7 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+
                     }
                 });
                 ibtn_pointstore_theme_bule.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +151,9 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         //파이어 베이스  형
+                        Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.PinkTheme);
+                        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
+                        view = localInflater.inflate(R.layout.fragment_pointstore, container, false);
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +174,15 @@ public class PointStoreFragment extends Fragment {
         });
 
     return view;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private Typeface getFont(int i){
+        switch (i){
+            case 0:checkfont = 0;  return getResources().getFont(R.font.nanum_handwriting_slow0);
+            case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_again1);
+            case 2:checkfont = 2;  return getResources().getFont(R.font.baedalofrace2);
+        }
+        return null;
     }
     private void setView(View view){
         btn_pointstore_font = view.findViewById(R.id.btn_pointstore_font);

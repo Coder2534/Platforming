@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:text="나눔손글씨 느릿느릿체"
                 android:textSize="20dp"
-                android:fontFamily="@font/nanum_handwriting_slow"/>
+                android:fontFamily="@font/nanum_handwriting_slow0"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_again"
@@ -61,7 +61,7 @@
                 android:layout_weight="1"
                 android:text="나눔손글씨 다시시작해"
                 android:textSize="20dp"
-                android:fontFamily="@font/nanum_handwriting_again"/>
+                android:fontFamily="@font/nanum_handwriting_again1"/>
 
 
 
@@ -76,7 +76,7 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/baedalofrace"
+                android:fontFamily="@font/baedalofrace2"
                 android:text="배달의 민족 주아체"
                 android:layout_marginTop="-3dp"/>
 

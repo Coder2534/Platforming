@@ -4,19 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_baseline_emoji_emotions_24.xml" value="0.2815" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/font/fontstyle.xml" value="0.4171875" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_community.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_start.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_web_view.xml" value="0.18819655521783182" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.18819655521783182" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_textcolor.xml" value="0.18819655521783182" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_theme.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_communit.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_emailalarm.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.18819655521783182" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_pointstore.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolintroduce.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolmeal.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolschedule.xml" value="0.32653985507246375" />
@@ -93,7 +88,7 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce_round.xml" value="0.4185" />
         <entry key="..\:/Users/user/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.18819655521783182" />
-        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.1" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.14666666666666667" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_textcolor.xml" value="0.1" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_theme.xml" value="0.16666666666666666" />
       </map>
