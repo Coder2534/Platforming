@@ -51,7 +51,7 @@ public class MyInfoFragment extends Fragment {
             }
         });
 
-        ImageButton profile2 = view.findViewById(R.id.ibtn_profile_1);
+        ImageButton profile2 = view.findViewById(R.id.ibtn_profile_2);
         profile2.setImageResource(User.getProfiles().get(1));
         profile2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class MyInfoFragment extends Fragment {
             }
         });
 
-        ImageButton profile3 = view.findViewById(R.id.ibtn_profile_1);
+        ImageButton profile3 = view.findViewById(R.id.ibtn_profile_3);
         profile3.setImageResource(User.getProfiles().get(2));
         profile3.setOnClickListener(new View.OnClickListener() {
             @Override
