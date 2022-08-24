@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
 
@@ -35,10 +36,10 @@ public class PointStoreFragment extends Fragment {
     Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_textcolor,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_Baedalofrace,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_savefont,btn_pointstore_buytheme,btn_pointstore_savetheme,btn_pointstore_theme_getout;
     ImageButton ibtn_pointstore_theme_pink,ibtn_pointstore_theme_bule, ibtn_pointstore_theme_green, ibtn_pointstore_theme_black;
 
-
+    FirestoreManager firestoreManager = new FirestoreManager();
     int point;
-    List<Typeface> font;
-    List<Integer> applyfont;
+    int checkfont;
+    List<Integer> boughtfont;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,37 +55,38 @@ public class PointStoreFragment extends Fragment {
                 setFontdialogview();
                 point = User.getUser().getPoint();
                 tv_pointstore_point.setText(Integer.toString(point)+ "포인트");
-                font.add(getResources().getFont(R.font.nanum_handwriting_slow0));
-                font.add(getResources().getFont(R.font.nanum_handwriting_again1));
-                font.add(getResources().getFont(R.font.baedalofrace2));
 
                 btn_pointstore_font_slow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        et_pointstore_testtext.setTypeface(font.get(0));
+                        et_pointstore_testtext.setTypeface(getFont(0));
+
                     }
                 });
                 btn_pointstore_font_again.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        et_pointstore_testtext.setTypeface(font.get(1));
+                        et_pointstore_testtext.setTypeface(getFont(1));
+
                     }
                 });
                 btn_pointstore_font_Baedalofrace.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        et_pointstore_testtext.setTypeface(font.get(2));
+                        et_pointstore_testtext.setTypeface(getFont(2));
                     }
                 });
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        applyfont = User.getUser().getFonts();
-                        Log.d("apply", String.valueOf(applyfont));
-                        /*Switch(){
-
-                        }*/
+                        boughtfont = User.getUser().getFonts();
+                        Log.d("apply", String.valueOf(boughtfont));
+                        for(int i=0;i<boughtfont.toArray().length;++i){
+                            if(boughtfont.get(i).equals(checkfont)){
+                                Toast.makeText(getContext(), "이미 구매하였습니다", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                         //파이어 베이스에 구매되있는지확인 안되있으면 font변수에 담아져 있는걸로 사고 사져있으면 토스트로 띄우기?
                         //사고 포인트 띄우는거도 해주세용  point 변수 있어요
                         // 대충 형이 구현 해주세요
@@ -172,6 +174,15 @@ public class PointStoreFragment extends Fragment {
         });
 
     return view;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private Typeface getFont(int i){
+        switch (i){
+            case 0:checkfont = 0;  return getResources().getFont(R.font.nanum_handwriting_slow0);
+            case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_again1);
+            case 2:checkfont = 2;  return getResources().getFont(R.font.baedalofrace2);
+        }
+        return null;
     }
     private void setView(View view){
         btn_pointstore_font = view.findViewById(R.id.btn_pointstore_font);
