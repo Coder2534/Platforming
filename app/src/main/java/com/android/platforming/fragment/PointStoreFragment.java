@@ -1,17 +1,21 @@
 package com.android.platforming.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,9 +25,7 @@ import androidx.fragment.app.Fragment;
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PointStoreFragment extends Fragment {
     Dialog fontdialog,themedialog,textcolordialog;
@@ -35,7 +37,7 @@ public class PointStoreFragment extends Fragment {
 
 
     int point;
-    Typeface font;
+    List<Typeface> font;
     List<Integer> applyfont;
     @Nullable
     @Override
@@ -45,47 +47,44 @@ public class PointStoreFragment extends Fragment {
         setDialog();
         //폰트 다이얼 로그
         btn_pointstore_font.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 fontdialog.show();
                 setFontdialogview();
                 point = User.getUser().getPoint();
                 tv_pointstore_point.setText(Integer.toString(point)+ "포인트");
+                font.add(getResources().getFont(R.font.nanum_handwriting_slow0));
+                font.add(getResources().getFont(R.font.nanum_handwriting_again1));
+                font.add(getResources().getFont(R.font.baedalofrace2));
 
                 btn_pointstore_font_slow.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        font = getResources().getFont(R.font.nanum_handwriting_slow);
-                        et_pointstore_testtext.setTypeface(font);
+                        et_pointstore_testtext.setTypeface(font.get(0));
                     }
                 });
                 btn_pointstore_font_again.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        font = getResources().getFont(R.font.nanum_handwriting_again);
-                        et_pointstore_testtext.setTypeface(font);
+                        et_pointstore_testtext.setTypeface(font.get(1));
                     }
                 });
                 btn_pointstore_font_Baedalofrace.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
-                        font = getResources().getFont(R.font.baedalofrace);
-                        et_pointstore_testtext.setTypeface(font);
+                        et_pointstore_testtext.setTypeface(font.get(2));
                     }
                 });
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Map<String, Typeface> storemap = new HashMap<>();
-                        storemap.put("font",font);
+
                         applyfont = User.getUser().getFonts();
                         Log.d("apply", String.valueOf(applyfont));
-                        if(font != applyfont){
+                        /*Switch(){
 
-                        }
+                        }*/
                         //파이어 베이스에 구매되있는지확인 안되있으면 font변수에 담아져 있는걸로 사고 사져있으면 토스트로 띄우기?
                         //사고 포인트 띄우는거도 해주세용  point 변수 있어요
                         // 대충 형이 구현 해주세요
@@ -119,6 +118,7 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+
                     }
                 });
                 ibtn_pointstore_theme_bule.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +149,9 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         //파이어 베이스  형
+                        Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.PinkTheme);
+                        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
+                        view = localInflater.inflate(R.layout.fragment_pointstore, container, false);
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
