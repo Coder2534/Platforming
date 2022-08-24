@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
@@ -38,7 +39,7 @@ public class PointStoreFragment extends Fragment {
 
     FirestoreManager firestoreManager = new FirestoreManager();
     int point;
-    int checkfont;
+    long checkfont;
     List<Long> boughtfont;
     @Nullable
     @Override
@@ -55,18 +56,17 @@ public class PointStoreFragment extends Fragment {
                 boughtfont = User.getUser().getFonts();
                 Log.d("check_font1", String.valueOf(boughtfont.get(0)));
                 for (int i=0; i<boughtfont.size();++i){
-                    Log.d("check_font2", String.valueOf((boughtfont.get(0))));
-                    if (boughtfont.get(i).equals(0)){
-                        btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.green));
+                    if (boughtfont.get(i)==0){
+                        btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
                     }
                     else if(boughtfont.get(i)==1){
-                        btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.green));
+                        btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.red));
                     }
                     else if(boughtfont.get(i)==2){
-                        btn_pointstore_font_noting1.setTextColor(getResources().getColor(R.color.green));
+                        btn_pointstore_font_noting1.setTextColor(getResources().getColor(R.color.red));
                     }
                     else if(boughtfont.get(i)==3){
-                        btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.green));
+                        btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.red));
                     }
                 }
                 fontdialog.show();
@@ -101,17 +101,19 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.d("apply", String.valueOf(boughtfont));
-                        for(int i=0;i<boughtfont.size();++i){
-                            if(boughtfont.get(i).equals(checkfont)){
-                                Toast.makeText(getContext(), "이미 구매하였습니다", Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                point -= 100;
-                                boughtfont.add((long) i);
-                                //파베 올리기
-                            }
+                        CustomDialog customDialog = new CustomDialog();
+                        Log.d("check_checkfont", String.valueOf(boughtfont));
 
+                        if(boughtfont.contains(checkfont)){
+
+                            customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
+                        }
+                        else {
+                            customDialog.messageDialog(getActivity(),"구입했습니다.");
+                            point-=100;
+                            tv_pointstore_point.setText(point+"포인트");
+                            //100 이하일때 안되게
+                            //파베
                         }
                     }
                 });

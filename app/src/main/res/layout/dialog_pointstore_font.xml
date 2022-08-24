@@ -28,9 +28,9 @@
 
     <EditText
         android:id="@+id/et_pointstore_testtext"
-        android:layout_width="412dp"
+        android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:hint="시험 텍스트를 입력해보세요"
+        android:hint="텍스트를 시험해보세요."
         android:textSize="40dp"
         android:typeface="normal"
         android:gravity="left"/>
@@ -51,8 +51,9 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="나눔손글씨 느릿느릿체"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
                 android:textSize="20dp"
+                android:backgroundTint="#499C54"
                 android:fontFamily="@font/nanum_handwriting_slow0"/>
 
             <Button
@@ -61,8 +62,9 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="나눔손글씨 다시시작해"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
                 android:textSize="20dp"
+                android:backgroundTint="#499C54"
                 android:fontFamily="@font/nanum_handwriting_again1"/>
 
 
@@ -79,7 +81,8 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="미정"
-                android:textColor="@color/red" />
+                android:textColor="@color/white"
+                android:backgroundTint="#499C54" />
 
             <Button
                 android:id="@+id/btn_pointstore_font_noting"
@@ -87,7 +90,9 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="미정"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
+                android:backgroundTint="#499C54"
+
                 />
 
 
@@ -104,21 +109,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="구매하기"
-            android:layout_alignParentBottom="true"/>
+            android:backgroundTint="#499C54"
+            android:layout_alignParentBottom="true"
+            />
 
         <Button
             android:id="@+id/btn_pointstore_savefont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="저장하기"
+            android:backgroundTint="#499C54"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/btn_pointstore_getout"
-            android:text="저장하기" />
+            />
 
         <Button
             android:id="@+id/btn_pointstore_getout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="나가기"
+            android:backgroundTint="#499C54"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
