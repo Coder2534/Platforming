@@ -101,7 +101,7 @@ public class CustomDialog {
         builder.setView(view);
 
         dialog = builder.create();
-        builder.show();
+        dialog.show();
     }
 
     public void verificationDialog(Activity activity){
