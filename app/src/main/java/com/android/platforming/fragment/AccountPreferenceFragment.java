@@ -15,10 +15,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.User;
 import com.example.platforming.R;
+import com.google.firebase.auth.UserInfo;
 
 public class AccountPreferenceFragment extends PreferenceFragmentCompat {
-
-    SharedPreferences pref;
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
@@ -33,11 +32,15 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
         email.setSummary(User.getUser().getEmail());
 
         String provider = getFirebaseAuth().getCurrentUser().getProviderData().get(0).getProviderId();
-        Log.d("FirebaseAuth","provider: "+provider);
-        if(!provider.equals("password")){
-            PreferenceScreen account = findPreference("account");
-            account.removePreference(changOfPassword);
-        } else{
+
+        boolean isPassword = false;
+        for(UserInfo data: getFirebaseAuth().getCurrentUser().getProviderData()){
+            if(data.getProviderId().equals("password"))
+                isPassword = true;
+            Log.d("FirebaseAuth","provider: "+data.getProviderId());
+        }
+
+        if (isPassword) {
             changOfPassword.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
@@ -46,6 +49,9 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
                     return true;
                 }
             });
+        } else {
+            PreferenceScreen account = findPreference("account");
+            account.removePreference(changOfPassword);
         }
 
         signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
