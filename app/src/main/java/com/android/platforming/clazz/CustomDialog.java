@@ -106,7 +106,7 @@ public class CustomDialog {
 
     public void verificationDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("비밀번호 변경");
+        builder.setTitle("본인인증");
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_verification, null);
