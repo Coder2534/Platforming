@@ -37,7 +37,6 @@
         android:layout_marginTop="120dp"
         android:gravity="center_horizontal"
         android:hint="닉네임적는곳"
-        android:enabled="false"
         android:maxLength="10"
         android:textSize="20sp" />
 
