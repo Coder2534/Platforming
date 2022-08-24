@@ -71,14 +71,6 @@ public class MyInfoFragment extends Fragment {
             }
         });
 
-        Button confirm = view.findViewById(R.id.btn_message_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
         builder.setView(view);
 
         dialog = builder.create();
