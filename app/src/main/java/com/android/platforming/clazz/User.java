@@ -33,6 +33,7 @@ public class User {
     private List<Long> fonts;
     private List<Long> themes;
     private List<Long> textColors;
+    private List<String> postIds;
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -48,6 +49,7 @@ public class User {
         themes = (List<Long>) data.get("themes");
         fonts = (List<Long>) data.get("fonts");
         textColors = (List<Long>) data.get("textColors");
+        postIds = (List<String>) data.get("postIds");
     }
 
     public String getUid() {
@@ -152,5 +154,9 @@ public class User {
 
     public List<Long> getTextColors() {
         return textColors;
+    }
+
+    public List<String> getPostIds() {
+        return postIds;
     }
 }

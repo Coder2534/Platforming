@@ -109,6 +109,16 @@ public class FirestoreManager {
         String id = documentReference.getId();
         documentReference.set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
+                User.getUser().getPostIds().add(id);
+                Map<String, Object> postIdsData = new HashMap<>();
+                postIdsData.put("postIds", User.getUser().getPostIds());
+                updateUserData(postIdsData, new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+                });
+
                 interfaze.onSuccess();
             }
             else{
