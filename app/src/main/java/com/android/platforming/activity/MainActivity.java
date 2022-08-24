@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ExpandableList mainExpandableList;
 
+    private static MainActivity mainActivity;
+
+    boolean mainPage = false;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainActivity = this;
+
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24); //왼쪽 상단 버튼 아이콘 지정
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
 
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
@@ -54,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setListener();
 
         if(User.getUser() == null){
-            Log.w("Debug", "user isEmpty");
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
         }
         else{
@@ -63,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setting(){
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         setHeader();
+        mainPage = true;
         getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
     }
 
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         username.setText(User.getUser().getUsername());
         TextView info = header.findViewById(R.id.tv_navigation_header_info);
         String studentId = User.getUser().getStudentId();
-        info.setText(String.format("%c학년 %c반 %c번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
+        info.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
     }
 
     private void setListView(){
@@ -101,15 +107,6 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, "free bulletin board"));
         mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, "question bulletin board"));
         mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
-
-        /*
-        커뮤니티 보류
-        mainExpandableList.addParent("커뮤니티", R.drawable.ic_baseline_comment_24);
-        mainExpandableList.addChild(3, "1학년", new Fragment());
-        mainExpandableList.addChild(3, "2학년", new Fragment());
-        mainExpandableList.addChild(3, "3학년", new Fragment());
-        mainExpandableList.addChild(3, "전체", toggleActivity(CommunityActivity.class, "all"));
-         */
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
@@ -154,10 +151,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout != null && mainPage && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
+    }
+
+    public static MainActivity getActivity(){
+        return mainActivity;
     }
 }

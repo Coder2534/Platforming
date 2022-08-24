@@ -78,7 +78,7 @@ public class SignInFragment extends Fragment{
 
                         if(!matcher.find()){
                             Log.w("EmailAlarmFragment", "email form Error");
-                            customDialog.errorDialog(getContext(), "이메일이 유효하지 않습니다.");
+                            customDialog.messageDialog(getActivity(), "이메일이 유효하지 않습니다.");
                         }
 
                         getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(task -> {
@@ -110,7 +110,7 @@ public class SignInFragment extends Fragment{
             }else{
                 Log.w("SignInFragment", "signInWithEmailAndPassword Error");
                 CustomDialog customDialog = new CustomDialog();
-                customDialog.errorDialog(getContext(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
+                customDialog.messageDialog(getActivity(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
             }
         });
     }

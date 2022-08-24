@@ -1,7 +1,9 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
+
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,6 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +97,7 @@ public class InitialSettingFragment extends Fragment {
             firestoreManager.writeUserData(data, new ListenerInterface() {
                 @Override
                 public void onSuccess() {
+                    User.setUser(new User(getFirebaseAuth().getCurrentUser().getUid(), getFirebaseAuth().getCurrentUser().getEmail(), data));
                     ((MainActivity)getActivity()).setting();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
                 }

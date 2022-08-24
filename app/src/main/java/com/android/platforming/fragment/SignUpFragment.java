@@ -58,7 +58,7 @@ public class SignUpFragment extends Fragment {
 
         if(!matcher.find()){
             Log.w("SignUpFragment", "email form Error");
-            customDialog.errorDialog(getContext(), "이메일이 유효하지 않습니다.");
+            customDialog.messageDialog(getActivity(), "이메일이 유효하지 않습니다.");
             return;
         }
 
@@ -67,19 +67,19 @@ public class SignUpFragment extends Fragment {
         matcher = pattern.matcher(password);
         if(!matcher.find()){
             Log.w("SignUpFragment", "password form Error");
-            customDialog.errorDialog(getContext(), "비밀번호가 유효하지 않습니다.\n\n8자리 이상과 두 종류 이상의 문자구성\n※문자종류: 대문자, 소문자, 특수문자, 숫자");
+            customDialog.messageDialog(getActivity(), "비밀번호가 유효하지 않습니다.\n\n8자리 이상과 두 종류 이상의 문자구성\n※문자종류: 대문자, 소문자, 특수문자, 숫자");
             return;
         }
 
         if(!password.equals(passwordCheck)){
             Log.w("SignUpFragment", "passwordCheck Error");
-            customDialog.errorDialog(getContext(), "비밀번호가 일치하지 않습니다.");
+            customDialog.messageDialog(getActivity(), "비밀번호가 일치하지 않습니다.");
             return;
         }
 
         if(!ACCESS_CODE.contains(accessCode)){
             Log.w("SignUpFragment", "accessCode Error");
-            customDialog.errorDialog(getContext(), "학교코드가 유효하지 않습니다.");
+            customDialog.messageDialog(getActivity(), "학교코드가 유효하지 않습니다.");
             return;
         }
 
@@ -91,7 +91,7 @@ public class SignUpFragment extends Fragment {
                 sendEmailVerification(getActivity().getSupportFragmentManager());
             }else{
                 Log.w("SignUpFragment", "createUserWithEmailAndPassword Error");
-                customDialog.errorDialog(getContext(), "이미 사용중인 이메일 입니다.");
+                customDialog.messageDialog(getActivity(), "이미 사용중인 이메일 입니다.");
             }
         });
     }
