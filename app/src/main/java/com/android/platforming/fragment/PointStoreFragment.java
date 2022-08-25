@@ -2,7 +2,6 @@ package com.android.platforming.fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,10 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,9 +22,14 @@ import androidx.fragment.app.Fragment;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class PointStoreFragment extends Fragment {
     Dialog fontdialog,themedialog;
@@ -56,16 +57,16 @@ public class PointStoreFragment extends Fragment {
                 boughtfont = User.getUser().getFonts();
                 Log.d("check_font1", String.valueOf(boughtfont.get(0)));
                 for (int i=0; i<boughtfont.size();++i){
-                    if (boughtfont.get(i)==0){
+                    if (boughtfont.get(i)==1){
                         btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
                     }
-                    else if(boughtfont.get(i)==1){
+                    else if(boughtfont.get(i)==2){
                         btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.red));
                     }
-                    else if(boughtfont.get(i)==2){
+                    else if(boughtfont.get(i)==3){
                         btn_pointstore_font_noting1.setTextColor(getResources().getColor(R.color.red));
                     }
-                    else if(boughtfont.get(i)==3){
+                    else if(boughtfont.get(i)==4){
                         btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.red));
                     }
                 }
@@ -77,25 +78,25 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_font_slow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        et_pointstore_testtext.setTypeface(getFont(0));
+                        et_pointstore_testtext.setTypeface(getFont(1));
                     }
                 });
                 btn_pointstore_font_again.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        et_pointstore_testtext.setTypeface(getFont(1));
+                        et_pointstore_testtext.setTypeface(getFont(2));
                     }
                 });
                 btn_pointstore_font_noting1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        et_pointstore_testtext.setTypeface(getFont(2));
+                        et_pointstore_testtext.setTypeface(getFont(3));
                     }
                 });
                 btn_pointstore_font_noting.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        et_pointstore_testtext.setTypeface(getFont(3));
+                        et_pointstore_testtext.setTypeface(getFont(4));
                     }
                 });
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
@@ -109,19 +110,29 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            customDialog.messageDialog(getActivity(),"구입했습니다.");
-                            point-=100;
-                            tv_pointstore_point.setText(point+"포인트");
-                            //100 이하일때 안되게
-                            //파베
+                            if(point >=100){
+                                point-=100;
+                                HashMap<String,Object> storemap = new HashMap<>();
+                                storemap.put("point",point);
+                                firestoreManager.updateUserData(storemap, new ListenerInterface() {
+                                    @Override
+                                    public void onSuccess() {
+                                        User.getUser().setPoint(point);
+                                        tv_pointstore_point.setText(point+"포인트");
+                                        customDialog.messageDialog(getActivity(),"구입했습니다.");
+
+                                    }
+                                });
+                            }
+                            else customDialog.messageDialog(getActivity(),"포인트가 부족합니다.");
                         }
                     }
                 });
                 btn_pointstore_savefont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         //파이어 베이스에 font변수에 담아져 있는걸로 파베에 "적용시킬 폰트"로저장 하고
-                        //font에 담아져있는게 구매가 안되있다면 토스트로 띄우기
                     }
                 });
                 btn_pointstore_getout.setOnClickListener(new View.OnClickListener() {
@@ -195,10 +206,11 @@ public class PointStoreFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Typeface getFont(int i){
         switch (i){
-            case 0:checkfont = 0;  return getResources().getFont(R.font.nanum_handwriting_slow0);
-            case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_again1);
-            case 2:checkfont = 2;  return null;
+            case 0:checkfont = 0;  return null;
+            case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_slow1);
+            case 2:checkfont = 2;  return getResources().getFont(R.font.nanum_handwriting_again2);
             case 3:checkfont = 3;  return null;
+            case 4:checkfont = 4;  return null;
         }
         return null;
     }

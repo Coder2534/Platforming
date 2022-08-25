@@ -54,7 +54,7 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:backgroundTint="#499C54"
-                android:fontFamily="@font/nanum_handwriting_slow0"/>
+                android:fontFamily="@font/nanum_handwriting_slow1"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_again"
@@ -65,7 +65,7 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:backgroundTint="#499C54"
-                android:fontFamily="@font/nanum_handwriting_again1"/>
+                android:fontFamily="@font/nanum_handwriting_again2"/>
 
 
 
