@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.platforming.clazz.ExpandableList;
@@ -31,6 +32,7 @@ import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ExpandableList mainExpandableList;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
+        super.setTheme(R.style.BlackTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -161,4 +164,9 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getActivity(){
         return mainActivity;
     }
+
+    public void theme(){
+        super.setTheme(R.style.BlackTheme);
+    }
+
 }

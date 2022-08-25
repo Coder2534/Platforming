@@ -19,8 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
+import com.android.platforming.clazz.ThemeUtil;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
@@ -30,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+
 
 public class PointStoreFragment extends Fragment {
     Dialog fontdialog,themedialog;
@@ -42,6 +46,10 @@ public class PointStoreFragment extends Fragment {
     int point;
     long checkfont;
     List<Long> boughtfont;
+    long checktheme;
+    List<Long> boughttheme;
+    static final String THEME_KEY = "theme_value";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,7 +63,6 @@ public class PointStoreFragment extends Fragment {
             public void onClick(View view) {
                 setFontdialogview();
                 boughtfont = User.getUser().getFonts();
-                Log.d("check_font1", String.valueOf(boughtfont.get(0)));
                 for (int i=0; i<boughtfont.size();++i){
                     if (boughtfont.get(i)==1){
                         btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
@@ -70,10 +77,11 @@ public class PointStoreFragment extends Fragment {
                         btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.red));
                     }
                 }
-                fontdialog.show();
-
                 point = User.getUser().getPoint();
                 tv_pointstore_point.setText(point+ "포인트");
+                fontdialog.show();
+
+
 
                 btn_pointstore_font_slow.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -146,11 +154,31 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_theme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                themedialog.show();
                 setThemedialogView();
+                boughttheme = User.getUser().getThemes();
+                for (int i=0; i<boughttheme.size();++i){
+                    if (boughttheme.get(i)==1){
+                        btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else if(boughttheme.get(i)==2){
+                        btn_pointstore_theme_bule.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else if(boughttheme.get(i)==3){
+                        btn_pointstore_theme_green.setTextColor(getResources().getColor(R.color.red));
+                    }
+                    else if(boughttheme.get(i)==4){
+                        btn_pointstore_theme_black.setTextColor(getResources().getColor(R.color.red));
+                    }
+                }
+                point = User.getUser().getPoint();
+                tv_pointstore_point.setText(point + "포인트");
+                themedialog.show();
+
                 btn_pointstore_theme_pink.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        MainActivity.getActivity().theme();
+                        ThemeUtil.applyTheme(view.getContext(), 0);
                         //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
 
                     }
@@ -170,22 +198,41 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_theme_black.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
+                        ThemeUtil.applyTheme(view.getContext(), 4);
                     }
                 });
                 btn_pointstore_buytheme.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        CustomDialog customDialog = new CustomDialog();
+                        if(boughttheme.contains(checktheme)){
+                            customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
+                        }
+                        else {
+                            if(point >=100){
+                                point-=100;
+                                HashMap<String,Object> storemap = new HashMap<>();
+                                storemap.put("point",point);
+                                firestoreManager.updateUserData(storemap, new ListenerInterface() {
+                                    @Override
+                                    public void onSuccess() {
+                                        User.getUser().setPoint(point);
+                                        tv_pointstore_point.setText(point+"포인트");
+                                        customDialog.messageDialog(getActivity(),"구입했습니다.");
+
+                                    }
+                                });
+                            }
+                            else customDialog.messageDialog(getActivity(),"포인트가 부족합니다.");
+                        }
                         //파이어 베이스 형
                     }
                 });
                 btn_pointstore_savetheme.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //파이어 베이스  형
-                        Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.PinkTheme);
-                        LayoutInflater localInflater = getActivity().getLayoutInflater().cloneInContext(contextThemeWrapper);
-                        view = localInflater.inflate(R.layout.fragment_pointstore, container, false);
+                        //적용시킬 테마 폰에 저장
+
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
@@ -242,5 +289,6 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_savetheme = themedialog.findViewById(R.id.btn_pointstore_savetheme);
         btn_pointstore_theme_getout = themedialog.findViewById(R.id.btn_pointstore_theme_getout);
     }
+
 
 }

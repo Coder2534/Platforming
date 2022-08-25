@@ -38,17 +38,6 @@
             android:textColor="@color/black"
             android:drawableTop="@drawable/ic_baseline_palette_24"
             android:gravity="center"/>
-
-        <Button
-            android:id="@+id/btn_pointstore_textcolor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="글자색"
-            android:textSize="35dp"
-            android:textColor="@color/black"
-            android:drawableTop="@drawable/ic_baseline_colorize_24"
-            android:gravity="center"/>
-
     </LinearLayout>
 
 
