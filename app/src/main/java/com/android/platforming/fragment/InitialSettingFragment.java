@@ -89,13 +89,14 @@ public class InitialSettingFragment extends Fragment {
 
             data.put("point", 0);
 
-            List<Long> list = Arrays.asList((long) 0);
-            data.put("themes", list);
-            data.put("fonts", list);
-            data.put("textColor", list);
+            List<Long> list_design = Arrays.asList((long) 0);
+            data.put("themes", list_design);
+            data.put("fonts", list_design);
 
-            List<String> postIds = new ArrayList<>();
-            data.put("postIds", postIds);
+            List<String> list_postIds = new ArrayList<>();
+            data.put("postIds_free", list_postIds);
+            data.put("postIds_question", list_postIds);
+            data.put("postIds_school", list_postIds);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {

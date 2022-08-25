@@ -105,13 +105,37 @@ public class FirestoreManager {
     }
 
     public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
+         List<String> postIds;
+        String key;
+
+        switch (workName){
+            case "free bulletin board":
+                postIds = User.getUser().getPostIds_free();
+                key = "postIds_free";
+                break;
+
+            case "question bulletin board":
+                postIds = User.getUser().getPostIds_question();
+                key = "postIds_question";
+                break;
+
+            case "school bulletin board":
+                postIds = User.getUser().getPostIds_school();
+                key = "postIds_school";
+                break;
+
+            default:
+                postIds = null;
+                key = null;
+                break;
+        }
+
         DocumentReference documentReference = firestore.collection(workName).document();
-        String id = documentReference.getId();
         documentReference.set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                User.getUser().getPostIds().add(id);
+                postIds.add(documentReference.getId());
                 Map<String, Object> postIdsData = new HashMap<>();
-                postIdsData.put("postIds", User.getUser().getPostIds());
+                postIdsData.put(key, postIds);
                 updateUserData(postIdsData, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
