@@ -103,10 +103,7 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         CustomDialog customDialog = new CustomDialog();
-                        Log.d("check_checkfont", String.valueOf(boughtfont));
-
                         if(boughtfont.contains(checkfont)){
-
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
@@ -223,7 +220,6 @@ public class PointStoreFragment extends Fragment {
         themedialog = new Dialog(getContext());
         fontdialog.setContentView(R.layout.dialog_pointstore_font);
         themedialog.setContentView(R.layout.dialog_pointstore_theme);
-
     }
     private void setFontdialogview(){
         btn_pointstore_font_slow = fontdialog.findViewById(R.id.btn_pointstore_font_slow);
@@ -245,7 +241,6 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_buytheme = themedialog.findViewById(R.id.btn_pointstore_buytheme);
         btn_pointstore_savetheme = themedialog.findViewById(R.id.btn_pointstore_savetheme);
         btn_pointstore_theme_getout = themedialog.findViewById(R.id.btn_pointstore_theme_getout);
-
     }
 
 }
