@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_newpassword_newpassword"
+        android:id="@+id/tv_select_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="message"
@@ -24,21 +24,23 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_newpassword_cancel"
+            android:id="@+id/btn_select_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:backgroundTint="#499C54"
+            android:textColor="@color/white"
             android:text="취소" />
 
         <Button
-            android:id="@+id/btn_newpassword_change"
+            android:id="@+id/btn_select_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:backgroundTint="#499C54"
+            android:textColor="@color/white"
             android:text="확인"/>
     </LinearLayout>
 </LinearLayout>

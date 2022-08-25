@@ -5,14 +5,12 @@ import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -26,23 +24,30 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.zip.Inflater;
-
 public class CustomDialog {
     AlertDialog dialog;
 
-    public void errorDialog(Context context, String message){
-        AlertDialog.Builder ad = new AlertDialog.Builder(context);
-        ad.setIcon(R.mipmap.ic_launcher);
-        ad.setMessage(message);
+    public void messageDialog(Activity activity, String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_message, null);
+
+        TextView message = view.findViewById(R.id.tv_message_message);
+        message.setText(msg);
+
+        Button confirm = view.findViewById(R.id.btn_message_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-        ad.show();
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
     }
 
     public void passwordResetDialog(Context context, ListenerInterface listenerInterface){
@@ -63,48 +68,83 @@ public class CustomDialog {
     }
 
     public void signOutDialog(Activity activity){
-        AlertDialog.Builder ad = new AlertDialog.Builder(activity);
-        ad.setTitle("로그아웃");
-        ad.setMessage("계속하시겠습니까?");
-        ad.setPositiveButton("확인", (dialog, which) -> {
-            getFirebaseAuth().signOut();
-            Intent loginIntent = new Intent(activity, SignInActivity.class);
-            activity.startActivity(loginIntent);
-            activity.finish();
-            MainActivity.getActivity().finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("로그아웃");
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_select, null);
+
+        TextView message = view.findViewById(R.id.tv_select_message);
+        message.setText("계속하시겠습니까?");
+
+        Button cancel = view.findViewById(R.id.btn_select_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
         });
-        ad.setNegativeButton("최소", (dialog, which) -> {
-            dialog.dismiss();
+
+        Button confirm = view.findViewById(R.id.btn_select_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFirebaseAuth().signOut();
+                Intent loginIntent = new Intent(activity, SignInActivity.class);
+                activity.startActivity(loginIntent);
+                activity.finish();
+                MainActivity.getActivity().finish();
+                dialog.dismiss();
+            }
         });
-        ad.show();
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
     }
 
-    public void changeOfPasswordDialog(Activity activity){
-        EditText editText = new EditText(activity);
+    public void verificationDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("본인인증");
 
-        AlertDialog.Builder ad = new AlertDialog.Builder(activity);
-        ad.setTitle("비밀번호 변경");
-        ad.setView(editText);
-        ad.setPositiveButton("확인", (dialog, which) -> {
-            String password = editText.getText().toString();
-            FirebaseUser user = getFirebaseAuth().getCurrentUser();
-            AuthCredential credential = EmailAuthProvider.getCredential(User.getUser().getEmail(), password);
-            user.reauthenticate(credential).addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
-                    dialog.dismiss();
-                    newPasswordDialog(activity, user);
-                }
-                else{
-                    dialog.dismiss();
-                    errorDialog(activity, "인증에 실패했습니다.");
-                }
-            });
-        });
-        ad.setNegativeButton("취소", (dialog, which) -> {
-            dialog.dismiss();
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_verification, null);
+
+        Button cancel = view.findViewById(R.id.btn_verification_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
         });
 
-        ad.show();
+        EditText et_password = view.findViewById(R.id.et_verification_password);
+
+        Button zontinue = view.findViewById(R.id.btn_verification_continue);
+        zontinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String password = et_password.getText().toString();
+                FirebaseUser user = getFirebaseAuth().getCurrentUser();
+                AuthCredential credential = EmailAuthProvider.getCredential(User.getUser().getEmail(), password);
+                user.reauthenticate(credential).addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        dialog.dismiss();
+                        newPasswordDialog(activity, user);
+                    }
+                    else{
+                        dialog.dismiss();
+                        messageDialog(activity, "인증에 실패했습니다.");
+                    }
+                });
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
     }
 
     private void newPasswordDialog(Activity activity, FirebaseUser user){
@@ -129,10 +169,11 @@ public class CustomDialog {
                 user.updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        dialog.dismiss();
                         if (task.isSuccessful()) {
-                            Log.d("CustomDialog", "Password updated");
+                            messageDialog(activity, "비밀번호를 성공적으로 변경했습니다.");
                         } else {
-                            Log.d("CustomDialog", "Error password not updated");
+                            messageDialog(activity, "비밀번호 변경을 실패했습니다.");
                         }
                     }
                 });

@@ -51,18 +51,22 @@ public class TelephoneFragment extends Fragment {
     private void showTelephone(){
         adapter = new TelephoneAdapter();
         lv_info.setAdapter(adapter);
+        Log.d("telephone", Character.toString(User.getUser().getStudentId().charAt(0)));
         getTelephone(User.getUser().getStudentId().charAt(0));
     }
 
-    public void getTelephone(int grade){
+    public void getTelephone(char grade){
         switch (grade){
-            case 1 : getTelephone1();
+            case '1':
+                getTelephone1();
                 break;
 
-            case 2 : getTelephone2();
+            case '2':
+                getTelephone2();
                 break;
 
-            case 3 : getTelephone3();
+            case '3':
+                getTelephone3();
                 break;
         }
     }

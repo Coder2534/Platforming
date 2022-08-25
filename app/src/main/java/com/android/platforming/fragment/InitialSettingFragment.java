@@ -23,6 +23,7 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
 import com.example.platforming.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -88,10 +89,13 @@ public class InitialSettingFragment extends Fragment {
 
             data.put("point", 0);
 
-            List<Integer> list = Arrays.asList(0);
+            List<Long> list = Arrays.asList((long) 0);
             data.put("themes", list);
             data.put("fonts", list);
             data.put("textColor", list);
+
+            List<String> postIds = new ArrayList<>();
+            data.put("postIds", postIds);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {

@@ -148,7 +148,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_initialsetting_profile"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/layoutIndicators"
             android:layout_gravity="center" />
 
