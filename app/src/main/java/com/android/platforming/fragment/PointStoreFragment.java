@@ -261,6 +261,7 @@ public class PointStoreFragment extends Fragment {
     private void setView(View view){
         btn_pointstore_font = view.findViewById(R.id.btn_pointstore_font);
         btn_pointstore_theme = view.findViewById(R.id.btn_pointstore_theme);
+        tv_pointstore_point = fontdialog.findViewById(R.id.tv_pointstore_font_point);
     }
     private void setDialog(){
         fontdialog = new Dialog(getContext());
@@ -277,7 +278,6 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
         btn_pointstore_savefont = fontdialog.findViewById(R.id.btn_pointstore_savefont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);
-        tv_pointstore_point = fontdialog.findViewById(R.id.tv_pointstore_font_point);
     }
     private void setThemedialogView(){
         tv_pointstore_theme_point = themedialog.findViewById(R.id.tv_pointstore_theme_point);
