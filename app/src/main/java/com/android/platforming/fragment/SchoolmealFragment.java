@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.SchoolApi;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
 import java.text.SimpleDateFormat;
@@ -26,6 +27,8 @@ import java.util.Date;
 
 public class SchoolmealFragment extends Fragment {
     private SchoolApi api;
+
+    ListenerInterface listenerInterface;
 
     Calendar minDate = Calendar.getInstance();
     ArrayAdapter<String> adapter;
@@ -41,17 +44,25 @@ public class SchoolmealFragment extends Fragment {
         Button btn_calender = view.findViewById(R.id.btn_calender);
         tv_date = view.findViewById(R.id.tv_date);
         lv_foodName =view.findViewById(R.id.lv_foodlist);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
+        lv_foodName.setAdapter(adapter);
 
+        listenerInterface = new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                tv_date.setText(api.getDate());
+                data.clear();
+                data.addAll(api.getResult());
+                adapter.notifyDataSetChanged();
+            }
+        };
 
         api = new SchoolApi();
         try {
-            api.getSchoolMeal();
-            tv_date.setText(api.getDate());
-            api.joinThreadMeal();
+            api.getSchoolMeal(listenerInterface);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        showFood();
 
 
         btn_calender.setOnClickListener(new View.OnClickListener() {
@@ -64,27 +75,17 @@ public class SchoolmealFragment extends Fragment {
         return view;
     }
 
-    public void showFood(){
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
-        lv_foodName.setAdapter(adapter);
-        data.clear();
-        data.addAll(api.getResult());
-        adapter.notifyDataSetChanged();
-    }
-
     public void showDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                 api = new SchoolApi();
                 try {
-                    api.getSchoolMeal(Integer.toString(year), Integer.toString(month + 1), Integer.toString(dayOfMonth));
-                    tv_date.setText(api.getDate());
-                    api.joinThreadMeal();
+                    api.getSchoolMeal(Integer.toString(year), Integer.toString(month + 1), Integer.toString(dayOfMonth), listenerInterface);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                showFood();
             }
         }, Integer.parseInt(api.getYear()), Integer.parseInt(api.getMonth()) - 1, Integer.parseInt(api.getDay()));
 

@@ -2,11 +2,14 @@ package com.android.platforming.clazz;
 
 import android.util.Log;
 
+import com.android.platforming.interfaze.ListenerInterface;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +21,8 @@ public class SchoolApi {
     public List<String> getResult(){
         return result;
     }
+
+    ListenerInterface listenerInterface;
 
     String year;
     String month;
@@ -63,7 +68,9 @@ public class SchoolApi {
     String baseUrlMeal = "https://open.neis.go.kr/hub/mealServiceDietInfo?";
     String resultUrlMeal;
 
-    public void getSchoolMeal(String year, String month, String day) throws InterruptedException {
+    public void getSchoolMeal(String year, String month, String day, ListenerInterface listenerInterface) throws InterruptedException {
+        this.listenerInterface = listenerInterface;
+
         this.year = year;
         this.month = month;
         this.day = day;
@@ -72,14 +79,14 @@ public class SchoolApi {
         String day_fix = fixDate(day);
 
         resultUrlMeal = getResultUrlMeal(year + month_fix + day_fix);
-
         threadMeal.setDaemon(true);
         threadMeal.start();
     }
 
-    public void getSchoolMeal() throws InterruptedException {
-        resultUrlMeal = getResultUrlMeal(dateFormat(new Date(System.currentTimeMillis())));
+    public void getSchoolMeal(ListenerInterface listenerInterface) throws InterruptedException {
+        this.listenerInterface = listenerInterface;
 
+        resultUrlMeal = getResultUrlMeal(dateFormat(new Date(System.currentTimeMillis())));
         threadMeal.setDaemon(true);
         threadMeal.start();
     }
@@ -125,8 +132,8 @@ public class SchoolApi {
                         if(result == null){
                             result = Collections.singletonList("등록된 식단이 없습니다.");
                         }
-                        Log.d("SchoolApi", String.valueOf(result));
                     }
+                    listenerInterface.onSuccess();
                     bf.close();
                 }
                 conn.disconnect();
@@ -137,34 +144,37 @@ public class SchoolApi {
     });
 
     //schoolSchedule
+    int dayOfWeek;
+
     String keySchedule = "key=abfda37c182d43bb9fa4a7e698b91fbb";
     String TypeSchedule = "&Type=json";
     String baseUrlSchedule = "https://open.neis.go.kr/hub/SchoolSchedule?";
     String resultUrlSchedule;
 
-    public void getSchoolSchedule(String year, String month, String day) throws InterruptedException {
+    public void getSchoolSchedule(String year, String month, String day, int dayOfWeek, ListenerInterface listenerInterface) throws InterruptedException {
+        this.listenerInterface = listenerInterface;
+
         this.year = year;
         this.month = month;
         this.day = day;
+        this.dayOfWeek = dayOfWeek;
 
         String month_fix = fixDate(month);
         String day_fix = fixDate(day);
 
         resultUrlSchedule = getResultUrlSchedule(year + month_fix + day_fix);
-
         threadSchedule.setDaemon(true);
         threadSchedule.start();
     }
 
-    public void getSchoolSchedule() throws InterruptedException {
+    public void getSchoolSchedule(int dayOfWeek, ListenerInterface listenerInterface) throws InterruptedException {
+        this.listenerInterface = listenerInterface;
+
+        this.dayOfWeek = dayOfWeek;
+
         resultUrlSchedule = getResultUrlSchedule(dateFormat(new Date(System.currentTimeMillis())));
-
         threadSchedule.setDaemon(true);
         threadSchedule.start();
-    }
-
-    public void joinThreadSchedule() throws InterruptedException{
-        threadSchedule.join();
     }
 
     private String getResultUrlSchedule(String calenerTime){
@@ -205,8 +215,8 @@ public class SchoolApi {
                         if(result == null){
                             result = Collections.singletonList("등록된 일정이 없습니다.");
                         }
-                        Log.d("result_SchoolSchedule", String.valueOf(result));
                     }
+                    listenerInterface.onSuccess();
                     bf.close();
                 }
                 conn.disconnect();
@@ -215,4 +225,32 @@ public class SchoolApi {
             Log.d("error_School",e.getMessage());
         }
     });
+
+    public String getDayOfWeek(){
+        String dayOfWeek = null;
+        switch (this.dayOfWeek){
+            case 1:
+                dayOfWeek = "(일요일)";
+                break;
+            case 2:
+                dayOfWeek = "(월요일)";
+                break;
+            case 3:
+                dayOfWeek = "(화요일)";
+                break;
+            case 4:
+                dayOfWeek = "(수요일)";
+                break;
+            case 5:
+                dayOfWeek = "(목요일)";
+                break;
+            case 6:
+                dayOfWeek = "(금요일)";
+                break;
+            case 7:
+                dayOfWeek = "(토요일)";
+                break;
+        }
+        return dayOfWeek;
+    }
 }

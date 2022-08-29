@@ -89,19 +89,13 @@ public class NotificationHelper extends ContextWrapper {
             SchoolApi schoolApi = new SchoolApi();
             String contentText = null;
             String bigText = null;
-            try {
-                schoolApi.getSchoolMeal();
-                contentText = schoolApi.getDate();
-                schoolApi.joinThreadMeal();
-                StringBuilder stringBuilder = new StringBuilder();
-                for(String result : schoolApi.getResult()){
-                    stringBuilder.append(result);
-                    stringBuilder.append("\n");
-                }
-                bigText = stringBuilder.toString();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for(String result : schoolApi.getResult()){
+                stringBuilder.append(result);
+                stringBuilder.append("\n");
             }
+            bigText = stringBuilder.toString();
 
             Intent intent = new Intent(mContext, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT); // 대기열에 이미 있다면 MainActivity가 아닌 앱 활성화

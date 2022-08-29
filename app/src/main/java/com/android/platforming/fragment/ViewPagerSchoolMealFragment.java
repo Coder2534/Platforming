@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.SchoolApi;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
 import java.util.ArrayList;
@@ -29,24 +30,23 @@ public class ViewPagerSchoolMealFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewpager_schoolmeal, container, false);
         lv_schoolMeal =view.findViewById(R.id.lv_viewpager_schoolMeal);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
+        lv_schoolMeal.setAdapter(adapter);
 
         api = new SchoolApi();
         try {
-            api.getSchoolMeal();
-            api.joinThreadMeal();
+            api.getSchoolMeal(new ListenerInterface() {
+                @Override
+                public void onSuccess() {
+                    data.clear();
+                    data.addAll(api.getResult());
+                    adapter.notifyDataSetChanged();
+                }
+            });
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        showFood();
 
         return view;
-    }
-
-    public void showFood(){
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
-        lv_schoolMeal.setAdapter(adapter);
-        data.clear();
-        data.addAll(api.getResult());
-        adapter.notifyDataSetChanged();
     }
 }
