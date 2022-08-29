@@ -18,7 +18,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.platforming.clazz.ExpandableList;
-import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
 import com.android.platforming.fragment.MyInfoFragment;
@@ -32,8 +31,6 @@ import com.example.platforming.R;
 import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
@@ -44,19 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
     boolean mainPage = false;
 
-    int applytheme;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
-        applytheme = 0;//적용시킬 테마
-        switch (applytheme){
-            case 0:setTheme(androidx.appcompat.R.style.Base_Theme_AppCompat_Light);break;//기본 흰색
-            case 1:setTheme(R.style.PinkTheme);break;//핑크
-            case 2:setTheme(R.style.BuleTheme);break;//블루
-            case 3:setTheme(R.style.GreenTheme);break;//그린
-            case 4:setTheme(R.style.BlackTheme);break;//블랙
-        }
         super.setTheme(R.style.BlackTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -177,14 +165,7 @@ public class MainActivity extends AppCompatActivity {
         return mainActivity;
     }
 
-    public void theme(int indextheme){
-        switch (indextheme){
-            case 0:setTheme(androidx.appcompat.R.style.Base_Theme_AppCompat_Light);//기본 흰색
-            case 1:setTheme(R.style.PinkTheme);//핑크
-            case 2:setTheme(R.style.BuleTheme);//블루
-            case 3:setTheme(R.style.GreenTheme);//그린
-            case 4:setTheme(R.style.BlackTheme);//블랙
-        }
+    public void theme(){
         super.setTheme(R.style.BlackTheme);
     }
 

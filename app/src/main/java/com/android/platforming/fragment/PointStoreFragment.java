@@ -1,9 +1,7 @@
 package com.android.platforming.fragment;
 
 import android.app.Dialog;
-import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,7 +46,7 @@ public class PointStoreFragment extends Fragment {
     int point;
     long checkfont;
     List<Long> boughtfont;
-    int themeindex;
+    long checktheme;
     List<Long> boughttheme;
     static final String THEME_KEY = "theme_value";
 
@@ -179,13 +177,8 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_theme_pink.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity.getActivity().theme(themeindex);
+                        MainActivity.getActivity().theme();
                         ThemeUtil.applyTheme(view.getContext(), 0);
-
-                        TaskStackBuilder.create(getActivity())
-                                .addNextIntent(new Intent(getActivity(), MainActivity.class))
-                                .addNextIntent(getActivity().getIntent())
-                                .startActivities();
                         //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
 
                     }
@@ -212,7 +205,7 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         CustomDialog customDialog = new CustomDialog();
-                        if(boughttheme.contains(themeindex)){
+                        if(boughttheme.contains(checktheme)){
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
