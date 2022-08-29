@@ -15,8 +15,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Document;
-
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -92,13 +91,13 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = new ArrayList<>();
+                    ArrayList<Post> posts = Post.getPosts();
+                    posts.clear();
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
+                        Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                        readCommentSize(workName, post, interfaze);
+                        posts.add(post);
                     }
-                    Post.getPosts().clear();
-                    Post.getPosts().addAll(posts);
-                    interfaze.onSuccess();
                 }
             }
         });
@@ -176,6 +175,15 @@ public class FirestoreManager {
             }
             else{
                 listenerInterface.onFail();
+            }
+        });
+    }
+
+    public void readCommentSize(String workName, Post post, ListenerInterface listenerInterface){
+        firestore.collection(workName).document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                post.setCommentSize(task.getResult().size());
+                listenerInterface.onSuccess();
             }
         });
     }

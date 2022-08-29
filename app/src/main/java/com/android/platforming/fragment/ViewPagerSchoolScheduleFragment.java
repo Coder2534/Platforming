@@ -12,9 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.SchoolApi;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ViewPagerSchoolScheduleFragment extends Fragment {
 
@@ -30,24 +32,24 @@ public class ViewPagerSchoolScheduleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_viewpager_schoolschedule, container, false);
 
         lv_schedule = view.findViewById(R.id.lv_viewpager_schoolSchedule);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
+        lv_schedule.setAdapter(adapter);
 
+        Calendar calendar = Calendar.getInstance();
         api = new SchoolApi();
         try {
-            api.getSchoolSchedule();
-            api.joinThreadSchedule();
+            api.getSchoolSchedule(calendar.get(Calendar.DAY_OF_WEEK), new ListenerInterface() {
+                @Override
+                public void onSuccess() {
+                    data.clear();
+                    data.addAll(api.getResult());
+                    adapter.notifyDataSetChanged();
+                }
+            });
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        showSchedule();
 
         return view;
-    }
-
-    public void showSchedule(){
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, data);
-        lv_schedule.setAdapter(adapter);
-        data.clear();
-        data.addAll(api.getResult());
-        adapter.notifyDataSetChanged();
     }
 }
