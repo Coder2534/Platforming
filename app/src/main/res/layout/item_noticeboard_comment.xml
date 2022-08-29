@@ -16,7 +16,7 @@
         android:id="@+id/tv_noticeboard_comment_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_noticeboard_comment_profile"
+        android:layout_toEndOf="@id/iv_noticeboard_comment_profile"
         android:layout_alignTop="@+id/iv_noticeboard_comment_profile"
         android:text="null"
         android:textSize="25dp" />
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="대충 댓글이라는 글"
-        android:layout_alignLeft="@+id/iv_noticeboard_comment_profile"
+        android:layout_alignStart="@+id/iv_noticeboard_comment_profile"
         android:layout_below="@+id/iv_noticeboard_comment_profile"
         android:layout_marginTop="5dp"/>
 
@@ -36,8 +36,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_noticeboard_comment_comment"
-        android:layout_alignLeft="@+id/iv_noticeboard_comment_profile"
+        android:layout_alignStart="@+id/iv_noticeboard_comment_profile"
         android:layout_marginTop="5dp"
         android:text="08/11 21:22"
         android:textSize="15dp" />
+
+
+    <ImageButton
+        android:id="@+id/btn_noticeboard_comment_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/bg_more"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        app:srcCompat="@drawable/ic_baseline_delete_outline_24"
+        app:tint="#A2A2A2" />
 </RelativeLayout>

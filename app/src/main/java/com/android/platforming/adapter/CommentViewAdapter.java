@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.Comment;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -41,6 +43,7 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
         TextView nickname;
         TextView date;
         TextView comment;
+        ImageButton delete;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -50,6 +53,20 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
             nickname = itemView.findViewById(R.id.tv_noticeboard_comment_nickname);
             date = itemView.findViewById(R.id.tv_noticeboard_comment_date);
             comment = itemView.findViewById(R.id.tv_noticeboard_comment_comment);
+            delete = itemView.findViewById(R.id.btn_noticeboard_comment_delete);
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.selectDialog(itemView, "삭제", new ListenerInterface() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+                    });
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

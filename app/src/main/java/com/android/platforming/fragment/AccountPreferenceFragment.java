@@ -2,6 +2,8 @@ package com.android.platforming.fragment;
 
 import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +14,11 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
+import com.android.platforming.activity.MainActivity;
+import com.android.platforming.activity.SignInActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.User;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.firebase.auth.UserInfo;
 
@@ -57,8 +62,19 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
         signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
+                Activity activity = getActivity();
+
                 CustomDialog customDialog = new CustomDialog();
-                customDialog.signOutDialog(getActivity());
+                customDialog.selectDialog(activity, "로그아웃", new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+                        getFirebaseAuth().signOut();
+                        Intent loginIntent = new Intent(activity, SignInActivity.class);
+                        activity.startActivity(loginIntent);
+                        activity.finish();
+                        MainActivity.getActivity().finish();
+                    }
+                });
                 return true;
             }
         });

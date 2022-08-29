@@ -54,7 +54,6 @@
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/menu/item_toolbar_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.5536458333333333" />
         <entry key="..\:/Project/Android/Platforming/app/src/main/res/xml/setting.xml" value="0.5536458333333333" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/box_border.xml" value="0.1505" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/ic_baseline_12mp_24.xml" value="0.1505" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/ic_baseline_emoji_emotions_24.xml" value="0.1505" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1505" />
@@ -63,47 +62,49 @@
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_notice_board.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_noticeboard.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/activity_setting.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_message.xml" value="0.278125" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_select.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_setting_changeofpassword.xml" value="0.25" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_setting_newpassword.xml" value="0.3617021276595745" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_setting_signout.xml" value="0.278125" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_vertification.xml" value="0.278125" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_mypost.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_myposts.xml" value="0.278125" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_detail.xml" value="0.49514563106796117" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_list.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.375" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_rowdata.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/layout_navigation_header.xml" value="0.25" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/view_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.2791666666666667" />
-        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/xml/preference_account.xml" value="0.165" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_indicator_inactive.xml" value="0.5035" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_more.xml" value="0.5035" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_round.xml" value="0.141" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_underline.xml" value="0.141" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.5035" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_profile_cat_background.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_profile_dog_background.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_profile_rabbit_background.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/activity_setting.xml" value="0.1609375" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_message.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_select.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_setting_changeofpassword.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_setting_newpassword.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_vertification.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_emailalarm.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.5" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_mypost.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_noticeboard_detail.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_viewpager_schoolmeal.xml" value="0.15" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_viewpager_schoolschedule.xml" value="0.15" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_viewpager_timetable.xml" value="0.21851851851851853" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.15" />
-        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.25" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.75" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.15" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/preference_timepicker.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_profile_cat.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_profile_dog.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_map_schoolintroduce.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce_round.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.7049180327868853" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/preference_account.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/preference_notification.xml" value="0.5536458333333333" />
         <entry key="..\:/Users/user/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.18819655521783182" />
       </map>
