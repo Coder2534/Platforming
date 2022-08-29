@@ -80,4 +80,8 @@ public class Post {
     public void setCommentSize(int commentSize) {
         this.commentSize = commentSize;
     }
+
+    public int getCommentSize() {
+        return commentSize;
+    }
 }

@@ -41,16 +41,6 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
             info = itemView.findViewById(R.id.tv_recyclerview_post_info);
             thumb_up = itemView.findViewById(R.id.tv_recyclerview_post_thumb_up);
             comment = itemView.findViewById(R.id.tv_recyclerview_post_comment);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition() ;
-                    if (pos != RecyclerView.NO_POSITION) {
-                        listenerInterface.onSuccess(pos);
-                    }
-                }
-            });
         }
     }
 
@@ -77,7 +67,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         holder.detail.setText(mData.get(position).getDetail());
         holder.info.setText(formatTimeString(mData.get(position).getDate()) + " | " + mData.get(position).getNickname());
         holder.thumb_up.setText(Integer.toString(mData.get(position).getThumb_up()));
-        holder.comment.setText(Integer.toString(mData.get(position).getComments().size()));
+        holder.comment.setText(Integer.toString(mData.get(position).getCommentSize()));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
