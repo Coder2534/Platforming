@@ -15,6 +15,7 @@ public class Post {
     String title;
     String detail;
     int thumb_up;
+    int commentSize;
     ArrayList<Comment> comments = new ArrayList<>();
 
     public Post (String id, Map<String, Object> data){
@@ -74,5 +75,9 @@ public class Post {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void setCommentSize(int commentSize) {
+        this.commentSize = commentSize;
     }
 }
