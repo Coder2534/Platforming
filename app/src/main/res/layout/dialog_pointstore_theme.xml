@@ -15,13 +15,14 @@
             android:textSize="30dp"
             android:textColor="@color/black"
             android:layout_centerHorizontal="true"/>
+
         <TextView
             android:id="@+id/tv_pointstore_theme_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0포인트"
-            android:textSize="30dp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:text="0p"
+            android:textSize="30dp" />
 
     </RelativeLayout>
     <LinearLayout
@@ -34,6 +35,7 @@
             android:layout_height="150dp"
             android:layout_weight="1"
             android:text="핑크테마"
+            android:textSize="30dp"
             android:textColor="@color/red"
             android:backgroundTint="@color/pink"/>
 
@@ -42,9 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:textColor="@color/red"
-
             android:text="블루테마"
+            android:textSize="30dp"
+            android:textColor="@color/red"
             android:backgroundTint="@color/bule"
             />
 
@@ -54,41 +56,43 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btn_pointstore_theme_green"
+            android:id="@+id/btn_pointstore_theme_white"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
+            android:text="라이트테마"
+            android:textSize="30dp"
             android:textColor="@color/red"
-            android:text="그린테마"
-            android:backgroundTint="@color/darkgreen"/>
+            android:backgroundTint="@color/white"/>
         <Button
             android:id="@+id/btn_pointstore_theme_black"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_weight="1"
-            android:textColor="@color/red"
             android:text="다크테마"
+            android:textSize="30dp"
+            android:textColor="@color/red"
+
             android:backgroundTint="@color/black"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/btn_pointstore_buytheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="구매하기"
             android:layout_marginTop="20dp"
-            />
+            android:text="구매하기" />
 
         <Button
-            android:id="@+id/btn_pointstore_savetheme"
+            android:id="@+id/btn_pointstore_applytheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장하기"
             android:layout_marginTop="20dp"
             android:layout_toLeftOf="@+id/btn_pointstore_theme_getout"
-            />
+            android:text="적용하기" />
 
         <Button
             android:id="@+id/btn_pointstore_theme_getout"
