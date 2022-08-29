@@ -91,10 +91,6 @@ public class SchoolApi {
         threadMeal.start();
     }
 
-    public void joinThreadMeal() throws InterruptedException{
-        threadMeal.join();
-    }
-
     private String getResultUrlMeal(String date){
         String sub_url = "&ATPT_OFCDC_SC_CODE=R10&SD_SCHUL_CODE=8750447&MLSV_YMD="+date;
         String result_URL = baseUrlMeal + keyMeal + TypeMeal +"&Plndex=1&pSize=10"+ sub_url;

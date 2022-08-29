@@ -86,15 +86,10 @@ public class NotificationHelper extends ContextWrapper {
                 notificationManager.notify(WORK_A_NOTIFICATION_CODE, notificationBuilder.build());
             }
         } else if (workName.equals("schoolMeal")) {
-            SchoolApi schoolApi = new SchoolApi();
             String contentText = null;
             String bigText = null;
 
             StringBuilder stringBuilder = new StringBuilder();
-            for(String result : schoolApi.getResult()){
-                stringBuilder.append(result);
-                stringBuilder.append("\n");
-            }
             bigText = stringBuilder.toString();
 
             Intent intent = new Intent(mContext, MainActivity.class);
