@@ -26,6 +26,8 @@ import java.util.ArrayList;
 public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.ViewHolder> {
 
     Activity activity;
+    String workName;
+    String postId;
     ListenerInterface listenerInterface;
 
     public void setListenerInterface(ListenerInterface listenerInterface) {
@@ -63,7 +65,7 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
                             int pos = getAdapterPosition() ;
                             if (pos != RecyclerView.NO_POSITION) {
                                 FirestoreManager firestoreManager = new FirestoreManager();
-                                firestoreManager.deleteComment(mData.get(pos), listenerInterface);
+                                firestoreManager.deleteComment(workName, postId, mData.get(pos).getId(), listenerInterface);
                             }
                         }
                     });
@@ -73,8 +75,10 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public CommentViewAdapter(Activity activity, ArrayList<Comment> list) {
+    public CommentViewAdapter(Activity activity, String workName, String postId, ArrayList<Comment> list) {
         this.activity = activity;
+        this.workName = workName;
+        this.postId = postId;
         mData = list ;
     }
 

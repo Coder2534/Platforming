@@ -3,7 +3,6 @@ package com.android.platforming.clazz;
 import java.util.Map;
 
 public class Comment {
-    private String workName;
     private String id;
     private String uid;
     private int profileIndex;
@@ -11,8 +10,7 @@ public class Comment {
     private long date;
     private String comment;
 
-    public Comment(String workName, String id, Map<String, Object> data){
-        this.workName = workName;
+    public Comment(String id, Map<String, Object> data){
         this.id = id;
         uid = (String) data.get("uid");
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
@@ -43,9 +41,5 @@ public class Comment {
 
     public String getId() {
         return id;
-    }
-
-    public String getWorkName() {
-        return workName;
     }
 }

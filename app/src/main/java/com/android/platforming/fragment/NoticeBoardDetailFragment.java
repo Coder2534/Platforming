@@ -57,12 +57,19 @@ public class NoticeBoardDetailFragment extends Fragment {
         detail.setText(post.getDetail());
         TextView thumb_up = view.findViewById(R.id.tv_noticeboard_detail_thumb_up);
         thumb_up.setText(Integer.toString(post.getThumb_up()));
+        thumb_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirestoreManager firestoreManager = new FirestoreManager();
+                firestoreManager.addPostThumb_up(workName, post.getId(), 1);
+            }
+        });
         TextView comment_count = view.findViewById(R.id.tv_noticeboard_detail_comment);
         comment_count.setText(Integer.toString(post.getComments().size()));
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_detail_coment);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        CommentViewAdapter commentViewAdapter = new CommentViewAdapter(getActivity(), post.getComments());
+        CommentViewAdapter commentViewAdapter = new CommentViewAdapter(getActivity(), workName, post.getId(), post.getComments());
         listenerInterface = new ListenerInterface() {
             @Override
             public void onSuccess() {
