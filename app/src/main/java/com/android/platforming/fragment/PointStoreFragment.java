@@ -276,17 +276,17 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_font_noting = fontdialog.findViewById(R.id.btn_pointstore_font_noting);
         btn_pointstore_getout = fontdialog.findViewById(R.id.btn_pointstore_getout);
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
-        btn_pointstore_savefont = fontdialog.findViewById(R.id.btn_pointstore_savefont);
+        btn_pointstore_savefont = fontdialog.findViewById(R.id.btn_pointstore_applyfont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);
     }
     private void setThemedialogView(){
         tv_pointstore_theme_point = themedialog.findViewById(R.id.tv_pointstore_theme_point);
         btn_pointstore_theme_pink = themedialog.findViewById(R.id.btn_pointstore_theme_pink);
         btn_pointstore_theme_bule = themedialog.findViewById(R.id.btn_pointstore_theme_bule);
-        btn_pointstore_theme_green = themedialog.findViewById(R.id.btn_pointstore_theme_green);
+        btn_pointstore_theme_green = themedialog.findViewById(R.id.btn_pointstore_theme_white);
         btn_pointstore_theme_black = themedialog.findViewById(R.id.btn_pointstore_theme_black);
         btn_pointstore_buytheme = themedialog.findViewById(R.id.btn_pointstore_buytheme);
-        btn_pointstore_savetheme = themedialog.findViewById(R.id.btn_pointstore_savetheme);
+        btn_pointstore_savetheme = themedialog.findViewById(R.id.btn_pointstore_applytheme);
         btn_pointstore_theme_getout = themedialog.findViewById(R.id.btn_pointstore_theme_getout);
     }
 
