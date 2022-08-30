@@ -1,7 +1,9 @@
 package com.android.platforming.fragment;
 
 import android.app.Dialog;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,13 +42,13 @@ public class PointStoreFragment extends Fragment {
 
     TextView tv_pointstore_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
-    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_noting1,btn_pointstore_font_noting,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_savefont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_savetheme,btn_pointstore_theme_getout;
+    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_noting1,btn_pointstore_font_noting,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_applyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_applytheme,btn_pointstore_theme_getout;
 
     FirestoreManager firestoreManager = new FirestoreManager();
     int point;
     long checkfont;
     List<Long> boughtfont;
-    long checktheme;
+    int themeindex;
     List<Long> boughttheme;
     static final String THEME_KEY = "theme_value";
 
@@ -133,7 +135,7 @@ public class PointStoreFragment extends Fragment {
                         }
                     }
                 });
-                btn_pointstore_savefont.setOnClickListener(new View.OnClickListener() {
+                btn_pointstore_applyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -177,8 +179,13 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_theme_pink.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity.getActivity().theme();
+                        MainActivity.getActivity().theme(themeindex);
                         ThemeUtil.applyTheme(view.getContext(), 0);
+
+                        TaskStackBuilder.create(getActivity())
+                                .addNextIntent(new Intent(getActivity(), MainActivity.class))
+                                .addNextIntent(getActivity().getIntent())
+                                .startActivities();
                         //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
 
                     }
@@ -205,7 +212,7 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         CustomDialog customDialog = new CustomDialog();
-                        if(boughttheme.contains(checktheme)){
+                        if(boughttheme.contains(themeindex)){
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
@@ -228,11 +235,10 @@ public class PointStoreFragment extends Fragment {
                         //파이어 베이스 형
                     }
                 });
-                btn_pointstore_savetheme.setOnClickListener(new View.OnClickListener() {
+                btn_pointstore_applytheme.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //적용시킬 테마 폰에 저장
-
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
@@ -276,17 +282,17 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_font_noting = fontdialog.findViewById(R.id.btn_pointstore_font_noting);
         btn_pointstore_getout = fontdialog.findViewById(R.id.btn_pointstore_getout);
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
-        btn_pointstore_savefont = fontdialog.findViewById(R.id.btn_pointstore_applyfont);
+        btn_pointstore_applyfont = fontdialog.findViewById(R.id.btn_pointstore_applyfont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);
     }
     private void setThemedialogView(){
         tv_pointstore_theme_point = themedialog.findViewById(R.id.tv_pointstore_theme_point);
         btn_pointstore_theme_pink = themedialog.findViewById(R.id.btn_pointstore_theme_pink);
         btn_pointstore_theme_bule = themedialog.findViewById(R.id.btn_pointstore_theme_bule);
-        btn_pointstore_theme_green = themedialog.findViewById(R.id.btn_pointstore_theme_white);
+        btn_pointstore_theme_green = themedialog.findViewById(R.id.btn_pointstore_theme_green);
         btn_pointstore_theme_black = themedialog.findViewById(R.id.btn_pointstore_theme_black);
         btn_pointstore_buytheme = themedialog.findViewById(R.id.btn_pointstore_buytheme);
-        btn_pointstore_savetheme = themedialog.findViewById(R.id.btn_pointstore_applytheme);
+        btn_pointstore_applytheme = themedialog.findViewById(R.id.btn_pointstore_applytheme);
         btn_pointstore_theme_getout = themedialog.findViewById(R.id.btn_pointstore_theme_getout);
     }
 
