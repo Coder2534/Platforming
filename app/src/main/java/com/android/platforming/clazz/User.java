@@ -32,7 +32,6 @@ public class User {
     private int profileIndex;
     private List<Long> fonts;
     private List<Long> themes;
-    private List<Long> textColors;
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -47,7 +46,6 @@ public class User {
         note = (String) data.get("note");
         themes = (List<Long>) data.get("themes");
         fonts = (List<Long>) data.get("fonts");
-        textColors = (List<Long>) data.get("textColors");
     }
 
     public String getUid() {
@@ -148,9 +146,5 @@ public class User {
 
     public List<Long> getThemes() {
         return themes;
-    }
-
-    public List<Long> getTextColors() {
-        return textColors;
     }
 }
