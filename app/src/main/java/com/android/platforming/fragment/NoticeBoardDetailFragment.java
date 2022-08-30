@@ -35,6 +35,8 @@ public class NoticeBoardDetailFragment extends Fragment {
     Post post;
     String workName;
 
+    ListenerInterface listenerInterface;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,19 +62,22 @@ public class NoticeBoardDetailFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_detail_coment);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        CommentViewAdapter commentViewAdapter = new CommentViewAdapter(post.getComments());
+        CommentViewAdapter commentViewAdapter = new CommentViewAdapter(getActivity(), post.getComments());
+        listenerInterface = new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                //refresh commentList
+                commentViewAdapter.notifyDataSetChanged();
+                comment_count.setText(Integer.toString(post.getComments().size()));
+            }
+        };
+        commentViewAdapter.setListenerInterface(listenerInterface);
         recyclerView.setAdapter(commentViewAdapter);
 
         EditText comment = view.findViewById(R.id.et_noticeboard_detail_comment);
 
         FirestoreManager firestoreManager = new FirestoreManager();
-        firestoreManager.readCommentData(workName, post, new ListenerInterface() {
-            @Override
-            public void onSuccess() {
-                commentViewAdapter.notifyDataSetChanged();
-                comment_count.setText(Integer.toString(post.getComments().size()));
-            }
-        });
+        firestoreManager.readCommentData(workName, post, listenerInterface);
 
         ImageButton send = view.findViewById(R.id.btn_noticeboard_detail_send);
         send.setOnClickListener(new View.OnClickListener() {

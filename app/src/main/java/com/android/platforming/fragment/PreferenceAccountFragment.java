@@ -22,7 +22,7 @@ import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.firebase.auth.UserInfo;
 
-public class AccountPreferenceFragment extends PreferenceFragmentCompat {
+public class PreferenceAccountFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
@@ -36,13 +36,10 @@ public class AccountPreferenceFragment extends PreferenceFragmentCompat {
         uid.setSummary(User.getUser().getUid());
         email.setSummary(User.getUser().getEmail());
 
-        String provider = getFirebaseAuth().getCurrentUser().getProviderData().get(0).getProviderId();
-
         boolean isPassword = false;
         for(UserInfo data: getFirebaseAuth().getCurrentUser().getProviderData()){
             if(data.getProviderId().equals("password"))
                 isPassword = true;
-            Log.d("FirebaseAuth","provider: "+data.getProviderId());
         }
 
         if (isPassword) {

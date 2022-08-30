@@ -157,7 +157,7 @@ public class FirestoreManager {
                 if(task.isSuccessful()){
                     ArrayList<Comment> comments = new ArrayList<>();
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                        comments.add(new Comment(documentSnapshot.getData()));
+                        comments.add(new Comment(workName, documentSnapshot.getId(), documentSnapshot.getData()));
                     }
                     post.getComments().clear();
                     post.getComments().addAll(comments);
@@ -183,6 +183,15 @@ public class FirestoreManager {
         firestore.collection(workName).document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 post.setCommentSize(task.getResult().size());
+                listenerInterface.onSuccess();
+            }
+        });
+    }
+
+    public void deleteComment(Comment comment, ListenerInterface listenerInterface){
+        firestore.collection(comment.getWorkName()).document(comment.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
                 listenerInterface.onSuccess();
             }
         });

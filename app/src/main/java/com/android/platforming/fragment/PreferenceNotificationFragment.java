@@ -18,7 +18,7 @@ import com.android.platforming.view.TimePreference;
 import com.android.platforming.view.TimePreferenceCompat;
 import com.example.platforming.R;
 
-public class NotificationPreferenceFragment extends PreferenceFragmentCompat {
+public class PreferenceNotificationFragment extends PreferenceFragmentCompat {
 
     SharedPreferences pref;
     Context context;

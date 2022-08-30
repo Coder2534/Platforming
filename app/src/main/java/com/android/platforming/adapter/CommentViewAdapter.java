@@ -1,5 +1,6 @@
 package com.android.platforming.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.Comment;
 import com.android.platforming.clazz.CustomDialog;
+import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -23,19 +25,15 @@ import java.util.ArrayList;
 
 public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.ViewHolder> {
 
-
-    //게시판 좋아요, 삭제
-    //댓글 삭제
-
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
-    private ArrayList<Comment> mData = null ;
-
+    Activity activity;
     ListenerInterface listenerInterface;
 
     public void setListenerInterface(ListenerInterface listenerInterface) {
         this.listenerInterface = listenerInterface;
     }
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
+    private ArrayList<Comment> mData = null ;
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,29 +57,24 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
                 @Override
                 public void onClick(View view) {
                     CustomDialog customDialog = new CustomDialog();
-                    customDialog.selectDialog(itemView, "삭제", new ListenerInterface() {
+                    customDialog.selectDialog(activity, "삭제", new ListenerInterface() {
                         @Override
                         public void onSuccess() {
-
+                            int pos = getAdapterPosition() ;
+                            if (pos != RecyclerView.NO_POSITION) {
+                                FirestoreManager firestoreManager = new FirestoreManager();
+                                firestoreManager.deleteComment(mData.get(pos), listenerInterface);
+                            }
                         }
                     });
-                }
-            });
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition() ;
-                    if (pos != RecyclerView.NO_POSITION) {
-                        listenerInterface.onSuccess(pos);
-                    }
                 }
             });
         }
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public CommentViewAdapter(ArrayList<Comment> list) {
+    public CommentViewAdapter(Activity activity, ArrayList<Comment> list) {
+        this.activity = activity;
         mData = list ;
     }
 
@@ -102,6 +95,8 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
         holder.nickname.setText(mData.get(position).getNickname());
         holder.comment.setText(mData.get(position).getComment());
         holder.date.setText(dateFormat.format(mData.get(position).getDate()));
+        if(!mData.get(position).getUid().equals(User.getUser().getUid()))
+            ((ViewGroup)holder.delete.getParent()).removeView(holder.delete);
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
