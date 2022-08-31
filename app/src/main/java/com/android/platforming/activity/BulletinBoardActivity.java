@@ -4,30 +4,17 @@ import static com.android.platforming.clazz.Post.FREE_BULLETIN_BOARD;
 import static com.android.platforming.clazz.Post.QUESTION_BULLETIN_BOARD;
 import static com.android.platforming.clazz.Post.SCHOOL_BULLETIN_BOARD;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.platforming.adapter.PostViewAdapter;
-import com.android.platforming.clazz.FirestoreManager;
-import com.android.platforming.clazz.Post;
-import com.android.platforming.fragment.NoticeBoardDetailFragment;
-import com.android.platforming.fragment.NoticeBoardListFragment;
-import com.android.platforming.interfaze.ListenerInterface;
+import com.android.platforming.fragment.BulletinBoardListFragment;
 import com.example.platforming.R;
 
-import org.w3c.dom.Text;
-
-public class NoticeBoardActivity extends AppCompatActivity {
+public class BulletinBoardActivity extends AppCompatActivity {
 
     //1. 게시판, 댓글 두번 들어가야 뜸 - 수정
     //3. comment 추가 이후 보여지지 않음 - 수정
@@ -67,7 +54,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
                 break;
         }
 
-        NoticeBoardListFragment fragment = new NoticeBoardListFragment();
+        BulletinBoardListFragment fragment = new BulletinBoardListFragment();
         Bundle args = new Bundle();
         args.putInt("type", type);
         if(id != null)

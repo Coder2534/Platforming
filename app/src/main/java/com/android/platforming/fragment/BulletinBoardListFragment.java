@@ -29,7 +29,7 @@ import com.example.platforming.R;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-public class NoticeBoardListFragment extends Fragment {
+public class BulletinBoardListFragment extends Fragment {
 
     private ActivityResultLauncher<Intent> resultLauncher;
 
@@ -99,7 +99,7 @@ public class NoticeBoardListFragment extends Fragment {
     }
 
     private void showDetail(int position){
-        NoticeBoardDetailFragment fragment = new NoticeBoardDetailFragment();
+        BulletinBoardPostFragment fragment = new BulletinBoardPostFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
         fragment.setArguments(args);

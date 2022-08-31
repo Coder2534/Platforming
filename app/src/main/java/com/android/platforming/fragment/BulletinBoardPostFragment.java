@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NoticeBoardDetailFragment extends Fragment {
+public class BulletinBoardPostFragment extends Fragment {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
     Post post;

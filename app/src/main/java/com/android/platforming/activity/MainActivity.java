@@ -10,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
-import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,9 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
@@ -48,19 +46,18 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity mainActivity;
 
     boolean mainPage = false;
-    int applytheme;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        applytheme = 0;//형이 폰에 저장 돼있는 적용시키는 테마index넣기
-        switch (applytheme){
+        Log.d("timeline", "MainActivity");
+        switch (((InitApplication)getApplication()).getAppliedTheme()){
             case 0:setTheme(R.style.Theme_Platforming);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
             case 3:setTheme(R.style.GreenTheme);break;
             case 4:setTheme(R.style.BlackTheme);break;
         }
-        Log.d("timeline", "MainActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -122,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(1, "학사일정", new SchoolScheduleFragment());
 
         mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
-        mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, FREE_BULLETIN_BOARD));
-        mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, QUESTION_BULLETIN_BOARD));
-        mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, SCHOOL_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "자유게시판", toggleActivity(BulletinBoardActivity.class, FREE_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "질문게시판", toggleActivity(BulletinBoardActivity.class, QUESTION_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "학교게시판", toggleActivity(BulletinBoardActivity.class, SCHOOL_BULLETIN_BOARD));
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
@@ -179,20 +176,4 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getActivity(){
         return mainActivity;
     }
-
-    public void theme(int applytheme){
-        switch (applytheme){
-            case 0:setTheme(R.style.Theme_Platforming);break;
-            case 1:setTheme(R.style.PinkTheme);break;
-            case 2:setTheme(R.style.BuleTheme);break;
-            case 3:setTheme(R.style.GreenTheme);break;
-            case 4:setTheme(R.style.BlackTheme);break;
-        }
-        TaskStackBuilder.create(getActivity())
-                .addNextIntent(new Intent(getActivity(), MainActivity.class))
-                .addNextIntent(getActivity().getIntent())
-                .startActivities();
-        recreate();
-    }
-
 }

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.platforming.activity.NoticeBoardActivity;
+import com.android.platforming.activity.BulletinBoardActivity;
 import com.android.platforming.adapter.PostViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
@@ -44,7 +44,7 @@ public class MyPostFragment extends Fragment {
                 Post post = Post.getPosts().get(position);
                 Activity activity = getActivity();
 
-                Intent intent = new Intent(activity, NoticeBoardActivity.class);
+                Intent intent = new Intent(activity, BulletinBoardActivity.class);
                 intent.putExtra("type", post.getType());
                 intent.putExtra("id", post.getId());
                 startActivity(intent);

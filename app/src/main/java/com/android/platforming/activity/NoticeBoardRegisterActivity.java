@@ -1,10 +1,7 @@
 package com.android.platforming.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +10,6 @@ import android.widget.ImageButton;
 
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
-import com.android.platforming.fragment.NoticeBoardListFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
