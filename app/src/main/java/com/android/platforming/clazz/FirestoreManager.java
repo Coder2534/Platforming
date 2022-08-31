@@ -99,6 +99,25 @@ public class FirestoreManager {
         });
     }
 
+    int a;
+    public void readMyPostData(){
+        for (String workName : new String[]{"free bulletin board", "question bulletin board", "school bulletin board"}){
+            FirebaseFirestore.getInstance().collection(workName).whereEqualTo("uid", User.getUser().getUid()).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        ArrayList<Post> posts = Post.getPosts();
+                        posts.clear();
+                        a=1;
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     public void writePostData(String workName, Map<String, Object> data, ListenerInterface interfaze){
          List<String> postIds;
         String key;
