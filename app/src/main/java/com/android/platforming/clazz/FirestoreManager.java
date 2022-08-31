@@ -23,12 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FirestoreManager {
-    private static FirebaseFirestore firestore = null;
     private static FirebaseAuth firebaseAuth = null;
-
-    public static void setFirestore(FirebaseFirestore firestore) {
-        FirestoreManager.firestore = firestore;
-    }
 
     public static FirebaseAuth getFirebaseAuth() {
         return firebaseAuth;
@@ -40,7 +35,7 @@ public class FirestoreManager {
 
     //User
     public void readUserData(ListenerInterface interfaze){
-        firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
+        FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 DocumentSnapshot documentSnapshot = task.getResult();
 
@@ -62,7 +57,7 @@ public class FirestoreManager {
     }
 
     public void writeUserData(Map<String, Object> data, ListenerInterface interfaze){
-        firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).set(data).addOnCompleteListener(task -> {
+        FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.getCurrentUser().getUid()).set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 interfaze.onSuccess();
             }
@@ -73,7 +68,7 @@ public class FirestoreManager {
     }
 
     public void updateUserData(Map<String, Object> data, ListenerInterface interfaze){
-        firestore.collection("users").document(firebaseAuth.getCurrentUser().getUid()).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.getCurrentUser().getUid()).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
@@ -91,11 +86,20 @@ public class FirestoreManager {
                 if(task.isSuccessful()){
                     ArrayList<Post> posts = Post.getPosts();
                     posts.clear();
-                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
-                        readCommentSize(post, interfaze);
-                        posts.add(post);
+                    Log.d("tester", Integer.toString(task.getResult().size()));
+                    if(task.getResult().size() == 0){
+                        interfaze.onSuccess();
                     }
+                    else{
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            readCommentSize(post, interfaze);
+                            posts.add(post);
+                        }
+                    }
+                }
+                else{
+                    Log.d("tester", task.getException().toString());
                 }
             }
         });
@@ -118,11 +122,10 @@ public class FirestoreManager {
     }
 
     public void writePostData(Map<String, Object> data, ListenerInterface interfaze){
-         List<String> postIds = User.getUser().getMyPostIds();
-
-        DocumentReference documentReference = firestore.collection("posts").document();
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document();
         documentReference.set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
+                List<String> postIds = User.getUser().getMyPostIds();
                 postIds.add(documentReference.getId());
                 updateUserData(new HashMap<String, Object>() {{
                     put("myPostIds", postIds);
@@ -138,7 +141,7 @@ public class FirestoreManager {
 
     //Comment
     public void readCommentSize(Post post, ListenerInterface listenerInterface){
-        firestore.collection("posts").document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
+        FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 post.setCommentSize(task.getResult().size());
                 listenerInterface.onSuccess();
@@ -147,7 +150,7 @@ public class FirestoreManager {
     }
 
     public void readCommentData(Post post, ListenerInterface listenerInterface){
-        firestore.collection("posts").document(post.getId()).collection("comments").orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -164,7 +167,7 @@ public class FirestoreManager {
     }
 
     public void writeCommentData(String id, Map<String, Object> data, ListenerInterface listenerInterface){
-        firestore.collection("posts").document(id).collection("comments").document().set(data).addOnCompleteListener(task -> {
+        FirebaseFirestore.getInstance().collection("posts").document(id).collection("comments").document().set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 listenerInterface.onSuccess();
             }
@@ -175,7 +178,7 @@ public class FirestoreManager {
     }
 
     public void deleteComment(String postId, String commentId, ListenerInterface listenerInterface){
-        firestore.collection("posts").document(postId).collection("comments").document(commentId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseFirestore.getInstance().collection("posts").document(postId).collection("comments").document(commentId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 listenerInterface.onSuccess();
@@ -186,7 +189,7 @@ public class FirestoreManager {
 
     //thumb_up : int -> arraylist<String>
     public void addPostThumb_up(String id, int value){
-        DocumentReference documentReference = firestore.collection("posts").document(id);
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document(id);
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

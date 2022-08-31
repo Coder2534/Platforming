@@ -43,13 +43,14 @@ public class NoticeBoardActivity extends AppCompatActivity {
 
         activity = this;
 
-        int type = getIntent().getIntExtra("type", 0);
-
         Toolbar toolbar = findViewById(R.id.tb_noticeboard);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24); //왼쪽 상단 버튼 아이콘 지정
+
+        int type = getIntent().getIntExtra("type", 0);
+        String id = getIntent().getStringExtra("id");
 
         TextView title = findViewById(R.id.tv_noticeboard_title);
         switch (type){
@@ -69,8 +70,10 @@ public class NoticeBoardActivity extends AppCompatActivity {
         NoticeBoardListFragment fragment = new NoticeBoardListFragment();
         Bundle args = new Bundle();
         args.putInt("type", type);
+        if(id != null)
+            args.putString("id", id);
         fragment.setArguments(args);
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").commit();
     }
 
     @Override

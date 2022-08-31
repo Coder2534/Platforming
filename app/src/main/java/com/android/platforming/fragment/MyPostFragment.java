@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.platforming.activity.NoticeBoardActivity;
 import com.android.platforming.adapter.PostViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
+
+import java.util.ArrayList;
 
 public class MyPostFragment extends Fragment {
 
@@ -28,16 +33,22 @@ public class MyPostFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_mypost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        postViewAdapter = new PostViewAdapter(Post.getPosts());
+        postViewAdapter = new PostViewAdapter(Post.getPosts(), new ArrayList<String>(){{
+            add("자유게시판");
+            add("질문게시판");
+            add("학교시판");
+        }});
         postViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
-                NoticeBoardDetailFragment fragment = new NoticeBoardDetailFragment();
-                Bundle args = new Bundle();
-                args.putInt("position", position);
-                fragment.setArguments(args);
+                Post post = Post.getPosts().get(position);
+                Activity activity = getActivity();
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
+                Intent intent = new Intent(activity, NoticeBoardActivity.class);
+                intent.putExtra("type", post.getType());
+                intent.putExtra("id", post.getId());
+                startActivity(intent);
+                activity.overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
             }
         });
         recyclerView.setAdapter(postViewAdapter);

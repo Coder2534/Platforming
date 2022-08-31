@@ -12,6 +12,7 @@ public class Post {
     private static ArrayList<Post> posts = new ArrayList<>();
 
     String id;
+    int type;
     String uid;
     int profileIndex;
     String nickname;
@@ -24,6 +25,7 @@ public class Post {
 
     public Post (String id, Map<String, Object> data){
         this.id = id;
+        this.type = Integer.parseInt(String.valueOf(data.get("type")));;
         this.uid = (String) data.get("uid");
         this.profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         this.nickname = (String) data.get("nickname");
@@ -43,6 +45,10 @@ public class Post {
 
     public String getId() {
         return id;
+    }
+
+    public int getType() {
+        return type;
     }
 
     public String getUid() {

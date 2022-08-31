@@ -94,9 +94,7 @@ public class InitialSettingFragment extends Fragment {
             data.put("fonts", list_design);
 
             List<String> list_postIds = new ArrayList<>();
-            data.put("postIds_free", list_postIds);
-            data.put("postIds_question", list_postIds);
-            data.put("postIds_school", list_postIds);
+            data.put("myPostIds", list_postIds);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {
