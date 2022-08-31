@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Post {
+    public static final int FREE_BULLETIN_BOARD = 0;
+    public static final int QUESTION_BULLETIN_BOARD = 1;
+    public static final int SCHOOL_BULLETIN_BOARD = 2;
+
     private static ArrayList<Post> posts = new ArrayList<>();
 
     String id;

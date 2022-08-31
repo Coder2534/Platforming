@@ -35,19 +35,21 @@ public class MyPostFragment extends Fragment {
                 NoticeBoardDetailFragment fragment = new NoticeBoardDetailFragment();
                 Bundle args = new Bundle();
                 args.putInt("position", position);
-                args.putString("workName", workName);
                 fragment.setArguments(args);
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
             }
         });
-        recyclerView.setAdapter();
+        recyclerView.setAdapter(postViewAdapter);
+
+        FirestoreManager firestoreManager = new FirestoreManager();
+        firestoreManager.readMyPostData(new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                postViewAdapter.notifyDataSetChanged();
+            }
+        });
 
         return view;
-    }
-
-    private void refreshPostList(){
-        FirestoreManager firestoreManager = new FirestoreManager();
-        firestoreManager.
     }
 }

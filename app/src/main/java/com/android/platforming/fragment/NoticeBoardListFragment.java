@@ -29,7 +29,7 @@ public class NoticeBoardListFragment extends Fragment {
 
     private ActivityResultLauncher<Intent> resultLauncher;
 
-    String workName;
+    int type;
     PostViewAdapter postViewAdapter;
     Button write;
     ListenerInterface listenerInterface;
@@ -39,7 +39,7 @@ public class NoticeBoardListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_noticeboard_list, container, false);
         Bundle args = getArguments();
-        workName = args.getString("workName", null);
+        type = args.getInt("type", 0);
 
         resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == RESULT_OK){
@@ -60,11 +60,6 @@ public class NoticeBoardListFragment extends Fragment {
             @Override
             public void onSuccess(int position) {
                 NoticeBoardDetailFragment fragment = new NoticeBoardDetailFragment();
-                Bundle args = new Bundle();
-                args.putInt("position", position);
-                args.putString("workName", workName);
-                fragment.setArguments(args);
-
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();
             }
         });
@@ -78,7 +73,7 @@ public class NoticeBoardListFragment extends Fragment {
                 postViewAdapter.notifyDataSetChanged();
                 write.setOnClickListener(v -> {
                     Intent intent = new Intent(getApplicationContext(), NoticeBoardRegisterActivity.class);
-                    intent.putExtra("workName", workName);
+                    intent.putExtra("type", type);
                     resultLauncher.launch(intent);
                     getActivity().overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
                 });
@@ -91,6 +86,6 @@ public class NoticeBoardListFragment extends Fragment {
 
     private void refreshPostList(){
         FirestoreManager firestoreManager = new FirestoreManager();
-        firestoreManager.readPostData(workName, listenerInterface);
+        firestoreManager.readPostData(type, listenerInterface);
     }
 }

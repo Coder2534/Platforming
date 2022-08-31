@@ -1,5 +1,11 @@
 package com.android.platforming.activity;
 
+import static com.android.platforming.InitApplication.HOMEPAGE;
+import static com.android.platforming.InitApplication.RIROSCHOOL;
+import static com.android.platforming.clazz.Post.FREE_BULLETIN_BOARD;
+import static com.android.platforming.clazz.Post.QUESTION_BULLETIN_BOARD;
+import static com.android.platforming.clazz.Post.SCHOOL_BULLETIN_BOARD;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -104,24 +110,24 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(1, "학사일정", new SchoolScheduleFragment());
 
         mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
-        mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, "free bulletin board"));
-        mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, "question bulletin board"));
-        mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
+        mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, FREE_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, QUESTION_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, SCHOOL_BULLETIN_BOARD));
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_home_24);
-        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, "homepage"));
-        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, "riroschool"));
+        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, HOMEPAGE));
+        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, RIROSCHOOL));
 
         mainExpandableList.setAdapter();
     }
 
-    private OnChildClickInterface toggleActivity(Class clazz,String workName){
+    private OnChildClickInterface toggleActivity(Class clazz, int type){
         OnChildClickInterface interfaze = () -> {
             Intent intent = new Intent(this, clazz);
-            intent.putExtra("workName", workName);
+            intent.putExtra("type", type);
             startActivity(intent);
             overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
         };

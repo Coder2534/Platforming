@@ -1,5 +1,9 @@
 package com.android.platforming.activity;
 
+import static com.android.platforming.InitApplication.HOMEPAGE;
+import static com.android.platforming.InitApplication.RIROSCHOOL;
+import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,19 +31,20 @@ import java.util.List;
 
 public class WebViewActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
 
         Intent intent = getIntent();
-        String workName = intent.getStringExtra("workName");
+        int type = intent.getIntExtra("type", 0);
 
-        if(workName.equals("homepage")){
+        if(type == HOMEPAGE){
             setListener();
             loadWeb("http://school.gyo6.net/geumohs");
         }
-        else if(workName.equals("riroschool")){
+        else if(type == RIROSCHOOL){
             String riroschoolPackage = "com.rirosoft.riroschool";
             try{
                 startActivity(getPackageManager().getLaunchIntentForPackage(riroschoolPackage));
@@ -49,7 +54,7 @@ public class WebViewActivity extends AppCompatActivity {
                 loadWeb("http://geumo.riroschool.kr/");
             }
         }
-        else if(workName.equals("selfDiagnosis")){
+        else if(type == SELFDIAGNOSIS){
             String selfDiagnosisPackage = "kr.go.eduro.hcs";
             try{
                 startActivity(getPackageManager().getLaunchIntentForPackage(selfDiagnosisPackage));

@@ -1,5 +1,9 @@
 package com.android.platforming.activity;
 
+import static com.android.platforming.clazz.Post.FREE_BULLETIN_BOARD;
+import static com.android.platforming.clazz.Post.QUESTION_BULLETIN_BOARD;
+import static com.android.platforming.clazz.Post.SCHOOL_BULLETIN_BOARD;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -39,7 +43,7 @@ public class NoticeBoardActivity extends AppCompatActivity {
 
         activity = this;
 
-        String workName = getIntent().getStringExtra("workName");
+        int type = getIntent().getIntExtra("type", 0);
 
         Toolbar toolbar = findViewById(R.id.tb_noticeboard);
         setSupportActionBar(toolbar);
@@ -48,23 +52,23 @@ public class NoticeBoardActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24); //왼쪽 상단 버튼 아이콘 지정
 
         TextView title = findViewById(R.id.tv_noticeboard_title);
-        switch (workName){
-            case "free bulletin board":
+        switch (type){
+            case FREE_BULLETIN_BOARD:
                 title.setText("자유게시판");
                 break;
 
-            case "question bulletin board":
+            case QUESTION_BULLETIN_BOARD:
                 title.setText("질문게시판");
                 break;
 
-            case "school bulletin board":
+            case SCHOOL_BULLETIN_BOARD:
                 title.setText("학교게시판");
                 break;
         }
 
         NoticeBoardListFragment fragment = new NoticeBoardListFragment();
         Bundle args = new Bundle();
-        args.putString("workName", workName);
+        args.putInt("type", type);
         fragment.setArguments(args);
         activity.getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").commit();
     }

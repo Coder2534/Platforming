@@ -9,6 +9,10 @@ import java.util.Calendar;
 
 public class InitApplication extends Application {
 
+    public static final int HOMEPAGE = 0;
+    public static final int RIROSCHOOL = 1;
+    public static final int SELFDIAGNOSIS = 2;
+
     @Override
     public void onCreate() {
         super.onCreate();
