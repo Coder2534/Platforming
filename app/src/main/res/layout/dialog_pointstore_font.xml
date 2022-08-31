@@ -54,7 +54,7 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:backgroundTint="#499C54"
-                android:fontFamily="@font/nanum_handwriting_slow0"/>
+                android:fontFamily="@font/nanum_handwriting_slow1"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_again"
@@ -65,7 +65,7 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:backgroundTint="#499C54"
-                android:fontFamily="@font/nanum_handwriting_again1"/>
+                android:fontFamily="@font/nanum_handwriting_again2"/>
 
 
 
@@ -104,24 +104,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
             android:id="@+id/btn_pointstore_buyfont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="구매하기"
-            android:backgroundTint="#499C54"
             android:layout_alignParentBottom="true"
-            />
+            android:backgroundTint="#499C54"
+            android:text="구매하기" />
 
         <Button
-            android:id="@+id/btn_pointstore_savefont"
+            android:id="@+id/btn_pointstore_applyfont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장하기"
-            android:backgroundTint="#499C54"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/btn_pointstore_getout"
-            />
+            android:backgroundTint="#499C54"
+            android:text="적용하기" />
 
         <Button
             android:id="@+id/btn_pointstore_getout"

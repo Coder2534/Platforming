@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.platforming.clazz.ExpandableList;
@@ -38,6 +40,7 @@ import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ExpandableList mainExpandableList;
@@ -45,10 +48,18 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity mainActivity;
 
     boolean mainPage = false;
-
+    int applytheme;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        applytheme = 0;//형이 폰에 저장 돼있는 적용시키는 테마index넣기
+        switch (applytheme){
+            case 0:setTheme(R.style.Theme_Platforming);break;
+            case 1:setTheme(R.style.PinkTheme);break;
+            case 2:setTheme(R.style.BuleTheme);break;
+            case 3:setTheme(R.style.GreenTheme);break;
+            case 4:setTheme(R.style.BlackTheme);break;
+        }
         Log.d("timeline", "MainActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -168,4 +179,20 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getActivity(){
         return mainActivity;
     }
+
+    public void theme(int applytheme){
+        switch (applytheme){
+            case 0:setTheme(R.style.Theme_Platforming);break;
+            case 1:setTheme(R.style.PinkTheme);break;
+            case 2:setTheme(R.style.BuleTheme);break;
+            case 3:setTheme(R.style.GreenTheme);break;
+            case 4:setTheme(R.style.BlackTheme);break;
+        }
+        TaskStackBuilder.create(getActivity())
+                .addNextIntent(new Intent(getActivity(), MainActivity.class))
+                .addNextIntent(getActivity().getIntent())
+                .startActivities();
+        recreate();
+    }
+
 }
