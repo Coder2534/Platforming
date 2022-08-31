@@ -1,10 +1,17 @@
 package com.android.platforming.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +24,21 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
+import com.android.platforming.clazz.ThemeUtil;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 
 
 public class PointStoreFragment extends Fragment {
@@ -149,8 +162,7 @@ public class PointStoreFragment extends Fragment {
                 btn_pointstore_applyfont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        // "적용시킬 폰트"폰에 저장 하고
+                        saveFont(view.getContext(), checkfont);
                     }
                 });
                 btn_pointstore_getout.setOnClickListener(new View.OnClickListener() {
@@ -250,14 +262,14 @@ public class PointStoreFragment extends Fragment {
                             }
                             else customDialog.messageDialog(getActivity(),"포인트가 부족합니다.");
                         }
-                        //파이어 베이스 형
+                        //파이어 베이스 형 -> 니가해 updateUserData
                     }
                 });
                 btn_pointstore_applytheme.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity.getActivity().theme(themeindex);
-                        //적용시킬 테마 폰에 저장
+                        saveTheme(view.getContext(), themeindex);
+                        applyTheme(getActivity(), themeindex);
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
@@ -282,6 +294,41 @@ public class PointStoreFragment extends Fragment {
             case 4:checkfont = 4;  return null;
         }
         return null;
+    }
+
+    public void applyTheme(Activity activity, int applytheme){
+        switch (applytheme){
+            case 0:activity.setTheme(R.style.Theme_Platforming);break;
+            case 1:activity.setTheme(R.style.PinkTheme);break;
+            case 2:activity.setTheme(R.style.BuleTheme);break;
+            case 3:activity.setTheme(R.style.GreenTheme);break;
+            case 4:activity.setTheme(R.style.BlackTheme);break;
+        }
+        TaskStackBuilder.create(activity)
+                .addNextIntent(new Intent(activity, MainActivity.class))
+                .addNextIntent(activity.getIntent())
+                .startActivities();
+        activity.recreate();
+    }
+
+    private void saveFont(Context context, int fontIndex){
+        //PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("font", fontIndex).apply();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("font", fontIndex);
+        editor.apply();
+
+        ((InitApplication)getActivity().getApplication()).setAppliedFont(fontIndex);
+    }
+
+    private void saveTheme(Context context, int fontIndex){
+        //PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("font", themeindex).apply(); <- 한줄
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("theme", fontIndex);
+        editor.apply();
+
+        ((InitApplication)getActivity().getApplication()).setAppliedTheme(fontIndex);
     }
 
     private void setFontdialogview(){

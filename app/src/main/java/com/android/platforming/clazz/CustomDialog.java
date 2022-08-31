@@ -67,9 +67,9 @@ public class CustomDialog {
         ad.show();
     }
 
-    public void signOutDialog(Activity activity){
+    public void selectDialog(Activity activity, String title, ListenerInterface listenerInterface){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("로그아웃");
+        builder.setTitle(title);
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_select, null);
@@ -89,11 +89,7 @@ public class CustomDialog {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFirebaseAuth().signOut();
-                Intent loginIntent = new Intent(activity, SignInActivity.class);
-                activity.startActivity(loginIntent);
-                activity.finish();
-                MainActivity.getActivity().finish();
+                listenerInterface.onSuccess();
                 dialog.dismiss();
             }
         });
@@ -101,12 +97,12 @@ public class CustomDialog {
         builder.setView(view);
 
         dialog = builder.create();
-        builder.show();
+        dialog.show();
     }
 
     public void verificationDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("비밀번호 변경");
+        builder.setTitle("본인인증");
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_verification, null);

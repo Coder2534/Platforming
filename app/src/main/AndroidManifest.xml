@@ -22,7 +22,7 @@
             android:name="com.android.platforming.activity.NoticeBoardRegisterActivity"
             android:exported="false" />
         <activity
-            android:name="com.android.platforming.activity.NoticeBoardActivity"
+            android:name="com.android.platforming.activity.BulletinBoardActivity"
             android:exported="false" />
         <activity
             android:name="com.android.platforming.activity.WebViewActivity"

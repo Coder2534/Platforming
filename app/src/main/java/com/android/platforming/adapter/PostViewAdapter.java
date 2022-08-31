@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 
 public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHolder> {
 
-    private ArrayList<Post> mData = null ;
+    private ArrayList<Post> mData;
+    private ArrayList<String> mTypes = null;
 
     ListenerInterface listenerInterface;
 
@@ -31,6 +33,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         TextView info;
         TextView thumb_up;
         TextView comment;
+        TextView type;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -41,10 +44,11 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
             info = itemView.findViewById(R.id.tv_recyclerview_post_info);
             thumb_up = itemView.findViewById(R.id.tv_recyclerview_post_thumb_up);
             comment = itemView.findViewById(R.id.tv_recyclerview_post_comment);
+            type = itemView.findViewById(R.id.tv_recyclerview_post_type);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     int pos = getAdapterPosition() ;
                     if (pos != RecyclerView.NO_POSITION) {
                         listenerInterface.onSuccess(pos);
@@ -55,8 +59,13 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public PostViewAdapter(ArrayList<Post> list) {
+    public PostViewAdapter(ArrayList<Post> data) {
+        mData = data;
+    }
+
+    public PostViewAdapter(ArrayList<Post> list, ArrayList<String> types) {
         mData = list ;
+        mTypes = types;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
@@ -73,11 +82,20 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(PostViewAdapter.ViewHolder holder, int position) {
-        holder.title.setText(mData.get(position).getTitle());
-        holder.detail.setText(mData.get(position).getDetail());
-        holder.info.setText(formatTimeString(mData.get(position).getDate()) + " | " + mData.get(position).getNickname());
-        holder.thumb_up.setText(Integer.toString(mData.get(position).getThumb_up()));
-        holder.comment.setText(Integer.toString(mData.get(position).getComments().size()));
+        Post post = mData.get(position);
+        holder.title.setText(post.getTitle());
+        holder.detail.setText(post.getDetail());
+        holder.info.setText(formatTimeString(post.getDate()) + " | " + post.getNickname());
+        holder.thumb_up.setText(Integer.toString(post.getThumb_up()));
+        holder.comment.setText(Integer.toString(post.getCommentSize()));
+        if(mTypes != null){
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.thumb_up.getLayoutParams();
+            params.addRule(RelativeLayout.ALIGN_BASELINE, R.id.tv_recyclerview_post_type);
+            holder.thumb_up.setLayoutParams(params);
+            holder.type.setText(mTypes.get(post.getType()));
+            holder.type.setVisibility(View.VISIBLE);
+        }
+
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

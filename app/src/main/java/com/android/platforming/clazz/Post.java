@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Post {
+    public static final int FREE_BULLETIN_BOARD = 0;
+    public static final int QUESTION_BULLETIN_BOARD = 1;
+    public static final int SCHOOL_BULLETIN_BOARD = 2;
+
     private static ArrayList<Post> posts = new ArrayList<>();
 
     String id;
+    int type;
     String uid;
     int profileIndex;
     String nickname;
@@ -15,10 +20,12 @@ public class Post {
     String title;
     String detail;
     int thumb_up;
+    int commentSize;
     ArrayList<Comment> comments = new ArrayList<>();
 
     public Post (String id, Map<String, Object> data){
         this.id = id;
+        this.type = Integer.parseInt(String.valueOf(data.get("type")));;
         this.uid = (String) data.get("uid");
         this.profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         this.nickname = (String) data.get("nickname");
@@ -38,6 +45,10 @@ public class Post {
 
     public String getId() {
         return id;
+    }
+
+    public int getType() {
+        return type;
     }
 
     public String getUid() {
@@ -74,5 +85,13 @@ public class Post {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void setCommentSize(int commentSize) {
+        this.commentSize = commentSize;
+    }
+
+    public int getCommentSize() {
+        return commentSize;
     }
 }

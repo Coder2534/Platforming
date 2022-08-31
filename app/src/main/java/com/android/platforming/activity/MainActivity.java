@@ -1,13 +1,17 @@
 package com.android.platforming.activity;
 
+import static com.android.platforming.InitApplication.HOMEPAGE;
+import static com.android.platforming.InitApplication.RIROSCHOOL;
+import static com.android.platforming.clazz.Post.FREE_BULLETIN_BOARD;
+import static com.android.platforming.clazz.Post.QUESTION_BULLETIN_BOARD;
+import static com.android.platforming.clazz.Post.SCHOOL_BULLETIN_BOARD;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
-import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,13 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.clazz.User;
 import com.android.platforming.fragment.MyInfoFragment;
+import com.android.platforming.fragment.MyPostFragment;
 import com.android.platforming.fragment.PointStoreFragment;
 import com.android.platforming.fragment.SchoolIntroduceFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
@@ -41,19 +46,18 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity mainActivity;
 
     boolean mainPage = false;
-    int applytheme;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        applytheme = 0;//형이 폰에 저장 돼있는 적용시키는 테마index넣기
-        switch (applytheme){
+        Log.d("timeline", "MainActivity");
+        switch (((InitApplication)getApplication()).getAppliedTheme()){
             case 0:setTheme(R.style.Theme_Platforming);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
             case 3:setTheme(R.style.GreenTheme);break;
             case 4:setTheme(R.style.BlackTheme);break;
         }
-        Log.d("timeline", "MainActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainExpandableList.addParent("내정보", R.drawable.ic_baseline_person_24);
         mainExpandableList.addChild(0, "내정보", new MyInfoFragment());
-        mainExpandableList.addChild(0, "나의 게시물", new Fragment());
+        mainExpandableList.addChild(0, "나의 게시물", new MyPostFragment());
 
         mainExpandableList.addParent("학교 정보", R.drawable.ic_baseline_school_24);
         mainExpandableList.addChild(1, "학교소개", new SchoolIntroduceFragment());
@@ -115,24 +119,24 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(1, "학사일정", new SchoolScheduleFragment());
 
         mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
-        mainExpandableList.addChild(2, "자유게시판", toggleActivity(NoticeBoardActivity.class, "free bulletin board"));
-        mainExpandableList.addChild(2, "질문게시판", toggleActivity(NoticeBoardActivity.class, "question bulletin board"));
-        mainExpandableList.addChild(2, "학교게시판", toggleActivity(NoticeBoardActivity.class, "school bulletin board"));
+        mainExpandableList.addChild(2, "자유게시판", toggleActivity(BulletinBoardActivity.class, FREE_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "질문게시판", toggleActivity(BulletinBoardActivity.class, QUESTION_BULLETIN_BOARD));
+        mainExpandableList.addChild(2, "학교게시판", toggleActivity(BulletinBoardActivity.class, SCHOOL_BULLETIN_BOARD));
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_home_24);
-        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, "homepage"));
-        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, "riroschool"));
+        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, HOMEPAGE));
+        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, RIROSCHOOL));
 
         mainExpandableList.setAdapter();
     }
 
-    private OnChildClickInterface toggleActivity(Class clazz,String workName){
+    private OnChildClickInterface toggleActivity(Class clazz, int type){
         OnChildClickInterface interfaze = () -> {
             Intent intent = new Intent(this, clazz);
-            intent.putExtra("workName", workName);
+            intent.putExtra("type", type);
             startActivity(intent);
             overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
         };
@@ -172,20 +176,4 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getActivity(){
         return mainActivity;
     }
-
-    public void theme(int applytheme){
-        switch (applytheme){
-            case 0:setTheme(R.style.Theme_Platforming);break;
-            case 1:setTheme(R.style.PinkTheme);break;
-            case 2:setTheme(R.style.BuleTheme);break;
-            case 3:setTheme(R.style.GreenTheme);break;
-            case 4:setTheme(R.style.BlackTheme);break;
-        }
-        TaskStackBuilder.create(getActivity())
-                .addNextIntent(new Intent(getActivity(), MainActivity.class))
-                .addNextIntent(getActivity().getIntent())
-                .startActivities();
-        recreate();
-    }
-
 }

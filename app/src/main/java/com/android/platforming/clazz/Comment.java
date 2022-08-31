@@ -3,13 +3,15 @@ package com.android.platforming.clazz;
 import java.util.Map;
 
 public class Comment {
-    String uid;
-    int profileIndex;
-    String nickname;
-    long date;
-    String comment;
+    private String id;
+    private String uid;
+    private int profileIndex;
+    private String nickname;
+    private long date;
+    private String comment;
 
-    public Comment(Map<String, Object> data){
+    public Comment(String id, Map<String, Object> data){
+        this.id = id;
         uid = (String) data.get("uid");
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         nickname = (String) data.get("nickname");
@@ -35,5 +37,9 @@ public class Comment {
 
     public String getComment() {
         return comment;
+    }
+
+    public String getId() {
+        return id;
     }
 }

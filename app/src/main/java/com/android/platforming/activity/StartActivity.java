@@ -2,7 +2,6 @@ package com.android.platforming.activity;
 
 import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 import static com.android.platforming.clazz.FirestoreManager.setFirebaseAuth;
-import static com.android.platforming.clazz.FirestoreManager.setFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,7 +38,6 @@ public class StartActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_start);
 
-        setFirestore(FirebaseFirestore.getInstance());
         setFirebaseAuth(FirebaseAuth.getInstance());
 
         if(getFirebaseAuth().getCurrentUser() != null && getFirebaseAuth().getCurrentUser().isEmailVerified()){

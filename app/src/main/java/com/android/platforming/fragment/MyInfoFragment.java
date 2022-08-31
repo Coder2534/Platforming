@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.media.Image;
 import android.os.Bundle;
@@ -19,19 +21,59 @@ import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyInfoFragment extends Fragment {
     FirestoreManager firestoreManager;
     TextView tv_myinfo_name,tv_myinfo_email,tv_myinfo_point,tv_myinfo_rivise;
-    ImageButton ibtn_myinfo_profile,ibtn_myinfo_rivise,ibtn_profile_1,ibtn_profile_2,ibtn_profile_3;
+    ImageButton ibtn_myinfo_profile,ibtn_myinfo_rivise;
     EditText et_myinfo_nickname,et_myinfo_class,et_myinfo_phonenumber;
     Button btn_myinfo_finish;
 
-    Dialog dialog;
-    private void setDialog() {
-        dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.customdialog_profile);
+    AlertDialog dialog;
+    private void setDialog(Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.customdialog_profile, null);
+
+        ImageButton profile1 = view.findViewById(R.id.ibtn_profile_1);
+        profile1.setImageResource(User.getProfiles().get(0));
+        profile1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ibtn_myinfo_profile.setImageResource(User.getProfiles().get(0));
+                dialog.dismiss();
+            }
+        });
+
+        ImageButton profile2 = view.findViewById(R.id.ibtn_profile_2);
+        profile2.setImageResource(User.getProfiles().get(1));
+        profile2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ibtn_myinfo_profile.setImageResource(User.getProfiles().get(1));
+                dialog.dismiss();
+            }
+        });
+
+        ImageButton profile3 = view.findViewById(R.id.ibtn_profile_3);
+        profile3.setImageResource(User.getProfiles().get(2));
+        profile3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ibtn_myinfo_profile.setImageResource(User.getProfiles().get(2));
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
         dialog.show();
     }
 
@@ -57,10 +99,14 @@ public class MyInfoFragment extends Fragment {
         tv_myinfo_name.setText(User.getUser().getUsername());
         tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
         tv_myinfo_point.setText(Integer.toString(User.getUser().getPoint()));
+        ibtn_myinfo_profile.setImageResource(User.getUser().getProfile());
 
-        et_myinfo_nickname.setEnabled(false);
-        et_myinfo_phonenumber.setEnabled(false);
-        et_myinfo_class.setEnabled(false);
+        et_myinfo_nickname.setClickable(false);
+        et_myinfo_nickname.setFocusable(false);
+        et_myinfo_phonenumber.setClickable(false);
+        et_myinfo_phonenumber.setFocusable(false);
+        et_myinfo_class.setClickable(false);
+        et_myinfo_class.setFocusable(false);
 
         ibtn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,54 +114,52 @@ public class MyInfoFragment extends Fragment {
 
             tv_myinfo_rivise.setText("수정가능");
             btn_myinfo_finish.setVisibility(View.VISIBLE);
-            ibtn_myinfo_profile.setEnabled(true);
-            et_myinfo_nickname.setEnabled(true);
-            et_myinfo_class.setEnabled(true);
-            et_myinfo_phonenumber.setEnabled(true);
-                ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setDialog();
-                        ibtn_profile_1 = dialog.findViewById(R.id.ibtn_profile_1);
-                        ibtn_profile_2 = dialog.findViewById(R.id.ibtn_profile_2);
-                        ibtn_profile_3 = dialog.findViewById(R.id.ibtn_profile_3);
+            ibtn_myinfo_profile.setClickable(true);
+            et_myinfo_nickname.setFocusableInTouchMode(true);
+            et_myinfo_nickname.setFocusable(true);
+            et_myinfo_class.setFocusableInTouchMode(true);
+            et_myinfo_class.setFocusable(true);
+            et_myinfo_phonenumber.setFocusableInTouchMode(true);
+            et_myinfo_phonenumber.setFocusable(true);
 
-                        ibtn_profile_1.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ibtn_myinfo_profile.setImageResource(R.drawable.ic_baseline_10mp_24);
-                                dialog.dismiss();
-                            }
-                        });
-                        ibtn_profile_2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ibtn_myinfo_profile.setImageResource(R.drawable.ic_baseline_11mp_24);
-                                dialog.dismiss();
-                            }
-                        });
-                        ibtn_profile_3.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ibtn_myinfo_profile.setImageResource(R.drawable.ic_baseline_12mp_24);
-                                dialog.dismiss();
-                            }
-                        });
-                    }
-                });
+            ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setDialog(getActivity());
+                }
+            });
 
-                btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btn_myinfo_finish.setVisibility(View.GONE);
-                        tv_myinfo_rivise.setText("");
-                        ibtn_myinfo_profile.setEnabled(false);
-                        et_myinfo_nickname.setEnabled(false);
-                        et_myinfo_class.setEnabled(false);
-                        et_myinfo_phonenumber.setEnabled(false);
+            btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    btn_myinfo_finish.setVisibility(View.GONE);
+                    tv_myinfo_rivise.setText("");
+                    ibtn_myinfo_profile.setClickable(false);
+                    et_myinfo_nickname.setClickable(false);
+                    et_myinfo_nickname.setFocusable(false);
+                    et_myinfo_phonenumber.setClickable(false);
+                    et_myinfo_phonenumber.setFocusable(false);
+                    et_myinfo_class.setClickable(false);
+                    et_myinfo_class.setFocusable(false);
 
-                    }
-                });
+                    et_myinfo_nickname.getText().toString();
+                    et_myinfo_class.getText().toString();
+                    et_myinfo_phonenumber.getText().toString();
+
+                    Map<String,Object> MyinfoData = new HashMap<>();
+
+                    MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
+                    MyinfoData.put("grade",et_myinfo_class.getText().toString());
+                    MyinfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
+
+                    firestoreManager.updateUserData(MyinfoData, new ListenerInterface() {
+                        @Override
+                        public void onSuccess() {
+                            ListenerInterface.super.onSuccess();
+                        }
+                    });
+                }
+            });
             }
         });
 

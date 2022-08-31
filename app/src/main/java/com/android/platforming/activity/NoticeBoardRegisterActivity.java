@@ -1,10 +1,7 @@
 package com.android.platforming.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +10,6 @@ import android.widget.ImageButton;
 
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
-import com.android.platforming.fragment.NoticeBoardListFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
@@ -27,7 +23,7 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeboard_register);
 
-        String workName = getIntent().getStringExtra("workName");
+        int type = getIntent().getIntExtra("type", 0);
 
         ImageButton button_back = findViewById(R.id.btn_noticeboard_register_back);
         button_back.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +41,7 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
                 EditText editText_detail = findViewById(R.id.et_noticeboard_register_detail);
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", User.getUser().getUid());
+                data.put("type", type);
                 data.put("profileIndex", User.getUser().getProfileIndex());
                 data.put("nickname", User.getUser().getNickname());
                 data.put("date", System.currentTimeMillis());
@@ -52,7 +49,7 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
                 data.put("detail", editText_detail.getText().toString());
                 data.put("thumb_up", 0);
                 FirestoreManager firestoreManager = new FirestoreManager();
-                firestoreManager.writePostData(workName, data, new ListenerInterface() {
+                firestoreManager.writePostData(data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
                         //refresh NoticeBoardListFragment

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Preference
+        android:key="font"
+        android:title="폰트"
+        android:icon="@drawable/ic_baseline_font_download_24"/>
+
+    <Preference
+        android:key="theme"
+        android:title="테마"
+        android:icon="@drawable/ic_baseline_palette_24"/>
+</PreferenceScreen>

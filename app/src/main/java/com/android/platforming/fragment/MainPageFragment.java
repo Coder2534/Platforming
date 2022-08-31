@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,7 +76,7 @@ public class MainPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("workName", "selfDiagnosis");
+                intent.putExtra("type", SELFDIAGNOSIS);
                 startActivity(intent);
             }
         });
