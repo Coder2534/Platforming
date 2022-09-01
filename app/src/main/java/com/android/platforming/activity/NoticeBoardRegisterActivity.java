@@ -13,6 +13,7 @@ import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class NoticeBoardRegisterActivity extends AppCompatActivity {
                 data.put("date", System.currentTimeMillis());
                 data.put("title", editText_title.getText().toString());
                 data.put("detail", editText_detail.getText().toString());
-                data.put("thumb_up", 0);
+                data.put("likes", new ArrayList<String>());
                 FirestoreManager firestoreManager = new FirestoreManager();
                 firestoreManager.writePostData(data, new ListenerInterface() {
                     @Override
