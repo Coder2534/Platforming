@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +28,14 @@ import com.android.platforming.InitApplication;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
-import com.android.platforming.clazz.ThemeUtil;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+
 
 
 

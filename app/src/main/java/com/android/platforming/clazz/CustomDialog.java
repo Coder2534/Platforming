@@ -8,8 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomDialog {
     AlertDialog dialog;
@@ -173,6 +180,32 @@ public class CustomDialog {
                         }
                     }
                 });
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+    public void themeDialog(Activity activity, List themes){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_message, null);
+
+        RadioButton button = new RadioButton(activity);
+        button.setLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setText("test");
+
+        RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
+        radioGroup.addView(button);
+
+        Button confirm = view.findViewById(R.id.btn_message_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
 
