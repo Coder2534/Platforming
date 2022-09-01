@@ -1,12 +1,9 @@
 package com.android.platforming.fragment;
 
-import android.app.AlertDialog;
+;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +15,6 @@ import com.android.platforming.clazz.User;
 import com.example.platforming.R;
 
 public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
-    AlertDialog dialog;
     CustomDialog customDialog;
 
     @Override
@@ -31,9 +27,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
         font.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-                Log.d("check_font_dialog","ok");
-                customDialog.themeDialog(getActivity(), User.getUser().getFonts());
-                Log.d("check_font_dialog2","ok");
+
                 return true;
             }
         });
@@ -41,6 +35,9 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
         theme.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
+                Log.d("check_font_dialog", String.valueOf(User.getUser().getThemes()));
+                customDialog.themeDialog(getActivity(), User.getUser().getThemes());
+                Log.d("check_font_dialog2","ok");
                 return true;
             }
         });
