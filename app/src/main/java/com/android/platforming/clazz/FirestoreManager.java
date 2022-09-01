@@ -188,15 +188,12 @@ public class FirestoreManager {
 
 
     //thumb_up : int -> arraylist<String>
-    public void addPostThumb_up(String id, int value){
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document(id);
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    public void updatePostData(String id, Map<String, Object> data, ListenerInterface listenerInterface) {
+        FirebaseFirestore.getInstance().collection("posts").document(id).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    documentReference.update(new HashMap<String, Object>() {{
-                        put("thumb_up", Integer.parseInt(String.valueOf(task.getResult().getData().get("thumb_up")) + value));
-                    }});
+                    listenerInterface.onSuccess();
                 }
             }
         });
