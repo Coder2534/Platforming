@@ -70,6 +70,7 @@ public class BulletinBoardPostFragment extends Fragment {
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                like.setClickable(false);
                 ListenerInterface listenerInterface;
                 if (likes.contains(uid)) {
                     likes.remove(uid);
@@ -78,11 +79,13 @@ public class BulletinBoardPostFragment extends Fragment {
                         public void onSuccess() {
                             like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_off_alt_24, 0, 0, 0);
                             like.setText(String.valueOf(likes.size()));
+                            like.setClickable(true);
                         }
 
                         @Override
                         public void onFail() {
                             likes.add(uid);
+                            like.setClickable(true);
                         }
                     };
                 } else {
@@ -92,11 +95,13 @@ public class BulletinBoardPostFragment extends Fragment {
                         public void onSuccess() {
                             like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_alt_24, 0, 0, 0);
                             like.setText(String.valueOf(likes.size()));
+                            like.setClickable(true);
                         }
 
                         @Override
                         public void onFail() {
                             likes.remove(uid);
+                            like.setClickable(true);
                         }
                     };
                 }
@@ -117,6 +122,17 @@ public class BulletinBoardPostFragment extends Fragment {
             @Override
             public void onSuccess() {
                 //refresh commentList
+                onChanged();
+            }
+
+            @Override
+            public void onSuccess(int pos) {
+                //refresh commentList
+                commentViewAdapter.removeData(pos);
+                onChanged();
+            }
+
+            private void onChanged(){
                 commentViewAdapter.notifyDataSetChanged();
                 comment_count.setText(String.valueOf(post.getComments().size()));
             }

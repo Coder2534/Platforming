@@ -177,24 +177,23 @@ public class FirestoreManager {
         });
     }
 
-    public void deleteComment(String postId, String commentId, ListenerInterface listenerInterface){
+    public void deleteComment(String postId, String commentId, int pos, ListenerInterface listenerInterface){
         FirebaseFirestore.getInstance().collection("posts").document(postId).collection("comments").document(commentId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                listenerInterface.onSuccess();
+                listenerInterface.onSuccess(pos);
             }
         });
     }
 
-
-    //thumb_up : int -> arraylist<String>
     public void updatePostData(String id, Map<String, Object> data, ListenerInterface listenerInterface) {
         FirebaseFirestore.getInstance().collection("posts").document(id).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if(task.isSuccessful())
                     listenerInterface.onSuccess();
-                }
+                else
+                    listenerInterface.onFail();
             }
         });
     }

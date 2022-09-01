@@ -36,6 +36,10 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
     private ArrayList<Comment> mData = null ;
 
+    public void removeData(int index){
+        mData.remove(index);
+    }
+
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profile;
@@ -64,7 +68,7 @@ public class CommentViewAdapter extends RecyclerView.Adapter<CommentViewAdapter.
                             int pos = getAdapterPosition() ;
                             if (pos != RecyclerView.NO_POSITION) {
                                 FirestoreManager firestoreManager = new FirestoreManager();
-                                firestoreManager.deleteComment(postId, mData.get(pos).getId(), listenerInterface);
+                                firestoreManager.deleteComment(postId, mData.get(pos).getId(), pos, listenerInterface);
                             }
                         }
                     });
