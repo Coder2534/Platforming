@@ -2,6 +2,8 @@ package com.android.platforming.clazz;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class Post {
@@ -19,7 +21,7 @@ public class Post {
     long date;
     String title;
     String detail;
-    int thumb_up;
+    ArrayList<String> likes = new ArrayList<>();
     int commentSize;
     ArrayList<Comment> comments = new ArrayList<>();
 
@@ -32,7 +34,7 @@ public class Post {
         this.date = (long) data.get("date");
         this.title = (String) data.get("title");
         this.detail = (String) data.get("detail");
-        this.thumb_up = Integer.parseInt(String.valueOf(data.get("thumb_up")));
+        this.likes.addAll ((List<String>) data.get("likes"));
     }
 
     public static ArrayList<Post> getPosts() {
@@ -75,8 +77,8 @@ public class Post {
         return detail;
     }
 
-    public int getThumb_up() {
-        return thumb_up;
+    public ArrayList<String> getLikes() {
+        return likes;
     }
 
     public ArrayList<Comment> getComments() {

@@ -26,6 +26,7 @@ import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,25 +46,69 @@ public class BulletinBoardPostFragment extends Fragment {
 
         ImageView profile = view.findViewById(R.id.iv_noticeboard_detail_profile);
         profile.setImageResource(User.getProfiles().get(post.getProfileIndex()));
+
         TextView nickname = view.findViewById(R.id.tv_noticeboard_detail_nickname);
         nickname.setText(post.getNickname());
+
         TextView date = view.findViewById(R.id.tv_noticeboard_detail_date);
         date.setText(dateFormat.format(post.getDate()));
+
         TextView title = view.findViewById(R.id.tv_noticeboard_detail_title);
         title.setText(post.getTitle());
+
         TextView detail = view.findViewById(R.id.tv_noticeboard_detail_detail);
         detail.setText(post.getDetail());
-        TextView thumb_up = view.findViewById(R.id.tv_noticeboard_detail_thumb_up);
-        thumb_up.setText(Integer.toString(post.getThumb_up()));
-        thumb_up.setOnClickListener(new View.OnClickListener() {
+
+        TextView like = view.findViewById(R.id.tv_noticeboard_detail_like);
+        ArrayList<String> likes = post.getLikes();
+        String uid = User.getUser().getUid();
+        like.setText(String.valueOf(likes.size()));
+        if(likes.contains(uid))
+            like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_alt_24, 0, 0, 0);
+        else
+            like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_off_alt_24, 0, 0, 0);
+        like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ListenerInterface listenerInterface;
+                if (likes.contains(uid)) {
+                    likes.remove(uid);
+                    listenerInterface = new ListenerInterface() {
+                        @Override
+                        public void onSuccess() {
+                            like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_off_alt_24, 0, 0, 0);
+                            like.setText(String.valueOf(likes.size()));
+                        }
+
+                        @Override
+                        public void onFail() {
+                            likes.add(uid);
+                        }
+                    };
+                } else {
+                    likes.add(uid);
+                    listenerInterface = new ListenerInterface() {
+                        @Override
+                        public void onSuccess() {
+                            like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_alt_24, 0, 0, 0);
+                            like.setText(String.valueOf(likes.size()));
+                        }
+
+                        @Override
+                        public void onFail() {
+                            likes.remove(uid);
+                        }
+                    };
+                }
+                Map<String, Object> data = new HashMap<String, Object>(){{
+                    put("likes", likes);
+                }};
                 FirestoreManager firestoreManager = new FirestoreManager();
-                firestoreManager.addPostThumb_up(post.getId(), 1);
+                firestoreManager.updatePostData(post.getId(), data, listenerInterface);
             }
         });
         TextView comment_count = view.findViewById(R.id.tv_noticeboard_detail_comment);
-        comment_count.setText(Integer.toString(post.getComments().size()));
+        comment_count.setText(String.valueOf(post.getComments().size()));
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_detail_coment);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -73,7 +118,7 @@ public class BulletinBoardPostFragment extends Fragment {
             public void onSuccess() {
                 //refresh commentList
                 commentViewAdapter.notifyDataSetChanged();
-                comment_count.setText(Integer.toString(post.getComments().size()));
+                comment_count.setText(String.valueOf(post.getComments().size()));
             }
         };
         commentViewAdapter.setListenerInterface(listenerInterface);

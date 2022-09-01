@@ -55,7 +55,7 @@
             android:text="대충 글이라는 글"/>
 
         <TextView
-            android:id="@+id/tv_noticeboard_detail_thumb_up"
+            android:id="@+id/tv_noticeboard_detail_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_noticeboard_detail_detail"
@@ -69,9 +69,9 @@
             android:id="@+id/tv_noticeboard_detail_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tv_noticeboard_detail_thumb_up"
+            android:layout_toRightOf="@+id/tv_noticeboard_detail_like"
             android:layout_marginLeft="20dp"
-            android:layout_alignTop="@+id/tv_noticeboard_detail_thumb_up"
+            android:layout_alignTop="@+id/tv_noticeboard_detail_like"
             android:drawableLeft="@drawable/ic_baseline_comment_24"
             android:textSize="20dp"
             android:text="0"/>
