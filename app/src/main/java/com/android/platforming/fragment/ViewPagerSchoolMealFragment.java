@@ -40,7 +40,12 @@ public class ViewPagerSchoolMealFragment extends Fragment {
                 public void onSuccess() {
                     data.clear();
                     data.addAll(api.getResult());
-                    adapter.notifyDataSetChanged();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
                 }
             });
         } catch (InterruptedException e) {

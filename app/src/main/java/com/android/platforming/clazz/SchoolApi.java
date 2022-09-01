@@ -54,9 +54,9 @@ public class SchoolApi {
     private String dateFormat(Date date){
         SimpleDateFormat dateFormat_year = new SimpleDateFormat("yyyy");
         year = dateFormat_year.format(date);
-        SimpleDateFormat dateFormat_month = new SimpleDateFormat("M");
+        SimpleDateFormat dateFormat_month = new SimpleDateFormat("MM");
         month = dateFormat_month.format(date);
-        SimpleDateFormat dateFormat_day = new SimpleDateFormat("d");
+        SimpleDateFormat dateFormat_day = new SimpleDateFormat("dd");
         day = dateFormat_day.format(date);
 
         return year + month + day;

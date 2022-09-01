@@ -5,18 +5,23 @@ import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.activity.WebViewActivity;
 import com.android.platforming.adapter.FragmentSliderAdapter;
+import com.android.platforming.adapter.PostRecentViewAdapter;
+import com.android.platforming.clazz.Post;
 import com.example.platforming.R;
 
 public class MainPageFragment extends Fragment {
@@ -53,7 +58,7 @@ public class MainPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
 
-        //ViewPager2
+        //상단 배너
         viewPager = view.findViewById(R.id.vp_mainpage);
         FragmentSliderAdapter sliderAdapter = new FragmentSliderAdapter(getActivity());
         sliderAdapter.addFragment(new ViewPagerSchoolMealFragment());
@@ -70,7 +75,7 @@ public class MainPageFragment extends Fragment {
         fakeSize = realSize + 2;
         viewPager.setCurrentItem(2, false);
 
-        //Listener
+        //자가진단 배너
         ImageView selfDiagnosis = view.findViewById(R.id.iv_mainpage_selfdiagnosis);
         selfDiagnosis.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +85,27 @@ public class MainPageFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //최근 게시물
+        recyclerView = view.findViewById(R.id.rv_mainpage_recentpost);
+        recyclerView.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        PostRecentViewAdapter recentViewAdapter = new PostRecentViewAdapter(Post.getPosts());
+
+        recyclerView.setAdapter(recentViewAdapter);
+
+        dummy = inflater.inflate(R.layout.item_recyclerview_post_recent, null);
+        dummy.measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
         return view;
+    }
+
+    RecyclerView recyclerView;
+    View dummy;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("Log", "Height: " + recyclerView.getHeight());
+        Log.d("Log", "Height2: " + dummy.getMeasuredHeight());
     }
 }

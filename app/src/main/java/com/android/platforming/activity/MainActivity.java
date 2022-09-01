@@ -72,15 +72,12 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
 
-        setListView();
-        setListener();
+        setDrawerLayoutView();
 
-        if(User.getUser() == null){
+        if(User.getUser() == null)
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
-        }
-        else{
+        else
             setting();
-        }
     }
 
     public void setting(){
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         info.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
     }
 
-    private void setListView(){
+    private void setDrawerLayoutView(){
         RelativeLayout relativeLayout = findViewById(R.id.ll_main);
 
         mainExpandableList = new ExpandableList(this);
@@ -131,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, RIROSCHOOL));
 
         mainExpandableList.setAdapter();
+
+        mainExpandableList.setListner(getSupportFragmentManager(), () -> drawerLayout.closeDrawer(GravityCompat.START));
+
+        TextView setting = findViewById(R.id.tv_main_setting);
+        setting.setOnClickListener(v -> {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(settingIntent);
+        });
     }
 
     private OnChildClickInterface toggleActivity(Class clazz, int type){
@@ -141,18 +147,6 @@ public class MainActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
         };
         return interfaze;
-    }
-
-
-    private void setListener(){
-        mainExpandableList.setListner(getSupportFragmentManager(), () -> drawerLayout.closeDrawer(GravityCompat.START));
-
-        TextView setting = findViewById(R.id.tv_main_setting);
-        setting.setOnClickListener(v -> {
-            drawerLayout.closeDrawer(GravityCompat.START);
-            Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
-            startActivity(settingIntent);
-        });
     }
 
     @Override

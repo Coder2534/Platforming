@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,9 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.platforming.adapter.CommentViewAdapter;
-import com.android.platforming.adapter.PostViewAdapter;
-import com.android.platforming.clazz.Comment;
+import com.android.platforming.adapter.PostCommentViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.clazz.User;
@@ -40,26 +37,26 @@ public class BulletinBoardPostFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_noticeboard_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_bulletinboard_post, container, false);
         Bundle args = getArguments();
         post = Post.getPosts().get(args.getInt("position", 0));
 
-        ImageView profile = view.findViewById(R.id.iv_noticeboard_detail_profile);
+        ImageView profile = view.findViewById(R.id.iv_bulletinboard_detail_profile);
         profile.setImageResource(User.getProfiles().get(post.getProfileIndex()));
 
-        TextView nickname = view.findViewById(R.id.tv_noticeboard_detail_nickname);
+        TextView nickname = view.findViewById(R.id.tv_bulletinboard_detail_nickname);
         nickname.setText(post.getNickname());
 
-        TextView date = view.findViewById(R.id.tv_noticeboard_detail_date);
+        TextView date = view.findViewById(R.id.tv_bulletinboard_detail_date);
         date.setText(dateFormat.format(post.getDate()));
 
-        TextView title = view.findViewById(R.id.tv_noticeboard_detail_title);
+        TextView title = view.findViewById(R.id.tv_bulletinboard_detail_title);
         title.setText(post.getTitle());
 
-        TextView detail = view.findViewById(R.id.tv_noticeboard_detail_detail);
+        TextView detail = view.findViewById(R.id.tv_bulletinboard_detail_detail);
         detail.setText(post.getDetail());
 
-        TextView like = view.findViewById(R.id.tv_noticeboard_detail_like);
+        TextView like = view.findViewById(R.id.tv_bulletinboard_detail_like);
         ArrayList<String> likes = post.getLikes();
         String uid = User.getUser().getUid();
         like.setText(String.valueOf(likes.size()));
@@ -112,12 +109,12 @@ public class BulletinBoardPostFragment extends Fragment {
                 firestoreManager.updatePostData(post.getId(), data, listenerInterface);
             }
         });
-        TextView comment_count = view.findViewById(R.id.tv_noticeboard_detail_comment);
+        TextView comment_count = view.findViewById(R.id.tv_bulletinboard_detail_comment);
         comment_count.setText(String.valueOf(post.getComments().size()));
 
-        RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_detail_coment);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_bulletinboard_detail_coment);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        CommentViewAdapter commentViewAdapter = new CommentViewAdapter(getActivity(), post.getId(), post.getComments());
+        PostCommentViewAdapter commentViewAdapter = new PostCommentViewAdapter(getActivity(), post.getId(), post.getComments());
         listenerInterface = new ListenerInterface() {
             @Override
             public void onSuccess() {
@@ -140,12 +137,12 @@ public class BulletinBoardPostFragment extends Fragment {
         commentViewAdapter.setListenerInterface(listenerInterface);
         recyclerView.setAdapter(commentViewAdapter);
 
-        EditText comment = view.findViewById(R.id.et_noticeboard_detail_comment);
+        EditText comment = view.findViewById(R.id.et_bulletinboard_detail_comment);
 
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readCommentData(post, listenerInterface);
 
-        ImageButton send = view.findViewById(R.id.btn_noticeboard_detail_send);
+        ImageButton send = view.findViewById(R.id.btn_bulletinboard_detail_send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

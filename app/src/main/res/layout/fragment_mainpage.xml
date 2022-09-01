@@ -34,9 +34,16 @@
         android:background="@drawable/bg_round">
 
         <TextView
+            android:id="@+id/tv_mainpage_recentpost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="새 게시물"
             android:textSize="30dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mainpage_recentpost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_mainpage_recentpost"/>
     </RelativeLayout>
 </RelativeLayout>

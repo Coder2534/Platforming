@@ -41,7 +41,7 @@ public class BulletinBoardListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_noticeboard_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_bulletinboard_list, container, false);
         Bundle args = getArguments();
 
         String id = args.getString("id");
@@ -68,7 +68,7 @@ public class BulletinBoardListFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = view.findViewById(R.id.rv_noticeboard_list_post);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_bulletinboard_list_post);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         postViewAdapter = new PostViewAdapter(Post.getPosts());
         postViewAdapter.setListenerInterface(new ListenerInterface() {
@@ -80,7 +80,7 @@ public class BulletinBoardListFragment extends Fragment {
 
         recyclerView.setAdapter(postViewAdapter);
 
-        write = view.findViewById(R.id.btn_noticeboard_list_write);
+        write = view.findViewById(R.id.btn_bulletinboard_list_write);
         listenerInterface = new ListenerInterface() {
             @Override
             public void onSuccess() {
