@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomDialog {
@@ -194,12 +192,21 @@ public class CustomDialog {
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_message, null);
 
-        RadioButton button = new RadioButton(activity);
-        button.setLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        button.setText("test");
-
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
-        radioGroup.addView(button);
+        radioGroup.setOrientation(radioGroup.VERTICAL);
+        Log.d("check_method_dialog","ok");
+
+        for(int i = 0; i< themes.size();i++){
+            RadioButton button = new RadioButton(activity);
+            button.setText("test");
+            button.setId(View.generateViewId());
+            button.setText("Radio " + button.getId());
+
+            radioGroup.addView(button);
+        }
+
+
+
 
         Button confirm = view.findViewById(R.id.btn_message_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
