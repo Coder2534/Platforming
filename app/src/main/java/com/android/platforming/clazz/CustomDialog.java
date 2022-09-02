@@ -200,30 +200,28 @@ public class CustomDialog {
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
-        ArrayList arrayList = new ArrayList();
 
         for(int i = 0; i< themes.size();i++){
             RadioButton radioButton = new RadioButton(activity);
-            radioButton.setId(500+i);
             radioButton.setTextColor(Color.BLACK);
             if (themes.get(i).equals((long)0)){
-                arrayList.add(0);
+                radioButton.setId(500+0);
                 radioButton.setText("라이트 테마");
             }
             else if(themes.get(i).equals((long)1)){
-                arrayList.add(1);
+                radioButton.setId(500+1);
                 radioButton.setText("핑크 테마");
             }
             else if(themes.get(i).equals((long)2)){
-                arrayList.add(2);
+                radioButton.setId(500+2);
                 radioButton.setText("블루 테마");
             }
             else if(themes.get(i).equals((long)3)){
-                arrayList.add(3);
+                radioButton.setId(500+3);
                 radioButton.setText("그린 테마");
             }
             else if(themes.get(i).equals((long)4)){
-                arrayList.add(4);
+                radioButton.setId(500+4);
                 radioButton.setText("블랙 테마");
             }
             radioThemeList[i] = radioButton;
@@ -237,12 +235,8 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
-                MainActivity.getActivity().recreate();
-                TaskStackBuilder.create(activity)
-                        .addNextIntent(new Intent(activity, MainActivity.class))
-                        .addNextIntent(activity.getIntent())
-                        .startActivities();
-
+                activity.recreate();
+                dialog.dismiss();
             }
         });
 
