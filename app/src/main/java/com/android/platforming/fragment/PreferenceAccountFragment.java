@@ -69,7 +69,7 @@ public class PreferenceAccountFragment extends PreferenceFragmentCompat {
                         Intent loginIntent = new Intent(activity, SignInActivity.class);
                         activity.startActivity(loginIntent);
                         activity.finish();
-                        MainActivity.getActivity().finish();
+                        getActivity().finish();
                     }
                 });
                 return true;

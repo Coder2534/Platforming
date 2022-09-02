@@ -57,11 +57,6 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
                         setResult(RESULT_OK);
                         onBackPressed();
                     }
-
-                    @Override
-                    public void onFail() {
-
-                    }
                 });
             }
         });
