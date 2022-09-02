@@ -30,6 +30,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomDialog {
@@ -198,24 +200,30 @@ public class CustomDialog {
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
+        ArrayList arrayList = new ArrayList();
 
         for(int i = 0; i< themes.size();i++){
             RadioButton radioButton = new RadioButton(activity);
             radioButton.setId(500+i);
             radioButton.setTextColor(Color.BLACK);
             if (themes.get(i).equals((long)0)){
+                arrayList.add(0);
                 radioButton.setText("라이트 테마");
             }
             else if(themes.get(i).equals((long)1)){
+                arrayList.add(1);
                 radioButton.setText("핑크 테마");
             }
             else if(themes.get(i).equals((long)2)){
+                arrayList.add(2);
                 radioButton.setText("블루 테마");
             }
             else if(themes.get(i).equals((long)3)){
+                arrayList.add(3);
                 radioButton.setText("그린 테마");
             }
             else if(themes.get(i).equals((long)4)){
+                arrayList.add(4);
                 radioButton.setText("블랙 테마");
             }
             radioThemeList[i] = radioButton;
