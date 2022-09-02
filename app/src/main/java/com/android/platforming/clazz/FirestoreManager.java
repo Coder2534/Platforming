@@ -111,6 +111,7 @@ public class FirestoreManager {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
                     }
+                    Log.d("recentPost", String.valueOf(posts.size()));
                     interfaze.onSuccess();
                 }
             }
