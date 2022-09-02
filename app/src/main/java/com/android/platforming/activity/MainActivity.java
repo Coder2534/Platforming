@@ -178,4 +178,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_main, menu);
         return true ;
     }
+
+    public AppCompatActivity getActivity(){
+        return this;
+    }
 }
