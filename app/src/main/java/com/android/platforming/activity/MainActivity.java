@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(homeFragmentIdentifier != -1){
+        if(true){
             switch (item.getItemId()){
                 case android.R.id.home:
                     drawerLayout.openDrawer(GravityCompat.START);
