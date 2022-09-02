@@ -30,6 +30,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomDialog {
@@ -195,6 +198,7 @@ public class CustomDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
+        ArrayList arrayTheme ;
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
@@ -229,7 +233,7 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
-                MainActivity.getActivity().recreate();
+                activity.recreate();
                 TaskStackBuilder.create(activity)
                         .addNextIntent(new Intent(activity, MainActivity.class))
                         .addNextIntent(activity.getIntent())
