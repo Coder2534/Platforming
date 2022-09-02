@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     int homeFragmentIdentifier = -1;
 
+    private static Activity activity;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        activity = this;
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -181,5 +185,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_main, menu);
         return true;
+    }
+
+    public static void reCreate(){
+        activity.recreate();
     }
 }
