@@ -170,7 +170,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { //뒤로가기 했을 때
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+        } else if(getSupportFragmentManager().getBackStackEntryCount() <= 2){
+            finish();
+        }else{
             super.onBackPressed();
         }
     }
