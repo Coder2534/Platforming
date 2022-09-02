@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     int homeFragmentIdentifier = -1;
 
+    public static Activity activity = null;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        activity = this;
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -179,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         return true ;
     }
 
-    public AppCompatActivity getActivity(){
-        return this;
+    public static Activity getActivity(){
+        return activity;
     }
 }
