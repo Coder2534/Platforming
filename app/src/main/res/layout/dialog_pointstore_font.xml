@@ -76,7 +76,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_pointstore_font_noting1"
+                android:id="@+id/btn_pointstore_font_galmuri"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
@@ -85,7 +85,7 @@
                 android:backgroundTint="#499C54" />
 
             <Button
-                android:id="@+id/btn_pointstore_font_noting"
+                android:id="@+id/btn_pointstore_font_mugunghwa"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"

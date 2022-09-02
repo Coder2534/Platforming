@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.activity.SignInActivity;
@@ -226,18 +227,14 @@ public class CustomDialog {
             @Override
             public void onClick(View view) {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)500;
-                switch (index){
-                    case 0:MainActivity.getActivity().setTheme(R.style.Theme_Platforming);break;
-                    case 1:MainActivity.getActivity().setTheme(R.style.PinkTheme);break;
-                    case 2:MainActivity.getActivity().setTheme(R.style.BuleTheme);break;
-                    case 3:MainActivity.getActivity().setTheme(R.style.GreenTheme);break;
-                    case 4:MainActivity.getActivity().setTheme(R.style.BlackTheme);break;
-                }
+                Log.d("check_index_", String.valueOf(index));
+                PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
+                MainActivity.getActivity().recreate();
                 TaskStackBuilder.create(activity)
                         .addNextIntent(new Intent(activity, MainActivity.class))
                         .addNextIntent(activity.getIntent())
                         .startActivities();
-                MainActivity.getActivity().recreate();
+
             }
         });
 
