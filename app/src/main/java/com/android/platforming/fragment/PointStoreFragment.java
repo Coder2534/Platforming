@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +28,14 @@ import com.android.platforming.InitApplication;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
-import com.android.platforming.clazz.ThemeUtil;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+
 
 
 
@@ -46,7 +44,7 @@ public class PointStoreFragment extends Fragment {
 
     TextView tv_pointstore_font_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
-    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_noting1,btn_pointstore_font_noting,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_applyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_applytheme,btn_pointstore_theme_getout;
+    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_galmuri,btn_pointstore_font_mugunghwa,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_theme_getout;
 
     FirestoreManager firestoreManager = new FirestoreManager();
     HashMap<String,Object> storeMap = new HashMap<>();
@@ -83,10 +81,10 @@ public class PointStoreFragment extends Fragment {
                     btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.red));
                 }
                 if(boughtfont.contains((long) 3)){
-                    btn_pointstore_font_noting1.setTextColor(getResources().getColor(R.color.red));
+                    btn_pointstore_font_galmuri.setTextColor(getResources().getColor(R.color.red));
                 }
                 if(boughtfont.contains((long) 4)){
-                    btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.red));
+                    btn_pointstore_font_mugunghwa.setTextColor(getResources().getColor(R.color.red));
                 }
                 point = User.getUser().getPoint();
                 tv_pointstore_font_point.setText(point+ "포인트");
@@ -106,14 +104,14 @@ public class PointStoreFragment extends Fragment {
                         et_pointstore_testtext.setTypeface(getFont(2));
                     }
                 });
-                btn_pointstore_font_noting1.setOnClickListener(new View.OnClickListener() {
+                btn_pointstore_font_galmuri.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         checkfont = 3;
                         et_pointstore_testtext.setTypeface(getFont(3));
                     }
                 });
-                btn_pointstore_font_noting.setOnClickListener(new View.OnClickListener() {
+                btn_pointstore_font_mugunghwa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         checkfont = 4;
@@ -145,10 +143,10 @@ public class PointStoreFragment extends Fragment {
                                             btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         else if(checkfont == 3){
-                                            btn_pointstore_font_noting1.setTextColor(getResources().getColor(R.color.red));
+                                            btn_pointstore_font_galmuri.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         else if(checkfont == 4){
-                                            btn_pointstore_font_noting.setTextColor(getResources().getColor(R.color.red));
+                                            btn_pointstore_font_mugunghwa.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         customDialog.messageDialog(getActivity(),"구입했습니다.");
 
@@ -157,12 +155,6 @@ public class PointStoreFragment extends Fragment {
                             }
                             else customDialog.messageDialog(getActivity(),"포인트가 부족합니다.");
                         }
-                    }
-                });
-                btn_pointstore_applyfont.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        saveFont(view.getContext(), checkfont);
                     }
                 });
                 btn_pointstore_getout.setOnClickListener(new View.OnClickListener() {
@@ -235,7 +227,7 @@ public class PointStoreFragment extends Fragment {
                         else {
                             if(point >=100){
                                 point-=100;
-                                boughttheme.add(themeindex, Long.valueOf(themeindex));
+                                boughttheme.add(Long.valueOf(themeindex));
                                 storeMap.put("point",point);
                                 storeMap.put("themes",boughttheme);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
@@ -265,13 +257,6 @@ public class PointStoreFragment extends Fragment {
                         //파이어 베이스 형 -> 니가해 updateUserData
                     }
                 });
-                btn_pointstore_applytheme.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        saveTheme(view.getContext(), themeindex);
-                        applyTheme(getActivity(), themeindex);
-                    }
-                });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -287,28 +272,13 @@ public class PointStoreFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Typeface getFont(int i){
         switch (i){
-            case 0:checkfont = 0;  return null;
+            case 0:checkfont = 0;  return getResources().getFont(R.font.leferipointwhiteoblique0);
             case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_slow1);
             case 2:checkfont = 2;  return getResources().getFont(R.font.nanum_handwriting_again2);
-            case 3:checkfont = 3;  return null;
-            case 4:checkfont = 4;  return null;
+            case 3:checkfont = 3;  return getResources().getFont(R.font.galmuri93);
+            case 4:checkfont = 4;  return getResources().getFont(R.font.nanum_handwriting_mugunghwa4);
         }
         return null;
-    }
-
-    public void applyTheme(Activity activity, int applytheme){
-        switch (applytheme){
-            case 0:activity.setTheme(R.style.Theme_Platforming);break;
-            case 1:activity.setTheme(R.style.PinkTheme);break;
-            case 2:activity.setTheme(R.style.BuleTheme);break;
-            case 3:activity.setTheme(R.style.GreenTheme);break;
-            case 4:activity.setTheme(R.style.BlackTheme);break;
-        }
-        TaskStackBuilder.create(activity)
-                .addNextIntent(new Intent(activity, MainActivity.class))
-                .addNextIntent(activity.getIntent())
-                .startActivities();
-        activity.recreate();
     }
 
     private void saveFont(Context context, int fontIndex){
@@ -334,11 +304,10 @@ public class PointStoreFragment extends Fragment {
     private void setFontdialogview(){
         btn_pointstore_font_slow = fontdialog.findViewById(R.id.btn_pointstore_font_slow);
         btn_pointstore_font_again = fontdialog.findViewById(R.id.btn_pointstore_font_again);
-        btn_pointstore_font_noting1 = fontdialog.findViewById(R.id.btn_pointstore_font_noting1);
-        btn_pointstore_font_noting = fontdialog.findViewById(R.id.btn_pointstore_font_noting);
+        btn_pointstore_font_galmuri = fontdialog.findViewById(R.id.btn_pointstore_font_galmuri);
+        btn_pointstore_font_mugunghwa = fontdialog.findViewById(R.id.btn_pointstore_font_mugunghwa);
         btn_pointstore_getout = fontdialog.findViewById(R.id.btn_pointstore_getout);
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
-        btn_pointstore_applyfont = fontdialog.findViewById(R.id.btn_pointstore_applyfont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);
         tv_pointstore_font_point = fontdialog.findViewById(R.id.tv_pointstore_font_point);
     }
@@ -349,7 +318,6 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_theme_green = themedialog.findViewById(R.id.btn_pointstore_theme_green);
         btn_pointstore_theme_black = themedialog.findViewById(R.id.btn_pointstore_theme_black);
         btn_pointstore_buytheme = themedialog.findViewById(R.id.btn_pointstore_buytheme);
-        btn_pointstore_applytheme = themedialog.findViewById(R.id.btn_pointstore_applytheme);
         btn_pointstore_theme_getout = themedialog.findViewById(R.id.btn_pointstore_theme_getout);
         tv_pointstore_theme_point = themedialog.findViewById(R.id.tv_pointstore_theme_point);
     }
