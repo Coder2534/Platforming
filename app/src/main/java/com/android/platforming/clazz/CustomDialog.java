@@ -196,7 +196,7 @@ public class CustomDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
-        dialog.setTitle("테마");
+        builder.setTitle("테마");
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
@@ -260,7 +260,7 @@ public class CustomDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
-        dialog.setTitle("폰트");
+        builder.setTitle("폰트");
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[fonts.size()];

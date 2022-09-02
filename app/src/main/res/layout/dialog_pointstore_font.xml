@@ -80,7 +80,7 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="미정"
+                android:text="갈무리9"
                 android:textColor="@color/white"
                 android:backgroundTint="#499C54" />
 
@@ -89,7 +89,7 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="미정"
+                android:text="무궁화체"
                 android:textColor="@color/white"
                 android:backgroundTint="#499C54"
 
