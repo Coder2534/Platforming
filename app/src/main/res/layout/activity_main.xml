@@ -15,7 +15,7 @@
             android:id="@+id/tb_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style=""
+            android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
