@@ -20,10 +20,8 @@ import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class SchoolmealFragment extends Fragment {
     private SchoolApi api;
@@ -53,7 +51,12 @@ public class SchoolmealFragment extends Fragment {
                 tv_date.setText(api.getDate());
                 data.clear();
                 data.addAll(api.getResult());
-                adapter.notifyDataSetChanged();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
             }
         };
 

@@ -15,10 +15,10 @@ import com.example.platforming.R;
 
 import java.util.ArrayList;
 
-public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHolder> {
+public class PostRecentViewAdapter extends RecyclerView.Adapter<PostRecentViewAdapter.ViewHolder> {
 
     private ArrayList<Post> mData;
-    private ArrayList<String> mTypes = null;
+    private ArrayList<String> mTypes;
 
     ListenerInterface listenerInterface;
 
@@ -28,23 +28,17 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        TextView detail;
-        TextView info;
-        TextView like;
-        TextView comment;
         TextView type;
+        TextView title;
+        TextView date;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             // 뷰 객체에 대한 참조. (hold strong reference)
-            title = itemView.findViewById(R.id.tv_recyclerview_post_title);
-            detail = itemView.findViewById(R.id.tv_recyclerview_post_detail);
-            info = itemView.findViewById(R.id.tv_recyclerview_post_info);
-            like = itemView.findViewById(R.id.tv_recyclerview_post_like);
-            comment = itemView.findViewById(R.id.tv_recyclerview_post_comment);
-            type = itemView.findViewById(R.id.tv_recyclerview_post_type);
+            type = itemView.findViewById(R.id.tv_recyclerview_post_recent_type);
+            title = itemView.findViewById(R.id.tv_recyclerview_post_recent_title);
+            date = itemView.findViewById(R.id.tv_recyclerview_post_recent_date);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,42 +53,29 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public PostViewAdapter(ArrayList<Post> data) {
+    public PostRecentViewAdapter(ArrayList<Post> data) {
         mData = data;
-    }
-
-    public PostViewAdapter(ArrayList<Post> list, ArrayList<String> types) {
-        mData = list ;
-        mTypes = types;
+        mTypes = Post.getTypes();
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
-    public PostViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PostRecentViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
-        View view = inflater.inflate(R.layout.item_recyclerview_post, parent, false) ;
-        PostViewAdapter.ViewHolder vh = new PostViewAdapter.ViewHolder(view) ;
+        View view = inflater.inflate(R.layout.item_recyclerview_post_recent, parent, false) ;
+        PostRecentViewAdapter.ViewHolder vh = new PostRecentViewAdapter.ViewHolder(view) ;
 
         return vh ;
     }
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(PostViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(PostRecentViewAdapter.ViewHolder holder, int position) {
         Post post = mData.get(position);
+        holder.type.setText(mTypes.get(post.getType()));
         holder.title.setText(post.getTitle());
-        holder.detail.setText(post.getDetail());
-        holder.info.setText(formatTimeString(post.getDate()) + " | " + post.getNickname());
-        holder.like.setText(String.valueOf(post.getLikes().size()));
-        holder.comment.setText(String.valueOf(post.getCommentSize()));
-        if(mTypes != null){
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.like.getLayoutParams();
-            params.addRule(RelativeLayout.ALIGN_BASELINE, R.id.tv_recyclerview_post_type);
-            holder.like.setLayoutParams(params);
-            holder.type.setText(mTypes.get(post.getType()));
-            holder.type.setVisibility(View.VISIBLE);
-        }
+        holder.date.setText(formatTimeString(post.getDate()));
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

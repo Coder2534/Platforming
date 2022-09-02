@@ -35,7 +35,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/tv_recyclerview_post_thumb_up"
+        android:id="@+id/tv_recyclerview_post_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tv_recyclerview_post_info"
@@ -49,7 +49,7 @@
         android:id="@+id/tv_recyclerview_post_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tv_recyclerview_post_thumb_up"
+        android:layout_alignTop="@+id/tv_recyclerview_post_like"
         android:layout_alignParentRight="true"
         android:drawableLeft="@drawable/ic_baseline_comment_24"
         android:text="0"

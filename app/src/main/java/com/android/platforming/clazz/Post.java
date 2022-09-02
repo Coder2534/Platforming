@@ -1,8 +1,6 @@
 package com.android.platforming.clazz;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +10,12 @@ public class Post {
     public static final int SCHOOL_BULLETIN_BOARD = 2;
 
     private static ArrayList<Post> posts = new ArrayList<>();
+
+    private static ArrayList<String> types = new ArrayList<String>(){{
+        add("자유게시판");
+        add("질문게시판");
+        add("학교시판");
+    }};
 
     String id;
     int type;
@@ -39,6 +43,10 @@ public class Post {
 
     public static ArrayList<Post> getPosts() {
         return posts;
+    }
+
+    public static ArrayList<String> getTypes() {
+        return types;
     }
 
     public static void setPosts(ArrayList<Post> posts) {
