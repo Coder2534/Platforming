@@ -23,8 +23,6 @@ public class InitApplication extends Application {
 
         Log.d("timeline", "initApplication");
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        appliedTheme = pref.getInt("theme", 0);
-        appliedFont = pref.getInt("font", 0);
         if(pref.getBoolean("firstActivate", true)){
             Calendar calendar_timer = Calendar.getInstance();
             calendar_timer.set(Calendar.HOUR_OF_DAY, 8);
