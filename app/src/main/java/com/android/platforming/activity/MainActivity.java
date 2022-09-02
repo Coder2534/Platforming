@@ -53,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
-        switch (((InitApplication)getApplication()).getAppliedTheme()){
+        InitApplication initApplication = ((InitApplication)getApplication());
+        initApplication.refreshAppliedTheme();
+        switch (initApplication.getAppliedTheme()){
             case 0:setTheme(R.style.Theme_Platforming);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
@@ -62,13 +64,6 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        listenerInterface = new ListenerInterface() {
-            @Override
-            public void onSuccess() {
-                recreate();
-            }
-        };
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -185,12 +180,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_main, menu);
-        return true ;
-    }
-
-
-    static ListenerInterface listenerInterface;
-    public static ListenerInterface reCreate(){
-        return listenerInterface;
+        return true;
     }
 }
