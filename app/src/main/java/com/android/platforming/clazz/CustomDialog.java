@@ -187,41 +187,33 @@ public class CustomDialog {
         dialog.show();
     }
     public void themeDialog(Activity activity, List themes){
-        Log.d("check_method_dialog","ok");
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        Log.d("check_method_dialog","ok");
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
-        Log.d("check_method_dialog","ok");
+
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
-        RadioButton[] themeList = new RadioButton[themes.size()];
-        radioGroup.setOrientation(radioGroup.VERTICAL);
-        Log.d("check_method_dialog","ok");
+        RadioButton[] radioThemeList = new RadioButton[themes.size()];
 
         for(int i = 0; i< themes.size();i++){
-            themeList[i] = new RadioButton(builder.getContext());
-            themeList[i].setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-            themeList[i].setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            RadioButton radioButton = new RadioButton();
             if (themes.get(i).equals(0)){
-                themeList[i].setText("라이트 테마");
+                radioThemeList[i].setText("라이트 테마");
             }
             else if(themes.get(i).equals(1)){
-                themeList[i].setText("핑크 테마");
+                radioThemeList[i].setText("핑크 테마");
             }
             else if(themes.get(i).equals(2)){
-                themeList[i].setText("블루 테마");
+                radioThemeList[i].setText("블루 테마");
             }
             else if(themes.get(i).equals(3)){
-                themeList[i].setText("그린 테마");
+                radioThemeList[i].setText("그린 테마");
             }
             else if(themes.get(i).equals(1)){
-                themeList[i].setText("블랙 테마");
+                radioThemeList[i].setText("블랙 테마");
             }
 
-
-            themeList[i].setId(i);
             Log.d("check_index", (String) themes.get(i));
-            radioGroup.addView(themeList[i]);
+            radioGroup.addView(radioThemeList[i]);
         }
 
 
