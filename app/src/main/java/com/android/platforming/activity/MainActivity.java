@@ -35,6 +35,7 @@ import com.android.platforming.fragment.SchoolIntroduceFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.interfaze.OnChildClickInterface;
 import com.example.platforming.R;
 import com.android.platforming.fragment.InitialSettingFragment;
@@ -47,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     ExpandableList mainExpandableList;
 
     int homeFragmentIdentifier = -1;
-
-    public static Activity activity = null;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -64,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        activity = this;
+        listenerInterface = new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                recreate();
+            }
+        };
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -184,7 +188,9 @@ public class MainActivity extends AppCompatActivity {
         return true ;
     }
 
-    public static Activity getActivity(){
-        return activity;
+
+    static ListenerInterface listenerInterface;
+    public static ListenerInterface reCreate(){
+        return listenerInterface;
     }
 }
