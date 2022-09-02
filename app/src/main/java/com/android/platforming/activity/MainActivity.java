@@ -53,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
-        switch (((InitApplication)getApplication()).getAppliedTheme()){
+        InitApplication initApplication = ((InitApplication)getApplication());
+        initApplication.refreshAppliedTheme();
+        switch (initApplication.getAppliedTheme()){
             case 0:setTheme(R.style.Theme_Platforming);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
