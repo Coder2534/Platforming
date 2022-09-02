@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ExpandableList mainExpandableList;
 
-    private static MainActivity mainActivity;
-
     int homeFragmentIdentifier = -1;
 
     @SuppressLint("SetTextI18n")
@@ -62,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mainActivity = this;
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -181,9 +177,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_main, menu);
         return true ;
-    }
-
-    public static MainActivity getActivity(){
-        return mainActivity;
     }
 }
