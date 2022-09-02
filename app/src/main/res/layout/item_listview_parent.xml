@@ -7,24 +7,25 @@
         android:id="@+id/iv_listview_parent_category"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
         android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/tv_listview_parent_title"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        android:layout_centerInParent="true"
+        android:layout_toEndOf="@id/iv_listview_parent_category"
+        android:layout_marginStart="20dp"
+        android:layout_centerVertical="true"
         android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/iv_listview_parent_expand"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
         android:gravity="center_vertical"/>
 </RelativeLayout>
