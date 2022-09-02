@@ -206,7 +206,7 @@ public class CustomDialog {
             radioButton.setTextColor(Color.BLACK);
             if (themes.get(i).equals((long)0)){
                 radioButton.setId(500+0);
-                radioButton.setText("라이트 테마");
+                radioButton.setText("라이트 테마(기본)");
             }
             else if(themes.get(i).equals((long)1)){
                 radioButton.setId(500+1);
@@ -270,7 +270,7 @@ public class CustomDialog {
             radioButton.setTextColor(Color.BLACK);
             if (fonts.get(i).equals((long)0)){
                 radioButton.setId((int)600);
-                radioButton.setText("레페리 포인트");
+                radioButton.setText("레페리 포인트(기본)");
             }
             else if(fonts.get(i).equals((long)1)){
                 radioButton.setId(600+1);
@@ -282,11 +282,11 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals((long)3)){
                 radioButton.setId(600+3);
-                radioButton.setText("그린 테마");
+                radioButton.setText("갈무리9");
             }
             else if(fonts.get(i).equals((long)4)){
                 radioButton.setId(600+4);
-                radioButton.setText("블랙 테마");
+                radioButton.setText("무궁화체");
             }
             radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);

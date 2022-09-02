@@ -43,7 +43,13 @@ public class StartActivity extends AppCompatActivity {
             case 3:setTheme(R.style.GreenTheme);break;
             case 4:setTheme(R.style.BlackTheme);break;
         }
-
+        switch (initApplication.getAppliedFont()){
+            case 0:setTheme(R.style.leferipointwhiteobliqueFont);break;
+            case 1:setTheme(R.style.SlowFont);break;
+            case 2:setTheme(R.style.AgainFont);break;
+            case 3:setTheme(R.style.Galmuri9Font);break;
+            case 4:setTheme(R.style.MugunghwaFont);break;
+        }
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_start);
