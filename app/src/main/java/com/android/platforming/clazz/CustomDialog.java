@@ -235,7 +235,9 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
-                MainActivity.getActivity().finish();
+                Intent refresh = new Intent(activity, MainActivity.class);
+                activity.startActivity(refresh);
+                activity.finish();
 
                 dialog.dismiss();
             }
