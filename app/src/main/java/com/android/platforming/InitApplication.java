@@ -55,6 +55,16 @@ public class InitApplication extends Application {
         this.appliedTheme = appliedTheme;
     }
 
+    public void refreshAppliedTheme(){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        appliedTheme = pref.getInt("theme", 0);
+    }
+
+    public void refreshAppliedFont(){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        appliedFont = pref.getInt("font", 0);
+    }
+
     public void setAppliedFont(int appliedFont) {
         this.appliedFont = appliedFont;
     }
