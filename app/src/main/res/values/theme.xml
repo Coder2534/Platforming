@@ -28,8 +28,8 @@
         <item name="colorControlActivated">#828382</item>
         <item name="android:navigationBarColor">#404040</item>
         <item name="android:statusBarColor">#404040</item>
-        <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColor">#FFFFFF</item>
+        <item name="backgroundColor">#313131</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
         <item name="buttonStyle">?attr/materialButtonOutlinedStyle</item>

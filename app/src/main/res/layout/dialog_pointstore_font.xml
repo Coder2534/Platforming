@@ -111,16 +111,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:backgroundTint="#499C54"
-            android:text="구매하기" />
-
-        <Button
-            android:id="@+id/btn_pointstore_applyfont"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:text="구매하기"
             android:layout_toLeftOf="@+id/btn_pointstore_getout"
-            android:backgroundTint="#499C54"
-            android:text="적용하기" />
+            />
 
         <Button
             android:id="@+id/btn_pointstore_getout"

@@ -36,6 +36,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
                 Log.d("check_font_dialog", String.valueOf(User.getUser().getThemes()));
+                customDialog = new CustomDialog();
                 customDialog.themeDialog(getActivity(), User.getUser().getThemes());
                 Log.d("check_font_dialog2","ok");
                 return false;

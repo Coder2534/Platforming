@@ -267,7 +267,6 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         saveTheme(view.getContext(), themeindex);
-                        applyTheme(getActivity(), themeindex);
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {
@@ -285,28 +284,13 @@ public class PointStoreFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Typeface getFont(int i){
         switch (i){
-            case 0:checkfont = 0;  return null;
+            case 0:checkfont = 0;  return getResources().getFont(R.font.leferipointwhiteoblique0);
             case 1:checkfont = 1;  return getResources().getFont(R.font.nanum_handwriting_slow1);
             case 2:checkfont = 2;  return getResources().getFont(R.font.nanum_handwriting_again2);
-            case 3:checkfont = 3;  return null;
-            case 4:checkfont = 4;  return null;
+            case 3:checkfont = 3;  return getResources().getFont(R.font.galmuri93);
+            case 4:checkfont = 4;  return getResources().getFont(R.font.nanum_handwriting_mugunghwa4);
         }
         return null;
-    }
-
-    public void applyTheme(Activity activity, int applytheme){
-        switch (applytheme){
-            case 0:activity.setTheme(R.style.Theme_Platforming);break;
-            case 1:activity.setTheme(R.style.PinkTheme);break;
-            case 2:activity.setTheme(R.style.BuleTheme);break;
-            case 3:activity.setTheme(R.style.GreenTheme);break;
-            case 4:activity.setTheme(R.style.BlackTheme);break;
-        }
-        TaskStackBuilder.create(activity)
-                .addNextIntent(new Intent(activity, MainActivity.class))
-                .addNextIntent(activity.getIntent())
-                .startActivities();
-        activity.recreate();
     }
 
     private void saveFont(Context context, int fontIndex){

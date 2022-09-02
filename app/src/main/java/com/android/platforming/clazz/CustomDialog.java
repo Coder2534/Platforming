@@ -4,8 +4,10 @@ import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -186,6 +188,8 @@ public class CustomDialog {
         dialog = builder.create();
         dialog.show();
     }
+
+    int index;
     public void themeDialog(Activity activity, List themes){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -195,32 +199,50 @@ public class CustomDialog {
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
 
         for(int i = 0; i< themes.size();i++){
-            RadioButton radioButton = new RadioButton();
-            if (themes.get(i).equals(0)){
-                radioThemeList[i].setText("라이트 테마");
+            RadioButton radioButton = new RadioButton(activity);
+            radioButton.setId(500+i);
+            radioButton.setTextColor(Color.BLACK);
+            if (themes.get(i).equals((long)0)){
+                radioButton.setText("라이트 테마");
             }
-            else if(themes.get(i).equals(1)){
-                radioThemeList[i].setText("핑크 테마");
+            else if(themes.get(i).equals((long)1)){
+                radioButton.setText("핑크 테마");
             }
-            else if(themes.get(i).equals(2)){
-                radioThemeList[i].setText("블루 테마");
+            else if(themes.get(i).equals((long)2)){
+                radioButton.setText("블루 테마");
             }
-            else if(themes.get(i).equals(3)){
-                radioThemeList[i].setText("그린 테마");
+            else if(themes.get(i).equals((long)3)){
+                radioButton.setText("그린 테마");
             }
-            else if(themes.get(i).equals(1)){
-                radioThemeList[i].setText("블랙 테마");
+            else if(themes.get(i).equals((long)4)){
+                radioButton.setText("블랙 테마");
             }
-
-            Log.d("check_index", (String) themes.get(i));
+            radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);
         }
 
+        Button apply = view.findViewById(R.id.btn_dialog_theme_apply);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int index = radioGroup.getCheckedRadioButtonId() - (int)500;
+                switch (index){
+                    case 0:MainActivity.getActivity().setTheme(R.style.Theme_Platforming);break;
+                    case 1:MainActivity.getActivity().setTheme(R.style.PinkTheme);break;
+                    case 2:MainActivity.getActivity().setTheme(R.style.BuleTheme);break;
+                    case 3:MainActivity.getActivity().setTheme(R.style.GreenTheme);break;
+                    case 4:MainActivity.getActivity().setTheme(R.style.BlackTheme);break;
+                }
+                TaskStackBuilder.create(activity)
+                        .addNextIntent(new Intent(activity, MainActivity.class))
+                        .addNextIntent(activity.getIntent())
+                        .startActivities();
+                MainActivity.getActivity().recreate();
+            }
+        });
 
-
-
-        Button confirm = view.findViewById(R.id.btn_message_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
+        Button getout = view.findViewById(R.id.btn_dialog_theme_getout);
+        getout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
