@@ -70,6 +70,9 @@
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_detail.xml" value="0.49514563106796117" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_list.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_listview_parent.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_listview_schoolintroduce.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_post_recent.xml" value="0.2791666666666667" />

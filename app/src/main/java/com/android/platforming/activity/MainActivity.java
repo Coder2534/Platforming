@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setting(){
         setHeader();
-        homeFragmentIdentifier = getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+        homeFragmentIdentifier = getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.cl_main, new MainPageFragment()).commit();
     }
 
     private void setHeader(){
@@ -141,18 +141,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private OnChildClickInterface toggleActivity(Class clazz, int type){
-        OnChildClickInterface interfaze = () -> {
+        return () -> {
             Intent intent = new Intent(this, clazz);
             intent.putExtra("type", type);
             startActivity(intent);
             overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
         };
-        return interfaze;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(true){
+        Log.d("FragmentIdentifier : ", String.valueOf(homeFragmentIdentifier));
+        if(homeFragmentIdentifier != -1){
             switch (item.getItemId()){
                 case android.R.id.home:
                     drawerLayout.openDrawer(GravityCompat.START);
