@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Platforming"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.android.platforming.activity.NoticeBoardRegisterActivity"
+            android:name="com.android.platforming.activity.BulletinBoardRegisterActivity"
             android:exported="false" />
         <activity
             android:name="com.android.platforming.activity.BulletinBoardActivity"
