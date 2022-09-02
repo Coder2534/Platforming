@@ -6,6 +6,7 @@ import static com.android.platforming.clazz.Post.FREE_BULLETIN_BOARD;
 import static com.android.platforming.clazz.Post.QUESTION_BULLETIN_BOARD;
 import static com.android.platforming.clazz.Post.SCHOOL_BULLETIN_BOARD;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static MainActivity mainActivity;
 
-    boolean mainPage = false;
+    int homeFragmentIdentifier = -1;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -82,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setting(){
         setHeader();
-        mainPage = true;
-        getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
+        homeFragmentIdentifier = getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
     }
 
     private void setHeader(){
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
 
-        mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_home_24);
+        mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_web_24);
         mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, HOMEPAGE));
         mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, RIROSCHOOL));
 
@@ -151,20 +152,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {// 왼쪽 상단 버튼 눌렀을 때
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
+        if(homeFragmentIdentifier != -1){
+            switch (item.getItemId()){
+                case android.R.id.home:
+                    drawerLayout.openDrawer(GravityCompat.START);
+                    return true;
+
+                case R.id.action_home:
+                    getSupportFragmentManager().popBackStack(homeFragmentIdentifier, 0);
+                    return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() { //뒤로가기 했을 때
-        if (drawerLayout != null && mainPage && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_main, menu) ;
+
+        return true ;
     }
 
     public static MainActivity getActivity(){
