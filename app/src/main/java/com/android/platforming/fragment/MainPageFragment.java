@@ -117,6 +117,7 @@ public class MainPageFragment extends Fragment {
                 recentViewAdapter.notifyDataSetChanged();
             }
         });
+
         return view;
     }
 }
