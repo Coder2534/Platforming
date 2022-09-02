@@ -31,7 +31,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         TextView title;
         TextView detail;
         TextView info;
-        TextView thumb_up;
+        TextView like;
         TextView comment;
         TextView type;
 
@@ -42,7 +42,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
             title = itemView.findViewById(R.id.tv_recyclerview_post_title);
             detail = itemView.findViewById(R.id.tv_recyclerview_post_detail);
             info = itemView.findViewById(R.id.tv_recyclerview_post_info);
-            thumb_up = itemView.findViewById(R.id.tv_recyclerview_post_thumb_up);
+            like = itemView.findViewById(R.id.tv_recyclerview_post_like);
             comment = itemView.findViewById(R.id.tv_recyclerview_post_comment);
             type = itemView.findViewById(R.id.tv_recyclerview_post_type);
 
@@ -86,12 +86,12 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         holder.title.setText(post.getTitle());
         holder.detail.setText(post.getDetail());
         holder.info.setText(formatTimeString(post.getDate()) + " | " + post.getNickname());
-        holder.thumb_up.setText(String.valueOf(post.getLikes().size()));
+        holder.like.setText(String.valueOf(post.getLikes().size()));
         holder.comment.setText(String.valueOf(post.getCommentSize()));
         if(mTypes != null){
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.thumb_up.getLayoutParams();
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.like.getLayoutParams();
             params.addRule(RelativeLayout.ALIGN_BASELINE, R.id.tv_recyclerview_post_type);
-            holder.thumb_up.setLayoutParams(params);
+            holder.like.setLayoutParams(params);
             holder.type.setText(mTypes.get(post.getType()));
             holder.type.setVisibility(View.VISIBLE);
         }

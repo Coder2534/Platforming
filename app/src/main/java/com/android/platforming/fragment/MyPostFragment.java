@@ -33,11 +33,7 @@ public class MyPostFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_mypost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        postViewAdapter = new PostViewAdapter(Post.getPosts(), new ArrayList<String>(){{
-            add("자유게시판");
-            add("질문게시판");
-            add("학교시판");
-        }});
+        postViewAdapter = new PostViewAdapter(Post.getPosts(), Post.getTypes());
         postViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {

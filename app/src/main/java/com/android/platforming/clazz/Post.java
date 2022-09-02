@@ -13,6 +13,12 @@ public class Post {
 
     private static ArrayList<Post> posts = new ArrayList<>();
 
+    private static ArrayList<String> types = new ArrayList<String>(){{
+        add("자유게시판");
+        add("질문게시판");
+        add("학교시판");
+    }};
+
     String id;
     int type;
     String uid;
@@ -35,6 +41,10 @@ public class Post {
         this.title = (String) data.get("title");
         this.detail = (String) data.get("detail");
         this.likes.addAll ((List<String>) data.get("likes"));
+    }
+
+    public static ArrayList<String> getTypes() {
+        return types;
     }
 
     public static ArrayList<Post> getPosts() {
