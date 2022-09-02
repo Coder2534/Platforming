@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.platforming.activity.NoticeBoardRegisterActivity;
+import com.android.platforming.activity.BulletinBoardRegisterActivity;
 import com.android.platforming.adapter.PostViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
@@ -86,7 +86,7 @@ public class BulletinBoardListFragment extends Fragment {
             public void onSuccess() {
                 postViewAdapter.notifyDataSetChanged();
                 write.setOnClickListener(v -> {
-                    Intent intent = new Intent(getApplicationContext(), NoticeBoardRegisterActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BulletinBoardRegisterActivity.class);
                     intent.putExtra("type", type);
                     resultLauncher.launch(intent);
                     getActivity().overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
