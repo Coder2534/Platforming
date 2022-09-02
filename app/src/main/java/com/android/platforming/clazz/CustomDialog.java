@@ -192,11 +192,11 @@ public class CustomDialog {
         dialog.show();
     }
 
-    int index;
     public void themeDialog(Activity activity, List themes){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
+        dialog.setTitle("테마");
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
@@ -236,6 +236,71 @@ public class CustomDialog {
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
                 MainActivity.reCreate();
+                activity.recreate();
+
+                dialog.dismiss();
+            }
+        });
+
+        Button getout = view.findViewById(R.id.btn_dialog_theme_getout);
+        getout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void fontDialog(Activity activity, List fonts){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_design_theme, null);
+        dialog.setTitle("폰트");
+
+        RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
+        RadioButton[] radioThemeList = new RadioButton[fonts.size()];
+
+        for(int i = 0; i< fonts.size();i++){
+            RadioButton radioButton = new RadioButton(activity);
+            radioButton.setTextColor(Color.BLACK);
+            if (fonts.get(i).equals((long)0)){
+                radioButton.setId((int)600);
+                radioButton.setText("");
+            }
+            else if(fonts.get(i).equals((long)1)){
+                radioButton.setId(600+1);
+                radioButton.setText("");
+            }
+            else if(fonts.get(i).equals((long)2)){
+                radioButton.setId(600+2);
+                radioButton.setText("블루 테마");
+            }
+            else if(fonts.get(i).equals((long)3)){
+                radioButton.setId(600+3);
+                radioButton.setText("그린 테마");
+            }
+            else if(fonts.get(i).equals((long)4)){
+                radioButton.setId(600+4);
+                radioButton.setText("블랙 테마");
+            }
+            radioThemeList[i] = radioButton;
+            radioGroup.addView(radioThemeList[i]);
+        }
+
+        Button apply = view.findViewById(R.id.btn_dialog_theme_apply);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int index = radioGroup.getCheckedRadioButtonId() - (int)600;
+                Log.d("check_index_", String.valueOf(index));
+                PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("font", index).apply();
+                MainActivity.reCreate();
+                activity.recreate();
 
                 dialog.dismiss();
             }

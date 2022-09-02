@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Window;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -34,6 +35,15 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "StartActivity");
+        InitApplication initApplication = ((InitApplication)getApplication());
+        switch (initApplication.getAppliedTheme()){
+            case 0:setTheme(R.style.Theme_Platforming);break;
+            case 1:setTheme(R.style.PinkTheme);break;
+            case 2:setTheme(R.style.BuleTheme);break;
+            case 3:setTheme(R.style.GreenTheme);break;
+            case 4:setTheme(R.style.BlackTheme);break;
+        }
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_start);
