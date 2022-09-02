@@ -270,15 +270,15 @@ public class CustomDialog {
             radioButton.setTextColor(Color.BLACK);
             if (fonts.get(i).equals((long)0)){
                 radioButton.setId((int)600);
-                radioButton.setText("");
+                radioButton.setText("레페리 포인트");
             }
             else if(fonts.get(i).equals((long)1)){
                 radioButton.setId(600+1);
-                radioButton.setText("");
+                radioButton.setText("나눔손글씨 느릿느릿체");
             }
             else if(fonts.get(i).equals((long)2)){
                 radioButton.setId(600+2);
-                radioButton.setText("블루 테마");
+                radioButton.setText("나눔손글씨 다시시작해");
             }
             else if(fonts.get(i).equals((long)3)){
                 radioButton.setId(600+3);
