@@ -63,13 +63,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listenerInterface = new ListenerInterface() {
-            @Override
-            public void onSuccess() {
-                recreate();
-            }
-        };
-
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -186,11 +179,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_main, menu);
         return true ;
-    }
-
-
-    static ListenerInterface listenerInterface;
-    public static ListenerInterface reCreate(){
-        return listenerInterface;
     }
 }
