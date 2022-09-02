@@ -43,12 +43,12 @@ public class Post {
         this.likes.addAll ((List<String>) data.get("likes"));
     }
 
-    public static ArrayList<String> getTypes() {
-        return types;
-    }
-
     public static ArrayList<Post> getPosts() {
         return posts;
+    }
+
+    public static ArrayList<String> getTypes() {
+        return types;
     }
 
     public static void setPosts(ArrayList<Post> posts) {
