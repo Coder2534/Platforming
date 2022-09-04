@@ -214,7 +214,6 @@ public class CustomDialog {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listenerInterface.onSuccess();
                 dialog.dismiss();
             }
         });
