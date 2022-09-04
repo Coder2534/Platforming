@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.android.platforming.activity.SettingActivity">
+    tools:context="com.android.platforming.activity.SettingActivity"
+    android:background="?attr/backgroundColor">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFAC07"
+        android:background="?attr/colorPrimaryDark"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
