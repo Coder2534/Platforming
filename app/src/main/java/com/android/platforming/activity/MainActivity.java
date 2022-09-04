@@ -57,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
         InitApplication initApplication = ((InitApplication)getApplication());
         initApplication.refreshAppliedTheme();
         initApplication.refreshAppliedFont();
+        switch (initApplication.getAppliedFont()){
+            case 0:setTheme(R.style.leferipointwhiteobliqueFont);break;
+            case 1:setTheme(R.style.SlowFont);break;
+            case 2:setTheme(R.style.AgainFont);break;
+            case 3:setTheme(R.style.Galmuri9Font);break;
+            case 4:setTheme(R.style.MugunghwaFont);break;
+        }
+
         switch (initApplication.getAppliedTheme()){
             case 0:setTheme(R.style.Theme_Platforming);break;
             case 1:setTheme(R.style.PinkTheme);break;
