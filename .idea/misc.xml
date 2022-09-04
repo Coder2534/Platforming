@@ -115,9 +115,15 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce_round.xml" value="0.4185" />
         <entry key="..\:/Users/user/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.18819655521783182" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/font/fontstyle.xml" value="0.18125" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/customdialog_profile.xml" value="0.14719202898550723" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_design_theme.xml" value="0.1" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_message.xml" value="0.1" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.14666666666666667" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_textcolor.xml" value="0.1" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_theme.xml" value="0.16666666666666666" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_select.xml" value="0.14719202898550723" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_setting_newpassword.xml" value="0.14719202898550723" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_verification.xml" value="0.14719202898550723" />
       </map>
     </option>
   </component>
