@@ -31,7 +31,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,33 +192,36 @@ public class CustomDialog {
         dialog.show();
     }
 
-    int index;
     public void themeDialog(Activity activity, List themes){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
-        ArrayList arrayTheme ;
+        builder.setTitle("테마");
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
 
         for(int i = 0; i< themes.size();i++){
             RadioButton radioButton = new RadioButton(activity);
-            radioButton.setId(500+i);
             radioButton.setTextColor(Color.BLACK);
             if (themes.get(i).equals((long)0)){
-                radioButton.setText("라이트 테마");
+                radioButton.setId(500+0);
+                radioButton.setText("라이트 테마(기본)");
             }
             else if(themes.get(i).equals((long)1)){
+                radioButton.setId(500+1);
                 radioButton.setText("핑크 테마");
             }
             else if(themes.get(i).equals((long)2)){
+                radioButton.setId(500+2);
                 radioButton.setText("블루 테마");
             }
             else if(themes.get(i).equals((long)3)){
+                radioButton.setId(500+3);
                 radioButton.setText("그린 테마");
             }
             else if(themes.get(i).equals((long)4)){
+                radioButton.setId(500+4);
                 radioButton.setText("블랙 테마");
             }
             radioThemeList[i] = radioButton;
@@ -233,12 +235,74 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
+                MainActivity.reCreate();
                 activity.recreate();
-                TaskStackBuilder.create(activity)
-                        .addNextIntent(new Intent(activity, MainActivity.class))
-                        .addNextIntent(activity.getIntent())
-                        .startActivities();
 
+                dialog.dismiss();
+            }
+        });
+
+        Button getout = view.findViewById(R.id.btn_dialog_theme_getout);
+        getout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void fontDialog(Activity activity, List fonts){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_design_theme, null);
+        builder.setTitle("폰트");
+
+        RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
+        RadioButton[] radioThemeList = new RadioButton[fonts.size()];
+
+        for(int i = 0; i< fonts.size();i++){
+            RadioButton radioButton = new RadioButton(activity);
+            radioButton.setTextColor(Color.BLACK);
+            if (fonts.get(i).equals((long)0)){
+                radioButton.setId((int)600);
+                radioButton.setText("레페리 포인트(기본)");
+            }
+            else if(fonts.get(i).equals((long)1)){
+                radioButton.setId(600+1);
+                radioButton.setText("나눔손글씨 느릿느릿체");
+            }
+            else if(fonts.get(i).equals((long)2)){
+                radioButton.setId(600+2);
+                radioButton.setText("나눔손글씨 다시시작해");
+            }
+            else if(fonts.get(i).equals((long)3)){
+                radioButton.setId(600+3);
+                radioButton.setText("갈무리9");
+            }
+            else if(fonts.get(i).equals((long)4)){
+                radioButton.setId(600+4);
+                radioButton.setText("무궁화체");
+            }
+            radioThemeList[i] = radioButton;
+            radioGroup.addView(radioThemeList[i]);
+        }
+
+        Button apply = view.findViewById(R.id.btn_dialog_theme_apply);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int index = radioGroup.getCheckedRadioButtonId() - (int)600;
+                Log.d("check_index_", String.valueOf(index));
+                PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("font", index).apply();
+                MainActivity.reCreate();
+                activity.recreate();
+
+                dialog.dismiss();
             }
         });
 

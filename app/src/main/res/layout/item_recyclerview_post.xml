@@ -3,7 +3,8 @@
     android:id="@+id/tester"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_underline">
+    android:background="?attr/backgroundColor"
+    >
 
     <TextView
         android:id="@+id/tv_recyclerview_post_title"

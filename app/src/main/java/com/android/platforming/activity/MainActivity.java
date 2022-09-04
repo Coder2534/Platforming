@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,7 @@ import com.android.platforming.fragment.SchoolIntroduceFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.interfaze.OnChildClickInterface;
 import com.example.platforming.R;
 import com.android.platforming.fragment.InitialSettingFragment;
@@ -47,19 +49,27 @@ public class MainActivity extends AppCompatActivity {
 
     int homeFragmentIdentifier = -1;
 
+    private static Activity activity;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("timeline", "MainActivity");
-        switch (((InitApplication)getApplication()).getAppliedTheme()){
+        InitApplication initApplication = ((InitApplication)getApplication());
+        initApplication.refreshAppliedTheme();
+        initApplication.refreshAppliedFont();
+        switch (initApplication.getAppliedTheme()){
             case 0:setTheme(R.style.Theme_Platforming);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
             case 3:setTheme(R.style.GreenTheme);break;
             case 4:setTheme(R.style.BlackTheme);break;
         }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        activity = this;
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -176,6 +186,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_main, menu);
-        return true ;
+        return true;
+    }
+
+    public static void reCreate(){
+        activity.recreate();
     }
 }

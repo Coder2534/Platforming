@@ -44,7 +44,7 @@ public class PointStoreFragment extends Fragment {
 
     TextView tv_pointstore_font_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
-    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_galmuri,btn_pointstore_font_mugunghwa,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_applyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_applytheme,btn_pointstore_theme_getout;
+    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_slow,btn_pointstore_font_again,btn_pointstore_font_galmuri,btn_pointstore_font_mugunghwa,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_theme_getout;
 
     FirestoreManager firestoreManager = new FirestoreManager();
     HashMap<String,Object> storeMap = new HashMap<>();
@@ -157,12 +157,6 @@ public class PointStoreFragment extends Fragment {
                         }
                     }
                 });
-                btn_pointstore_applyfont.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        saveFont(view.getContext(), checkfont);
-                    }
-                });
                 btn_pointstore_getout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -233,7 +227,7 @@ public class PointStoreFragment extends Fragment {
                         else {
                             if(point >=100){
                                 point-=100;
-                                boughttheme.add(themeindex, Long.valueOf(themeindex));
+                                boughttheme.add(Long.valueOf(themeindex));
                                 storeMap.put("point",point);
                                 storeMap.put("themes",boughttheme);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
@@ -261,12 +255,6 @@ public class PointStoreFragment extends Fragment {
                             else customDialog.messageDialog(getActivity(),"포인트가 부족합니다.");
                         }
                         //파이어 베이스 형 -> 니가해 updateUserData
-                    }
-                });
-                btn_pointstore_applytheme.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        saveTheme(view.getContext(), themeindex);
                     }
                 });
                 btn_pointstore_theme_getout.setOnClickListener(new View.OnClickListener() {

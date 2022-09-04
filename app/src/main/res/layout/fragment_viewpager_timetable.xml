@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_round">
+    android:background="?attr/colorOnSecondary">
 
     <ImageView
         android:id="@+id/iv_viewpager_timetable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="?attr/colorOnSecondary"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        app:srcCompat="@drawable/ic_baseline_edit_24" />
+        app:srcCompat="@drawable/ic_baseline_edit_24"
+        android:background="?attr/colorPrimary"/>
 
 </FrameLayout>

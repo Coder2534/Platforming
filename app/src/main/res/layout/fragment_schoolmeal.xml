@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B270A2"
+    android:background="?attr/backgroundColor"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,14 +20,13 @@
             android:layout_below="@+id/BTN_getFoodName"
             android:gravity="center"
             android:text="(날짜)"
-            android:textSize="30dp"
-            android:background="#FF8FB1"/>
+            android:textSize="30dp" />
 
         <ListView
             android:id="@+id/lv_foodlist"
             android:layout_width="match_parent"
             android:layout_height="590dp"
-            android:background="#FFF"/>
+            android:background="?attr/backgroundColor"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="날짜 선택"
-            android:backgroundTint="#FF8FB1" />
+            android:textColor="@color/black"
+            android:backgroundTint="?attr/colorPrimary" />
     </LinearLayout>
 </RelativeLayout>

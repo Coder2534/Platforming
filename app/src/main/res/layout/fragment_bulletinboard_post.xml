@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorOnSecondary">
 
         <ImageView
             android:id="@+id/iv_bulletinboard_detail_profile"
@@ -88,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_round">
+        android:background="?attr/colorPrimary">
 
         <EditText
             android:id="@+id/et_bulletinboard_detail_comment"

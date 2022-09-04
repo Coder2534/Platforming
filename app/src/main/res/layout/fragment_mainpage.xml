@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="?attr/backgroundColor">
 
 
     <androidx.viewpager2.widget.ViewPager2
@@ -27,11 +28,11 @@
         android:layout_height="match_parent"
         android:layout_below="@id/iv_mainpage_selfdiagnosis"
         android:layout_marginTop="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
+        android:background="?attr/colorOnSecondary"
         android:paddingLeft="10dp"
+        android:paddingTop="20dp"
         android:paddingRight="10dp"
-        android:background="@drawable/bg_round">
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tv_mainpage_recentpost"
@@ -44,6 +45,6 @@
             android:id="@+id/rv_mainpage_recentpost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tv_mainpage_recentpost"/>
+            android:layout_below="@id/tv_mainpage_recentpost" />
     </RelativeLayout>
 </RelativeLayout>

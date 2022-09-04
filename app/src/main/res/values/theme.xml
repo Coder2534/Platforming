@@ -1,44 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="PinkTheme">
-        <item name="android:textColor">#FFD8D8</item>
-        <item name="android:colorPrimary">#FF8FB1</item>
-        <item name="android:background">#FFFFFF</item>
-        <item name="android:statusBarColor" tools:targetApi="l">#FF8FB1</item>
+        <item name="colorPrimary">#FAA4A4</item>
+        <item name="colorOnSecondary">#FBBABA</item>
+        <item name="colorPrimaryDark">#FF8787</item>
+        <item name="colorAccent">#FF6E6E</item>
+        <item name="colorControlHighlight">#FFACAC</item>
+        <item name="colorControlActivated">#FFACAC</item>
+        <item name="android:navigationBarColor">#FF7D7D</item>
+        <item name="android:statusBarColor">#FF7D7D</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textColorHighlight">#FF6060</item>
+        <item name="backgroundColor">#FDCBCB</item>
+
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
     <style name="BuleTheme">
-        <item name="android:textColor">#D4F4FA</item>
-        <item name="android:colorPrimary">#90D8F0</item>
-        <item name="android:background">#FFFFFF</item>
-        <item name="android:statusBarColor" tools:targetApi="l">#90D8F0</item>
+        <item name="colorPrimary">#A3E5FB</item>
+        <item name="colorOnSecondary">#B0EBFD</item>
+        <item name="colorPrimaryDark">#85E1FF</item>
+        <item name="colorAccent">#8EE0FB</item>
+        <item name="colorControlHighlight">#9BD9ED</item>
+        <item name="colorControlActivated">#9BD9ED</item>
+        <item name="android:navigationBarColor">#6EDCFD</item>
+        <item name="android:statusBarColor">#6EDCFD</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textColorHighlight">#4FD1FB</item>
+        <item name="backgroundColor">#BFF5FF</item>
+
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
     <style name="GreenTheme">
-        <item name="android:textColor">#598A6A</item>
-        <item name="android:colorPrimary">#63A479</item>
-        <item name="android:statusBarColor" tools:targetApi="l">#63A479</item>
+        <item name="colorPrimary">#98D8AD</item>
+        <item name="colorOnSecondary">#A4DFAD</item>
+        <item name="colorPrimaryDark">#6FBC7A</item>
+        <item name="colorAccent">#70BD7C</item>
+        <item name="colorControlHighlight">#86BA8E</item>
+        <item name="colorControlActivated">#86BA8E</item>
+        <item name="android:navigationBarColor">#50B360</item>
+        <item name="android:statusBarColor">#50B360</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textColorHighlight">#55AF63</item>
+        <item name="backgroundColor">#CEFBC9</item>
+
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
 
     <style name="BlackTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:textColorHighlight">#FFFFFF</item>
-        <item name="colorPrimary">#373737</item>
-        <item name="colorPrimaryDark">#313131</item>
-        <item name="colorAccent">#000000</item>
-        <item name="colorControlHighlight">#828382</item>
-        <item name="colorControlActivated">#828382</item>
-        <item name="android:navigationBarColor">#404040</item>
-        <item name="android:statusBarColor">#404040</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="backgroundColor">#313131</item>
+
+        <item name="colorPrimary">#616161</item>
+        <item name="colorOnSecondary">#686868</item>
+        <item name="colorPrimaryDark">#494949</item>
+        <item name="colorAccent">#616161</item>
+        <item name="colorControlHighlight">#6C6C6C</item>
+        <item name="colorControlActivated">#6C6C6C</item>
+        <item name="android:navigationBarColor">#3C3C3C</item>
+        <item name="android:statusBarColor">#3C3C3C</item>
+        <item name="android:textColor">#DADADA</item>
+        <item name="android:textColorHighlight">#555555</item>
+        <item name="backgroundColor">#828381</item>
+
         <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
         <item name="buttonStyle">?attr/materialButtonOutlinedStyle</item>
 
     </style>
-
+    <style name="leferipointwhiteobliqueFont">
+        <item name="android:fontFamily">@font/nanum_handwriting_slow1</item>
+    </style>
     <style name="SlowFont">
         <item name="android:fontFamily">@font/nanum_handwriting_slow1</item>
     </style>
     <style name="AgainFont">
+        <item name="android:fontFamily">@font/nanum_handwriting_again2</item>
+    </style>
+    <style name="Galmuri9Font">
+        <item name="android:fontFamily">@font/nanum_handwriting_again2</item>
+    </style>
+    <style name="MugunghwaFont">
         <item name="android:fontFamily">@font/nanum_handwriting_again2</item>
     </style>
 </resources>

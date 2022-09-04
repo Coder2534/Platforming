@@ -23,11 +23,12 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
 
         Preference font = findPreference("font");
         Preference theme = findPreference("theme");
-
+        customDialog = new CustomDialog();
         font.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
 
+                customDialog.fontDialog(getActivity(), User.getUser().getFonts());
                 return true;
             }
         });
@@ -36,7 +37,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
                 Log.d("check_font_dialog", String.valueOf(User.getUser().getThemes()));
-                customDialog = new CustomDialog();
+
                 customDialog.themeDialog(getActivity(), User.getUser().getThemes());
                 Log.d("check_font_dialog2","ok");
                 return false;

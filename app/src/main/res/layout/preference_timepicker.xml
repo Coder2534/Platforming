@@ -7,4 +7,5 @@
     android:layout_height="wrap_content"
     android:paddingBottom="18dp"
     android:paddingTop="18dp"
-    android:timePickerMode="spinner"/>
+    android:timePickerMode="spinner"
+    android:background="?attr/backgroundColor"/>

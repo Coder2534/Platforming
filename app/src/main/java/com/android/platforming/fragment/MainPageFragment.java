@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -92,7 +93,7 @@ public class MainPageFragment extends Fragment {
 
         //최근 게시물
         RecyclerView recyclerView = view.findViewById(R.id.rv_mainpage_recentpost);
-        recyclerView.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         PostRecentViewAdapter recentViewAdapter = new PostRecentViewAdapter(Post.getPosts());
         recentViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
@@ -116,6 +117,7 @@ public class MainPageFragment extends Fragment {
                 recentViewAdapter.notifyDataSetChanged();
             }
         });
+
         return view;
     }
 }

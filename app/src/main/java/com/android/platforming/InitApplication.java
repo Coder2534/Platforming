@@ -23,8 +23,6 @@ public class InitApplication extends Application {
 
         Log.d("timeline", "initApplication");
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        appliedTheme = pref.getInt("theme", 0);
-        appliedFont = pref.getInt("font", 0);
         if(pref.getBoolean("firstActivate", true)){
             Calendar calendar_timer = Calendar.getInstance();
             calendar_timer.set(Calendar.HOUR_OF_DAY, 8);
@@ -53,6 +51,16 @@ public class InitApplication extends Application {
 
     public void setAppliedTheme(int appliedTheme) {
         this.appliedTheme = appliedTheme;
+    }
+
+    public void refreshAppliedTheme(){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        appliedTheme = pref.getInt("theme", 0);
+    }
+
+    public void refreshAppliedFont(){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        appliedFont = pref.getInt("font", 0);
     }
 
     public void setAppliedFont(int appliedFont) {
