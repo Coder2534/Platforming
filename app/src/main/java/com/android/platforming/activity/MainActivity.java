@@ -35,7 +35,6 @@ import com.android.platforming.fragment.SchoolIntroduceFragment;
 import com.android.platforming.fragment.SchoolScheduleFragment;
 import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
-import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.interfaze.OnChildClickInterface;
 import com.example.platforming.R;
 import com.android.platforming.fragment.InitialSettingFragment;

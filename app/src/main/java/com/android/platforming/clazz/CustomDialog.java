@@ -192,6 +192,39 @@ public class CustomDialog {
         dialog.show();
     }
 
+    public void attendanceCheckDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle("출석체크");
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_attendancecheck, null);
+
+        TextView message = view.findViewById(R.id.tv_select_message);
+        message.setText("계속하시겠습니까?");
+
+        Button cancel = view.findViewById(R.id.btn_select_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        Button confirm = view.findViewById(R.id.btn_select_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listenerInterface.onSuccess();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
     public void themeDialog(Activity activity, List themes){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();

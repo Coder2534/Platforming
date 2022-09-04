@@ -33,6 +33,7 @@ public class User {
     private List<Long> fonts;
     private List<Long> themes;
     private List<String> myPostIds;
+    private long lastSignIn;
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -48,6 +49,7 @@ public class User {
         themes = (List<Long>) data.get("themes");
         fonts = (List<Long>) data.get("fonts");
         myPostIds = (List<String>) data.get("myPostIds");
+        lastSignIn = (long) data.get("lastSignIn");
     }
 
     public String getUid() {
@@ -152,5 +154,9 @@ public class User {
 
     public List<String> getMyPostIds() {
         return myPostIds;
+    }
+
+    public long getLastSignIn() {
+        return lastSignIn;
     }
 }

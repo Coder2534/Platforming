@@ -3,9 +3,11 @@ package com.android.platforming.fragment;
 import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +26,21 @@ import com.android.platforming.activity.BulletinBoardActivity;
 import com.android.platforming.activity.WebViewActivity;
 import com.android.platforming.adapter.FragmentSliderAdapter;
 import com.android.platforming.adapter.PostRecentViewAdapter;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
+import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
+
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.TimeInfo;
+
+import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainPageFragment extends Fragment {
     ViewPager2 viewPager;
@@ -62,6 +75,12 @@ public class MainPageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
+
+        if(Settings.Global.getInt(view.getContext().getContentResolver(), Settings.Global.AUTO_TIME, 0) == 1){
+            attendanceCheck(getActivity(), new Date(System.currentTimeMillis()));
+        }
+        else
+            getCurrentNetworkTime();
 
         //상단 배너
         viewPager = view.findViewById(R.id.vp_mainpage);
@@ -120,4 +139,51 @@ public class MainPageFragment extends Fragment {
 
         return view;
     }
+
+    public static final String TIME_SERVER = "pool.ntp.org";
+
+
+    public void getCurrentNetworkTime() {
+        new Thread(() -> {
+            NTPUDPClient lNTPUDPClient = new NTPUDPClient();
+            lNTPUDPClient.setDefaultTimeout(3000);
+            long returnTime = 0;
+            try {
+                lNTPUDPClient.open();
+                InetAddress lInetAddress = InetAddress.getByName(TIME_SERVER);
+                TimeInfo lTimeInfo = lNTPUDPClient.getTime(lInetAddress);
+                returnTime = lTimeInfo.getReturnTime(); // local time
+                returnTime = lTimeInfo.getMessage().getTransmitTimeStamp().getTime(); // server time
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                lNTPUDPClient.close();
+            }
+            Date date = new Date(returnTime);
+            Activity activity = getActivity();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    attendanceCheck(activity, date);
+                }
+            });
+        }).start();
+    }
+
+    private void attendanceCheck(Activity activity, Date date){
+        if(date.before(new Date(User.getUser().getLastSignIn()))){
+            Map<String, Object> data = new HashMap<String, Object>(){{
+                put("lastSignIn", date);
+            }};
+            FirestoreManager firestoreManager = new FirestoreManager();
+            firestoreManager.updateUserData(data, new ListenerInterface() {
+                @Override
+                public void onSuccess() {
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.attendanceCheckDialog(activity);
+                }
+            });
+        }
+    }
+
 }
