@@ -106,6 +106,9 @@ public class SignInFragment extends Fragment{
 
     //로그인(Email)
     private void signInWithEmail(String email, String password){
+        if(email.isEmpty() || password.isEmpty())
+            return;
+
         getFirebaseAuth().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 readData();
