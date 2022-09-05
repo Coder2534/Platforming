@@ -176,8 +176,6 @@ public class FirestoreManager {
         });
     }
 
-
-
     //Comment
     public void readCommentSize(Post post, ListenerInterface listenerInterface){
         FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
