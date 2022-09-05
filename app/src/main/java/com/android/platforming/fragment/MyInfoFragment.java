@@ -100,7 +100,7 @@ public class MyInfoFragment extends Fragment {
 
         tv_myinfo_name.setText(user.getUsername());
         tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
-        tv_myinfo_point.setText(Integer.toString(user.getPoint()));
+        tv_myinfo_point.setText(user.getPoint() + "p");
         ibtn_myinfo_profile.setImageResource(user.getProfile());
 
         et_myinfo_nickname.setClickable(false);
