@@ -19,32 +19,35 @@
         android:id="@+id/cb_dailytask_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_dailytask_title"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:button="@null"
+        android:clickable="false"
         android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
-        android:text="금일 로그인"/>
+        android:text="금일 로그인" />
 
     <CheckBox
         android:id="@+id/cb_dailytask_selfdiagnosis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/cb_dailytask_signin"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:button="@null"
+        android:clickable="false"
         android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
-        android:text="자가진단 확인"/>
+        android:text="자가진단 확인" />
 
     <CheckBox
         android:id="@+id/cb_dailytask_writepost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/cb_dailytask_selfdiagnosis"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:button="@null"
+        android:clickable="false"
         android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
         android:text="게시물 작성" />
 
@@ -52,10 +55,11 @@
         android:id="@+id/cb_dailytask_writecomment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/cb_dailytask_writepost"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:button="@null"
+        android:clickable="false"
         android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
         android:text="댓글 작성(0/2)" />
 

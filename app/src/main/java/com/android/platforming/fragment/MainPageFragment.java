@@ -38,6 +38,7 @@ import org.apache.commons.net.ntp.TimeInfo;
 
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -175,11 +176,15 @@ public class MainPageFragment extends Fragment {
         if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
             Map<String, Object> data = new HashMap<String, Object>(){{
                 put("lastSignIn", calendar_now.getTimeInMillis());
+                put("dailyTasks", Arrays.asList(0L, 0L, 0L, 0L));
+                put("point_receipt", 0);
             }};
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.updateUserData(data, new ListenerInterface() {
                 @Override
                 public void onSuccess() {
+                    user.setPoint_receipt(0);
+                    user.setDailyTasks(Arrays.asList(0L, 0L, 0L, 0L));
                     CustomDialog customDialog = new CustomDialog();
                     customDialog.dailyMissionDialog(activity);
                 }
