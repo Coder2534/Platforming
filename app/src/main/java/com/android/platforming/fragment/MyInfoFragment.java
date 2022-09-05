@@ -144,10 +144,6 @@ public class MyInfoFragment extends Fragment {
                     et_myinfo_class.setClickable(false);
                     et_myinfo_class.setFocusable(false);
 
-                    et_myinfo_nickname.getText().toString();
-                    et_myinfo_class.getText().toString();
-                    et_myinfo_phonenumber.getText().toString();
-
                     Map<String,Object> MyinfoData = new HashMap<>();
 
                     MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
