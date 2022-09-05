@@ -76,16 +76,16 @@ public class PointStoreFragment extends Fragment {
                 setFontdialogview();
                 boughtfont = user.getFonts();
                 Log.d("asd", String.valueOf(boughtfont));
-                if (boughtfont.contains((long) 1)){
+                if (boughtfont.contains(1L)){
                     btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
                 }
-                if(boughtfont.contains((long) 2)){
+                if(boughtfont.contains(2L)){
                     btn_pointstore_font_again.setTextColor(getResources().getColor(R.color.red));
                 }
-                if(boughtfont.contains((long) 3)){
+                if(boughtfont.contains(3L)){
                     btn_pointstore_font_galmuri.setTextColor(getResources().getColor(R.color.red));
                 }
-                if(boughtfont.contains((long) 4)){
+                if(boughtfont.contains(4L)){
                     btn_pointstore_font_mugunghwa.setTextColor(getResources().getColor(R.color.red));
                 }
                 point = user.getPoint();
@@ -175,16 +175,16 @@ public class PointStoreFragment extends Fragment {
             public void onClick(View view) {
                 setThemedialogView();
                 boughttheme = user.getThemes();
-                if(boughttheme.contains((long) 1)){
+                if(boughttheme.contains(1L)){
                     btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));
                 }
-                if(boughttheme.contains((long) 2)){
+                if(boughttheme.contains(2L)){
                     btn_pointstore_theme_bule.setTextColor(getResources().getColor(R.color.red));
                 }
-                if(boughttheme.contains((long) 3)){
+                if(boughttheme.contains(3L)){
                     btn_pointstore_theme_green.setTextColor(getResources().getColor(R.color.red));
                 }
-                if(boughttheme.contains((long) 4)){
+                if(boughttheme.contains(4L)){
                     btn_pointstore_theme_black.setTextColor(getResources().getColor(R.color.red));
                 }
                 point = user.getPoint();
