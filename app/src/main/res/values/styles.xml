@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="LeferipointwhiteobliqueFont">
+        <item name="fontFamily">@font/leferipointwhiteoblique0</item>
+    </style>
+    <style name="SlowFont">
+        <item name="fontFamily">@font/nanum_handwriting_slow1</item>
+    </style>
+    <style name="AgainFont">
+        <item name="fontFamily">@font/nanum_handwriting_again2</item>
+    </style>
+    <style name="Galmuri9Font">
+        <item name="fontFamily">@font/galmuri93</item>
+    </style>
+    <style name="MugunghwaFont">
+        <item name="fontFamily">@font/nanum_handwriting_mugunghwa4</item>
+    </style>
+</resources>

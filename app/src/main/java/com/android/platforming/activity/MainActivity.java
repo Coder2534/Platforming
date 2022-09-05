@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.fonts.FontFamily;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -61,16 +62,17 @@ public class MainActivity extends AppCompatActivity {
         InitApplication initApplication = ((InitApplication)getApplication());
         initApplication.refreshAppliedTheme();
         initApplication.refreshAppliedFont();
+        Log.d("check_main", String.valueOf(initApplication.getAppliedTheme())+initApplication.getAppliedFont());
 
         switch (initApplication.getAppliedTheme()){
-            case 0:setTheme(R.style.Theme_Platforming);break;
+            case 0:setTheme(R.style.WhiteTheme);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
             case 3:setTheme(R.style.GreenTheme);break;
             case 4:setTheme(R.style.BlackTheme);break;
         }
         switch (initApplication.getAppliedFont()){
-            case 0:setTheme(R.style.leferipointwhiteobliqueFont);break;
+            case 0:setTheme(R.style.LeferipointwhiteobliqueFont);break;
             case 1:setTheme(R.style.SlowFont);break;
             case 2:setTheme(R.style.AgainFont);break;
             case 3:setTheme(R.style.Galmuri9Font);break;
