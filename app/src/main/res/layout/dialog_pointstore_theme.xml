@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,17 +84,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#499C54"
-            android:text="구매하기"
             android:layout_toLeftOf="@+id/btn_pointstore_theme_getout"
-            />
+            android:backgroundTint="?attr/colorPrimary"
+            android:text="구매하기" />
         <Button
             android:id="@+id/btn_pointstore_theme_getout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_alignParentRight="true"
-            android:backgroundTint="#499C54"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="나가기"
             />
     </RelativeLayout>

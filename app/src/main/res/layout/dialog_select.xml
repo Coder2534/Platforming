@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
 
     <TextView
         android:id="@+id/tv_select_message"
@@ -29,8 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#499C54"
-            android:textColor="@color/white"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="취소" />
 
         <Button
@@ -39,8 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#499C54"
-            android:textColor="@color/white"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="확인"/>
     </LinearLayout>
 </LinearLayout>

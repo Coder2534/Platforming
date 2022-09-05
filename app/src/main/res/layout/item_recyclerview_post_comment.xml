@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="@drawable/bg_round">
+    android:background="?attr/colorOnSecondary">
 
     <ImageView
         android:id="@+id/iv_noticeboard_comment_profile"
@@ -16,8 +16,8 @@
         android:id="@+id/tv_noticeboard_comment_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/iv_noticeboard_comment_profile"
         android:layout_alignTop="@+id/iv_noticeboard_comment_profile"
+        android:layout_toEndOf="@id/iv_noticeboard_comment_profile"
         android:text="null"
         android:textSize="25dp" />
 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/bg_more"
+        android:background="?attr/colorPrimary"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         app:srcCompat="@drawable/ic_baseline_delete_outline_24"
