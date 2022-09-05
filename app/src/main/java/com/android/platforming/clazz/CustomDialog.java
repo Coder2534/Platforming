@@ -201,8 +201,14 @@ public class CustomDialog {
         if(user.getDailyTasks().get(0) == 1L)
             signIn.setChecked(true);
         CheckBox selfDiagnosis = view.findViewById(R.id.cb_dailytask_selfdiagnosis);
+        if(user.getDailyTasks().get(1) == 1L)
+            selfDiagnosis.setChecked(true);
         CheckBox writePost = view.findViewById(R.id.cb_dailytask_writepost);
+        if(user.getDailyTasks().get(2) == 1L)
+            writePost.setChecked(true);
         CheckBox writeComment = view.findViewById(R.id.cb_dailytask_writecomment);
+        if(user.getDailyTasks().get(3) == 2L)
+            writeComment.setChecked(true);
 
         Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
         if(user.getPoint_receipt() > 0){
