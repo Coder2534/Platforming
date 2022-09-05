@@ -77,8 +77,6 @@ public class MainPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
 
-        getCurrentNetworkTime();
-
         //상단 배너
         viewPager = view.findViewById(R.id.vp_mainpage);
         FragmentSliderAdapter sliderAdapter = new FragmentSliderAdapter(getActivity());
@@ -135,60 +133,5 @@ public class MainPageFragment extends Fragment {
         });
 
         return view;
-    }
-
-    public static final String TIME_SERVER = "pool.ntp.org";
-
-
-    public void getCurrentNetworkTime() {
-        new Thread(() -> {
-            NTPUDPClient lNTPUDPClient = new NTPUDPClient();
-            lNTPUDPClient.setDefaultTimeout(3000);
-            long returnTime = 0;
-            try {
-                lNTPUDPClient.open();
-                InetAddress lInetAddress = InetAddress.getByName(TIME_SERVER);
-                TimeInfo lTimeInfo = lNTPUDPClient.getTime(lInetAddress);
-                returnTime = lTimeInfo.getReturnTime(); // local time
-                returnTime = lTimeInfo.getMessage().getTransmitTimeStamp().getTime(); // server time
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                lNTPUDPClient.close();
-            }
-            Date date = new Date(returnTime);
-            Activity activity = getActivity();
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    attendanceCheck(activity, date);
-                }
-            });
-        }).start();
-    }
-
-    private void attendanceCheck(Activity activity, Date date){
-        Calendar calendar_now = Calendar.getInstance();
-        calendar_now.setTime(date);
-        Calendar calendar_last = Calendar.getInstance();
-        calendar_last.setTimeInMillis(user.getLastSignIn());
-
-        if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
-            Map<String, Object> data = new HashMap<String, Object>(){{
-                put("lastSignIn", calendar_now.getTimeInMillis());
-                put("dailyTasks", Arrays.asList(0L, 0L, 0L, 0L));
-                put("point_receipt", 0);
-            }};
-            FirestoreManager firestoreManager = new FirestoreManager();
-            firestoreManager.updateUserData(data, new ListenerInterface() {
-                @Override
-                public void onSuccess() {
-                    user.setPoint_receipt(0);
-                    user.setDailyTasks(Arrays.asList(0L, 0L, 0L, 0L));
-                    CustomDialog customDialog = new CustomDialog();
-                    customDialog.dailyMissionDialog(activity);
-                }
-            });
-        }
     }
 }
