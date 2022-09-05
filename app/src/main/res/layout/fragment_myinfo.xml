@@ -16,7 +16,7 @@
         android:id="@+id/tv_myinfo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="165dp"
         android:layout_marginTop="75dp"
         android:background="?attr/colorOnSecondary"
         android:gravity="center_horizontal"
@@ -35,32 +35,32 @@
         android:id="@+id/et_myinfo_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="165dp"
         android:layout_marginTop="120dp"
+        android:background="?attr/colorOnSecondary"
         android:gravity="center_horizontal"
         android:hint="닉네임적는곳"
         android:maxLength="10"
-        android:textSize="20sp"
-        android:background="?attr/colorOnSecondary"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/et_myinfo_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="190dp"
+        android:background="?attr/colorOnSecondary"
         android:hint="금오고등학교 @학년 @반 @번"
-        android:textSize="22dp"
-        android:background="?attr/colorOnSecondary"/>
+        android:textSize="22dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="350dp"
+        android:background="?attr/colorOnSecondary"
         android:text="이메일"
-        android:textSize="25dp"
-        android:background="?attr/colorOnSecondary"/>
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/tv_myinfo_email"
@@ -94,10 +94,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="305dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="75dp"
+        android:background="?attr/colorOnSecondary"
         android:text="0"
-        android:textSize="30dp"
-        android:background="?attr/colorOnSecondary"/>
+        android:textSize="30dp" />
 
         <Button
             android:id="@+id/btn_myinfo_finish"
