@@ -9,12 +9,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:text="학사일정"/>
+        android:text="학사일정"
+        android:padding="10dp"/>
 
     <ListView
         android:id="@+id/lv_viewpager_schoolSchedule"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimary"/>
+        android:layout_margin="10dp"
+        android:background="?attr/colorPrimary" />
 
 </LinearLayout>

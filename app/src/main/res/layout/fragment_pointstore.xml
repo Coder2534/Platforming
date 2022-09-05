@@ -11,7 +11,8 @@
         android:text="포인트 상점"
         android:textSize="30dp"
         android:textColor="@color/black"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:background="?attr/colorOnSecondary"/>
     <LinearLayout
         android:layout_margin="20dp"
         android:layout_width="match_parent"

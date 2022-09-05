@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:orientation="horizontal"
-    android:background="?attr/backgroundColor">
+    android:background="?attr/colorPrimary">
 
     <TextView
         android:id="@+id/tv_team"

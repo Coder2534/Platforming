@@ -20,7 +20,8 @@
             android:layout_below="@+id/BTN_getFoodName"
             android:gravity="center"
             android:text="(날짜)"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:background="?attr/colorOnSecondary"/>
 
         <ListView
             android:id="@+id/lv_foodlist"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="날짜 선택"
-            android:textColor="@color/black"
+            android:textSize="30dp"
             android:backgroundTint="?attr/colorPrimary" />
     </LinearLayout>
 </RelativeLayout>
