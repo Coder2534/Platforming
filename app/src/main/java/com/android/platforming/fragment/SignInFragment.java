@@ -27,6 +27,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -35,6 +36,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.regex.Matcher;
@@ -66,7 +70,6 @@ public class SignInFragment extends Fragment{
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //final EditText editText = new EditText(getContext());
                 CustomDialog customDialog = new CustomDialog();
                 customDialog.passwordResetDialog(getContext(), new ListenerInterface() {
                     @Override
@@ -105,12 +108,16 @@ public class SignInFragment extends Fragment{
     private void signInWithEmail(String email, String password){
         getFirebaseAuth().signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                Log.w("SignInFragment", "signInWithEmailAndPassword Success");
                 readData();
             }else{
-                Log.w("SignInFragment", "signInWithEmailAndPassword Error");
                 CustomDialog customDialog = new CustomDialog();
-                customDialog.messageDialog(getActivity(), "아이디가 없거나 비밀번호가 맞지 않습니다.");
+                try{
+                    throw task.getException();
+                } catch(FirebaseAuthInvalidCredentialsException e) {
+                    customDialog.messageDialog(getActivity(), "입력하신 정보가 유효하지 않습니다.");
+                } catch(Exception e) {
+                    customDialog.messageDialog(getActivity(), "로그인 중 오류가 발생했습니다.");
+                }
             }
         });
     }
@@ -145,24 +152,33 @@ public class SignInFragment extends Fragment{
                         Log.w("SignInActivity", "Google SignIn success");
                         readData();
                     }else{
-                        Log.w("SignInActivity", "Google SignIn fail");
+                        LoginManager.getInstance().logOut();
+                        CustomDialog customDialog = new CustomDialog();
+                        try{
+                            throw task.getException();
+                        } catch(FirebaseAuthUserCollisionException e) {
+                            customDialog.messageDialog(getActivity(), "이미 사용중인 이메일 입니다.");
+                        } catch(Exception e) {
+                            customDialog.messageDialog(getActivity(), "로그인 중 오류가 발생했습니다.");
+                        }
                     }
                 });
     }
 
     //로그인(Facebook)
     private CallbackManager callbackManager;
+    LoginButton loginButton_facebook;
     private void setFacebook(View view){
 
         callbackManager = CallbackManager.Factory.create();
 
         //callbackManager
-        LoginButton loginButton = view.findViewById(R.id.lbtn_signin_facebook);
-        loginButton.setFragment(this);// If you are using in a fragment, call loginButton.setFragment(this);
+        loginButton_facebook = view.findViewById(R.id.lbtn_signin_facebook);
+        loginButton_facebook.setFragment(this);// If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginButton_facebook.setReadPermissions("email", "public_profile");
+        loginButton_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
@@ -192,8 +208,15 @@ public class SignInFragment extends Fragment{
                         Log.w("SignInActivity", "Facebook SignIn success");
                         readData();
                     } else {
-                        // 로그인 실패
-                        Log.w("SignInActivity", "Facebook SignIn fail: " + task.getException());
+                        LoginManager.getInstance().logOut();
+                        CustomDialog customDialog = new CustomDialog();
+                        try{
+                            throw task.getException();
+                        } catch(FirebaseAuthUserCollisionException e) {
+                            customDialog.messageDialog(getActivity(), "이미 사용중인 이메일 입니다.");
+                        } catch(Exception e) {
+                            customDialog.messageDialog(getActivity(), "로그인 중 오류가 발생했습니다.");
+                        }
                     }
                 });
     }
