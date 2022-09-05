@@ -190,7 +190,7 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void dailyMissionDialog(Activity activity){
+    public void dailyTaskDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("출석체크");
 

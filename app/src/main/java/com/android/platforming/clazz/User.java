@@ -1,8 +1,19 @@
 package com.android.platforming.clazz;
 
+import android.app.Activity;
+
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.TimeInfo;
+
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -169,5 +180,41 @@ public class User {
 
     public List<Long> getDailyTasks() {
         return dailyTasks;
+    }
+
+    public void attendanceCheck(Activity activity, ListenerInterface listenerInterface) {
+        new Thread(() -> {
+            NTPUDPClient lNTPUDPClient = new NTPUDPClient();
+            lNTPUDPClient.setDefaultTimeout(3000);
+            long returnTime = 0;
+            try {
+                lNTPUDPClient.open();
+                InetAddress lInetAddress = InetAddress.getByName("pool.ntp.org");
+                TimeInfo lTimeInfo = lNTPUDPClient.getTime(lInetAddress);
+                returnTime = lTimeInfo.getReturnTime(); // local time
+                returnTime = lTimeInfo.getMessage().getTransmitTimeStamp().getTime(); // server time
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                lNTPUDPClient.close();
+            }
+            Date date = new Date(returnTime);
+            activity.runOnUiThread(() -> {
+                Calendar calendar_now = Calendar.getInstance();
+                calendar_now.setTime(date);
+                Calendar calendar_last = Calendar.getInstance();
+                calendar_last.setTimeInMillis(user.getLastSignIn());
+
+                if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
+                    Map<String, Object> data = new HashMap<String, Object>(){{
+                        put("lastSignIn", calendar_now.getTimeInMillis());
+                        put("dailyTasks", Arrays.asList(0L, 0L, 0L, 0L));
+                        put("point_receipt", 0);
+                    }};
+                    FirestoreManager firestoreManager = new FirestoreManager();
+                    firestoreManager.updateUserData(data, listenerInterface);
+                }
+            });
+        }).start();
     }
 }
