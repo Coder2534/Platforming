@@ -28,7 +28,6 @@ import android.widget.TextView;
 import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.ExpandableList;
-import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.fragment.MainPageFragment;
 import com.android.platforming.fragment.MyInfoFragment;
 import com.android.platforming.fragment.MyPostFragment;
@@ -43,15 +42,7 @@ import com.example.platforming.R;
 import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import org.apache.commons.net.ntp.NTPUDPClient;
-import org.apache.commons.net.ntp.TimeInfo;
-
-import java.net.InetAddress;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,14 +87,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         activity = this;
-
-        getCurrentNetworkTime(new ListenerInterface() {
-            @Override
-            public void onSuccess() {
-                user.setPoint_receipt(0);
-                user.setDailyTasks(Arrays.asList(0L, 0L, 0L, 0L));
-            }
-        });
 
         Toolbar toolbar = findViewById(R.id.tb_main);
         setSupportActionBar(toolbar);
@@ -203,13 +186,24 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_dailytask:
-                    getCurrentNetworkTime(new ListenerInterface() {
+                    user.attendanceCheck(new ListenerInterface() {
                         @Override
-                        public void onSuccess() {
-                            user.setPoint_receipt(0);
-                            user.setDailyTasks(Arrays.asList(0L, 0L, 0L, 0L));
-                            CustomDialog customDialog = new CustomDialog();
-                            customDialog.dailyTaskDialog(activity);
+                        public void onSuccess(long timeInMillis) {
+                            user.setPoint_receipt(10);
+                            user.setDailyTasks(Arrays.asList(1L, 0L, 0L, 0L));
+                            user.setLastSignIn(timeInMillis);
+                            runOnUiThread(() -> {
+                                CustomDialog customDialog = new CustomDialog();
+                                customDialog.dailyTaskDialog(activity);
+                            });
+                        }
+
+                        @Override
+                        public void onFail() {
+                            runOnUiThread(() -> {
+                                CustomDialog customDialog = new CustomDialog();
+                                customDialog.dailyTaskDialog(activity);
+                            });
                         }
                     });
                     return true;
