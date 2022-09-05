@@ -203,7 +203,7 @@ public class CustomDialog {
         CheckBox writeComment = view.findViewById(R.id.cb_dailytask_writecomment);
 
         Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
-        if(user.getPoint_receipt() == 0){
+        if(user.getPoint_receipt() > 0){
             receipt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

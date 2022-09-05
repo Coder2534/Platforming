@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="일일업무" />
+        android:text="오늘의 할일" />
 
     <CheckBox
         android:id="@+id/cb_dailytask_signin"

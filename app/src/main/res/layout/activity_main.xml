@@ -41,7 +41,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/layout_navigation_header">
+        app:headerLayout="@layout/layout_navigation_header"
+        android:background="?attr/backgroundColor">
         <RelativeLayout
             android:id="@+id/ll_main"
             android:layout_width="match_parent"
