@@ -27,6 +27,7 @@ import com.example.platforming.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,17 +92,15 @@ public class InitialSettingFragment extends Fragment {
 
             data.put("point", 0);
 
-            List<Long> list_design = Arrays.asList(0L);
+            List<Long> list_design = Collections.singletonList(0L);
             data.put("themes", list_design);
             data.put("fonts", list_design);
 
-            List<String> list_postIds = new ArrayList<>();
-            data.put("myPostIds", list_postIds);
+            data.put("myPostIds", new ArrayList<String>());
 
             data.put("lastSignIn", 0);
 
-            List<Long> list_dailyTasks = Arrays.asList(0L, 0L, 0L, 0L);
-            data.put("dailyTasks", list_dailyTasks);
+            data.put("dailyTasks", Arrays.asList(0L, 0L, 0L, 0L));
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {
