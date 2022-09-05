@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="출석체크"/>
+        android:text="일일업무" />
 
     <CheckBox
         android:id="@+id/cb_dailytask_signin"
@@ -63,8 +63,8 @@
         android:id="@+id/btn_dailytask_receipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/cb_dailytask_writecomment"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="포인트 수령"/>
+        android:text="포인트 수령" />
 </RelativeLayout>

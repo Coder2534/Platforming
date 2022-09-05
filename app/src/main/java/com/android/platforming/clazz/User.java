@@ -69,10 +69,6 @@ public class User {
         return profiles;
     }
 
-    public static void setUser(User user) {
-        User.user = user;
-    }
-
     public String getUsername() {
         return username;
     }

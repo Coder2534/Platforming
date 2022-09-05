@@ -195,7 +195,7 @@ public class CustomDialog {
         builder.setTitle("출석체크");
 
         LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_attendancecheck, null);
+        View view = inflater.inflate(R.layout.dialog_dailytask, null);
 
         CheckBox signIn = view.findViewById(R.id.cb_dailytask_signin);
         CheckBox selfDiagnosis = view.findViewById(R.id.cb_dailytask_selfdiagnosis);
@@ -203,23 +203,25 @@ public class CustomDialog {
         CheckBox writeComment = view.findViewById(R.id.cb_dailytask_writecomment);
 
         Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
-        receipt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirestoreManager firestoreManager = new FirestoreManager();
-                firestoreManager.updateUserData(new HashMap<String, Object>() {{
-                    put("point", user.getPoint() + user.getPoint_receipt());
-                    put("point_receipt", 0);
-                }}, new ListenerInterface() {
-                    @Override
-                    public void onSuccess() {
-                        user.setPoint(user.getPoint() + user.getPoint_receipt());
-                        user.setPoint_receipt(0);
-                    }
-                });
-                dialog.dismiss();
-            }
-        });
+        if(user.getPoint_receipt() == 0){
+            receipt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirestoreManager firestoreManager = new FirestoreManager();
+                    firestoreManager.updateUserData(new HashMap<String, Object>() {{
+                        put("point", user.getPoint() + user.getPoint_receipt());
+                        put("point_receipt", 0);
+                    }}, new ListenerInterface() {
+                        @Override
+                        public void onSuccess() {
+                            user.setPoint(user.getPoint() + user.getPoint_receipt());
+                            user.setPoint_receipt(0);
+                        }
+                    });
+                    dialog.dismiss();
+                }
+            });
+        }
 
         builder.setView(view);
 
