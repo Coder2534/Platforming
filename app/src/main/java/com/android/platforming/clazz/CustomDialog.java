@@ -206,6 +206,7 @@ public class CustomDialog {
         if(user.getDailyTasks().get(2) == 1L)
             writePost.setChecked(true);
         CheckBox writeComment = view.findViewById(R.id.cb_dailytask_writecomment);
+        writeComment.setText(String.format("댓글 작성(%d/2)", user.getDailyTasks().get(3)));
         if(user.getDailyTasks().get(3) == 2L)
             writeComment.setChecked(true);
 

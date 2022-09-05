@@ -17,6 +17,8 @@ import com.example.platforming.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class BulletinBoardRegisterActivity extends AppCompatActivity {
@@ -70,6 +72,21 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
                 firestoreManager.writePostData(data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
+                        if(user.getDailyTasks().get(2) < 1){
+                            List<Long> dailyTasks = new LinkedList<>(user.getDailyTasks());
+                            dailyTasks.set(2, 1L);
+                            firestoreManager.updateUserData(new HashMap<String, Object>() {{
+                                put("point_receipt", user.getPoint_receipt() + 10);
+                                put("dailyTasks", dailyTasks);
+                            }}, new ListenerInterface() {
+                                @Override
+                                public void onSuccess() {
+                                    user.addPoint_receipt(10);
+                                    user.getDailyTasks().set(2, 1L);
+                                }
+                            });
+                        }
+
                         //refresh NoticeBoardListFragment
                         setResult(RESULT_OK);
                         onBackPressed();

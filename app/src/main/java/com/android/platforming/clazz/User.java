@@ -187,6 +187,10 @@ public class User {
         this.point_receipt = point_receipt;
     }
 
+    public void addPoint_receipt(int value){
+        this.point_receipt += value;
+    }
+
     public int getPoint_receipt() {
         return point_receipt;
     }

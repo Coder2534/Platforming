@@ -3,6 +3,7 @@ package com.android.platforming.activity;
 import static com.android.platforming.InitApplication.HOMEPAGE;
 import static com.android.platforming.InitApplication.RIROSCHOOL;
 import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
+import static com.android.platforming.clazz.User.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,10 +25,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.android.platforming.InitApplication;
+import com.android.platforming.clazz.FirestoreManager;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.cookie.Cookie;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class WebViewActivity extends AppCompatActivity {
@@ -61,9 +66,8 @@ public class WebViewActivity extends AppCompatActivity {
             loadWeb("http://school.gyo6.net/geumohs");
         }
         else if(type == RIROSCHOOL){
-            String riroschoolPackage = "com.rirosoft.riroschool";
             try{
-                startActivity(getPackageManager().getLaunchIntentForPackage(riroschoolPackage));
+                startActivity(getPackageManager().getLaunchIntentForPackage("com.rirosoft.riroschool"));
                 finish();
             }catch (Exception e){
                 setListener();
@@ -71,9 +75,24 @@ public class WebViewActivity extends AppCompatActivity {
             }
         }
         else if(type == SELFDIAGNOSIS){
-            String selfDiagnosisPackage = "kr.go.eduro.hcs";
+            if(user.getDailyTasks().get(1) < 1){
+                List<Long> dailyTasks = new LinkedList<>(user.getDailyTasks());
+                dailyTasks.set(1, 1L);
+                FirestoreManager firestoreManager = new FirestoreManager();
+                firestoreManager.updateUserData(new HashMap<String, Object>() {{
+                    put("point_receipt", user.getPoint_receipt() + 10);
+                    put("dailyTasks", dailyTasks);
+                }}, new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+                        user.addPoint_receipt(10);
+                        user.getDailyTasks().set(1, 1L);
+                    }
+                });
+            }
+
             try{
-                startActivity(getPackageManager().getLaunchIntentForPackage(selfDiagnosisPackage));
+                startActivity(getPackageManager().getLaunchIntentForPackage("kr.go.eduro.hcs"));
                 finish();
             }catch (Exception e){
                 setListener();

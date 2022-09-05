@@ -27,6 +27,8 @@ import com.example.platforming.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class BulletinBoardPostFragment extends Fragment {
@@ -159,11 +161,27 @@ public class BulletinBoardPostFragment extends Fragment {
                 firestoreManager.writeCommentData(post.getId(), data, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
+                        long count = user.getDailyTasks().get(3);
+                        if(count < 2){
+                            List<Long> dailyTasks = new LinkedList<>(user.getDailyTasks());
+                            dailyTasks.set(3, count + 1L);
+                            firestoreManager.updateUserData(new HashMap<String, Object>() {{
+                                put("point_receipt", user.getPoint_receipt() + 5);
+                                put("dailyTasks", dailyTasks);
+                            }}, new ListenerInterface() {
+                                @Override
+                                public void onSuccess() {
+                                    user.addPoint_receipt(5);
+                                    user.getDailyTasks().set(3,  count + 1L);
+                                }
+                            });
+                        }
+
                         firestoreManager.readCommentData(post, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
                                 commentViewAdapter.notifyDataSetChanged();
-                                comment_count.setText(Integer.toString(post.getComments().size()));
+                                comment_count.setText(String.valueOf(post.getComments().size()));
                                 comment.setText("");
                             }
                         });
