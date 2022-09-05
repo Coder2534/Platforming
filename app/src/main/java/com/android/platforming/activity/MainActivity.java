@@ -102,11 +102,12 @@ public class MainActivity extends AppCompatActivity {
         homeFragmentIdentifier = getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.cl_main, new MainPageFragment()).commit();
     }
 
+    TextView point;
     private void setHeader(){
         View header = navigationView.getHeaderView(0);
         ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
         profile.setImageResource(user.getProfile());
-        TextView point = header.findViewById(R.id.tv_navigation_header_point);
+        point = header.findViewById(R.id.tv_navigation_header_point);
         point.setText(user.getPoint() + "p");
         TextView username = header.findViewById(R.id.tv_navigation_header_username);
         username.setText(user.getUsername());
@@ -178,6 +179,15 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_dailytask:
+                    ListenerInterface listenerInterface = new ListenerInterface() {
+                        @Override
+                        public void onSuccess() {
+                            user.setPoint(user.getPoint() + user.getPoint_receipt());
+                            user.setPoint_receipt(0);
+                            point.setText(user.getPoint() + "p");
+                        }
+                    };
+
                     user.attendanceCheck(new ListenerInterface() {
                         @Override
                         public void onSuccess(long timeInMillis) {
@@ -186,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                             user.setLastSignIn(timeInMillis);
                             runOnUiThread(() -> {
                                 CustomDialog customDialog = new CustomDialog();
-                                customDialog.dailyTaskDialog(activity);
+                                customDialog.dailyTaskDialog(activity, listenerInterface);
                             });
                         }
 
@@ -194,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onFail() {
                             runOnUiThread(() -> {
                                 CustomDialog customDialog = new CustomDialog();
-                                customDialog.dailyTaskDialog(activity);
+                                customDialog.dailyTaskDialog(activity, listenerInterface);
                             });
                         }
                     });

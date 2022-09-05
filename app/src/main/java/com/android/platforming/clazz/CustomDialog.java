@@ -190,9 +190,8 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void dailyTaskDialog(Activity activity){
+    public void dailyTaskDialog(Activity activity, ListenerInterface listenerInterface){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("출석체크");
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_dailytask, null);
@@ -220,13 +219,7 @@ public class CustomDialog {
                     firestoreManager.updateUserData(new HashMap<String, Object>() {{
                         put("point", user.getPoint() + user.getPoint_receipt());
                         put("point_receipt", 0);
-                    }}, new ListenerInterface() {
-                        @Override
-                        public void onSuccess() {
-                            user.setPoint(user.getPoint() + user.getPoint_receipt());
-                            user.setPoint_receipt(0);
-                        }
-                    });
+                    }}, listenerInterface);
                     dialog.dismiss();
                 }
             });
