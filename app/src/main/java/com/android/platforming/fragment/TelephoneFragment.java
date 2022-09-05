@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,10 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.platforming.adapter.TelephoneAdapter;
 import com.android.platforming.clazz.TelephoneItem;
-import com.android.platforming.clazz.User;
 import com.example.platforming.R;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TelephoneFragment extends Fragment {
 
@@ -51,8 +50,8 @@ public class TelephoneFragment extends Fragment {
     private void showTelephone(){
         adapter = new TelephoneAdapter();
         lv_info.setAdapter(adapter);
-        Log.d("telephone", Character.toString(User.getUser().getStudentId().charAt(0)));
-        getTelephone(User.getUser().getStudentId().charAt(0));
+        Log.d("telephone", Character.toString(user.getStudentId().charAt(0)));
+        getTelephone(user.getStudentId().charAt(0));
     }
 
     public void getTelephone(char grade){

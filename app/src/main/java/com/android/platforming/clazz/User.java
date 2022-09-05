@@ -3,13 +3,12 @@ package com.android.platforming.clazz;
 import com.example.platforming.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class User {
 
-    private static User user = null;
+    public static User user = null;
 
     private final static ArrayList<Integer> profiles = new ArrayList<Integer>(){{
         add(R.mipmap.ic_profile_dog_round);
@@ -28,6 +27,7 @@ public class User {
 
     //etc
     private int point;
+    private int point_receipt;
     private String note;
     private int profileIndex;
     private List<Long> fonts;
@@ -50,6 +50,7 @@ public class User {
         fonts = (List<Long>) data.get("fonts");
         myPostIds = (List<String>) data.get("myPostIds");
         lastSignIn = (long) data.get("lastSignIn");
+        point_receipt = Integer.parseInt(String.valueOf(data.get("point_receipt")));
     }
 
     public String getUid() {
@@ -62,10 +63,6 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public static User getUser() {
-        return user;
     }
 
     public static ArrayList<Integer> getProfiles(){
@@ -158,5 +155,13 @@ public class User {
 
     public long getLastSignIn() {
         return lastSignIn;
+    }
+
+    public void setPoint_receipt(int point_receipt) {
+        this.point_receipt = point_receipt;
+    }
+
+    public int getPoint_receipt() {
+        return point_receipt;
     }
 }

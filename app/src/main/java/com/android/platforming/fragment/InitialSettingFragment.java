@@ -2,6 +2,8 @@ package com.android.platforming.fragment;
 
 import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -96,11 +98,13 @@ public class InitialSettingFragment extends Fragment {
             List<String> list_postIds = new ArrayList<>();
             data.put("myPostIds", list_postIds);
 
+            data.put("lastSignIn", 0);
+
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {
                 @Override
                 public void onSuccess() {
-                    User.setUser(new User(getFirebaseAuth().getCurrentUser().getUid(), getFirebaseAuth().getCurrentUser().getEmail(), data));
+                    user = new User(getFirebaseAuth().getCurrentUser().getUid(), getFirebaseAuth().getCurrentUser().getEmail(), data);
                     ((MainActivity)getActivity()).setting();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new MainPageFragment()).commit();
                 }

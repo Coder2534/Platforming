@@ -1,6 +1,7 @@
 package com.android.platforming.fragment;
 
 import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,10 +15,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
-import com.android.platforming.activity.MainActivity;
 import com.android.platforming.activity.SignInActivity;
 import com.android.platforming.clazz.CustomDialog;
-import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.firebase.auth.UserInfo;
@@ -33,8 +32,8 @@ public class PreferenceAccountFragment extends PreferenceFragmentCompat {
         Preference changOfPassword = findPreference("changOfPassword");
         Preference signOut = findPreference("signOut");
 
-        uid.setSummary(User.getUser().getUid());
-        email.setSummary(User.getUser().getEmail());
+        uid.setSummary(user.getUid());
+        email.setSummary(user.getEmail());
 
         boolean isPassword = false;
         for(UserInfo data: getFirebaseAuth().getCurrentUser().getProviderData()){

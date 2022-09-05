@@ -1,6 +1,7 @@
 package com.android.platforming.fragment;
 
 import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
+import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,7 +30,6 @@ import com.android.platforming.adapter.PostRecentViewAdapter;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
-import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
@@ -38,6 +38,7 @@ import org.apache.commons.net.ntp.TimeInfo;
 
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +69,6 @@ public class MainPageFragment extends Fragment {
     };
 
     private int fakeSize;
-    private int realSize;
     private int currentPosition;
 
     @Nullable
@@ -76,11 +76,7 @@ public class MainPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mainpage, container, false);
 
-        if(Settings.Global.getInt(view.getContext().getContentResolver(), Settings.Global.AUTO_TIME, 0) == 1){
-            attendanceCheck(getActivity(), new Date(System.currentTimeMillis()));
-        }
-        else
-            getCurrentNetworkTime();
+        getCurrentNetworkTime();
 
         //상단 배너
         viewPager = view.findViewById(R.id.vp_mainpage);
@@ -95,7 +91,7 @@ public class MainPageFragment extends Fragment {
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setOffscreenPageLimit(5);
 
-        realSize = 3;
+        int realSize = 3;
         fakeSize = realSize + 2;
         viewPager.setCurrentItem(2, false);
 
@@ -171,19 +167,23 @@ public class MainPageFragment extends Fragment {
     }
 
     private void attendanceCheck(Activity activity, Date date){
-        if(date.before(new Date(User.getUser().getLastSignIn()))){
+        Calendar calendar_now = Calendar.getInstance();
+        calendar_now.setTime(date);
+        Calendar calendar_last = Calendar.getInstance();
+        calendar_last.setTimeInMillis(user.getLastSignIn());
+
+        if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
             Map<String, Object> data = new HashMap<String, Object>(){{
-                put("lastSignIn", date);
+                put("lastSignIn", calendar_now.getTimeInMillis());
             }};
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.updateUserData(data, new ListenerInterface() {
                 @Override
                 public void onSuccess() {
                     CustomDialog customDialog = new CustomDialog();
-                    customDialog.attendanceCheckDialog(activity);
+                    customDialog.dailyMissionDialog(activity);
                 }
             });
         }
     }
-
 }

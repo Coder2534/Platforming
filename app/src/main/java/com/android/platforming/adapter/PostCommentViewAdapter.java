@@ -1,5 +1,7 @@
 package com.android.platforming.adapter;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -100,7 +102,7 @@ public class PostCommentViewAdapter extends RecyclerView.Adapter<PostCommentView
         holder.nickname.setText(mData.get(position).getNickname());
         holder.comment.setText(mData.get(position).getComment());
         holder.date.setText(dateFormat.format(mData.get(position).getDate()));
-        if(!mData.get(position).getUid().equals(User.getUser().getUid()))
+        if(!mData.get(position).getUid().equals(user.getUid()))
             ((ViewGroup)holder.delete.getParent()).removeView(holder.delete);
     }
 

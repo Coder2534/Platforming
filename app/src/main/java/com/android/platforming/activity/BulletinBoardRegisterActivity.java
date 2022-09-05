@@ -1,5 +1,7 @@
 package com.android.platforming.activity;
 
+import static com.android.platforming.clazz.User.user;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,7 +12,6 @@ import android.widget.ImageButton;
 
 import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.FirestoreManager;
-import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
@@ -57,10 +58,10 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
                 EditText editText_title = findViewById(R.id.et_noticeboard_register_title);
                 EditText editText_detail = findViewById(R.id.et_noticeboard_register_detail);
                 Map<String, Object> data = new HashMap<>();
-                data.put("uid", User.getUser().getUid());
+                data.put("uid", user.getUid());
                 data.put("type", type);
-                data.put("profileIndex", User.getUser().getProfileIndex());
-                data.put("nickname", User.getUser().getNickname());
+                data.put("profileIndex", user.getProfileIndex());
+                data.put("nickname", user.getNickname());
                 data.put("date", System.currentTimeMillis());
                 data.put("title", editText_title.getText().toString());
                 data.put("detail", editText_detail.getText().toString());

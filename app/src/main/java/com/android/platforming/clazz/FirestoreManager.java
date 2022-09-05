@@ -1,5 +1,7 @@
 package com.android.platforming.clazz;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,6 @@ public class FirestoreManager {
         FirestoreManager.firebaseAuth = firebaseAuth;
     }
 
-    //User
     public void readUserData(ListenerInterface interfaze){
         FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.getCurrentUser().getUid()).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
@@ -42,7 +43,7 @@ public class FirestoreManager {
                 if(documentSnapshot.exists()){
                     Log.w("setUserData", "Document exist",task.getException());
                     Map<String, Object> data = documentSnapshot.getData();
-                    User.setUser(new User(firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getEmail(), data));
+                    user = new User(firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getEmail(), data);
                 }
                 else{
                     Log.w("setUserData", "Document doesn't exist");
@@ -119,7 +120,7 @@ public class FirestoreManager {
     }
 
     public void readMyPostData(ListenerInterface listenerInterface){
-        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("uid", User.getUser().getUid()).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("uid", user.getUid()).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -138,7 +139,7 @@ public class FirestoreManager {
         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("posts").document();
         documentReference.set(data).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                List<String> postIds = User.getUser().getMyPostIds();
+                List<String> postIds = user.getMyPostIds();
                 postIds.add(documentReference.getId());
                 updateUserData(new HashMap<String, Object>() {{
                     put("myPostIds", postIds);

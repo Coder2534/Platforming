@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TaskStackBuilder;
@@ -72,7 +74,7 @@ public class PointStoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setFontdialogview();
-                boughtfont = User.getUser().getFonts();
+                boughtfont = user.getFonts();
                 Log.d("asd", String.valueOf(boughtfont));
                 if (boughtfont.contains((long) 1)){
                     btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
@@ -86,7 +88,7 @@ public class PointStoreFragment extends Fragment {
                 if(boughtfont.contains((long) 4)){
                     btn_pointstore_font_mugunghwa.setTextColor(getResources().getColor(R.color.red));
                 }
-                point = User.getUser().getPoint();
+                point = user.getPoint();
                 tv_pointstore_font_point.setText(point+ "포인트");
                 fontdialog.show();
 
@@ -134,7 +136,7 @@ public class PointStoreFragment extends Fragment {
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        User.getUser().setPoint(point);
+                                        user.setPoint(point);
                                         tv_pointstore_font_point.setText(point+"포인트");
                                         if (checkfont == 1){
                                             btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
@@ -172,7 +174,7 @@ public class PointStoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setThemedialogView();
-                boughttheme = User.getUser().getThemes();
+                boughttheme = user.getThemes();
                 if(boughttheme.contains((long) 1)){
                     btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));
                 }
@@ -185,7 +187,7 @@ public class PointStoreFragment extends Fragment {
                 if(boughttheme.contains((long) 4)){
                     btn_pointstore_theme_black.setTextColor(getResources().getColor(R.color.red));
                 }
-                point = User.getUser().getPoint();
+                point = user.getPoint();
                 tv_pointstore_theme_point.setText(point + "p");
                 themedialog.show();
 
@@ -233,7 +235,7 @@ public class PointStoreFragment extends Fragment {
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        User.getUser().setPoint(point);
+                                        user.setPoint(point);
                                         tv_pointstore_theme_point.setText(point+"p");
                                         if(themeindex==1){
                                             btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));

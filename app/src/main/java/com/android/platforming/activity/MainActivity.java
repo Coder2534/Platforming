@@ -5,6 +5,7 @@ import static com.android.platforming.InitApplication.RIROSCHOOL;
 import static com.android.platforming.clazz.Post.FREE_BULLETIN_BOARD;
 import static com.android.platforming.clazz.Post.QUESTION_BULLETIN_BOARD;
 import static com.android.platforming.clazz.Post.SCHOOL_BULLETIN_BOARD;
+import static com.android.platforming.clazz.User.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,6 @@ import android.widget.TextView;
 import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.fragment.MainPageFragment;
-import com.android.platforming.clazz.User;
 import com.android.platforming.fragment.MyInfoFragment;
 import com.android.platforming.fragment.MyPostFragment;
 import com.android.platforming.fragment.PointStoreFragment;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         setDrawerLayoutView();
 
-        if(User.getUser() == null)
+        if(user == null)
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
         else
             setting();
@@ -101,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
     private void setHeader(){
         View header = navigationView.getHeaderView(0);
         ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
-        profile.setImageResource(User.getUser().getProfile());
+        profile.setImageResource(user.getProfile());
         TextView point = header.findViewById(R.id.tv_navigation_header_point);
-        point.setText(User.getUser().getPoint() + "p");
+        point.setText(user.getPoint() + "p");
         TextView username = header.findViewById(R.id.tv_navigation_header_username);
-        username.setText(User.getUser().getUsername());
+        username.setText(user.getUsername());
         TextView info = header.findViewById(R.id.tv_navigation_header_info);
-        String studentId = User.getUser().getStudentId();
+        String studentId = user.getStudentId();
         info.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
     }
 

@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +60,7 @@ public class BulletinBoardPostFragment extends Fragment {
 
         TextView like = view.findViewById(R.id.tv_bulletinboard_detail_like);
         ArrayList<String> likes = post.getLikes();
-        String uid = User.getUser().getUid();
+        String uid = user.getUid();
         like.setText(String.valueOf(likes.size()));
         if(likes.contains(uid))
             like.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_thumb_up_alt_24, 0, 0, 0);
@@ -142,14 +144,14 @@ public class BulletinBoardPostFragment extends Fragment {
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readCommentData(post, listenerInterface);
 
-        ImageButton send = view.findViewById(R.id.btn_bulletinboard_detail_send);
-        send.setOnClickListener(new View.OnClickListener() {
+        ImageButton write = view.findViewById(R.id.btn_bulletinboard_detail_write);
+        write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Map<String, Object> data = new HashMap<>();
-                data.put("uid", User.getUser().getUid());
-                data.put("profileIndex", User.getUser().getProfileIndex());
-                data.put("nickname", User.getUser().getNickname());
+                data.put("uid", user.getUid());
+                data.put("profileIndex", user.getProfileIndex());
+                data.put("nickname", user.getNickname());
                 data.put("date", System.currentTimeMillis());
                 data.put("comment", comment.getText().toString());
 

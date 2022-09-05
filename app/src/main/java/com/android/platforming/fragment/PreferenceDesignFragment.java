@@ -1,6 +1,8 @@
 package com.android.platforming.fragment;
 
 ;
+import static com.android.platforming.clazz.User.user;
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -11,7 +13,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.platforming.clazz.CustomDialog;
-import com.android.platforming.clazz.User;
 import com.example.platforming.R;
 
 public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
@@ -28,7 +29,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
 
-                customDialog.fontDialog(getActivity(), User.getUser().getFonts());
+                customDialog.fontDialog(getActivity(), user.getFonts());
                 return true;
             }
         });
@@ -36,9 +37,9 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
         theme.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-                Log.d("check_font_dialog", String.valueOf(User.getUser().getThemes()));
+                Log.d("check_font_dialog", String.valueOf(user.getThemes()));
 
-                customDialog.themeDialog(getActivity(), User.getUser().getThemes());
+                customDialog.themeDialog(getActivity(), user.getThemes());
                 Log.d("check_font_dialog2","ok");
                 return false;
             }

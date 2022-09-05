@@ -1,18 +1,17 @@
 package com.android.platforming.clazz;
 
 import static com.android.platforming.clazz.FirestoreManager.getFirebaseAuth;
+import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
 import com.android.platforming.activity.MainActivity;
-import com.android.platforming.activity.SignInActivity;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +29,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CustomDialog {
@@ -133,7 +131,7 @@ public class CustomDialog {
             public void onClick(View view) {
                 String password = et_password.getText().toString();
                 FirebaseUser user = getFirebaseAuth().getCurrentUser();
-                AuthCredential credential = EmailAuthProvider.getCredential(User.getUser().getEmail(), password);
+                AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), password);
                 user.reauthenticate(credential).addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         dialog.dismiss();
@@ -192,28 +190,33 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void attendanceCheckDialog(Activity activity){
+    public void dailyMissionDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("출석체크");
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_attendancecheck, null);
 
-        TextView message = view.findViewById(R.id.tv_select_message);
-        message.setText("계속하시겠습니까?");
+        CheckBox signIn = view.findViewById(R.id.cb_dailytask_signin);
+        CheckBox selfDiagnosis = view.findViewById(R.id.cb_dailytask_selfdiagnosis);
+        CheckBox writePost = view.findViewById(R.id.cb_dailytask_writepost);
+        CheckBox writeComment = view.findViewById(R.id.cb_dailytask_writecomment);
 
-        Button cancel = view.findViewById(R.id.btn_select_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
+        receipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        Button confirm = view.findViewById(R.id.btn_select_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                FirestoreManager firestoreManager = new FirestoreManager();
+                firestoreManager.updateUserData(new HashMap<String, Object>() {{
+                    put("point", user.getPoint() + user.getPoint_receipt());
+                    put("point_receipt", 0);
+                }}, new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+                        user.setPoint(user.getPoint() + user.getPoint_receipt());
+                        user.setPoint_receipt(0);
+                    }
+                });
                 dialog.dismiss();
             }
         });
