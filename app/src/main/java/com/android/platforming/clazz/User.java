@@ -38,13 +38,13 @@ public class User {
 
     //etc
     private int point;
-    private int point_receipt;
     private String note;
     private int profileIndex;
     private List<Long> fonts;
     private List<Long> themes;
     private List<String> myPostIds;
     private long lastSignIn;
+    private int point_receipt;
     private List<Long> dailyTasks;
 
     public User(String uid, String email, Map<String, Object> data){
@@ -57,13 +57,25 @@ public class User {
         studentId = (String)data.get("studentId");
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         point = Integer.parseInt(String.valueOf(data.get("point")));
-        point_receipt = Integer.parseInt(String.valueOf(data.get("point_receipt")));
         note = (String) data.get("note");
         themes = (List<Long>) data.get("themes");
         fonts = (List<Long>) data.get("fonts");
         myPostIds = (List<String>) data.get("myPostIds");
-        lastSignIn = (long) data.get("lastSignIn");
-        dailyTasks = (List<Long>) data.get("dailyTasks");
+        attendanceCheck(new ListenerInterface() {
+            @Override
+            public void onSuccess(long timeInMillis) {
+                user.setLastSignIn(timeInMillis);
+                user.setPoint_receipt(10);
+                user.setDailyTasks(Arrays.asList(1L, 0L, 0L, 0L));
+            }
+
+            @Override
+            public void onFail() {
+                lastSignIn = Long.parseLong(String.valueOf(data.get("lastSignIn")));
+                point_receipt = Integer.parseInt(String.valueOf(data.get("point_receipt")));
+                dailyTasks = (List<Long>) data.get("dailyTasks");
+            }
+        });
     }
 
     public String getUid() {
@@ -162,6 +174,10 @@ public class User {
         return myPostIds;
     }
 
+    public void setLastSignIn(long lastSignIn) {
+        this.lastSignIn = lastSignIn;
+    }
+
     public long getLastSignIn() {
         return lastSignIn;
     }
@@ -182,7 +198,7 @@ public class User {
         return dailyTasks;
     }
 
-    public void attendanceCheck(Activity activity, ListenerInterface listenerInterface) {
+    public void attendanceCheck(ListenerInterface listenerInterface) {
         new Thread(() -> {
             NTPUDPClient lNTPUDPClient = new NTPUDPClient();
             lNTPUDPClient.setDefaultTimeout(3000);
@@ -191,7 +207,7 @@ public class User {
                 lNTPUDPClient.open();
                 InetAddress lInetAddress = InetAddress.getByName("pool.ntp.org");
                 TimeInfo lTimeInfo = lNTPUDPClient.getTime(lInetAddress);
-                returnTime = lTimeInfo.getReturnTime(); // local time
+                //returnTime = lTimeInfo.getReturnTime(); // local time
                 returnTime = lTimeInfo.getMessage().getTransmitTimeStamp().getTime(); // server time
             } catch (Exception e) {
                 e.printStackTrace();
@@ -199,22 +215,23 @@ public class User {
                 lNTPUDPClient.close();
             }
             Date date = new Date(returnTime);
-            activity.runOnUiThread(() -> {
-                Calendar calendar_now = Calendar.getInstance();
-                calendar_now.setTime(date);
-                Calendar calendar_last = Calendar.getInstance();
-                calendar_last.setTimeInMillis(user.getLastSignIn());
 
-                if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
-                    Map<String, Object> data = new HashMap<String, Object>(){{
-                        put("lastSignIn", calendar_now.getTimeInMillis());
-                        put("dailyTasks", Arrays.asList(0L, 0L, 0L, 0L));
-                        put("point_receipt", 0);
-                    }};
-                    FirestoreManager firestoreManager = new FirestoreManager();
-                    firestoreManager.updateUserData(data, listenerInterface);
-                }
-            });
+            Calendar calendar_now = Calendar.getInstance();
+            calendar_now.setTime(date);
+            Calendar calendar_last = Calendar.getInstance();
+            calendar_last.setTimeInMillis(user.getLastSignIn());
+
+            if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
+                FirestoreManager firestoreManager = new FirestoreManager();
+                firestoreManager.updateUserData(new HashMap<String, Object>(){{
+                    put("lastSignIn", calendar_now.getTimeInMillis());
+                    put("point_receipt", 10);
+                    put("dailyTasks", Arrays.asList(1L, 0L, 0L, 0L));
+                }}, calendar_now.getTimeInMillis(), listenerInterface);
+            }
+            else{
+                listenerInterface.onFail();
+            }
         }).start();
     }
 }

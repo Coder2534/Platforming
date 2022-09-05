@@ -99,7 +99,7 @@ public class InitialSettingFragment extends Fragment {
             data.put("myPostIds", new ArrayList<String>());
 
             data.put("lastSignIn", 0);
-
+            data.put("point_receipt", 0);
             data.put("dailyTasks", Arrays.asList(0L, 0L, 0L, 0L));
 
             FirestoreManager firestoreManager = new FirestoreManager();

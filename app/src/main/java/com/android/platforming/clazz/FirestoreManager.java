@@ -79,6 +79,17 @@ public class FirestoreManager {
         });
     }
 
+    public void updateUserData(Map<String, Object> data, long timeInMillis, ListenerInterface interfaze){
+        FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.getCurrentUser().getUid()).update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    interfaze.onSuccess(timeInMillis);
+                }
+            }
+        });
+    }
+
     //Post
     public void readPostData(int type, ListenerInterface interfaze){
         FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
