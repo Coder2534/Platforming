@@ -193,7 +193,7 @@ public class SignInFragment extends Fragment{
                         readData();
                     } else {
                         // 로그인 실패
-                        Log.w("SignInActivity", "Facebook SignIn fail");
+                        Log.w("SignInActivity", "Facebook SignIn fail: " + task.getException());
                     }
                 });
     }
@@ -215,7 +215,7 @@ public class SignInFragment extends Fragment{
             }
             else{
                 //구글 로그인 실패
-                Log.w("Google", "signIn fail");
+                Log.w("Google", "signIn fail: " + result.getStatus());
             }
         }
 
