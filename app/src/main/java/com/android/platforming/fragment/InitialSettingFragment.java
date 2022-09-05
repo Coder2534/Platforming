@@ -91,7 +91,7 @@ public class InitialSettingFragment extends Fragment {
 
             data.put("point", 0);
 
-            List<Long> list_design = Arrays.asList((long) 0);
+            List<Long> list_design = Arrays.asList(0L);
             data.put("themes", list_design);
             data.put("fonts", list_design);
 
@@ -99,6 +99,9 @@ public class InitialSettingFragment extends Fragment {
             data.put("myPostIds", list_postIds);
 
             data.put("lastSignIn", 0);
+
+            List<Long> list_dailyTasks = Arrays.asList(0L, 0L, 0L, 0L);
+            data.put("dailyTasks", list_dailyTasks);
 
             FirestoreManager firestoreManager = new FirestoreManager();
             firestoreManager.writeUserData(data, new ListenerInterface() {

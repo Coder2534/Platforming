@@ -198,6 +198,8 @@ public class CustomDialog {
         View view = inflater.inflate(R.layout.dialog_dailytask, null);
 
         CheckBox signIn = view.findViewById(R.id.cb_dailytask_signin);
+        if(user.getDailyTasks().get(0) == 1L)
+            signIn.setChecked(true);
         CheckBox selfDiagnosis = view.findViewById(R.id.cb_dailytask_selfdiagnosis);
         CheckBox writePost = view.findViewById(R.id.cb_dailytask_writepost);
         CheckBox writeComment = view.findViewById(R.id.cb_dailytask_writecomment);
@@ -241,23 +243,23 @@ public class CustomDialog {
         for(int i = 0; i< themes.size();i++){
             RadioButton radioButton = new RadioButton(activity);
             radioButton.setTextColor(Color.BLACK);
-            if (themes.get(i).equals((long)0)){
-                radioButton.setId(500+0);
+            if (themes.get(i).equals(0L)){
+                radioButton.setId((int)500);
                 radioButton.setText("라이트 테마(기본)");
             }
-            else if(themes.get(i).equals((long)1)){
+            else if(themes.get(i).equals(1L)){
                 radioButton.setId(500+1);
                 radioButton.setText("핑크 테마");
             }
-            else if(themes.get(i).equals((long)2)){
+            else if(themes.get(i).equals(2L)){
                 radioButton.setId(500+2);
                 radioButton.setText("블루 테마");
             }
-            else if(themes.get(i).equals((long)3)){
+            else if(themes.get(i).equals(3L)){
                 radioButton.setId(500+3);
                 radioButton.setText("그린 테마");
             }
-            else if(themes.get(i).equals((long)4)){
+            else if(themes.get(i).equals(4L)){
                 radioButton.setId(500+4);
                 radioButton.setText("블랙 테마");
             }
@@ -269,7 +271,7 @@ public class CustomDialog {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int index = radioGroup.getCheckedRadioButtonId() - (int)500;
+                int index = radioGroup.getCheckedRadioButtonId() - (int) 500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
                 MainActivity.reCreate();
@@ -305,23 +307,23 @@ public class CustomDialog {
         for(int i = 0; i< fonts.size();i++){
             RadioButton radioButton = new RadioButton(activity);
             radioButton.setTextColor(Color.BLACK);
-            if (fonts.get(i).equals((long)0)){
+            if (fonts.get(i).equals(0L)){
                 radioButton.setId((int)600);
                 radioButton.setText("레페리 포인트(기본)");
             }
-            else if(fonts.get(i).equals((long)1)){
+            else if(fonts.get(i).equals(1L)){
                 radioButton.setId(600+1);
                 radioButton.setText("나눔손글씨 느릿느릿체");
             }
-            else if(fonts.get(i).equals((long)2)){
+            else if(fonts.get(i).equals(2L)){
                 radioButton.setId(600+2);
                 radioButton.setText("나눔손글씨 다시시작해");
             }
-            else if(fonts.get(i).equals((long)3)){
+            else if(fonts.get(i).equals(3L)){
                 radioButton.setId(600+3);
                 radioButton.setText("갈무리9");
             }
-            else if(fonts.get(i).equals((long)4)){
+            else if(fonts.get(i).equals(4L)){
                 radioButton.setId(600+4);
                 radioButton.setText("무궁화체");
             }

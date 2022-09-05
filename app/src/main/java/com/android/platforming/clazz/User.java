@@ -34,6 +34,7 @@ public class User {
     private List<Long> themes;
     private List<String> myPostIds;
     private long lastSignIn;
+    private List<Long> dailyTasks;
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -45,12 +46,13 @@ public class User {
         studentId = (String)data.get("studentId");
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         point = Integer.parseInt(String.valueOf(data.get("point")));
+        point_receipt = Integer.parseInt(String.valueOf(data.get("point_receipt")));
         note = (String) data.get("note");
         themes = (List<Long>) data.get("themes");
         fonts = (List<Long>) data.get("fonts");
         myPostIds = (List<String>) data.get("myPostIds");
         lastSignIn = (long) data.get("lastSignIn");
-        point_receipt = Integer.parseInt(String.valueOf(data.get("point_receipt")));
+        dailyTasks = (List<Long>) data.get("dailyTasks");
     }
 
     public String getUid() {
@@ -159,5 +161,9 @@ public class User {
 
     public int getPoint_receipt() {
         return point_receipt;
+    }
+
+    public List<Long> getDailyTasks() {
+        return dailyTasks;
     }
 }
