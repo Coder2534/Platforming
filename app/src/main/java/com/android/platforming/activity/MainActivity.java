@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             case 4:setTheme(R.style.BlackTheme);break;
         }
         switch (initApplication.getAppliedFont()){
-            case 0:setTheme(R.style.leferipointwhiteobliqueFont);break;
+            case 0:setTheme(R.style.LeferipointwhiteobliqueFont);break;
             case 1:setTheme(R.style.SlowFont);break;
             case 2:setTheme(R.style.AgainFont);break;
             case 3:setTheme(R.style.Galmuri9Font);break;
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public static void reCreate(){
-        activity.recreate();
+    public static Activity getActivity(){
+        return activity;
     }
 }

@@ -275,7 +275,7 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int) 500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
-                MainActivity.reCreate();
+                MainActivity.getActivity().recreate();
                 activity.recreate();
 
                 dialog.dismiss();
@@ -339,7 +339,7 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)600;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("font", index).apply();
-                MainActivity.reCreate();
+                MainActivity.getActivity().recreate();
                 activity.recreate();
 
                 dialog.dismiss();
