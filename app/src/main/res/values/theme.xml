@@ -2,9 +2,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="WhiteTheme">
-        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimary">#B6B6B6</item>
         <item name="colorOnSecondary">#C5C5C5</item>
-        <item name="colorPrimaryDark">#AAAAAA</item>
+        <item name="colorPrimaryDark">#A5A5A5</item>
         <item name="colorAccent">#8F8F8F</item>
         <item name="colorControlHighlight">#C6C6C6</item>
         <item name="colorControlActivated">#CACACA</item>
