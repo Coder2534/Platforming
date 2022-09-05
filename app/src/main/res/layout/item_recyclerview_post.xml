@@ -3,7 +3,8 @@
     android:id="@+id/tester"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/backgroundColor"
+    android:layout_margin="5dp"
+    android:background="?attr/colorOnSecondary"
     >
 
     <TextView
