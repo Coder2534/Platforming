@@ -1,6 +1,7 @@
 package com.android.platforming.clazz;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
@@ -61,6 +62,7 @@ public class User {
         themes = (List<Long>) data.get("themes");
         fonts = (List<Long>) data.get("fonts");
         myPostIds = (List<String>) data.get("myPostIds");
+        lastSignIn = Long.parseLong(String.valueOf(data.get("lastSignIn")));
         attendanceCheck(new ListenerInterface() {
             @Override
             public void onSuccess(long timeInMillis) {
@@ -71,7 +73,6 @@ public class User {
 
             @Override
             public void onFail() {
-                lastSignIn = Long.parseLong(String.valueOf(data.get("lastSignIn")));
                 point_receipt = Integer.parseInt(String.valueOf(data.get("point_receipt")));
                 dailyTasks = (List<Long>) data.get("dailyTasks");
             }
@@ -221,6 +222,7 @@ public class User {
             Calendar calendar_last = Calendar.getInstance();
             calendar_last.setTimeInMillis(user.getLastSignIn());
 
+            Log.d("date", String.format("last: %d, now: %d", calendar_last.get(Calendar.DATE), calendar_now.get(Calendar.DATE)));
             if(calendar_last.get(Calendar.DATE) < calendar_now.get(Calendar.DATE)){
                 FirestoreManager firestoreManager = new FirestoreManager();
                 firestoreManager.updateUserData(new HashMap<String, Object>(){{
