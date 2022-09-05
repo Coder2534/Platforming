@@ -227,8 +227,8 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            if(point >=100){
-                                point-=100;
+                            if(point >=50){
+                                point-=50;
                                 boughttheme.add(Long.valueOf(themeindex));
                                 storeMap.put("point",point);
                                 storeMap.put("themes",boughttheme);
