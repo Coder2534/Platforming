@@ -163,6 +163,10 @@ public class User {
         return point_receipt;
     }
 
+    public void setDailyTasks(List<Long> dailyTasks) {
+        this.dailyTasks = dailyTasks;
+    }
+
     public List<Long> getDailyTasks() {
         return dailyTasks;
     }
