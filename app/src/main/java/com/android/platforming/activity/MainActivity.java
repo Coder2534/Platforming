@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         initApplication.refreshAppliedFont();
 
         switch (initApplication.getAppliedTheme()){
-            case 0:setTheme(R.style.Theme_Platforming);break;
+            case 0:setTheme(R.style.WhiteTheme);break;
             case 1:setTheme(R.style.PinkTheme);break;
             case 2:setTheme(R.style.BuleTheme);break;
             case 3:setTheme(R.style.GreenTheme);break;
