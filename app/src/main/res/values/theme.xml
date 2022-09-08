@@ -69,17 +69,17 @@
 
     <style name="BlackTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
 
-        <item name="colorPrimary">#616161</item>
-        <item name="colorOnSecondary">#686868</item>
-        <item name="colorPrimaryDark">#494949</item>
+        <item name="colorPrimary">#4E4E4E</item>
+        <item name="colorOnSecondary">#434343</item>
+        <item name="colorPrimaryDark">#232323</item>
         <item name="colorAccent">#616161</item>
         <item name="colorControlHighlight">#6C6C6C</item>
         <item name="colorControlActivated">#6C6C6C</item>
-        <item name="android:navigationBarColor">#3C3C3C</item>
-        <item name="android:statusBarColor">#3C3C3C</item>
-        <item name="android:textColor">#DADADA</item>
-        <item name="android:textColorHighlight">#555555</item>
-        <item name="backgroundColor">#828381</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHighlight">#CCCCCC</item>
+        <item name="backgroundColor">#515151</item>
 
         <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>

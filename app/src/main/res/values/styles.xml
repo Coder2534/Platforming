@@ -9,6 +9,7 @@
     </style>
     <style name="AgainFont">
         <item name="fontFamily">@font/nanum_handwriting_again2</item>
+        <item name="fontProviderSystemFontFamily">900</item>
 
     </style>
     <style name="Galmuri9Font">
@@ -16,6 +17,7 @@
     </style>
     <style name="MugunghwaFont">
         <item name="fontFamily">@font/nanum_handwriting_mugunghwa4</item>
+        <item name="fontWeight">900</item>
 
     </style>
 </resources>
