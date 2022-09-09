@@ -38,6 +38,7 @@ import org.apache.commons.net.ntp.TimeInfo;
 
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,28 +47,6 @@ import java.util.Map;
 
 public class MainPageFragment extends Fragment {
     ViewPager2 viewPager;
-    private ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
-        @Override
-        public void onPageSelected(final int position) {
-            super.onPageSelected(position);
-            currentPosition = position;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(final int state) {
-            super.onPageScrollStateChanged(state);
-            if (state == ViewPager2.SCROLL_STATE_IDLE) {
-                if (currentPosition == 0) {
-                    viewPager.setCurrentItem(fakeSize - 2, false);
-                } else if (currentPosition == fakeSize - 1) {
-                    viewPager.setCurrentItem(1, false);
-                }
-            } else if (state == ViewPager2.SCROLL_STATE_DRAGGING && currentPosition == fakeSize) {
-                //we scroll too fast and miss the state SCROLL_STATE_IDLE for the previous item
-                viewPager.setCurrentItem(2, false);
-            }
-        }
-    };
 
     private int fakeSize;
     private int currentPosition;
@@ -79,14 +58,36 @@ public class MainPageFragment extends Fragment {
 
         //상단 배너
         viewPager = view.findViewById(R.id.vp_mainpage);
-        FragmentSliderAdapter sliderAdapter = new FragmentSliderAdapter(getActivity());
-        sliderAdapter.addFragment(new ViewPagerSchoolMealFragment());
-        sliderAdapter.addFragment(new ViewPagerSchoolScheduleFragment());
-        sliderAdapter.addFragment(new ViewPagerTimetableFragment());
-        sliderAdapter.addFragment(new ViewPagerSchoolMealFragment());
-        sliderAdapter.addFragment(new ViewPagerSchoolScheduleFragment());
+        FragmentSliderAdapter sliderAdapter = new FragmentSliderAdapter(getActivity(), new ArrayList<Fragment>(){{
+            add(new ViewPagerSchoolMealFragment());
+            add(new ViewPagerSchoolScheduleFragment());
+            add(new ViewPagerTimetableFragment());
+            add(new ViewPagerSchoolMealFragment());
+            add(new ViewPagerSchoolScheduleFragment());
+        }});
         viewPager.setAdapter(sliderAdapter);
-        viewPager.registerOnPageChangeCallback(pageChangeCallback);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(final int position) {
+                super.onPageSelected(position);
+                currentPosition = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int state) {
+                super.onPageScrollStateChanged(state);
+                if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                    if (currentPosition == 0) {
+                        viewPager.setCurrentItem(fakeSize - 2, false);
+                    } else if (currentPosition == fakeSize - 1) {
+                        viewPager.setCurrentItem(1, false);
+                    }
+                } else if (state == ViewPager2.SCROLL_STATE_DRAGGING && currentPosition == fakeSize) {
+                    //we scroll too fast and miss the state SCROLL_STATE_IDLE for the previous item
+                    viewPager.setCurrentItem(2, false);
+                }
+            }
+        });
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setOffscreenPageLimit(5);
 

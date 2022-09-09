@@ -13,14 +13,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.activity.MainActivity;
+import com.android.platforming.adapter.FragmentSliderAdapter;
+import com.android.platforming.adapter.TableAdapter;
+import com.android.platforming.fragment.ViewPagerTimetableEditFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +37,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -350,6 +359,77 @@ public class CustomDialog {
         getout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void editSchedule(FragmentActivity activity, ListenerInterface listenerInterface){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_schedule_edit, null);
+
+        ViewPager2 viewPager = view.findViewById(R.id.vp_schedule_edit);
+        FragmentSliderAdapter sliderAdapter = new FragmentSliderAdapter(activity, new ArrayList<Fragment>(){{
+            add(new ViewPagerTimetableEditFragment("월"));
+            add(new ViewPagerTimetableEditFragment("화"));
+            add(new ViewPagerTimetableEditFragment("수"));
+            add(new ViewPagerTimetableEditFragment("목"));
+            add(new ViewPagerTimetableEditFragment("금"));
+        }});
+        viewPager.setAdapter(sliderAdapter);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+        viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        viewPager.setOffscreenPageLimit(5);
+
+        ImageButton previous = view.findViewById(R.id.btn_schedule_edit_previous);
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        ImageButton next = view.findViewById(R.id.btn_schedule_edit_next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public void expandSchedule(Activity activity, TableAdapter tableAdapter){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_schedule_expand, null);
+
+        GridView timetable = view.findViewById(R.id.gv_schedule_expand);
+        timetable.setAdapter(tableAdapter);
+
+        Button confirm = view.findViewById(R.id.btn_schedule_expand_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dialog.dismiss();
             }
         });

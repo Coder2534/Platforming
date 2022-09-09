@@ -5,6 +5,38 @@
     android:layout_height="match_parent"
     android:background="?attr/colorOnSecondary">
 
+    <GridView
+        android:id="@+id/gv_timetable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="6"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="right|bottom">
+
+        <ImageButton
+            android:id="@+id/btn_timetable_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_crop_free_24"
+            android:background="?attr/colorPrimary" />
+
+        <ImageButton
+            android:id="@+id/btn_timetable_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_edit_24"
+            android:background="?attr/colorPrimary" />
+    </LinearLayout>
+
+    <!--
     <ImageView
         android:id="@+id/iv_viewpager_timetable"
         android:layout_width="match_parent"
@@ -24,5 +56,5 @@
         android:layout_gravity="right|bottom"
         app:srcCompat="@drawable/ic_baseline_edit_24"
         android:background="?attr/colorPrimary"/>
-
+         -->
 </FrameLayout>
