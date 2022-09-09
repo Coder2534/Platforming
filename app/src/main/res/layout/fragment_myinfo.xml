@@ -43,8 +43,7 @@
                     android:id="@+id/tv_myinfo_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_horizontal"
+                    android:paddingLeft="10dp"
                     android:textSize="35dp" />
 
                 <TextView
@@ -60,11 +59,13 @@
             <EditText
                 android:id="@+id/et_myinfo_nickname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:hint="닉네임적는곳"
+                android:layout_height="55dp"
+                android:hint="닉네임"
                 android:maxLength="10"
-                android:textSize="20sp" />
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="30dp"
+                android:paddingLeft="10dp"/>
         </LinearLayout>
 
 
@@ -75,20 +76,37 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_myinfo_1"
         android:layout_margin="10dp"
-        android:paddingTop="10dp"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/et_myinfo_class"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="금오고등학교 @학년 @반 @번"
-            android:textSize="22dp"
-            android:background="?attr/colorOnSecondary"/>
+        android:orientation="vertical"
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorOnSecondary"
+                android:text="학번:"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/et_myinfo_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorOnSecondary"
+                android:hint="금오고등학교 @학년 @반 @번"
+                android:maxLines="1"
+                android:paddingLeft="15dp"
+                android:singleLine="true"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -104,14 +122,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorOnSecondary"
-                android:textSize="25dp"
-                android:paddingLeft="15dp"/>
+                android:paddingLeft="15dp"
+                android:textSize="25dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -127,9 +145,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorOnSecondary"
-                android:hint="입력해주세요"
-                android:textSize="25dp"
-                android:paddingLeft="15dp"/>
+                android:hint='"-"없이 입력해 주세요'
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingLeft="15dp"
+                android:singleLine="true"
+                android:textSize="25dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -137,7 +158,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_above="@id/ibtn_myinfo_rivise">
+        android:layout_above="@id/btn_myinfo_rivise">
         <TextView
             android:id="@+id/tv_myinfo_revise"
             android:layout_width="match_parent"
@@ -156,16 +177,15 @@
     </RelativeLayout>
 
 
-    <ImageButton
-        android:id="@+id/ibtn_myinfo_rivise"
+    <Button
+        android:id="@+id/btn_myinfo_rivise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp"
         android:background="?attr/colorPrimary"
-        android:src="@drawable/ic_baseline_edit_24" />
+        android:drawableLeft="@drawable/ic_baseline_edit_24"
+        android:text="수정하기"
+        android:textColor="@color/black"/>
 
 </RelativeLayout>

@@ -36,6 +36,7 @@ public class User {
     private String telephone;
     private int sex; //0: male 1: female
     private String studentId;
+    private String grade;
 
     //etc
     private int point;
@@ -56,6 +57,7 @@ public class User {
         telephone = (String)data.get("telephone");
         sex = Integer.parseInt(String.valueOf(data.get("sex")));
         studentId = (String)data.get("studentId");
+        grade = (String)data.get("grade");
         profileIndex = Integer.parseInt(String.valueOf(data.get("profileIndex")));
         point = Integer.parseInt(String.valueOf(data.get("point")));
         note = (String) data.get("note");
@@ -142,6 +144,10 @@ public class User {
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
+
+    public String getGrade(){return grade;}
+
+    public void setGrade(String grade){this.grade = grade;}
 
     public String getNote() {
         return note;

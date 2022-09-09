@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +33,9 @@ import java.util.Map;
 public class MyInfoFragment extends Fragment {
     FirestoreManager firestoreManager;
     TextView tv_myinfo_name,tv_myinfo_email,tv_myinfo_point,tv_myinfo_rivise;
-    ImageButton ibtn_myinfo_profile,ibtn_myinfo_rivise;
+    ImageButton ibtn_myinfo_profile;
     EditText et_myinfo_nickname,et_myinfo_class,et_myinfo_phonenumber;
-    Button btn_myinfo_finish;
+    Button btn_myinfo_finish,btn_myinfo_rivise;
 
     AlertDialog dialog;
     private void setDialog(Activity activity) {
@@ -92,15 +93,18 @@ public class MyInfoFragment extends Fragment {
         tv_myinfo_point = view.findViewById(R.id.tv_myinfo_point);
         tv_myinfo_rivise = view.findViewById(R.id.tv_myinfo_revise);
         ibtn_myinfo_profile = view.findViewById(R.id.ibtn_myinfo_profile);
-        ibtn_myinfo_rivise = view.findViewById(R.id.ibtn_myinfo_rivise);
+        btn_myinfo_rivise = view.findViewById(R.id.btn_myinfo_rivise);
         btn_myinfo_finish = view.findViewById(R.id.btn_myinfo_finish);
         et_myinfo_nickname = view.findViewById(R.id.et_myinfo_nickname);
         et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
         et_myinfo_phonenumber = view.findViewById(R.id.et_myinfo_phonenumber);
 
         tv_myinfo_name.setText(user.getUsername());
+        et_myinfo_nickname.setText(user.getNickname());
+        et_myinfo_class.setText(user.getGrade());
         tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
         tv_myinfo_point.setText(user.getPoint() + "p");
+        et_myinfo_phonenumber.setText(user.getTelephone());
         ibtn_myinfo_profile.setImageResource(user.getProfile());
 
         et_myinfo_nickname.setClickable(false);
@@ -110,20 +114,21 @@ public class MyInfoFragment extends Fragment {
         et_myinfo_class.setClickable(false);
         et_myinfo_class.setFocusable(false);
 
-        ibtn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
+        btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-            tv_myinfo_rivise.setText("수정가능");
+            tv_myinfo_rivise.setText("수정중");
             btn_myinfo_finish.setVisibility(View.VISIBLE);
             ibtn_myinfo_profile.setClickable(true);
             et_myinfo_nickname.setFocusableInTouchMode(true);
             et_myinfo_nickname.setFocusable(true);
             et_myinfo_class.setFocusableInTouchMode(true);
             et_myinfo_class.setFocusable(true);
+            et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
             et_myinfo_phonenumber.setFocusableInTouchMode(true);
             et_myinfo_phonenumber.setFocusable(true);
-
+            et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
             ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
