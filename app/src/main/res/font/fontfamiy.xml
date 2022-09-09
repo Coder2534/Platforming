@@ -8,12 +8,12 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/nanum_handwriting_slow1"
+        android:font="@font/pyeongchangpeace1"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/nanum_handwriting_again2"
+        android:font="@font/vitorcore2"
         />
     <font
         android:fontStyle="normal"
@@ -23,6 +23,6 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/nanum_handwriting_mugunghwa4"
+        android:font="@font/kyobohandwriting20204"
         />
 </font-family>

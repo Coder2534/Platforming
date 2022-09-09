@@ -50,10 +50,10 @@ public class WebViewActivity extends AppCompatActivity {
         }
         switch (initApplication.getAppliedFont()){
             case 0:setTheme(R.style.LeferipointwhiteobliqueFont);break;
-            case 1:setTheme(R.style.SlowFont);break;
-            case 2:setTheme(R.style.AgainFont);break;
+            case 1:setTheme(R.style.pyeongFont);break;
+            case 2:setTheme(R.style.vitorFont);break;
             case 3:setTheme(R.style.Galmuri9Font);break;
-            case 4:setTheme(R.style.MugunghwaFont);break;
+            case 4:setTheme(R.style.kyoboFont);break;
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);

@@ -47,7 +47,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_pointstore_font_slow"
+                android:id="@+id/btn_pointstore_font_pyeong"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
@@ -55,10 +55,10 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/nanum_handwriting_slow1"/>
+                android:fontFamily="@font/pyeongchangpeace1"/>
 
             <Button
-                android:id="@+id/btn_pointstore_font_again"
+                android:id="@+id/btn_pointstore_font_vitorcore"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
@@ -66,7 +66,7 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/nanum_handwriting_again2"/>
+                android:fontFamily="@font/vitorcore2"/>
 
 
 
@@ -84,17 +84,19 @@
                 android:text="갈무리9"
                 android:textSize="20dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/galmuri93"
                 android:backgroundTint="?attr/colorPrimary"
                 />
 
             <Button
-                android:id="@+id/btn_pointstore_font_mugunghwa"
+                android:id="@+id/btn_pointstore_font_kyobo"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="무궁화체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/kyobohandwriting20204"
                 android:backgroundTint="?attr/colorPrimary"
                 />
         </LinearLayout>

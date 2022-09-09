@@ -324,11 +324,11 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(1L)){
                 radioButton.setId(600+1);
-                radioButton.setText("나눔손글씨 느릿느릿체");
+                radioButton.setText("평창평화체");
             }
             else if(fonts.get(i).equals(2L)){
                 radioButton.setId(600+2);
-                radioButton.setText("나눔손글씨 다시시작해");
+                radioButton.setText("비트로코어체");
             }
             else if(fonts.get(i).equals(3L)){
                 radioButton.setId(600+3);
@@ -336,7 +336,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(4L)){
                 radioButton.setId(600+4);
-                radioButton.setText("무궁화체");
+                radioButton.setText("교보손글씨2020체");
             }
             radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);

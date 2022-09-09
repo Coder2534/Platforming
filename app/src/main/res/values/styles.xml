@@ -3,19 +3,19 @@
     <style name="LeferipointwhiteobliqueFont">
         <item name="fontFamily">@font/leferipointwhiteoblique0</item>
     </style>
-    <style name="SlowFont">
-        <item name="fontFamily">@font/nanum_handwriting_slow1</item>
+    <style name="pyeongFont">
+        <item name="fontFamily">@font/pyeongchangpeace1</item>
 
     </style>
-    <style name="AgainFont">
-        <item name="fontFamily">@font/nanum_handwriting_again2</item>
+    <style name="vitorFont">
+        <item name="fontFamily">@font/vitorcore2</item>
 
     </style>
     <style name="Galmuri9Font">
         <item name="fontFamily">@font/galmuri93</item>
     </style>
-    <style name="MugunghwaFont">
-        <item name="fontFamily">@font/nanum_handwriting_mugunghwa4</item>
+    <style name="kyoboFont">
+        <item name="fontFamily">@font/kyobohandwriting20204</item>
         <item name="fontWeight">900</item>
         <item name="font">@color/black</item>
         <item name="android:textFontWeight" tools:targetApi="p">100</item>
