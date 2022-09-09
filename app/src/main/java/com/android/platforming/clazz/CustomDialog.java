@@ -27,6 +27,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.FragmentSliderAdapter;
+import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
 import com.android.platforming.fragment.ViewPagerTimetableEditFragment;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -376,20 +377,14 @@ public class CustomDialog {
         View view = inflater.inflate(R.layout.dialog_schedule_edit, null);
 
         ViewPager2 viewPager = view.findViewById(R.id.vp_schedule_edit);
-        FragmentSliderAdapter sliderAdapter = new FragmentSliderAdapter(activity, new ArrayList<Fragment>(){{
-            add(new ViewPagerTimetableEditFragment("월"));
-            add(new ViewPagerTimetableEditFragment("화"));
-            add(new ViewPagerTimetableEditFragment("수"));
-            add(new ViewPagerTimetableEditFragment("목"));
-            add(new ViewPagerTimetableEditFragment("금"));
-        }});
+        RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(user.getSchedules());
         viewPager.setAdapter(sliderAdapter);
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        /*viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
             }
-        });
+        });*/
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setOffscreenPageLimit(5);
 

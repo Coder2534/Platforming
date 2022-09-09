@@ -128,15 +128,14 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            if(point >=100){
-                                point-=100;
+                            if(point >=50){
                                 boughtfont.add(checkfont, Long.valueOf(checkfont));
-                                storeMap.put("point",point);
+                                storeMap.put("point",point - 50);
                                 storeMap.put("fonts",boughtfont);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        user.setPoint(point);
+                                        user.setPoint(point - 50);
                                         tv_pointstore_font_point.setText(point+"포인트");
                                         if (checkfont == 1){
                                             btn_pointstore_font_slow.setTextColor(getResources().getColor(R.color.red));
@@ -151,7 +150,6 @@ public class PointStoreFragment extends Fragment {
                                             btn_pointstore_font_mugunghwa.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         customDialog.messageDialog(getActivity(),"구입했습니다.");
-
                                     }
                                 });
                             }

@@ -82,6 +82,7 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="갈무리9"
+                android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
                 />
@@ -92,12 +93,10 @@
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:text="무궁화체"
+                android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
                 />
-
-
-
         </LinearLayout>
 
 
