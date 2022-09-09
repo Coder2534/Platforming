@@ -1,11 +1,12 @@
 package com.android.platforming.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.TableItem;
@@ -14,22 +15,25 @@ import com.example.platforming.R;
 import java.util.ArrayList;
 
 public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerViewSliderAdapter.MyViewHolder> {
-    private ArrayList<TableItem> schedules;
+    private ArrayList<ArrayList<TableItem>> schedules;
 
-    public RecyclerViewSliderAdapter(ArrayList<TableItem> schedules) {
+    public RecyclerViewSliderAdapter(ArrayList<ArrayList<TableItem>> schedules) {
         this.schedules = schedules;
     }
 
     @NonNull
     @Override
     public RecyclerViewSliderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_slider, parent, false);
-        return new RecyclerViewSliderAdapter.MyViewHolder(view);
+        Context context = parent.getContext() ;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
+        View view = inflater.inflate(R.layout.item_recyclerview_slider, parent, false) ;
+
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewSliderAdapter.MyViewHolder holder, int position) {
-
+        holder.mRecyclerView.setAdapter(new ScheduleEditAdapter(schedules.get(position)));
     }
 
     @Override
@@ -44,6 +48,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             mRecyclerView = itemView.findViewById(R.id.rv_slider);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
     }
 }

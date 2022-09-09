@@ -26,10 +26,8 @@ import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.activity.MainActivity;
-import com.android.platforming.adapter.FragmentSliderAdapter;
 import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
-import com.android.platforming.fragment.ViewPagerTimetableEditFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -379,20 +377,18 @@ public class CustomDialog {
         ViewPager2 viewPager = view.findViewById(R.id.vp_schedule_edit);
         RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(user.getSchedules());
         viewPager.setAdapter(sliderAdapter);
-        /*viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
-            }
-        });*/
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setOffscreenPageLimit(5);
+
+        TextView dayOfWeek = view.findViewById(R.id.tv_schedule_edit_dayofweek);
 
         ImageButton previous = view.findViewById(R.id.btn_schedule_edit_previous);
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int currentItem = viewPager.getCurrentItem();
+                viewPager.setCurrentItem(currentItem - 1 == -1 ? 4 : currentItem - 1, true);
+                dayOfWeek.setText(getDayOfWeek(viewPager.getCurrentItem()));
             }
         });
 
@@ -401,15 +397,35 @@ public class CustomDialog {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int currentItem = viewPager.getCurrentItem();
+                viewPager.setCurrentItem(currentItem + 1 == 5 ? 0 : currentItem + 1, true);
+                dayOfWeek.setText(getDayOfWeek(viewPager.getCurrentItem()));
             }
         });
-
 
         builder.setView(view);
 
         dialog = builder.create();
         dialog.show();
+    }
+
+    private String getDayOfWeek(int index){
+        switch (index){
+            case 0:
+                return "월";
+
+            case 1:
+                return "화";
+
+            case 2:
+                return "수";
+
+            case 3:
+                return "목";
+
+            default:
+                return "금";
+        }
     }
 
     public void expandSchedule(Activity activity, TableAdapter tableAdapter){
