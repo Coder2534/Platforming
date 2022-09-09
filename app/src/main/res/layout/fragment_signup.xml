@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/WhiteTheme">
 
     <TextView
         android:id="@+id/tv_signup_title"
@@ -21,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이메일"
-            android:layout_alignStart="@id/et_signup_email" />
+            android:layout_alignStart="@id/et_signup_email"/>
 
         <EditText
             android:id="@+id/et_signup_email"
