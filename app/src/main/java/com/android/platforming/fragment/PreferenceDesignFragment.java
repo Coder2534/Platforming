@@ -12,15 +12,18 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.CustomDialog;
 import com.example.platforming.R;
 
 public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
     CustomDialog customDialog;
 
+
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.preference_design, rootKey);
+        InitApplication initApplication = ((InitApplication)getActivity().getApplication());
 
         Preference font = findPreference("font");
         Preference theme = findPreference("theme");
@@ -29,7 +32,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
 
-                customDialog.fontDialog(getActivity(), user.getFonts());
+                customDialog.fontDialog(getActivity(), user.getFonts(), initApplication.getAppliedFont());
                 return true;
             }
         });
@@ -39,7 +42,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(@NonNull Preference preference) {
                 Log.d("check_font_dialog", String.valueOf(user.getThemes()));
 
-                customDialog.themeDialog(getActivity(), user.getThemes());
+                customDialog.themeDialog(getActivity(), user.getThemes(), initApplication.getAppliedTheme());
                 Log.d("check_font_dialog2","ok");
                 return false;
             }

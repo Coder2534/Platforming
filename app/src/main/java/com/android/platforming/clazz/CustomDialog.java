@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.FragmentSliderAdapter;
 import com.android.platforming.adapter.RecyclerViewSliderAdapter;
@@ -242,7 +243,7 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void themeDialog(Activity activity, List themes){
+    public void themeDialog(Activity activity, List themes, int applytheme){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
@@ -276,7 +277,10 @@ public class CustomDialog {
             }
             radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);
+
         }
+        Log.d("check_themeid", String.valueOf(600+applytheme));
+        radioGroup.check((Integer)600+applytheme);
 
         Button apply = view.findViewById(R.id.btn_dialog_theme_apply);
         apply.setOnClickListener(new View.OnClickListener() {
@@ -306,7 +310,7 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void fontDialog(Activity activity, List fonts){
+    public void fontDialog(Activity activity, List fonts, int applyfont){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
@@ -340,7 +344,11 @@ public class CustomDialog {
             }
             radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);
+
+
         }
+        Log.d("check_fontid", String.valueOf(600+applyfont));
+        radioGroup.check((Integer)600+applyfont);
 
         Button apply = view.findViewById(R.id.btn_dialog_theme_apply);
         apply.setOnClickListener(new View.OnClickListener() {
