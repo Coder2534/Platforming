@@ -1,6 +1,7 @@
 package com.android.platforming.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class TableAdapter extends BaseAdapter {
     ArrayList<TableItem> tableItems;
 
     public TableAdapter(TableItem crossCriterion, ArrayList<TableItem> columnCriteria, ArrayList<TableItem> rowCriteria, ArrayList<TableItem> tableItems){
+        Log.d("TableAdapter", "public");
         numColumns = columnCriteria.size() + 1;
         this.crossCriterion = crossCriterion;
         this.columnCriteria = columnCriteria;
@@ -32,12 +34,29 @@ public class TableAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return 1 + columnCriteria.size() + rowCriteria.size() + tableItems.size();
     }
 
+
+    int itemPosition2 = 0;
     @Override
     public Object getItem(int position) {
-        return null;
+        TableItem tableItem;
+
+        if(position == 0)
+            tableItem = crossCriterion;
+        else if(position / numColumns == 0)
+            tableItem = columnCriteria.get(position % numColumns - 1);
+        else if(position % numColumns == 0){
+            if(position / numColumns < rowCriteria.size() + 1)
+                tableItem = rowCriteria.get(position / numColumns - 1);
+            else
+                tableItem = new TableItem();
+        }
+        else
+            tableItem = tableItems.get(itemPosition2++);;
+
+        return tableItem;
     }
 
     @Override
@@ -48,6 +67,8 @@ public class TableAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Context context = parent.getContext();
+
+        Log.d("TableAdapter", String.valueOf(position));
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,10 +83,10 @@ public class TableAdapter extends BaseAdapter {
         if(position == 0)
             tableItem = crossCriterion;
         else if(position / numColumns == 0)
-            tableItem = columnCriteria.get(position % numColumns);
+            tableItem = columnCriteria.get(position % numColumns - 1);
         else if(position % numColumns == 0){
-            if(position / numColumns < rowCriteria.size())
-                tableItem = rowCriteria.get(position / numColumns);
+            if(position / numColumns < rowCriteria.size() + 1)
+                tableItem = rowCriteria.get(position / numColumns - 1);
             else
                 tableItem = new TableItem();
         }

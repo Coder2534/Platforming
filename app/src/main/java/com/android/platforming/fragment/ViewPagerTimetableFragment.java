@@ -1,5 +1,7 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.User.user;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +34,6 @@ public class ViewPagerTimetableFragment extends Fragment {
         add(new TableItem("금"));
     }};
     ArrayList<TableItem> rowCriteria = new ArrayList<>();
-    ArrayList<TableItem> schedules = new ArrayList<>();
 
     TableAdapter tableAdapter;
 
@@ -43,12 +44,21 @@ public class ViewPagerTimetableFragment extends Fragment {
 
         timetable = view.findViewById(R.id.gv_timetable);
 
-        tableAdapter = new TableAdapter(crossCriterion, columnCriteria, rowCriteria, schedules);
+        tableAdapter = new TableAdapter(crossCriterion, columnCriteria, rowCriteria, user.getSchedules());
 
         timetable.setAdapter(tableAdapter);
 
         ImageButton expand = view.findViewById(R.id.btn_timetable_expand);
         expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDialog customDialog = new CustomDialog();
+                customDialog.expandSchedule(getActivity(), tableAdapter);
+            }
+        });
+
+        ImageButton edit = view.findViewById(R.id.btn_timetable_edit);
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CustomDialog customDialog = new CustomDialog();
@@ -58,15 +68,6 @@ public class ViewPagerTimetableFragment extends Fragment {
 
                     }
                 });
-            }
-        });
-
-        ImageButton edit = view.findViewById(R.id.btn_timetable_edit);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CustomDialog customDialog = new CustomDialog();
-                customDialog.expandSchedule(getActivity(), tableAdapter);
             }
         });
 
