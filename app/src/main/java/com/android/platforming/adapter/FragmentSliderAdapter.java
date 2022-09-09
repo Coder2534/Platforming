@@ -16,10 +16,11 @@ import java.util.ArrayList;
 
 public class FragmentSliderAdapter extends FragmentStateAdapter {
 
-    ArrayList<Fragment> fragments = new ArrayList<>();
+    ArrayList<Fragment> fragments;
 
-    public FragmentSliderAdapter(FragmentActivity fa) {
+    public FragmentSliderAdapter(FragmentActivity fa, ArrayList<Fragment> fragments) {
         super(fa);
+        this.fragments = fragments;
     }
 
     @NonNull
@@ -31,11 +32,6 @@ public class FragmentSliderAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 5;
-    }
-
-    public void addFragment(Fragment fragment){
-        fragments.add(fragment);
-        notifyItemInserted(fragments.size() - 1);
+        return fragments.size();
     }
 }
