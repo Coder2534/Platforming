@@ -22,7 +22,7 @@
         />
     <font
         android:fontStyle="normal"
-        android:fontWeight="10000"
+        android:fontWeight="400"
         android:font="@font/nanum_handwriting_mugunghwa4"
         />
 </font-family>
