@@ -369,7 +369,7 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void editSchedule(FragmentActivity activity, ListenerInterface listenerInterface){
+    public void editSchedule(FragmentActivity activity, ArrayList<ArrayList<TableItem>> schedules_, ListenerInterface listenerInterface){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -378,7 +378,7 @@ public class CustomDialog {
         TextView dayOfWeek = view.findViewById(R.id.tv_schedule_edit_dayofweek);
 
         ArrayList<ArrayList<TableItem>> schedules = new ArrayList<>();
-        for (ArrayList<TableItem> tableItems : user.getSchedules())
+        for (ArrayList<TableItem> tableItems : schedules_)
             schedules.add(new ArrayList<>(tableItems));
 
 
@@ -429,8 +429,8 @@ public class CustomDialog {
             @Override
             public void onClick(View v) {
                 sliderAdapter.saveSchedules();
-                for(int i = 0; i < user.getSchedules().size(); ++i){
-                    ArrayList<TableItem> tableItems = user.getSchedules().get(i);
+                for(int i = 0; i < schedules_.size(); ++i){
+                    ArrayList<TableItem> tableItems = schedules_.get(i);
                     tableItems.clear();
                     tableItems.addAll(schedules.get(i));
                 }

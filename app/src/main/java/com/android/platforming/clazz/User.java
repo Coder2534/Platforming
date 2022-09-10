@@ -48,13 +48,7 @@ public class User {
     private long lastSignIn;
     private int point_receipt;
     private List<Long> dailyTasks;
-    private ArrayList<ArrayList<TableItem>> schedules = new ArrayList<ArrayList<TableItem>>(){{
-        add(new ArrayList<>());
-        add(new ArrayList<>());
-        add(new ArrayList<>());
-        add(new ArrayList<>());
-        add(new ArrayList<>());
-    }};
+
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -216,14 +210,6 @@ public class User {
         return dailyTasks;
     }
 
-    public void setSchedules(ArrayList<ArrayList<TableItem>> schedules) {
-        this.schedules = schedules;
-    }
-
-    public ArrayList<ArrayList<TableItem>> getSchedules() {
-        return schedules;
-    }
-
     public void attendanceCheck(ListenerInterface listenerInterface) {
         new Thread(() -> {
             NTPUDPClient lNTPUDPClient = new NTPUDPClient();
@@ -261,4 +247,6 @@ public class User {
             }
         }).start();
     }
+
+
 }
