@@ -1,5 +1,8 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.Post.POST;
+import static com.android.platforming.clazz.Post.POST_MY;
+import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
@@ -43,7 +46,21 @@ public class BulletinBoardPostFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bulletinboard_post, container, false);
         Bundle args = getArguments();
-        post = Post.getPosts().get(args.getInt("position", 0));
+
+        switch (args.getInt("post", 0)){
+            case POST:
+                post = Post.getPosts().get(args.getInt("position", 0));
+                break;
+
+            case POST_MY:
+                post = Post.getMyPosts().get(args.getInt("position", 0));
+                break;
+
+            case POST_RECENT:
+                post = Post.getRecentPosts().get(args.getInt("position", 0));
+                break;
+        }
+
 
         ImageView profile = view.findViewById(R.id.iv_bulletinboard_detail_profile);
         profile.setImageResource(User.getProfiles().get(post.getProfileIndex()));

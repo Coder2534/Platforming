@@ -1,11 +1,13 @@
 package com.android.platforming.fragment;
 
 import static android.app.Activity.RESULT_OK;
+import static com.android.platforming.clazz.Post.POST;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +46,11 @@ public class BulletinBoardListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bulletinboard_list, container, false);
         Bundle args = getArguments();
 
+        int post = args.getInt("post", 0);
         String id = args.getString("id");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && id != null) {
-            ArrayList<Post> posts = Post.getPosts();
-            showDetail(IntStream.range(0, posts.size())
+            ArrayList<Post> posts = Post.getRecentPosts();
+            showDetail(post, IntStream.range(0, posts.size())
                     .filter(i -> posts.get(i).getId().equals(id))
                     .findFirst()
                     .orElse(-1));
@@ -74,11 +77,22 @@ public class BulletinBoardListFragment extends Fragment {
         postViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
-                showDetail(position);
+                showDetail(POST, position);
             }
         });
 
         recyclerView.setAdapter(postViewAdapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.d("-----","end");
+                }
+            }
+        });
+
 
         write = view.findViewById(R.id.btn_bulletinboard_list_write);
         listenerInterface = new ListenerInterface() {
@@ -98,9 +112,11 @@ public class BulletinBoardListFragment extends Fragment {
         return view;
     }
 
-    private void showDetail(int position){
+    private void showDetail(int post, int position){
+        Log.d("Test", String.valueOf(post));
         BulletinBoardPostFragment fragment = new BulletinBoardPostFragment();
         Bundle args = new Bundle();
+        args.putInt("post", post);
         args.putInt("position", position);
         fragment.setArguments(args);
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment).addToBackStack(null).commit();

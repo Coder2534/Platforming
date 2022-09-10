@@ -92,7 +92,7 @@ public class FirestoreManager {
 
     //Post
     public void readPostData(int type, ListenerInterface interfaze){
-        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).limit(15).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -114,11 +114,11 @@ public class FirestoreManager {
     }
 
     public void readRecentPostData(ListenerInterface interfaze){
-        FirebaseFirestore.getInstance().collection("posts").orderBy("date", Query.Direction.DESCENDING).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("posts").orderBy("date", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
+                    ArrayList<Post> posts = Post.getRecentPosts();
                     posts.clear();
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
@@ -135,7 +135,7 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
+                    ArrayList<Post> posts = Post.getMyPosts();
                     posts.clear();
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));

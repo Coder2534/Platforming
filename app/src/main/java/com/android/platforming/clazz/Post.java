@@ -9,7 +9,13 @@ public class Post {
     public static final int QUESTION_BULLETIN_BOARD = 1;
     public static final int SCHOOL_BULLETIN_BOARD = 2;
 
+    public static final int POST = 0;
+    public static final int POST_MY = 1;
+    public static final int POST_RECENT = 2;
+
     private static ArrayList<Post> posts = new ArrayList<>();
+    private static ArrayList<Post> myPosts = new ArrayList<>();
+    private static ArrayList<Post> recentPosts = new ArrayList<>();
 
     private static ArrayList<String> types = new ArrayList<String>(){{
         add("자유게시판");
@@ -43,6 +49,14 @@ public class Post {
 
     public static ArrayList<Post> getPosts() {
         return posts;
+    }
+
+    public static ArrayList<Post> getMyPosts() {
+        return myPosts;
+    }
+
+    public static ArrayList<Post> getRecentPosts() {
+        return recentPosts;
     }
 
     public static ArrayList<String> getTypes() {

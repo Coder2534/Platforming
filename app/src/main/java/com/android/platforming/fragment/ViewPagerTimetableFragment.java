@@ -104,7 +104,6 @@ public class ViewPagerTimetableFragment extends Fragment {
         if(text != null){
             String[] array = text.split("#");
             for(String str : array){
-                Log.d("Test", str);
                 String[] data = str.split(",");
                 if(data.length == 0)
                     result.add(new TableItem());

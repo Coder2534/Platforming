@@ -29,16 +29,12 @@ public class TableAdapter extends BaseAdapter {
         int posY = 0;
 
         for(int i = 0; i < schedules.size(); ++i){
-            Log.d("TableAdapter", String.valueOf(schedules.get(i).size()));
             if(posY < schedules.get(i).size()){
                 posY = schedules.get(i).size();
             }
         }
 
-        int count = numColumns + posY * numColumns;
-        Log.d("TableAdapter", "getCount : " + count);
-
-        return count;
+        return numColumns + posY * numColumns;
     }
 
 

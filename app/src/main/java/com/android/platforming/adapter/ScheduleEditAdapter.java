@@ -89,8 +89,10 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
         for(int i = 0; i < Math.min(viewHolders.size(), tableItems.size()); ++i){
             TableItem tableItem = tableItems.get(i);
             ViewHolder viewHolder = viewHolders.get(i);
-            tableItem.setMainText(viewHolder.subject.getText().toString());
-            tableItem.setSubText(viewHolder.teacher.getText().toString());
+            String subject = viewHolder.subject.getText().toString();
+            tableItem.setMainText(subject);
+            if(!subject.equals(""))
+                tableItem.setSubText(viewHolder.teacher.getText().toString());
         }
     }
 }

@@ -1,8 +1,11 @@
 package com.android.platforming.fragment;
 
+import static com.android.platforming.clazz.Post.POST_MY;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,14 +36,14 @@ public class MyPostFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_mypost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        postViewAdapter = new PostViewAdapter(Post.getPosts(), Post.getTypes());
+        postViewAdapter = new PostViewAdapter(Post.getMyPosts(), Post.getTypes());
         postViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
-                Post post = Post.getPosts().get(position);
+                Post post = Post.getMyPosts().get(position);
                 Activity activity = getActivity();
-
                 Intent intent = new Intent(activity, BulletinBoardActivity.class);
+                intent.putExtra("post", POST_MY);
                 intent.putExtra("type", post.getType());
                 intent.putExtra("id", post.getId());
                 startActivity(intent);
