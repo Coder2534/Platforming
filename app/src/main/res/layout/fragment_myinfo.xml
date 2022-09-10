@@ -86,7 +86,8 @@
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:inputType="number"/>
 
         </LinearLayout>
 
@@ -131,7 +132,8 @@
                 android:hint="입력해주세요"
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:inputType="number"/>
 
         </LinearLayout>
 

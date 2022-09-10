@@ -37,6 +37,106 @@ public class MyInfoFragment extends Fragment {
     EditText et_myinfo_nickname,et_myinfo_class,et_myinfo_phonenumber;
     Button btn_myinfo_finish,btn_myinfo_rivise;
 
+    String studentId;
+
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_myinfo, container, false);
+
+
+        firestoreManager = new FirestoreManager();
+        tv_myinfo_name = view.findViewById(R.id.tv_myinfo_name);
+        tv_myinfo_email = view.findViewById(R.id.tv_myinfo_email);
+        tv_myinfo_point = view.findViewById(R.id.tv_myinfo_point);
+        tv_myinfo_rivise = view.findViewById(R.id.tv_myinfo_revise);
+        ibtn_myinfo_profile = view.findViewById(R.id.ibtn_myinfo_profile);
+        btn_myinfo_rivise = view.findViewById(R.id.btn_myinfo_rivise);
+        btn_myinfo_finish = view.findViewById(R.id.btn_myinfo_finish);
+        et_myinfo_nickname = view.findViewById(R.id.et_myinfo_nickname);
+        et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
+        et_myinfo_phonenumber = view.findViewById(R.id.et_myinfo_phonenumber);
+
+        tv_myinfo_name.setText(user.getUsername());
+        tv_myinfo_point.setText(user.getPoint() + "p");
+        et_myinfo_nickname.setText(user.getNickname());
+        studentId = user.getStudentId();
+        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
+        tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
+
+        et_myinfo_phonenumber.setText(user.getTelephone());
+        ibtn_myinfo_profile.setImageResource(user.getProfile());
+
+        et_myinfo_nickname.setClickable(false);
+        et_myinfo_nickname.setFocusable(false);
+        et_myinfo_phonenumber.setClickable(false);
+        et_myinfo_phonenumber.setFocusable(false);
+        et_myinfo_class.setClickable(false);
+        et_myinfo_class.setFocusable(false);
+
+        btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                tv_myinfo_rivise.setText("수정중");
+                et_myinfo_class.setText(studentId);
+                btn_myinfo_finish.setVisibility(View.VISIBLE);
+                ibtn_myinfo_profile.setClickable(true);
+                et_myinfo_nickname.setFocusableInTouchMode(true);
+                et_myinfo_nickname.setFocusable(true);
+                et_myinfo_class.setFocusableInTouchMode(true);
+                et_myinfo_class.setFocusable(true);
+                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
+                et_myinfo_phonenumber.setFocusableInTouchMode(true);
+                et_myinfo_phonenumber.setFocusable(true);
+                et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+                ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setDialog(getActivity());
+                    }
+                });
+
+                btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        btn_myinfo_finish.setVisibility(View.GONE);
+                        tv_myinfo_rivise.setText("");
+                        ibtn_myinfo_profile.setClickable(false);
+                        et_myinfo_nickname.setClickable(false);
+                        et_myinfo_nickname.setFocusable(false);
+                        et_myinfo_phonenumber.setClickable(false);
+                        et_myinfo_phonenumber.setFocusable(false);
+                        et_myinfo_class.setClickable(false);
+                        et_myinfo_class.setFocusable(false);
+
+                        Map<String,Object> MyinfoData = new HashMap<>();
+
+                        MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
+                        MyinfoData.put("studentId",et_myinfo_class.getText().toString());
+                        MyinfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
+
+                        firestoreManager.updateUserData(MyinfoData, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                ListenerInterface.super.onSuccess();
+                                studentId = et_myinfo_class.getText().toString();
+                                et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
+
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
+        return view;
+
+    }
     AlertDialog dialog;
     private void setDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -80,94 +180,5 @@ public class MyInfoFragment extends Fragment {
         dialog.show();
     }
 
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_myinfo, container, false);
-
-        firestoreManager = new FirestoreManager();
-        tv_myinfo_name = view.findViewById(R.id.tv_myinfo_name);
-        tv_myinfo_email = view.findViewById(R.id.tv_myinfo_email);
-        tv_myinfo_point = view.findViewById(R.id.tv_myinfo_point);
-        tv_myinfo_rivise = view.findViewById(R.id.tv_myinfo_revise);
-        ibtn_myinfo_profile = view.findViewById(R.id.ibtn_myinfo_profile);
-        btn_myinfo_rivise = view.findViewById(R.id.btn_myinfo_rivise);
-        btn_myinfo_finish = view.findViewById(R.id.btn_myinfo_finish);
-        et_myinfo_nickname = view.findViewById(R.id.et_myinfo_nickname);
-        et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
-        et_myinfo_phonenumber = view.findViewById(R.id.et_myinfo_phonenumber);
-
-        tv_myinfo_name.setText(user.getUsername());
-        et_myinfo_nickname.setText(user.getNickname());
-        et_myinfo_class.setText(user.getGrade());
-        tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
-        tv_myinfo_point.setText(user.getPoint() + "p");
-        et_myinfo_phonenumber.setText(user.getTelephone());
-        ibtn_myinfo_profile.setImageResource(user.getProfile());
-
-        et_myinfo_nickname.setClickable(false);
-        et_myinfo_nickname.setFocusable(false);
-        et_myinfo_phonenumber.setClickable(false);
-        et_myinfo_phonenumber.setFocusable(false);
-        et_myinfo_class.setClickable(false);
-        et_myinfo_class.setFocusable(false);
-
-        btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            tv_myinfo_rivise.setText("수정중");
-            btn_myinfo_finish.setVisibility(View.VISIBLE);
-            ibtn_myinfo_profile.setClickable(true);
-            et_myinfo_nickname.setFocusableInTouchMode(true);
-            et_myinfo_nickname.setFocusable(true);
-            et_myinfo_class.setFocusableInTouchMode(true);
-            et_myinfo_class.setFocusable(true);
-            et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
-            et_myinfo_phonenumber.setFocusableInTouchMode(true);
-            et_myinfo_phonenumber.setFocusable(true);
-            et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
-            ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    setDialog(getActivity());
-                }
-            });
-
-            btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    btn_myinfo_finish.setVisibility(View.GONE);
-                    tv_myinfo_rivise.setText("");
-                    ibtn_myinfo_profile.setClickable(false);
-                    et_myinfo_nickname.setClickable(false);
-                    et_myinfo_nickname.setFocusable(false);
-                    et_myinfo_phonenumber.setClickable(false);
-                    et_myinfo_phonenumber.setFocusable(false);
-                    et_myinfo_class.setClickable(false);
-                    et_myinfo_class.setFocusable(false);
-
-                    Map<String,Object> MyinfoData = new HashMap<>();
-
-                    MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
-                    MyinfoData.put("grade",et_myinfo_class.getText().toString());
-                    MyinfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
-
-                    firestoreManager.updateUserData(MyinfoData, new ListenerInterface() {
-                        @Override
-                        public void onSuccess() {
-                            ListenerInterface.super.onSuccess();
-                        }
-                    });
-                }
-            });
-            }
-        });
-
-        return view;
-
-    }
 
 }
