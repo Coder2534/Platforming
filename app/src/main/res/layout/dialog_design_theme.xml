@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
     <RadioGroup
         android:id="@+id/rg_dialog_theme"
         android:layout_width="match_parent"
@@ -19,8 +20,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/btn_dialog_theme_getout"
             android:backgroundTint="?attr/colorPrimary"
-            android:text="적용하기"
-            />
+            android:text="적용하기" />
 
         <Button
             android:id="@+id/btn_dialog_theme_getout"

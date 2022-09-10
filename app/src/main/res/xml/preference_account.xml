@@ -5,7 +5,8 @@
     <Preference
         android:key="uid"
         android:title="UID"
-        app:iconSpaceReserved="false"/>
+        app:iconSpaceReserved="false"
+        />
 
     <Preference
         android:key="email"

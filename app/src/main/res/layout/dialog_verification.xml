@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/et_verification_password"
             android:text="현재 비밀번호"
-            android:textColor="@color/black"
             android:textSize="20dp" />
 
         <EditText

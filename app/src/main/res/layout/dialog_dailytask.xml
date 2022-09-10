@@ -5,7 +5,8 @@
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
     android:paddingStart="50dp"
-    android:paddingEnd="50dp">
+    android:paddingEnd="50dp"
+    android:background="?attr/backgroundColor">
 
     <TextView
         android:id="@+id/tv_dailytask_title"

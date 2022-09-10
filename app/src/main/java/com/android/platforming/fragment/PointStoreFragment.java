@@ -89,7 +89,7 @@ public class PointStoreFragment extends Fragment {
                     btn_pointstore_font_kyobo.setTextColor(getResources().getColor(R.color.red));
                 }
                 point = user.getPoint();
-                tv_pointstore_font_point.setText(point+ "포인트");
+                tv_pointstore_font_point.setText(point+ "p");
                 fontdialog.show();
 
                 btn_pointstore_font_pyeong.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +136,7 @@ public class PointStoreFragment extends Fragment {
                                     @Override
                                     public void onSuccess() {
                                         user.setPoint(point - 50);
-                                        tv_pointstore_font_point.setText(point+"포인트");
+                                        tv_pointstore_font_point.setText(point+"p");
                                         if (checkfont == 1){
                                             btn_pointstore_font_pyeong.setTextColor(getResources().getColor(R.color.red));
                                         }

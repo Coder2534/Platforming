@@ -30,21 +30,24 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_10mp_24"/>
+                android:src="@drawable/ic_baseline_10mp_24"
+                android:background="?attr/backgroundColor"/>
 
             <ImageButton
                 android:id="@+id/ibtn_profile_2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_11mp_24"/>
+                android:src="@drawable/ic_baseline_11mp_24"
+                android:background="?attr/backgroundColor"/>
 
             <ImageButton
                 android:id="@+id/ibtn_profile_3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_12mp_24"/>
+                android:src="@drawable/ic_baseline_12mp_24"
+                android:background="?attr/backgroundColor"/>
 
         </LinearLayout>
 

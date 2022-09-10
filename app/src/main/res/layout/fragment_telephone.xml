@@ -10,11 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="1.5"
-        android:shadowDy="1.3"
-        android:shadowRadius="1.6"
-        android:textColor="#000000"
         android:textSize="40dp"
         android:background="?attr/colorOnSecondary"/>
 

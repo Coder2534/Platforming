@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:text="포인트 상점"
         android:textSize="30dp"
-        android:textColor="@color/black"
         android:gravity="center"
         android:background="?attr/colorOnSecondary"/>
     <LinearLayout
@@ -26,7 +25,6 @@
             android:layout_height="wrap_content"
             android:text="폰트"
             android:textSize="35dp"
-            android:textColor="@color/black"
             android:drawableTop="@drawable/ic_baseline_font_download_24"
             android:gravity="center"/>
 
@@ -36,7 +34,6 @@
             android:layout_height="wrap_content"
             android:text="테마"
             android:textSize="35dp"
-            android:textColor="@color/black"
             android:drawableTop="@drawable/ic_baseline_palette_24"
             android:gravity="center"/>
     </LinearLayout>

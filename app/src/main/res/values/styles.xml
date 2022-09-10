@@ -16,9 +16,6 @@
     </style>
     <style name="kyoboFont">
         <item name="fontFamily">@font/kyobohandwriting20204</item>
-        <item name="fontWeight">900</item>
-        <item name="font">@color/black</item>
-        <item name="android:textFontWeight" tools:targetApi="p">100</item>
 
     </style>
 </resources>
