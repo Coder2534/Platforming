@@ -82,6 +82,17 @@ public class BulletinBoardListFragment extends Fragment {
         });
 
         recyclerView.setAdapter(postViewAdapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.d("-----","end");
+                }
+            }
+        });
+
 
         write = view.findViewById(R.id.btn_bulletinboard_list_write);
         listenerInterface = new ListenerInterface() {
