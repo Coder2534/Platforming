@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -427,7 +428,12 @@ public class CustomDialog {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user.setSchedules(schedules);
+                sliderAdapter.saveSchedules();
+                for(int i = 0; i < user.getSchedules().size(); ++i){
+                    ArrayList<TableItem> tableItems = user.getSchedules().get(i);
+                    tableItems.clear();
+                    tableItems.addAll(schedules.get(i));
+                }
                 listenerInterface.onSuccess();
                 dialog.dismiss();
             }
@@ -437,6 +443,7 @@ public class CustomDialog {
 
         dialog = builder.create();
         dialog.show();
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
     }
 
     private String getDayOfWeek(int index){

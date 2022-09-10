@@ -1,8 +1,8 @@
 package com.android.platforming.clazz;
 
 public class TableItem {
-    private String mainText = null;
-    private String subText = null;
+    private String mainText = "";
+    private String subText = "";
 
     public TableItem(){}
 
@@ -21,5 +21,13 @@ public class TableItem {
 
     public String getSubText() {
         return subText;
+    }
+
+    public void setMainText(String mainText) {
+        this.mainText = mainText;
+    }
+
+    public void setSubText(String subText) {
+        this.subText = subText;
     }
 }

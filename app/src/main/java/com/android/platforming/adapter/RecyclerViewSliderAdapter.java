@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +26,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
 
     @NonNull
     @Override
-    public RecyclerViewSliderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
         View view = inflater.inflate(R.layout.item_recyclerview_slider, parent, false) ;
@@ -34,13 +35,8 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewSliderAdapter.MyViewHolder holder, int position) {
-        ScheduleEditAdapter scheduleEditAdapter = new ScheduleEditAdapter(schedules.get(position), new ListenerInterface() {
-            @Override
-            public void onSuccess() {
-                notifyItemChanged(holder.getAdapterPosition());
-            }
-        });
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        ScheduleEditAdapter scheduleEditAdapter = new ScheduleEditAdapter(schedules.get(position));
         scheduleEditAdapters.add(scheduleEditAdapter);
         holder.mRecyclerView.setAdapter(scheduleEditAdapter);
     }
@@ -66,6 +62,12 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
             schedules.get(position).add(new TableItem());
             notifyItemChanged(position);
             scheduleEditAdapters.get(position).notifyItemInserted(schedules.size() - 1);
+        }
+    }
+
+    public void saveSchedules(){
+        for(ScheduleEditAdapter scheduleEditAdapter : scheduleEditAdapters){
+            scheduleEditAdapter.saveTableItems();
         }
     }
 }

@@ -1,9 +1,12 @@
 package com.android.platforming.adapter;
 
+import android.app.Service;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapter.ViewHolder> {
 
     ArrayList<TableItem> tableItems;
-    ListenerInterface listenerInterface;
+    ArrayList<ViewHolder> viewHolders = new ArrayList<>();
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,43 +48,33 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
                     int pos = getAdapterPosition() ;
                     if (pos != RecyclerView.NO_POSITION) {
                         tableItems.remove(pos);
-                        listenerInterface.onSuccess();
+                        viewHolders.remove(pos);
+                        notifyItemChanged(pos);
                     }
                 }
             });
         }
     }
 
-    public ScheduleEditAdapter(ArrayList<TableItem> tableItems, ListenerInterface listenerInterface) {
+    public ScheduleEditAdapter(ArrayList<TableItem> tableItems) {
         this.tableItems = tableItems;
-        this.listenerInterface = listenerInterface;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
-    public ScheduleEditAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext() ;
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
-        View view = inflater.inflate(R.layout.item_recyclerview_schedule_edit, parent, false) ;
-
-        return new ScheduleEditAdapter.ViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.item_recyclerview_schedule_edit, parent, false);
+        viewHolders.add(new ViewHolder(view));
+        return viewHolders.get(viewHolders.size() - 1);
     }
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(ScheduleEditAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.time.setText((position + 1) + "교시");
         holder.subject.setText(tableItems.get(position).getMainText());
-        holder.subject.setOnClickListener(new View.OnClickListener() {
-            @Override
-    public void onClick(View v) {
-                     editText.clearFocus();
-        editText.requestFocus();
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Service.INPUT_METHOD_SERVICE);            imm.showSoftInput(editText, 0);
-        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-    }
-        });
-        출처: https://cocoalab.tistory.com/293 [Cocoa Lab : 코코아팀 랩실:티스토리]
         holder.teacher.setText(tableItems.get(position).getSubText());
     }
 
@@ -89,5 +82,15 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
     @Override
     public int getItemCount() {
         return tableItems.size() ;
+    }
+
+
+    public void saveTableItems(){
+        for(int i = 0; i < Math.min(viewHolders.size(), tableItems.size()); ++i){
+            TableItem tableItem = tableItems.get(i);
+            ViewHolder viewHolder = viewHolders.get(i);
+            tableItem.setMainText(viewHolder.subject.getText().toString());
+            tableItem.setSubText(viewHolder.teacher.getText().toString());
+        }
     }
 }

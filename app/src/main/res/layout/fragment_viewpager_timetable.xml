@@ -11,9 +11,9 @@
         android:layout_height="match_parent"
         android:numColumns="6"
         android:stretchMode="columnWidth"
+        android:padding="1dp"
         android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"
-        />
+        android:verticalSpacing="1dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,26 +35,4 @@
             app:srcCompat="@drawable/ic_baseline_edit_24"
             android:background="?attr/colorPrimary" />
     </LinearLayout>
-
-    <!--
-    <ImageView
-        android:id="@+id/iv_viewpager_timetable"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorOnSecondary"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="시간표" />
-
-    <ImageButton
-        android:id="@+id/btn_viewpager_timetable_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        app:srcCompat="@drawable/ic_baseline_edit_24"
-        android:background="?attr/colorPrimary"/>
-         -->
 </FrameLayout>
