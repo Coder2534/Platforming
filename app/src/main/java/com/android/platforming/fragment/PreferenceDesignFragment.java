@@ -32,7 +32,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
 
-                customDialog.fontDialog(getActivity(), user.getFonts(), initApplication.getAppliedFont());
+                customDialog.fontDialog(getActivity(), user.getFonts(), initApplication.getAppliedFont(), initApplication.getAppliedTheme());
                 return true;
             }
         });
@@ -40,10 +40,8 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
         theme.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {
-                Log.d("check_font_dialog", String.valueOf(user.getThemes()));
 
                 customDialog.themeDialog(getActivity(), user.getThemes(), initApplication.getAppliedTheme());
-                Log.d("check_font_dialog2","ok");
                 return false;
             }
         });

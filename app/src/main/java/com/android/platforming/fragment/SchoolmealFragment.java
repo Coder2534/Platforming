@@ -1,5 +1,6 @@
 package com.android.platforming.fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
@@ -71,15 +73,21 @@ public class SchoolmealFragment extends Fragment {
         btn_calender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDate();
+                InitApplication initApplication = ((InitApplication)getActivity().getApplication());
+                showDate(initApplication.getAppliedTheme());
             }
         });
 
         return view;
     }
 
-    public void showDate() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+    public void showDate(int applytheme) {
+        int dialogtheme;
+        if (applytheme==4){
+            dialogtheme = 4;
+        }
+        else dialogtheme=5;
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),dialogtheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -93,8 +101,8 @@ public class SchoolmealFragment extends Fragment {
         }, Integer.parseInt(api.getYear()), Integer.parseInt(api.getMonth()) - 1, Integer.parseInt(api.getDay()));
 
         minDate.set(2020,0,1);
+        datePickerDialog.setTitle("날짜선택");
         datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
-        datePickerDialog.setMessage("날짜선택");
         datePickerDialog.show();
     }
 }

@@ -242,7 +242,12 @@ public class CustomDialog {
     }
 
     public void themeDialog(Activity activity, List themes, int applytheme){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        int dialogtheme;
+        if (applytheme==4){
+            dialogtheme = 4;
+        }
+        else dialogtheme=5;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity,dialogtheme);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
         builder.setTitle("테마");
@@ -256,29 +261,49 @@ public class CustomDialog {
             if (themes.get(i).equals(0L)){
                 radioButton.setId((int)500);
                 radioButton.setText("라이트 테마(기본)");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(themes.get(i).equals(1L)){
                 radioButton.setId(500+1);
                 radioButton.setText("핑크 테마");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(themes.get(i).equals(2L)){
                 radioButton.setId(500+2);
                 radioButton.setText("블루 테마");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(themes.get(i).equals(3L)){
                 radioButton.setId(500+3);
                 radioButton.setText("그린 테마");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(themes.get(i).equals(4L)){
                 radioButton.setId(500+4);
                 radioButton.setText("블랙 테마");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);
 
         }
         Log.d("check_themeid", String.valueOf(600+applytheme));
-        radioGroup.check((Integer)600+applytheme);
+        radioGroup.check((Integer)500+applytheme);
 
         Button apply = view.findViewById(R.id.btn_dialog_theme_apply);
         apply.setOnClickListener(new View.OnClickListener() {
@@ -308,8 +333,13 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void fontDialog(Activity activity, List fonts, int applyfont){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    public void fontDialog(Activity activity, List fonts, int applyfont, int applytheme){
+        int dialogtheme;
+        if (applytheme==4){
+            dialogtheme = 4;
+        }
+        else dialogtheme=5;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity,dialogtheme);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_design_theme, null);
         builder.setTitle("폰트");
@@ -323,22 +353,42 @@ public class CustomDialog {
             if (fonts.get(i).equals(0L)){
                 radioButton.setId((int)600);
                 radioButton.setText("레페리 포인트(기본)");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(fonts.get(i).equals(1L)){
                 radioButton.setId(600+1);
                 radioButton.setText("평창평화체");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(fonts.get(i).equals(2L)){
                 radioButton.setId(600+2);
                 radioButton.setText("비트로코어체");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(fonts.get(i).equals(3L)){
                 radioButton.setId(600+3);
                 radioButton.setText("갈무리9");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             else if(fonts.get(i).equals(4L)){
                 radioButton.setId(600+4);
                 radioButton.setText("교보손글씨2020체");
+                if (applytheme == 4){
+                    radioButton.setTextColor(Color.WHITE);
+                }
+                else radioButton.setTextColor(Color.BLACK);
             }
             radioThemeList[i] = radioButton;
             radioGroup.addView(radioThemeList[i]);

@@ -7,41 +7,36 @@
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
     android:orientation="vertical">
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_date"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorOnSecondary"
+        android:gravity="center"
+        android:text="(날짜)"
+        android:textSize="30dp" />
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/BTN_getFoodName"
-            android:gravity="center"
-            android:text="(날짜)"
-            android:textSize="30dp"
-            android:background="?attr/colorOnSecondary"/>
-
-        <ListView
-            android:id="@+id/lv_foodlist"
-            android:layout_width="match_parent"
-            android:layout_height="590dp"
-            android:background="?attr/backgroundColor"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <ListView
+        android:id="@+id/lv_foodlist"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        android:layout_below="@+id/tv_date"/>
 
-        <Button
-            android:id="@+id/btn_calender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="날짜 선택"
-            android:textSize="30dp"
-            android:backgroundTint="?attr/colorPrimary" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_calender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorPrimary"
+        android:padding="5dp"
+        android:text="날짜 선택"
+        android:textSize="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        />
+
+
+
+
+
 </RelativeLayout>

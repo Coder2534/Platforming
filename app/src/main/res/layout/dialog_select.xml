@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:text="message"
         android:gravity="center"
-        android:textColor="@color/black"
         android:textSize="25dp" />
 
     <LinearLayout
