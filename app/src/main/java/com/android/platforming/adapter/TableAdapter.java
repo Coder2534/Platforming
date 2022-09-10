@@ -14,16 +14,14 @@ import com.example.platforming.R;
 import java.util.ArrayList;
 
 public class TableAdapter extends BaseAdapter {
-
-    int itemPosition = 0;
     final int numColumns;
 
     TableItem crossCriterion;
     ArrayList<TableItem> columnCriteria;
     ArrayList<TableItem> rowCriteria;
-    ArrayList<TableItem> tableItems;
+    ArrayList<ArrayList<TableItem>> tableItems;
 
-    public TableAdapter(TableItem crossCriterion, ArrayList<TableItem> columnCriteria, ArrayList<TableItem> rowCriteria, ArrayList<TableItem> tableItems){
+    public TableAdapter(TableItem crossCriterion, ArrayList<TableItem> columnCriteria, ArrayList<TableItem> rowCriteria, ArrayList<ArrayList<TableItem>> tableItems){
         Log.d("TableAdapter", "public");
         numColumns = columnCriteria.size() + 1;
         this.crossCriterion = crossCriterion;
@@ -38,7 +36,6 @@ public class TableAdapter extends BaseAdapter {
     }
 
 
-    int itemPosition2 = 0;
     @Override
     public Object getItem(int position) {
         TableItem tableItem;
@@ -54,7 +51,7 @@ public class TableAdapter extends BaseAdapter {
                 tableItem = new TableItem();
         }
         else
-            tableItem = tableItems.get(itemPosition2++);;
+            tableItem = tableItems.get(position % numColumns - 1).get(position / numColumns - 1);
 
         return tableItem;
     }
@@ -91,7 +88,8 @@ public class TableAdapter extends BaseAdapter {
                 tableItem = new TableItem();
         }
         else
-            tableItem = tableItems.get(itemPosition++);
+            tableItem = new TableItem();
+            //tableItem = tableItems.get(position % numColumns - 1).get(position / numColumns - 1);
 
         if(tableItem.getMainText() == null)
             mainText.setVisibility(View.GONE);

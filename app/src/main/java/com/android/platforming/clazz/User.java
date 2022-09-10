@@ -48,7 +48,13 @@ public class User {
     private long lastSignIn;
     private int point_receipt;
     private List<Long> dailyTasks;
-    ArrayList<TableItem> schedules = new ArrayList<>();
+    ArrayList<ArrayList<TableItem>> schedules = new ArrayList<ArrayList<TableItem>>(){{
+        add(new ArrayList<>());
+        add(new ArrayList<>());
+        add(new ArrayList<>());
+        add(new ArrayList<>());
+        add(new ArrayList<>());
+    }};
 
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
@@ -210,7 +216,7 @@ public class User {
         return dailyTasks;
     }
 
-    public ArrayList<TableItem> getSchedules() {
+    public ArrayList<ArrayList<TableItem>> getSchedules() {
         return schedules;
     }
 
