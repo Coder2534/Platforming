@@ -65,7 +65,7 @@ public class ViewPagerTimetableFragment extends Fragment {
                 customDialog.editSchedule(getActivity(), new ListenerInterface() {
                     @Override
                     public void onSuccess() {
-
+                        tableAdapter.notifyDataSetChanged();
                     }
                 });
             }

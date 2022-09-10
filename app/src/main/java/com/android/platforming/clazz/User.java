@@ -48,7 +48,7 @@ public class User {
     private long lastSignIn;
     private int point_receipt;
     private List<Long> dailyTasks;
-    ArrayList<ArrayList<TableItem>> schedules = new ArrayList<ArrayList<TableItem>>(){{
+    private ArrayList<ArrayList<TableItem>> schedules = new ArrayList<ArrayList<TableItem>>(){{
         add(new ArrayList<>());
         add(new ArrayList<>());
         add(new ArrayList<>());
@@ -214,6 +214,10 @@ public class User {
 
     public List<Long> getDailyTasks() {
         return dailyTasks;
+    }
+
+    public void setSchedules(ArrayList<ArrayList<TableItem>> schedules) {
+        this.schedules = schedules;
     }
 
     public ArrayList<ArrayList<TableItem>> getSchedules() {
