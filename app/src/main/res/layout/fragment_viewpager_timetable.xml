@@ -15,24 +15,19 @@
         android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp" />
 
-    <LinearLayout
+    <ImageButton
+        android:id="@+id/btn_timetable_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="right|bottom">
+        android:layout_gravity="bottom"
+        app:srcCompat="@drawable/ic_baseline_edit_24"
+        android:background="?attr/colorPrimary" />
 
-        <ImageButton
-            android:id="@+id/btn_timetable_expand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_crop_free_24"
-            android:background="?attr/colorPrimary" />
-
-        <ImageButton
-            android:id="@+id/btn_timetable_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_edit_24"
-            android:background="?attr/colorPrimary" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btn_timetable_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:srcCompat="@drawable/ic_baseline_crop_free_24"
+        android:background="?attr/colorPrimary" />
 </FrameLayout>
