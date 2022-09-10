@@ -118,7 +118,7 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
+                    ArrayList<Post> posts = Post.getRecentPosts();
                     posts.clear();
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
@@ -135,7 +135,7 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
+                    ArrayList<Post> posts = Post.getMyPosts();
                     posts.clear();
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));

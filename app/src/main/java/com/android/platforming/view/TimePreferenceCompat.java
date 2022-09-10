@@ -31,7 +31,6 @@ public class TimePreferenceCompat extends androidx.preference.PreferenceDialogFr
     @Override
     protected void onBindDialogView(View v) {
         super.onBindDialogView(v);
-        Log.d("Test","testeat");
         preference = getPreference();
         calendar = getPreference().getCalendar();
         timePicker = v.findViewById(R.id.tp_preference_timepicker);

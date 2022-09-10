@@ -17,11 +17,6 @@ import com.example.platforming.R;
 
 public class BulletinBoardActivity extends AppCompatActivity {
 
-    //1. 게시판, 댓글 두번 들어가야 뜸 - 수정
-    //3. comment 추가 이후 보여지지 않음 - 수정
-    //4. docutment 자동완성시 순서개판 - 수정
-    //5. 전제적인 크기조절
-
     private static AppCompatActivity activity = null;
 
     @Override
@@ -72,6 +67,7 @@ public class BulletinBoardActivity extends AppCompatActivity {
 
         BulletinBoardListFragment fragment = new BulletinBoardListFragment();
         Bundle args = new Bundle();
+        args.putInt("post", getIntent().getIntExtra("post", 0));
         args.putInt("type", type);
         if(id != null)
             args.putString("id", id);

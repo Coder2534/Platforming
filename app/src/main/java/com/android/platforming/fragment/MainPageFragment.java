@@ -1,6 +1,7 @@
 package com.android.platforming.fragment;
 
 import static com.android.platforming.InitApplication.SELFDIAGNOSIS;
+import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
@@ -109,14 +110,15 @@ public class MainPageFragment extends Fragment {
         //최근 게시물
         RecyclerView recyclerView = view.findViewById(R.id.rv_mainpage_recentpost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        PostRecentViewAdapter recentViewAdapter = new PostRecentViewAdapter(Post.getPosts());
+        PostRecentViewAdapter recentViewAdapter = new PostRecentViewAdapter(Post.getRecentPosts());
         recentViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
-                Post post = Post.getPosts().get(position);
+                Post post = Post.getRecentPosts().get(position);
                 Activity activity = getActivity();
 
                 Intent intent = new Intent(activity, BulletinBoardActivity.class);
+                intent.putExtra("post", POST_RECENT);
                 intent.putExtra("type", post.getType());
                 intent.putExtra("id", post.getId());
                 startActivity(intent);
