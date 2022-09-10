@@ -33,9 +33,9 @@ import java.util.Map;
 public class MyInfoFragment extends Fragment {
     FirestoreManager firestoreManager;
     TextView tv_myinfo_name,tv_myinfo_email,tv_myinfo_point,tv_myinfo_rivise;
-    ImageButton ibtn_myinfo_profile;
+    ImageButton ibtn_myinfo_profile, ibtn_myinfo_rivise;
     EditText et_myinfo_nickname,et_myinfo_class,et_myinfo_phonenumber;
-    Button btn_myinfo_finish,btn_myinfo_rivise;
+    Button btn_myinfo_finish;
 
     AlertDialog dialog;
     private void setDialog(Activity activity) {
@@ -93,7 +93,7 @@ public class MyInfoFragment extends Fragment {
         tv_myinfo_point = view.findViewById(R.id.tv_myinfo_point);
         tv_myinfo_rivise = view.findViewById(R.id.tv_myinfo_revise);
         ibtn_myinfo_profile = view.findViewById(R.id.ibtn_myinfo_profile);
-        btn_myinfo_rivise = view.findViewById(R.id.btn_myinfo_rivise);
+        ibtn_myinfo_rivise = view.findViewById(R.id.ibtn_myinfo_rivise);
         btn_myinfo_finish = view.findViewById(R.id.btn_myinfo_finish);
         et_myinfo_nickname = view.findViewById(R.id.et_myinfo_nickname);
         et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
@@ -114,7 +114,7 @@ public class MyInfoFragment extends Fragment {
         et_myinfo_class.setClickable(false);
         et_myinfo_class.setFocusable(false);
 
-        btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
+        ibtn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

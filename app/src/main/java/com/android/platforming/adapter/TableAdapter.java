@@ -14,46 +14,37 @@ import com.example.platforming.R;
 import java.util.ArrayList;
 
 public class TableAdapter extends BaseAdapter {
-    final int numColumns;
+    final int numColumns = 6;
 
-    TableItem crossCriterion;
-    ArrayList<TableItem> columnCriteria;
-    ArrayList<TableItem> rowCriteria;
-    ArrayList<ArrayList<TableItem>> tableItems;
+    TableItem crossCriterion = new TableItem("시간");
 
-    public TableAdapter(TableItem crossCriterion, ArrayList<TableItem> columnCriteria, ArrayList<TableItem> rowCriteria, ArrayList<ArrayList<TableItem>> tableItems){
-        Log.d("TableAdapter", "public");
-        numColumns = columnCriteria.size() + 1;
-        this.crossCriterion = crossCriterion;
-        this.columnCriteria = columnCriteria;
-        this.rowCriteria = rowCriteria;
-        this.tableItems = tableItems;
+    ArrayList<ArrayList<TableItem>> schedules;
+
+    public TableAdapter(ArrayList<ArrayList<TableItem>> schedules){
+        this.schedules = schedules;
     }
 
     @Override
     public int getCount() {
-        return 1 + columnCriteria.size() + rowCriteria.size() + tableItems.size();
+        int posY = 0;
+
+        for(int i = 0; i < schedules.size(); ++i){
+            Log.d("TableAdapter", String.valueOf(schedules.get(i).size()));
+            if(posY < schedules.get(i).size()){
+                posY = schedules.get(i).size();
+            }
+        }
+
+        int count = numColumns + posY * numColumns;
+        Log.d("TableAdapter", "getCount : " + count);
+
+        return count;
     }
 
 
     @Override
     public Object getItem(int position) {
-        TableItem tableItem;
-
-        if(position == 0)
-            tableItem = crossCriterion;
-        else if(position / numColumns == 0)
-            tableItem = columnCriteria.get(position % numColumns - 1);
-        else if(position % numColumns == 0){
-            if(position / numColumns < rowCriteria.size() + 1)
-                tableItem = rowCriteria.get(position / numColumns - 1);
-            else
-                tableItem = new TableItem();
-        }
-        else
-            tableItem = tableItems.get(position % numColumns - 1).get(position / numColumns - 1);
-
-        return tableItem;
+        return getTableItem(position);
     }
 
     @Override
@@ -65,8 +56,6 @@ public class TableAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Context context = parent.getContext();
 
-        Log.d("TableAdapter", String.valueOf(position));
-
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_recyclerview_tableitem, parent, false);
@@ -75,32 +64,50 @@ public class TableAdapter extends BaseAdapter {
         TextView mainText = convertView.findViewById(R.id.tv_schedule_maintext);
         TextView subText = convertView.findViewById(R.id.tv_schedule_subtext);
 
-        TableItem tableItem;
+        TableItem tableItem = getTableItem(position);
 
-        if(position == 0)
-            tableItem = crossCriterion;
-        else if(position / numColumns == 0)
-            tableItem = columnCriteria.get(position % numColumns - 1);
-        else if(position % numColumns == 0){
-            if(position / numColumns < rowCriteria.size() + 1)
-                tableItem = rowCriteria.get(position / numColumns - 1);
-            else
-                tableItem = new TableItem();
-        }
-        else
-            tableItem = new TableItem();
-            //tableItem = tableItems.get(position % numColumns - 1).get(position / numColumns - 1);
-
-        if(tableItem.getMainText() == null)
+        if(tableItem.getMainText().equals(""))
             mainText.setVisibility(View.GONE);
         else
             mainText.setText(tableItem.getMainText());
 
-        if(tableItem.getSubText() == null)
+        if(tableItem.getSubText().equals(""))
             subText.setVisibility(View.GONE);
         else
             subText.setText(tableItem.getSubText());
 
         return convertView;
+    }
+
+    private TableItem getTableItem(int position) {
+        if (position == 0)
+            return crossCriterion;
+        else if (position / numColumns == 0)
+            return new TableItem(getDayOfWeek(position % numColumns - 1));
+        else if (position % numColumns == 0)
+            return new TableItem(position / numColumns + "교시");
+        else if (position / numColumns <= schedules.get(position % numColumns - 1).size())
+            return schedules.get(position % numColumns - 1).get(position / numColumns - 1);
+        else
+            return new TableItem();
+    }
+
+    private String getDayOfWeek(int index){
+        switch (index){
+            case 0:
+                return "월";
+
+            case 1:
+                return "화";
+
+            case 2:
+                return "수";
+
+            case 3:
+                return "목";
+
+            default:
+                return "금";
+        }
     }
 }

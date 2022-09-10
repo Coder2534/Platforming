@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -439,19 +440,31 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void editSchedule(FragmentActivity activity, ListenerInterface listenerInterface){
+    public void editSchedule(FragmentActivity activity, ArrayList<ArrayList<TableItem>> schedules_, ListenerInterface listenerInterface){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_schedule_edit, null);
 
+        TextView dayOfWeek = view.findViewById(R.id.tv_schedule_edit_dayofweek);
+
+        ArrayList<ArrayList<TableItem>> schedules = new ArrayList<>();
+        for (ArrayList<TableItem> tableItems : schedules_)
+            schedules.add(new ArrayList<>(tableItems));
+
+
         ViewPager2 viewPager = view.findViewById(R.id.vp_schedule_edit);
-        RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(user.getSchedules());
+        RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(schedules);
         viewPager.setAdapter(sliderAdapter);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                dayOfWeek.setText(getDayOfWeek(position));
+            }
+        });
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         viewPager.setOffscreenPageLimit(5);
-
-        TextView dayOfWeek = view.findViewById(R.id.tv_schedule_edit_dayofweek);
 
         ImageButton previous = view.findViewById(R.id.btn_schedule_edit_previous);
         previous.setOnClickListener(new View.OnClickListener() {
@@ -482,10 +495,17 @@ public class CustomDialog {
             }
         });
 
-        Button confirm = view.findViewById(R.id.btn_schedule_edit_confirm);
-        confirm.setOnClickListener(new View.OnClickListener() {
+        Button save = view.findViewById(R.id.btn_schedule_edit_save);
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sliderAdapter.saveSchedules();
+                for(int i = 0; i < schedules_.size(); ++i){
+                    ArrayList<TableItem> tableItems = schedules_.get(i);
+                    tableItems.clear();
+                    tableItems.addAll(schedules.get(i));
+                }
+                listenerInterface.onSuccess();
                 dialog.dismiss();
             }
         });
@@ -494,6 +514,7 @@ public class CustomDialog {
 
         dialog = builder.create();
         dialog.show();
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
     }
 
     private String getDayOfWeek(int index){

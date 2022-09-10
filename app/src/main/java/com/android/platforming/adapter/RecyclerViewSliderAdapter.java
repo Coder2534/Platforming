@@ -4,18 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.TableItem;
+import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
 import java.util.ArrayList;
 
 public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerViewSliderAdapter.MyViewHolder> {
     private ArrayList<ArrayList<TableItem>> schedules;
+    private ArrayList<ScheduleEditAdapter> scheduleEditAdapters = new ArrayList<>();
 
     public RecyclerViewSliderAdapter(ArrayList<ArrayList<TableItem>> schedules) {
         this.schedules = schedules;
@@ -23,7 +26,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
 
     @NonNull
     @Override
-    public RecyclerViewSliderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
         View view = inflater.inflate(R.layout.item_recyclerview_slider, parent, false) ;
@@ -32,8 +35,10 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewSliderAdapter.MyViewHolder holder, int position) {
-        holder.mRecyclerView.setAdapter(new ScheduleEditAdapter(schedules.get(position)));
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        ScheduleEditAdapter scheduleEditAdapter = new ScheduleEditAdapter(schedules.get(position));
+        scheduleEditAdapters.add(scheduleEditAdapter);
+        holder.mRecyclerView.setAdapter(scheduleEditAdapter);
     }
 
     @Override
@@ -53,7 +58,16 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     public void addSchedule(int position){
-        schedules.get(position).add(new TableItem());
-        notifyItemInserted(schedules.get(position).size() - 1);
+        if(schedules.get(position).size() < 8){
+            schedules.get(position).add(new TableItem());
+            notifyItemChanged(position);
+            scheduleEditAdapters.get(position).notifyItemInserted(schedules.size() - 1);
+        }
+    }
+
+    public void saveSchedules(){
+        for(ScheduleEditAdapter scheduleEditAdapter : scheduleEditAdapters){
+            scheduleEditAdapter.saveTableItems();
+        }
     }
 }

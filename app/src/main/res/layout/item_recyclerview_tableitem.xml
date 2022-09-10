@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="?attr/colorPrimary">
 
-    <TextView
-        android:id="@+id/tv_schedule_maintext"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="과목" />
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/tv_schedule_maintext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:maxLines="1"
+            android:text="과목" />
 
-    <TextView
-        android:id="@+id/tv_schedule_subtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="담당선생님" />
+        <TextView
+            android:id="@+id/tv_schedule_subtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_schedule_maintext"
+            android:layout_centerHorizontal="true"
+            android:maxLines="1"
+            android:text="담당선생님"
+            android:textSize="10sp" />
+    </RelativeLayout>
 </RelativeLayout>

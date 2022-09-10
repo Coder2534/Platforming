@@ -2,7 +2,10 @@ package com.android.platforming.fragment;
 
 import static com.android.platforming.clazz.User.user;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,32 +23,35 @@ import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ViewPagerTimetableFragment extends Fragment {
 
     GridView timetable;
-
-    TableItem crossCriterion = new TableItem("시간");
-    ArrayList<TableItem> columnCriteria = new ArrayList<TableItem>(){{
-        add(new TableItem("월"));
-        add(new TableItem("화"));
-        add(new TableItem("수"));
-        add(new TableItem("목"));
-        add(new TableItem("금"));
-    }};
-    ArrayList<TableItem> rowCriteria = new ArrayList<>();
-
     TableAdapter tableAdapter;
+
+    private ArrayList<ArrayList<TableItem>> schedules = new ArrayList<>();
+
+    String[] keys = new String[]{
+            "schedule_mon",
+            "schedule_tue",
+            "schedule_wed",
+            "schedule_thu",
+            "schedule_fri"
+    };
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewpager_timetable, container, false);
 
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        for(String key : keys){
+            schedules.add(decodeSchedule(pref.getString(key, null)));
+        }
+
         timetable = view.findViewById(R.id.gv_timetable);
-
-        tableAdapter = new TableAdapter(crossCriterion, columnCriteria, rowCriteria, user.getSchedules());
-
+        tableAdapter = new TableAdapter(schedules);
         timetable.setAdapter(tableAdapter);
 
         ImageButton expand = view.findViewById(R.id.btn_timetable_expand);
@@ -62,10 +68,15 @@ public class ViewPagerTimetableFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CustomDialog customDialog = new CustomDialog();
-                customDialog.editSchedule(getActivity(), new ListenerInterface() {
+                customDialog.editSchedule(getActivity(), schedules, new ListenerInterface() {
                     @Override
                     public void onSuccess() {
-
+                        SharedPreferences.Editor editor = pref.edit();
+                        for(int i = 0; i < schedules.size(); ++i){
+                            editor.putString(keys[i], encodeSchedule(schedules.get(i)));
+                        }
+                        editor.apply();
+                        tableAdapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -74,83 +85,36 @@ public class ViewPagerTimetableFragment extends Fragment {
         return view;
     }
 
-    /*
-        ImageView imageView;
-        String imgName = "default.png";    // 이미지 이름
+    private String encodeSchedule(ArrayList<TableItem> tableItems){
+        StringBuilder result = new StringBuilder();
 
-        imageView = view.findViewById(R.id.iv_viewpager_timetable);
-        try {
-            String imgpath = view.getContext().getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
-            Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            imageView.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
-            Toast.makeText(view.getContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(view.getContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
+        for(int i = 0; i < tableItems.size(); ++i){
+            TableItem tableItem = tableItems.get(i);
+            result.append(String.format("%s,%s", tableItem.getMainText(), tableItem.getSubText()));
+            if(i < tableItems.size() - 1)
+                result.append("#");
         }
 
-        ImageButton button = view.findViewById(R.id.btn_viewpager_timetable_edit);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edit();
-            }
-        });*/
-
-    /*public void edit() {    // 이미지 선택 누르면 실행됨 이미지 고를 갤러리 오픈
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 101);
+        return result.toString();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101) {
-            if (resultCode == getActivity().RESULT_OK) {
-                deleteFile();
+    private ArrayList<TableItem> decodeSchedule(String text){
+        ArrayList<TableItem> result = new ArrayList<>();
 
-                Uri fileUri = data.getData();
-                ContentResolver resolver = getActivity().getContentResolver();
-                try {
-                    InputStream instream = resolver.openInputStream(fileUri);
-                    Bitmap imgBitmap = BitmapFactory.decodeStream(instream);
-                    imageView.setImageBitmap(imgBitmap);    // 선택한 이미지 이미지뷰에 셋
-                    instream.close();   // 스트림 닫아주기
-                    saveBitmapToJpeg(imgBitmap);    // 내부 저장소에 저장
-                    Toast.makeText(getContext(), "파일 불러오기 성공", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
-                }
+        if(text != null){
+            String[] array = text.split("#");
+            for(String str : array){
+                Log.d("Test", str);
+                String[] data = str.split(",");
+                if(data.length == 0)
+                    result.add(new TableItem());
+                else if(data.length == 1)
+                    result.add(new TableItem(data[0]));
+                else
+                    result.add(new TableItem(data[0], data[1]));
             }
         }
-    }
 
-    public void saveBitmapToJpeg(Bitmap bitmap) {   // 선택한 이미지 내부 저장소에 저장
-        File tempFile = new File(getContext().getCacheDir(), imgName);    // 파일 경로와 이름 넣기
-        try {
-            tempFile.createNewFile();   // 자동으로 빈 파일을 생성하기
-            FileOutputStream out = new FileOutputStream(tempFile);  // 파일을 쓸 수 있는 스트림을 준비하기
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
-            out.close();    // 스트림 닫아주기
-            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
-        }
+        return result;
     }
-
-    public void deleteFile() {    // 이미지 삭제
-        try {
-            File file = getContext().getCacheDir();  // 내부저장소 캐시 경로를 받아오기
-            File[] flist = file.listFiles();
-            for (int i = 0; i < flist.length; i++) {    // 배열의 크기만큼 반복
-                if (flist[i].getName().equals(imgName)) {   // 삭제하고자 하는 이름과 같은 파일명이 있으면 실행
-                    flist[i].delete();  // 파일 삭제
-                    Toast.makeText(getContext(), "파일 삭제 성공", Toast.LENGTH_SHORT).show();
-                }
-            }
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "파일 삭제 실패", Toast.LENGTH_SHORT).show();
-        }
-    }*/
 }
