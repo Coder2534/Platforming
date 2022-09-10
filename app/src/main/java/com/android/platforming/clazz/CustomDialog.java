@@ -403,6 +403,22 @@ public class CustomDialog {
             }
         });
 
+        Button add = view.findViewById(R.id.btn_schedule_edit_add);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sliderAdapter.addSchedule(viewPager.getCurrentItem());
+            }
+        });
+
+        Button confirm = view.findViewById(R.id.btn_schedule_edit_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
         builder.setView(view);
 
         dialog = builder.create();

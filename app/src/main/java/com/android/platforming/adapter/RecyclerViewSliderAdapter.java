@@ -51,4 +51,9 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
             mRecyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
     }
+
+    public void addSchedule(int position){
+        schedules.get(position).add(new TableItem());
+        notifyItemInserted(schedules.get(position).size() - 1);
+    }
 }
