@@ -51,6 +51,32 @@ public class MyPostFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(postViewAdapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int start = Post.getMyPosts().size();
+                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    FirestoreManager firestoreManager = new FirestoreManager();
+                    if(start == 0){
+                        firestoreManager.readMyPostData(new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                postViewAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                    else{
+                        firestoreManager.readExtraMyPostData(new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                postViewAdapter.notifyItemRangeInserted(start, Post.getMyPosts().size() - 1);
+                            }
+                        });
+                    }
+                }
+            }
+        });
 
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readMyPostData(new ListenerInterface() {

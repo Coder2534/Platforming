@@ -2,6 +2,8 @@ package com.android.platforming.fragment;
 
 import static android.app.Activity.RESULT_OK;
 import static com.android.platforming.clazz.Post.POST;
+import static com.android.platforming.clazz.Post.POST_MY;
+import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.content.Intent;
@@ -47,9 +49,16 @@ public class BulletinBoardListFragment extends Fragment {
         Bundle args = getArguments();
 
         int post = args.getInt("post", 0);
-        String id = args.getString("id");
+        String id = args.getString("id", null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && id != null) {
-            ArrayList<Post> posts = Post.getRecentPosts();
+            ArrayList<Post> posts;
+
+            if (post == POST_RECENT) {
+                posts = Post.getRecentPosts();
+            } else {
+                posts = Post.getMyPosts();
+            }
+
             showDetail(post, IntStream.range(0, posts.size())
                     .filter(i -> posts.get(i).getId().equals(id))
                     .findFirst()
@@ -86,13 +95,28 @@ public class BulletinBoardListFragment extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-
+                int start = Post.getPosts().size();
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
-                    Log.d("-----","end");
+                    FirestoreManager firestoreManager = new FirestoreManager();
+                    if(start == 0){
+                        firestoreManager.readPostData(type, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                postViewAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+                    else{
+                        firestoreManager.readExtraPostData(type, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                postViewAdapter.notifyItemRangeInserted(start, Post.getPosts().size() - 1);
+                            }
+                        });
+                    }
                 }
             }
         });
-
 
         write = view.findViewById(R.id.btn_bulletinboard_list_write);
         listenerInterface = new ListenerInterface() {

@@ -91,28 +91,6 @@ public class FirestoreManager {
     }
 
     //Post
-    public void readPostData(int type, ListenerInterface interfaze){
-        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).limit(15).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
-                    posts.clear();
-                    if(task.getResult().size() == 0){
-                        interfaze.onSuccess();
-                    }
-                    else{
-                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
-                            readCommentSize(post, interfaze);
-                            posts.add(post);
-                        }
-                    }
-                }
-            }
-        });
-    }
-
     public void readRecentPostData(ListenerInterface interfaze){
         FirebaseFirestore.getInstance().collection("posts").orderBy("date", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -130,17 +108,114 @@ public class FirestoreManager {
         });
     }
 
-    public void readMyPostData(ListenerInterface listenerInterface){
-        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("uid", user.getUid()).orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    private static QueryDocumentSnapshot lastDocument_post;
+    public void readPostData(int type, ListenerInterface interfaze){
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).limit(15).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
+                    ArrayList<Post> posts = Post.getPosts();
+                    posts.clear();
+
+                    int size = task.getResult().size();
+                    if(size == 0){
+                        interfaze.onSuccess();
+                    }
+                    else{
+                        int i = 0;
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            posts.add(post);
+                            if(++i == size){
+                                lastDocument_post = documentSnapshot;
+                                readCommentSize(post, interfaze);
+                            }else{
+                                readCommentSize(post, new ListenerInterface() {});
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void readExtraPostData(int type, ListenerInterface interfaze){
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).limit(15).startAfter(lastDocument_post).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    ArrayList<Post> posts = Post.getPosts();
+
+                    int size = task.getResult().size();
+                    if(size > 0){
+                        int i = 0;
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            posts.add(post);
+                            if(++i == size){
+                                lastDocument_post = documentSnapshot;
+                                readCommentSize(post, interfaze);
+                            }else{
+                                readCommentSize(post, new ListenerInterface() {});
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private static QueryDocumentSnapshot lastDocument_myPost;
+    public void readMyPostData(ListenerInterface listenerInterface){
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("uid", user.getUid()).orderBy("date", Query.Direction.DESCENDING).limit(15).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
                     ArrayList<Post> posts = Post.getMyPosts();
                     posts.clear();
-                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
+
+                    int size = task.getResult().size();
+                    if (size > 0) {
+                        int i = 0;
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            posts.add(post);
+                            if (++i == size) {
+                                lastDocument_myPost = documentSnapshot;
+                                readCommentSize(post, listenerInterface);
+                            } else {
+                                readCommentSize(post, new ListenerInterface() {
+                                });
+                            }
+                        }
                     }
-                    listenerInterface.onSuccess();
+                }
+            }
+        });
+    }
+
+    public void readExtraMyPostData(ListenerInterface listenerInterface){
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("uid", user.getUid()).orderBy("date", Query.Direction.DESCENDING).limit(15).startAfter(lastDocument_myPost).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    ArrayList<Post> posts = Post.getMyPosts();
+
+                    int size = task.getResult().size();
+                    if (size > 0) {
+                        int i = 0;
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            posts.add(post);
+                            if (++i == size) {
+                                lastDocument_myPost = documentSnapshot;
+                                readCommentSize(post, listenerInterface);
+                            } else {
+                                readCommentSize(post, new ListenerInterface() {
+                                });
+                            }
+                        }
+                    }
                 }
             }
         });
