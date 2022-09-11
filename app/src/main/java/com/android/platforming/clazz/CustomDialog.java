@@ -200,11 +200,12 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void dailyTaskDialog(Activity activity, ListenerInterface listenerInterface){
+    public void dailyTaskDialog(Activity activity, int applytheme,ListenerInterface listenerInterface){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_dailytask, null);
+
 
         CheckBox signIn = view.findViewById(R.id.cb_dailytask_signin);
         if(user.getDailyTasks().get(0) == 1L)
@@ -219,8 +220,20 @@ public class CustomDialog {
         writeComment.setText(String.format("댓글 작성(%d/2)", user.getDailyTasks().get(3)));
         if(user.getDailyTasks().get(3) == 2L)
             writeComment.setChecked(true);
+        if (applytheme==4){
+            signIn.setTextColor(Color.WHITE);
+            selfDiagnosis.setTextColor(Color.WHITE);
+            writePost.setTextColor(Color.WHITE);
+            writeComment.setTextColor(Color.WHITE);
+        }
+        else{
+            signIn.setTextColor(Color.BLACK);
+            selfDiagnosis.setTextColor(Color.BLACK);
+            writePost.setTextColor(Color.BLACK);
+            writeComment.setTextColor(Color.BLACK);
+        }
 
-        Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
+            Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
         if(user.getPoint_receipt() > 0){
             receipt.setText(user.getPoint_receipt() + "포인트 수령");
             receipt.setOnClickListener(new View.OnClickListener() {

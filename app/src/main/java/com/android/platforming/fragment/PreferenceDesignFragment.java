@@ -28,6 +28,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
         Preference font = findPreference("font");
         Preference theme = findPreference("theme");
         customDialog = new CustomDialog();
+
         font.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(@NonNull Preference preference) {

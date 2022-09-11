@@ -197,7 +197,8 @@ public class MainActivity extends AppCompatActivity {
                             user.setLastSignIn(timeInMillis);
                             runOnUiThread(() -> {
                                 CustomDialog customDialog = new CustomDialog();
-                                customDialog.dailyTaskDialog(activity, listenerInterface);
+                                InitApplication initApplication = ((InitApplication)getActivity().getApplication());
+                                customDialog.dailyTaskDialog(activity, initApplication.getAppliedTheme(), listenerInterface);
                             });
                         }
 
@@ -205,7 +206,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onFail() {
                             runOnUiThread(() -> {
                                 CustomDialog customDialog = new CustomDialog();
-                                customDialog.dailyTaskDialog(activity, listenerInterface);
+                                InitApplication initApplication = ((InitApplication)getActivity().getApplication());
+
+                                customDialog.dailyTaskDialog(activity,initApplication.getAppliedTheme(), listenerInterface);
                             });
                         }
                     });
