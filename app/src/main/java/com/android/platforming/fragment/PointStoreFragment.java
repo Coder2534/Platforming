@@ -61,6 +61,8 @@ public class PointStoreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pointstore, container, false);
 
+        ((MainActivity)getActivity()).setTitle("포인트 상점");
+
         btn_pointstore_font = view.findViewById(R.id.btn_pointstore_font);
         btn_pointstore_theme = view.findViewById(R.id.btn_pointstore_theme);
         fontdialog = new Dialog(getContext());
@@ -279,26 +281,6 @@ public class PointStoreFragment extends Fragment {
             case 4:checkfont = 4;  return getResources().getFont(R.font.kyobohandwriting20204);
         }
         return null;
-    }
-
-    private void saveFont(Context context, int fontIndex){
-        //PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("font", fontIndex).apply();
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("font", fontIndex);
-        editor.apply();
-
-        ((InitApplication)getActivity().getApplication()).setAppliedFont(fontIndex);
-    }
-
-    private void saveTheme(Context context, int fontIndex){
-        //PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("font", themeindex).apply(); <- 한줄
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("theme", fontIndex);
-        editor.apply();
-
-        ((InitApplication)getActivity().getApplication()).setAppliedTheme(fontIndex);
     }
 
     private void setFontdialogview(){

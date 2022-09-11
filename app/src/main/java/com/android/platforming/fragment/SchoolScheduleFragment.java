@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.JsonParser;
 import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -44,6 +45,9 @@ public class SchoolScheduleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schoolschedule, container, false);
+
+        ((MainActivity)getActivity()).setTitle("학사일정");
+
         tv_diary_date = view.findViewById(R.id.tv_diary_date);
         calendarview = view.findViewById(R.id.calendarview);
         lv_plan = view.findViewById(R.id.lv_plan);

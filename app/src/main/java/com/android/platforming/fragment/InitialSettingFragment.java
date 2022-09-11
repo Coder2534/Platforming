@@ -35,6 +35,12 @@ import java.util.Map;
 public class InitialSettingFragment extends Fragment {
     ImageSlider imageSlider;
 
+    private final static ArrayList<Integer> profiles = new ArrayList<Integer>(){{
+        add(R.drawable.profile_dog);
+        add(R.drawable.profile_cat);
+        add(R.drawable.profile_rabbit);
+    }};
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class InitialSettingFragment extends Fragment {
         setListenr(view);
 
         imageSlider = new ImageSlider(view.getContext(), view.findViewById(R.id.vp_initialsetting_profile), view.findViewById(R.id.layoutIndicators));
-        imageSlider.setAdapter(new ImageSliderAdapter(User.getProfiles()));
+        imageSlider.setAdapter(new ImageSliderAdapter(profiles));
         imageSlider.setIndicators(User.getProfiles().size());
 
         return view;

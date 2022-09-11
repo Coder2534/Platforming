@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.activity.BulletinBoardActivity;
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.PostViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
@@ -33,6 +34,8 @@ public class MyPostFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypost, container, false);
+
+        ((MainActivity)getActivity()).setTitle("나의 게시물");
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_mypost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));

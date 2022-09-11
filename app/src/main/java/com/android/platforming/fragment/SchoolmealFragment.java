@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.InitApplication;
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
@@ -41,6 +42,9 @@ public class SchoolmealFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schoolmeal, container, false);
+
+        ((MainActivity)getActivity()).setTitle("식단표");
+
         Button btn_calender = view.findViewById(R.id.btn_calender);
         tv_date = view.findViewById(R.id.tv_date);
         lv_foodName =view.findViewById(R.id.lv_foodlist);
