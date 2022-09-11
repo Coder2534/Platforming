@@ -49,7 +49,7 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
                     if (pos != RecyclerView.NO_POSITION) {
                         tableItems.remove(pos);
                         viewHolders.remove(pos);
-                        notifyItemChanged(pos);
+                        notifyDataSetChanged();
                     }
                 }
             });
