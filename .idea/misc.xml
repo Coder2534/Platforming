@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_autonomy_background.xml" value="0.1" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_baseline_10mp_24.xml" value="0.1" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_baseline_emoji_emotions_24.xml" value="0.2815" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/font/fontstyle.xml" value="0.2740740740740741" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_community.xml" value="0.32653985507246375" />
@@ -14,6 +16,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_web_view.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/customdialog_profile.xml" value="0.14842958459979735" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_design_theme.xml" value="0.2911458333333333" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_message.xml" value="0.1" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.12817028985507245" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_theme.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_select.xml" value="0.14842958459979735" />
