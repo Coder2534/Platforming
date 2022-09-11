@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.activity.MainActivity;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -39,6 +40,7 @@ public class MyInfoFragment extends Fragment {
     Button btn_myinfo_finish,btn_myinfo_rivise;
 
     String studentId;
+    long profileIndex;
 
 
 
@@ -91,7 +93,7 @@ public class MyInfoFragment extends Fragment {
                 et_myinfo_nickname.setFocusable(true);
                 et_myinfo_class.setFocusableInTouchMode(true);
                 et_myinfo_class.setFocusable(true);
-                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
+                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
                 et_myinfo_phonenumber.setFocusableInTouchMode(true);
                 et_myinfo_phonenumber.setFocusable(true);
                 et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
@@ -114,9 +116,21 @@ public class MyInfoFragment extends Fragment {
                         et_myinfo_phonenumber.setFocusable(false);
                         et_myinfo_class.setClickable(false);
                         et_myinfo_class.setFocusable(false);
+                        studentId = et_myinfo_class.getText().toString();
+                        if (Integer.parseInt(studentId) < 5){
+                            CustomDialog customDialog = new CustomDialog();
+                            customDialog.messageDialog(getActivity(),"학반을 정확히 입력해주세요.");
+                        }
+                        else if (studentId.charAt(0)<0 || studentId.charAt(0)>3 ){
+                            CustomDialog customDialog = new CustomDialog();
+                            customDialog.messageDialog(getActivity(),"학반을 정확히 입력해주세요.");
+                        }
+
+
 
                         Map<String,Object> MyinfoData = new HashMap<>();
 
+                        MyinfoData.put("profileIndex",profileIndex);
                         MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
                         MyinfoData.put("studentId",et_myinfo_class.getText().toString());
                         MyinfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
@@ -125,9 +139,13 @@ public class MyInfoFragment extends Fragment {
                             @Override
                             public void onSuccess() {
                                 ListenerInterface.super.onSuccess();
-                                studentId = et_myinfo_class.getText().toString();
+                                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
                                 et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
-
+                                user.setNickName(et_myinfo_nickname.getText().toString());
+                                user.setStudentId(studentId);
+                                user.setTelephone(et_myinfo_phonenumber.getText().toString());
+                                user.setProfileIndex(Math.toIntExact(profileIndex));
+                                ((MainActivity)getActivity()).setHeader();
                             }
                         });
                     }
@@ -151,6 +169,7 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ibtn_myinfo_profile.setImageResource(User.getProfiles().get(0));
+                profileIndex = 0;
                 dialog.dismiss();
             }
         });
@@ -161,6 +180,7 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ibtn_myinfo_profile.setImageResource(User.getProfiles().get(1));
+                profileIndex = 1;
                 dialog.dismiss();
             }
         });
@@ -171,6 +191,7 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ibtn_myinfo_profile.setImageResource(User.getProfiles().get(2));
+                profileIndex = 2;
                 dialog.dismiss();
             }
         });

@@ -3,20 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_myinfo_pagename"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="내 정보"
-        android:textSize="25sp"
-        android:background="?attr/colorOnSecondary"/>
-
     <LinearLayout
         android:id="@+id/ll_myinfo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_myinfo_pagename"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -136,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="25dp"
-                android:hint="입력해주세요"
+                android:hint='"-"없이 입력해주세요.'
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:maxLines="1"

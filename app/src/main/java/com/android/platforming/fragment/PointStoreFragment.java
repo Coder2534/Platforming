@@ -51,9 +51,9 @@ public class PointStoreFragment extends Fragment {
     FirestoreManager firestoreManager = new FirestoreManager();
     HashMap<String,Object> storeMap = new HashMap<>();
     int point;
-    int checkfont;
+    long checkfont;
     List<Long> boughtfont;
-    int themeindex;
+    long themeindex;
     List<Long> boughttheme;
 
     @Nullable
@@ -131,7 +131,7 @@ public class PointStoreFragment extends Fragment {
                         }
                         else {
                             if(point >=50){
-                                boughtfont.add(checkfont, Long.valueOf(checkfont));
+                                boughtfont.add(Math.toIntExact(checkfont), Long.valueOf(checkfont));
                                 storeMap.put("point",point - 50);
                                 storeMap.put("fonts",boughtfont);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {

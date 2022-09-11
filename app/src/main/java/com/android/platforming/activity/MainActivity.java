@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     TextView point;
-    private void setHeader(){
+    public void setHeader(){
         View header = navigationView.getHeaderView(0);
         ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
         profile.setImageResource(user.getProfile());
@@ -251,4 +251,5 @@ public class MainActivity extends AppCompatActivity {
     public void setTitle(String text) {
         title.setText(text);
     }
+
 }

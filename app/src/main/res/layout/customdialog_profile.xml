@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,21 +29,24 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_10mp_24"/>
+                android:src="@drawable/ic_baseline_10mp_24"
+                android:backgroundTint="?attr/colorPrimary"/>
 
             <ImageButton
                 android:id="@+id/ibtn_profile_2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_11mp_24"/>
+                android:src="@drawable/ic_baseline_11mp_24"
+                android:backgroundTint="?attr/colorPrimary"/>
 
             <ImageButton
                 android:id="@+id/ibtn_profile_3"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_12mp_24"/>
+                android:src="@drawable/ic_baseline_12mp_24"
+                android:backgroundTint="?attr/colorPrimary"/>
 
         </LinearLayout>
 
