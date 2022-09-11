@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ExpandableList mainExpandableList;
+    TextView title;
 
     int homeFragmentIdentifier = -1;
 
@@ -89,7 +91,9 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.dl_main);
         navigationView = findViewById(R.id.nv_main);
+        title = findViewById(R.id.tv_main_title);
 
+        drawerLayout.setEnabled(false);
         setDrawerLayoutView();
 
         if(user == null)
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setting(){
         setHeader();
+        drawerLayout.setEnabled(true);
         homeFragmentIdentifier = getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.cl_main, new MainPageFragment()).commit();
     }
 
@@ -177,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.action_home:
                     getSupportFragmentManager().popBackStack(homeFragmentIdentifier, 0);
+                    setTitle("Autonomy");
                     return true;
 
                 case R.id.action_dailytask:
@@ -222,6 +228,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() { //뒤로가기 했을 때
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
+        } else if(getSupportFragmentManager().getBackStackEntryCount() == 2){
+            setTitle("Autonomy");
+            super.onBackPressed();
         } else if(getSupportFragmentManager().getBackStackEntryCount() < 2){
             finish();
         }else{
@@ -237,5 +246,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static Activity getActivity(){
         return activity;
+    }
+
+    public void setTitle(String text) {
+        title.setText(text);
     }
 }

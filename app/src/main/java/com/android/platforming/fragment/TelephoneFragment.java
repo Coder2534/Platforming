@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.TelephoneAdapter;
 import com.android.platforming.clazz.TelephoneItem;
 import com.example.platforming.R;
@@ -33,6 +34,9 @@ public class TelephoneFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_telephone, container, false);
+
+        ((MainActivity)getActivity()).setTitle("전화번호");
+
         lv_info = view.findViewById(R.id.lv_info);
         tv_class = view.findViewById(R.id.tv_class);
         showTelephone();

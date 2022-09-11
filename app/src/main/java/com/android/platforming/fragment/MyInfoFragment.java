@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
@@ -44,9 +45,9 @@ public class MyInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_myinfo, container, false);
 
+        ((MainActivity)getActivity()).setTitle("내 정보");
 
         firestoreManager = new FirestoreManager();
         tv_myinfo_name = view.findViewById(R.id.tv_myinfo_name);

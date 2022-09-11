@@ -52,12 +52,12 @@ public class BulletinBoardPostFragment extends Fragment {
                 post = Post.getPosts().get(args.getInt("position", 0));
                 break;
 
-            case POST_MY:
-                post = Post.getMyPosts().get(args.getInt("position", 0));
-                break;
-
             case POST_RECENT:
                 post = Post.getRecentPosts().get(args.getInt("position", 0));
+                break;
+
+            case POST_MY:
+                post = Post.getMyPosts().get(args.getInt("position", 0));
                 break;
         }
 

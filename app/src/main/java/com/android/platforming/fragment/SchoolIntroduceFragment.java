@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.SchoolIntroduceAdapter;
 import com.android.platforming.clazz.SchoolIntroduceItem;
 import com.example.platforming.R;
@@ -28,6 +29,9 @@ public class SchoolIntroduceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schoolintroduce, container, false);
+
+        ((MainActivity)getActivity()).setTitle("학교소개");
+
         adapter = new SchoolIntroduceAdapter();
         lv_schoolintroduce = view.findViewById(R.id.lv_schoolintroduce);
         ibtn_schoolintroduce_map = view.findViewById(R.id.ibtn_schoolintroduce_map);
