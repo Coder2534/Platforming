@@ -11,40 +11,46 @@
         android:text="내 정보"
         android:textSize="25sp"
         android:background="?attr/colorOnSecondary"/>
+
     <LinearLayout
         android:id="@+id/ll_myinfo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/tv_myinfo_pagename">
+        android:layout_below="@+id/tv_myinfo_pagename"
+        android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/ibtn_myinfo_profile"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:scaleType="fitXY"
             android:layout_margin="10dp"
-            android:background="?attr/backgroundColor"/>
+            android:background="?attr/backgroundColor"
+            android:scaleType="fitXY" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/tv_myinfo_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="35sp"
-                    android:layout_marginLeft="10dp"/>
+                    android:paddingLeft="10dp"
+                    android:textSize="35sp" />
+
                 <TextView
                     android:id="@+id/tv_myinfo_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:text="0"
-                    android:textSize="30dp"
-                    android:layout_marginLeft="20dp"/>
+                    android:textSize="30dp" />
 
             </LinearLayout>
 
@@ -55,9 +61,10 @@
                 android:layout_height="wrap_content"
                 android:hint="닉네임적는곳"
                 android:maxLength="10"
-                android:textSize="25sp"
+                android:maxLines="1"
                 android:singleLine="true"
-                android:maxLines="1" />
+                android:textSize="25sp"
+                android:paddingLeft="10dp"/>
 
         </LinearLayout>
     </LinearLayout>
