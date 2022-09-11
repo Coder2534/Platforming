@@ -65,7 +65,12 @@ public class MyPostFragment extends Fragment {
                         firestoreManager.readMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyDataSetChanged();
+                                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                postViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -73,7 +78,12 @@ public class MyPostFragment extends Fragment {
                         firestoreManager.readExtraMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyItemRangeInserted(start, Post.getMyPosts().size() - 1);
+                                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                postViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -81,11 +91,18 @@ public class MyPostFragment extends Fragment {
             }
         });
 
+        Post.getMyPosts().clear();
+        postViewAdapter.notifyDataSetChanged();
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readMyPostData(new ListenerInterface() {
             @Override
             public void onSuccess() {
-                postViewAdapter.notifyDataSetChanged();
+                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+            }
+
+            @Override
+            public void onSuccess(int msg) {
+                postViewAdapter.notifyItemChanged(msg);
             }
         });
 

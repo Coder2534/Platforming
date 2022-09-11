@@ -40,7 +40,17 @@ public class BulletinBoardListFragment extends Fragment {
     int type;
     PostViewAdapter postViewAdapter;
     Button write;
-    ListenerInterface listenerInterface;
+    ListenerInterface listenerInterface = new ListenerInterface() {
+        @Override
+        public void onSuccess() {
+            postViewAdapter.notifyItemInserted(Post.getPosts().size() - 1);
+        }
+
+        @Override
+        public void onSuccess(int msg) {
+            postViewAdapter.notifyItemChanged(msg);
+        }
+    };
 
     @Nullable
     @Override
@@ -70,12 +80,6 @@ public class BulletinBoardListFragment extends Fragment {
 
         resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == RESULT_OK){
-                listenerInterface = new ListenerInterface() {
-                    @Override
-                    public void onSuccess() {
-                        postViewAdapter.notifyDataSetChanged();
-                    }
-                };
                 refreshPostList();
             }
         });
@@ -102,7 +106,12 @@ public class BulletinBoardListFragment extends Fragment {
                         firestoreManager.readPostData(type, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyDataSetChanged();
+                                postViewAdapter.notifyItemInserted(Post.getPosts().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                postViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -110,7 +119,12 @@ public class BulletinBoardListFragment extends Fragment {
                         firestoreManager.readExtraPostData(type, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyItemRangeInserted(start, Post.getPosts().size() - 1);
+                                postViewAdapter.notifyItemInserted(Post.getPosts().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                postViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -119,25 +133,19 @@ public class BulletinBoardListFragment extends Fragment {
         });
 
         write = view.findViewById(R.id.btn_bulletinboard_list_write);
-        listenerInterface = new ListenerInterface() {
-            @Override
-            public void onSuccess() {
-                postViewAdapter.notifyDataSetChanged();
-                write.setOnClickListener(v -> {
-                    Intent intent = new Intent(getApplicationContext(), BulletinBoardRegisterActivity.class);
-                    intent.putExtra("type", type);
-                    resultLauncher.launch(intent);
-                    getActivity().overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
-                });
-            }
-        };
+        write.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), BulletinBoardRegisterActivity.class);
+            intent.putExtra("type", type);
+            resultLauncher.launch(intent);
+            getActivity().overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
+        });
+
         refreshPostList();
 
         return view;
     }
 
     private void showDetail(int post, int position){
-        Log.d("Test", String.valueOf(post));
         BulletinBoardPostFragment fragment = new BulletinBoardPostFragment();
         Bundle args = new Bundle();
         args.putInt("post", post);
@@ -147,6 +155,8 @@ public class BulletinBoardListFragment extends Fragment {
     }
 
     private void refreshPostList(){
+        Post.getPosts().clear();
+        postViewAdapter.notifyDataSetChanged();
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readPostData(type, listenerInterface);
     }

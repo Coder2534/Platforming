@@ -82,7 +82,7 @@ public class PostCommentViewAdapter extends RecyclerView.Adapter<PostCommentView
     public PostCommentViewAdapter(Activity activity, String postId, ArrayList<Comment> list) {
         this.activity = activity;
         this.postId = postId;
-        mData = list ;
+        mData = list;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
@@ -91,7 +91,9 @@ public class PostCommentViewAdapter extends RecyclerView.Adapter<PostCommentView
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
         View view = inflater.inflate(R.layout.item_recyclerview_post_comment, parent, false) ;
-        PostCommentViewAdapter.ViewHolder vh = new PostCommentViewAdapter.ViewHolder(view) ;
+        PostCommentViewAdapter.ViewHolder vh = new PostCommentViewAdapter.ViewHolder(view);
+
+
         return vh;
     }
 
@@ -102,8 +104,10 @@ public class PostCommentViewAdapter extends RecyclerView.Adapter<PostCommentView
         holder.nickname.setText(mData.get(position).getNickname());
         holder.comment.setText(mData.get(position).getComment());
         holder.date.setText(dateFormat.format(mData.get(position).getDate()));
-        if(!mData.get(position).getUid().equals(user.getUid()))
-            ((ViewGroup)holder.delete.getParent()).removeView(holder.delete);
+        if (mData.get(position).getUid().equals(user.getUid()))
+            holder.delete.setVisibility(View.VISIBLE);
+        else
+            holder.delete.setVisibility(View.GONE);
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.

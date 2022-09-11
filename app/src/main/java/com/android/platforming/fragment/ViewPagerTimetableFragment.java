@@ -101,11 +101,11 @@ public class ViewPagerTimetableFragment extends Fragment {
     private ArrayList<TableItem> decodeSchedule(String text){
         ArrayList<TableItem> result = new ArrayList<>();
 
-        if(text != null){
+        if(text != null && !text.equals("")){
             String[] array = text.split("#");
             for(String str : array){
                 String[] data = str.split(",");
-                if(data.length == 0)
+                if(data.length == 0 && str.contains(","))
                     result.add(new TableItem());
                 else if(data.length == 1)
                     result.add(new TableItem(data[0]));

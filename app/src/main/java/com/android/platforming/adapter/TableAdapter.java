@@ -62,15 +62,8 @@ public class TableAdapter extends BaseAdapter {
 
         TableItem tableItem = getTableItem(position);
 
-        if(tableItem.getMainText().equals(""))
-            mainText.setVisibility(View.GONE);
-        else
-            mainText.setText(tableItem.getMainText());
-
-        if(tableItem.getSubText().equals(""))
-            subText.setVisibility(View.GONE);
-        else
-            subText.setText(tableItem.getSubText());
+        mainText.setText(tableItem.getMainText());
+        subText.setText(tableItem.getSubText());
 
         return convertView;
     }
