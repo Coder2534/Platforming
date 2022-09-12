@@ -288,7 +288,6 @@ public class FirestoreManager {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     ArrayList<Comment> comments = post.getComments();
-                    comments.clear();
 
                     int size = task.getResult().size();
                     if(size > 0){

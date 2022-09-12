@@ -6,6 +6,7 @@ import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,10 +170,18 @@ public class BulletinBoardPostFragment extends Fragment {
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
                     FirestoreManager firestoreManager = new FirestoreManager();
                     if(start == 0){
+                        post.getComments().clear();
+                        commentViewAdapter.notifyDataSetChanged();
+
                         firestoreManager.readCommentData(post, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                commentViewAdapter.notifyDataSetChanged();
+                                commentViewAdapter.notifyItemInserted(post.getComments().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                commentViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -180,7 +189,12 @@ public class BulletinBoardPostFragment extends Fragment {
                         firestoreManager.readExtraCommentData(post, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                commentViewAdapter.notifyItemRangeInserted(start, post.getComments().size() - 1);
+                                commentViewAdapter.notifyItemInserted(post.getComments().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                commentViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -188,6 +202,9 @@ public class BulletinBoardPostFragment extends Fragment {
             }
         });
 
+
+        post.getComments().clear();
+        commentViewAdapter.notifyDataSetChanged();
         firestoreManager.readCommentData(post, listenerInterface);
 
         EditText comment = view.findViewById(R.id.et_bulletinboard_detail_comment);
@@ -233,11 +250,17 @@ public class BulletinBoardPostFragment extends Fragment {
                         firestoreManager.readCommentData(post, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                commentViewAdapter.notifyDataSetChanged();
-                                comment.setText("");
-                                write.setClickable(true);
+                                commentViewAdapter.notifyItemInserted(post.getComments().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                commentViewAdapter.notifyItemChanged(msg);
                             }
                         });
+
+                        comment.setText("");
+                        write.setClickable(true);
                     }
                 });
             }

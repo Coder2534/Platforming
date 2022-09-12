@@ -103,6 +103,9 @@ public class BulletinBoardListFragment extends Fragment {
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
                     FirestoreManager firestoreManager = new FirestoreManager();
                     if(start == 0){
+                        Post.getPosts().clear();
+                        postViewAdapter.notifyDataSetChanged();
+
                         firestoreManager.readPostData(type, new ListenerInterface() {
                             @Override
                             public void onSuccess() {

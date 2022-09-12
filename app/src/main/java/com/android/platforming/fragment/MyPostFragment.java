@@ -62,6 +62,9 @@ public class MyPostFragment extends Fragment {
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
                     FirestoreManager firestoreManager = new FirestoreManager();
                     if(start == 0){
+                        Post.getMyPosts().clear();
+                        postViewAdapter.notifyDataSetChanged();
+
                         firestoreManager.readMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
