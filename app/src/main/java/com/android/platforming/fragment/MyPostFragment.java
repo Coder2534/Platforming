@@ -62,10 +62,18 @@ public class MyPostFragment extends Fragment {
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
                     FirestoreManager firestoreManager = new FirestoreManager();
                     if(start == 0){
+                        Post.getMyPosts().clear();
+                        postViewAdapter.notifyDataSetChanged();
+
                         firestoreManager.readMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyDataSetChanged();
+                                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                postViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -73,7 +81,12 @@ public class MyPostFragment extends Fragment {
                         firestoreManager.readExtraMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyItemRangeInserted(start, Post.getMyPosts().size() - 1);
+                                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                postViewAdapter.notifyItemChanged(msg);
                             }
                         });
                     }
@@ -81,11 +94,18 @@ public class MyPostFragment extends Fragment {
             }
         });
 
+        Post.getMyPosts().clear();
+        postViewAdapter.notifyDataSetChanged();
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readMyPostData(new ListenerInterface() {
             @Override
             public void onSuccess() {
-                postViewAdapter.notifyDataSetChanged();
+                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+            }
+
+            @Override
+            public void onSuccess(int msg) {
+                postViewAdapter.notifyItemChanged(msg);
             }
         });
 

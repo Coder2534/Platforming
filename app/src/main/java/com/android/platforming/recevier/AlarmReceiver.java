@@ -33,8 +33,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 key = "time_selfDiagnosis";
                 break;
             case NOTIFICATION_SCHOOLMEAL_ID:
-                workName = "schoolMeal";
-                key = "time_schoolMeal";
+                workName = "schedule";
+                key = "time_schedule";
                 break;
         }
 

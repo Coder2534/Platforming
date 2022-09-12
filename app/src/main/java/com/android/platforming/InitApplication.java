@@ -35,7 +35,7 @@ public class InitApplication extends Application {
 
             SharedPreferences.Editor editor = pref.edit();
             editor.putLong("time_selfDiagnosis", calendar_timer.getTimeInMillis());
-            editor.putLong("time_schoolMeal", calendar_timer.getTimeInMillis());
+            editor.putLong("time_schedule", calendar_timer.getTimeInMillis());
             editor.putBoolean("firstActivate", false);
             editor.apply();
         }

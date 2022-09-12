@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
-        android:title="학교알림"
+        android:title="학교알림(배터리 소모 주의)"
         app:iconSpaceReserved="false">
 
         <SwitchPreference
@@ -19,18 +19,19 @@
 
         <SwitchPreference
             android:defaultValue="false"
-            android:key="schoolMeal"
-            android:summary="설정된 시간에 오늘의 급식 발송"
-            android:title="오늘의 급식 알림"
+            android:key="schedule"
+            android:summary="설정된 시간에 오늘의 시간표 발송"
+            android:title="오늘의 시간표 알림"
             app:iconSpaceReserved="false" />
 
         <com.android.platforming.view.TimePreference
-            android:dependency="schoolMeal"
-            android:key="time_schoolMeal"
+            android:dependency="schedule"
+            android:key="time_schedule"
             android:title="시간" />
 
     </PreferenceCategory>
 
+    <!--
     <PreferenceCategory
         android:title="앱 알림"
         app:iconSpaceReserved="false">
@@ -47,4 +48,5 @@
             android:title="댓글"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
+    !-->
 </PreferenceScreen>

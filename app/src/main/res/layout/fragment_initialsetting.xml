@@ -20,12 +20,12 @@
             android:id="@+id/et_initialsetting_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
+            android:layout_alignStart="@id/et_initialsetting_nickname"
+            android:ems="5"
+            android:maxLength="5"
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/et_initialsetting_nickname"
@@ -37,13 +37,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/et_initialsetting_username"
-            android:layout_centerHorizontal="true"
+            android:layout_alignStart="@id/et_initialsetting_telephone"
             android:layout_marginTop="10dp"
-            android:ems="10"
+            android:ems="6"
+            android:maxLength="6"
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/et_initialsetting_telephone"
@@ -57,11 +57,11 @@
             android:layout_below="@+id/et_initialsetting_nickname"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:ems="10"
+            android:ems="11"
+            android:maxLength="11"
             android:inputType="phone" />
 
         <TextView
-            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/rg_initialsetting_sex"
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_initialsetting_telephone"
-            android:layout_alignLeft="@id/et_initialsetting_telephone"
+            android:layout_alignStart="@id/et_initialsetting_telephone"
             android:layout_marginTop="10dp"
             android:baselineAligned="true"
             android:baselineAlignedChildIndex="0"
@@ -97,7 +97,6 @@
         </RadioGroup>
 
         <TextView
-            android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/et_initialsetting_studentid"
@@ -109,9 +108,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rg_initialsetting_sex"
-            android:layout_centerHorizontal="true"
+            android:layout_alignStart="@id/rg_initialsetting_sex"
             android:layout_marginTop="10dp"
-            android:ems="10"
+            android:ems="5"
             android:inputType="number"
             android:maxLength="5" />
 
@@ -122,9 +121,9 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_above="@id/btn_initialsetting"
         android:layout_below="@id/rl_initialsetting"
-        android:layout_above="@id/btn_initialsetting">
+        android:layout_marginTop="10dp">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_initialsetting_profile"

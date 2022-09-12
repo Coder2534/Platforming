@@ -57,6 +57,7 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
         button_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                button_confirm.setClickable(false);
                 EditText editText_title = findViewById(R.id.et_noticeboard_register_title);
                 EditText editText_detail = findViewById(R.id.et_noticeboard_register_detail);
                 Map<String, Object> data = new HashMap<>();

@@ -6,6 +6,7 @@ import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,8 +131,16 @@ public class BulletinBoardPostFragment extends Fragment {
                 firestoreManager.updatePostData(post.getId(), data, listenerInterface);
             }
         });
+
+        FirestoreManager firestoreManager = new FirestoreManager();
+
         TextView comment_count = view.findViewById(R.id.tv_bulletinboard_detail_comment);
-        comment_count.setText(String.valueOf(post.getComments().size()));
+        firestoreManager.readCommentSize(post, new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                comment_count.setText(String.valueOf(post.getCommentSize()));
+            }
+        });
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_bulletinboard_detail_coment);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -140,33 +149,70 @@ public class BulletinBoardPostFragment extends Fragment {
             @Override
             public void onSuccess() {
                 //refresh commentList
-                onChanged();
+                commentViewAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onSuccess(int pos) {
                 //refresh commentList
                 commentViewAdapter.removeData(pos);
-                onChanged();
-            }
-
-            private void onChanged(){
-                commentViewAdapter.notifyDataSetChanged();
+                commentViewAdapter.notifyItemRemoved(pos);
                 comment_count.setText(String.valueOf(post.getComments().size()));
             }
         };
         commentViewAdapter.setListenerInterface(listenerInterface);
         recyclerView.setAdapter(commentViewAdapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int start = post.getComments().size();
+                if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    FirestoreManager firestoreManager = new FirestoreManager();
+                    if(start == 0){
+                        post.getComments().clear();
+                        commentViewAdapter.notifyDataSetChanged();
 
-        EditText comment = view.findViewById(R.id.et_bulletinboard_detail_comment);
+                        firestoreManager.readCommentData(post, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                commentViewAdapter.notifyItemInserted(post.getComments().size() - 1);
+                            }
 
-        FirestoreManager firestoreManager = new FirestoreManager();
+                            @Override
+                            public void onSuccess(int msg) {
+                                commentViewAdapter.notifyItemChanged(msg);
+                            }
+                        });
+                    }
+                    else{
+                        firestoreManager.readExtraCommentData(post, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                commentViewAdapter.notifyItemInserted(post.getComments().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                commentViewAdapter.notifyItemChanged(msg);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+
+        post.getComments().clear();
+        commentViewAdapter.notifyDataSetChanged();
         firestoreManager.readCommentData(post, listenerInterface);
 
+        EditText comment = view.findViewById(R.id.et_bulletinboard_detail_comment);
         ImageButton write = view.findViewById(R.id.btn_bulletinboard_detail_write);
         write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                write.setClickable(false);
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", user.getUid());
                 data.put("profileIndex", user.getProfileIndex());
@@ -194,14 +240,27 @@ public class BulletinBoardPostFragment extends Fragment {
                             });
                         }
 
+                        firestoreManager.readCommentSize(post, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                comment_count.setText(String.valueOf(post.getCommentSize()));
+                            }
+                        });
+
                         firestoreManager.readCommentData(post, new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                commentViewAdapter.notifyDataSetChanged();
-                                comment_count.setText(String.valueOf(post.getComments().size()));
-                                comment.setText("");
+                                commentViewAdapter.notifyItemInserted(post.getComments().size() - 1);
+                            }
+
+                            @Override
+                            public void onSuccess(int msg) {
+                                commentViewAdapter.notifyItemChanged(msg);
                             }
                         });
+
+                        comment.setText("");
+                        write.setClickable(true);
                     }
                 });
             }
