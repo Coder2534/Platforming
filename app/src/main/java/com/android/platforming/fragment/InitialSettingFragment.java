@@ -58,22 +58,26 @@ public class InitialSettingFragment extends Fragment {
         Button confirm = view.findViewById(R.id.btn_initialsetting);
 
         confirm.setOnClickListener(v -> {
+            confirm.setClickable(false);
 
             Map<String, Object> data = new HashMap<>();
             String userName = ((EditText)view.findViewById(R.id.et_initialsetting_username)).getText().toString();
-            if(userName == ""){
+            if(userName.equals("") && !userName.matches("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$")){
+                confirm.setClickable(true);
                 return;
             }
             data.put("username", userName);
 
             String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
-            if(nickName == ""){
+            if(nickName.equals("")){
+                confirm.setClickable(true);
                 return;
             }
             data.put("nickname", nickName);
 
             String telephone = ((EditText)view.findViewById(R.id.et_initialsetting_telephone)).getText().toString();
-            if(telephone == ""){
+            if(telephone.equals("")){
+                confirm.setClickable(true);
                 return;
             }
             data.put("telephone", telephone);
@@ -81,6 +85,7 @@ public class InitialSettingFragment extends Fragment {
             boolean isMale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_male)).isChecked();
             boolean isFemale = ((RadioButton)view.findViewById(R.id.rbtn_initialsetting_female)).isChecked();
             if(!isMale && !isFemale){
+                confirm.setClickable(true);
                 return;
             }
             if(isMale)
@@ -90,6 +95,7 @@ public class InitialSettingFragment extends Fragment {
 
             String studentId = ((EditText)view.findViewById(R.id.et_initialsetting_studentid)).getText().toString();
             if(studentId.length() != 5){
+                confirm.setClickable(true);
                 return;
             }
             data.put("studentId", studentId);
