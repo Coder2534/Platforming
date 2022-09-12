@@ -23,6 +23,6 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/kyobohandwriting20204"
+        android:font="@font/hssantokki4"
         />
 </font-family>

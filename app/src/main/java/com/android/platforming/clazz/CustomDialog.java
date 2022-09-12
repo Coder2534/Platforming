@@ -382,7 +382,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(2L)){
                 radioButton.setId(600+2);
-                radioButton.setText("비트로코어체");
+                radioButton.setText("비트로 코어체");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
@@ -398,7 +398,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(4L)){
                 radioButton.setId(600+4);
-                radioButton.setText("교보손글씨2020체");
+                radioButton.setText("산토끼체");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }

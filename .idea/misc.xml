@@ -47,6 +47,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_profile_cat_background.xml" value="0.1305" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_profile_dog_background.xml" value="0.1305" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/drawable/ic_profile_rabbit_background.xml" value="0.1305" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/font/fontfamiy.xml" value="0.23177083333333334" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/font/fontstyle.xml" value="0.2740740740740741" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_community.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -59,7 +60,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_dailytask.xml" value="0.18059777102330293" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_design_theme.xml" value="0.2911458333333333" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_message.xml" value="0.1" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.12817028985507245" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_pointstore_theme.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_schedule_edit.xml" value="0.12777777777777777" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/dialog_select.xml" value="0.14842958459979735" />
@@ -71,7 +72,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_emailalarm.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.18819655521783182" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.18059777102330293" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.25" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_mypost.xml" value="0.18059777102330293" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_pointstore.xml" value="0.12817028985507245" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolintroduce.xml" value="0.25" />
@@ -165,7 +166,6 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_pointstore.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.5536458333333333" />
-        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_telephone.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_viewpager_schoolmeal.xml" value="0.15" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_viewpager_schoolschedule.xml" value="0.15" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_viewpager_timetable.xml" value="0.21851851851851853" />
@@ -174,20 +174,17 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_listview_schoolintroduce.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.25" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.15" />
-        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post_comment.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_schedule_edit.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_slider.xml" value="0.4981481481481482" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_tableitem.xml" value="0.67" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_profile_cat.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_profile_dog.xml" value="0.4185" />
-        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/ic_profile_dog_round.xml" value="0.292" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_map_schoolintroduce.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/mipmap-anydpi-v26/img_pine_schoolintroduce_round.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.4515625" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/preference_account.xml" value="0.4515625" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/preference_design.xml" value="0.4515625" />
-        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/xml/preference_notification.xml" value="0.4981481481481482" />
         <entry key="..\:/Users/user/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.18819655521783182" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/font/fontfamiy.xml" value="0.1" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/font/fontstyle.xml" value="0.18125" />

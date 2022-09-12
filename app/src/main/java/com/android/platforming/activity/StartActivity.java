@@ -48,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
             case 1:setTheme(R.style.pyeongFont);break;
             case 2:setTheme(R.style.vitorFont);break;
             case 3:setTheme(R.style.Galmuri9Font);break;
-            case 4:setTheme(R.style.kyoboFont);break;
+            case 4:setTheme(R.style.tokkiFont);break;
         }
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
