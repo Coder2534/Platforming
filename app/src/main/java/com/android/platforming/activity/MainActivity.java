@@ -98,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(user == null)
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
-        else
-            setting();
+        else setting();
     }
 
     public void setting(){

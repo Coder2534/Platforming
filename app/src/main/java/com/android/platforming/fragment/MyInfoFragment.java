@@ -109,20 +109,26 @@ public class MyInfoFragment extends Fragment {
                     public void onClick(View view) {
 
                         studentId = et_myinfo_class.getText().toString();
-                        Log.d("check_0", String.valueOf(studentId.charAt(0)));
-                        Log.d("check_1,3",studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""));
-                        Log.d("check_,3,5",studentId.substring(3, 5).replaceFirst("^0+(?!$)", ""));
+                        Log.d("check_0", String.valueOf(studentId));
 
-                        if (studentId.length() < 5){
+                        if (studentId.length() != 5){
                             CustomDialog customDialog = new CustomDialog();
-                            customDialog.messageDialog(getActivity(),"학반을 정확히 입력해주세요.");
+                            customDialog.messageDialog(getActivity(),"5글자로 학반을 정확히 입력해주세요.");
                             Log.d("check_5", String.valueOf(studentId.length()));
                         }
                         else if (studentId.charAt(0)<0 || Integer.parseInt(String.valueOf(studentId.charAt(0)))>3 ){
                             CustomDialog customDialog = new CustomDialog();
-                            customDialog.messageDialog(getActivity(),"학반을 정확히 입력해주세요.");
-                            Log.d("check_0", String.valueOf(studentId.charAt(0)));
+                            customDialog.messageDialog(getActivity(),"학년을 정확히 입력해주세요.");
+                            Log.d("check_1", String.valueOf(studentId.charAt(0)));
 
+                        }
+                        else if (Integer.parseInt(studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""))<0 || Integer.parseInt(studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""))>10){
+                            CustomDialog customDialog = new CustomDialog();
+                            customDialog.messageDialog(getActivity(),"반을 정확히 입력해주세요.");
+                        }
+                        else if (Integer.parseInt(studentId.substring(3, 5).replaceFirst("^0+(?!$)", ""))<0 || Integer.parseInt(studentId.substring(3, 5).replaceFirst("^0+(?!$)",""))>30){
+                            CustomDialog customDialog = new CustomDialog();
+                            customDialog.messageDialog(getActivity(),"번호를 정확히 입력해주세요.");
                         }
                         else {
                             btn_myinfo_finish.setVisibility(View.GONE);

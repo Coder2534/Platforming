@@ -80,7 +80,7 @@
                 android:id="@+id/et_myinfo_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="*학년 *반 *번"
+                android:hint="예:1학년 1반 1번->10101"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"

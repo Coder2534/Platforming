@@ -6,6 +6,8 @@ import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
 
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class InitialSettingFragment extends Fragment {
     ImageSlider imageSlider;
@@ -126,4 +129,14 @@ public class InitialSettingFragment extends Fragment {
 
         });
     }
+    protected InputFilter filterKoEnNum = new InputFilter() {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Pattern ps = Pattern.compile("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$");
+
+            if (!ps.matcher(source).matches()) {
+                return "";
+            }
+            return null;
+        }
+    };
 }
