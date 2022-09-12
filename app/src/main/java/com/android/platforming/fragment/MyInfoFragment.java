@@ -107,47 +107,58 @@ public class MyInfoFragment extends Fragment {
                 btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        btn_myinfo_finish.setVisibility(View.GONE);
-                        tv_myinfo_rivise.setText("");
-                        ibtn_myinfo_profile.setClickable(false);
-                        et_myinfo_nickname.setClickable(false);
-                        et_myinfo_nickname.setFocusable(false);
-                        et_myinfo_phonenumber.setClickable(false);
-                        et_myinfo_phonenumber.setFocusable(false);
-                        et_myinfo_class.setClickable(false);
-                        et_myinfo_class.setFocusable(false);
+
                         studentId = et_myinfo_class.getText().toString();
-                        if (Integer.parseInt(studentId) < 5){
+                        Log.d("check_0", String.valueOf(studentId.charAt(0)));
+                        Log.d("check_1,3",studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""));
+                        Log.d("check_,3,5",studentId.substring(3, 5).replaceFirst("^0+(?!$)", ""));
+
+                        if (studentId.length() < 5){
                             CustomDialog customDialog = new CustomDialog();
                             customDialog.messageDialog(getActivity(),"학반을 정확히 입력해주세요.");
+                            Log.d("check_5", String.valueOf(studentId.length()));
                         }
-                        else if (studentId.charAt(0)<0 || studentId.charAt(0)>3 ){
+                        else if (studentId.charAt(0)<0 || Integer.parseInt(String.valueOf(studentId.charAt(0)))>3 ){
                             CustomDialog customDialog = new CustomDialog();
                             customDialog.messageDialog(getActivity(),"학반을 정확히 입력해주세요.");
+                            Log.d("check_0", String.valueOf(studentId.charAt(0)));
+
+                        }
+                        else {
+                            btn_myinfo_finish.setVisibility(View.GONE);
+                            tv_myinfo_rivise.setText("");
+                            ibtn_myinfo_profile.setClickable(false);
+                            et_myinfo_nickname.setClickable(false);
+                            et_myinfo_nickname.setFocusable(false);
+                            et_myinfo_phonenumber.setClickable(false);
+                            et_myinfo_phonenumber.setFocusable(false);
+                            et_myinfo_class.setClickable(false);
+                            et_myinfo_class.setFocusable(false);
+
+                            Map<String,Object> MyinfoData = new HashMap<>();
+
+                            MyinfoData.put("profileIndex",profileIndex);
+                            MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
+                            MyinfoData.put("studentId",et_myinfo_class.getText().toString());
+                            MyinfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
+
+                            firestoreManager.updateUserData(MyinfoData, new ListenerInterface() {
+                                @Override
+                                public void onSuccess() {
+                                    ListenerInterface.super.onSuccess();
+                                    et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+                                    et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
+                                    user.setNickName(et_myinfo_nickname.getText().toString());
+                                    user.setStudentId(studentId);
+                                    user.setTelephone(et_myinfo_phonenumber.getText().toString());
+                                    user.setProfileIndex(Math.toIntExact(profileIndex));
+                                    ((MainActivity)getActivity()).setHeader();
+                                }
+                            });
                         }
 
 
 
-                        Map<String,Object> MyinfoData = new HashMap<>();
-
-                        MyinfoData.put("profileIndex",profileIndex);
-                        MyinfoData.put("nickname",et_myinfo_nickname.getText().toString());
-                        MyinfoData.put("studentId",et_myinfo_class.getText().toString());
-                        MyinfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
-
-                        firestoreManager.updateUserData(MyinfoData, new ListenerInterface() {
-                            @Override
-                            public void onSuccess() {
-                                ListenerInterface.super.onSuccess();
-                                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
-                                et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
-                                user.setNickName(et_myinfo_nickname.getText().toString());
-                                user.setStudentId(studentId);
-                                user.setTelephone(et_myinfo_phonenumber.getText().toString());
-                                user.setProfileIndex(Math.toIntExact(profileIndex));
-                                ((MainActivity)getActivity()).setHeader();
-                            }
-                        });
                     }
                 });
 
