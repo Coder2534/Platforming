@@ -85,7 +85,7 @@ public class NotificationHelper extends ContextWrapper {
             if (notificationManager != null) {
                 notificationManager.notify(WORK_A_NOTIFICATION_CODE, notificationBuilder.build());
             }
-        } else if (workName.equals("schoolMeal")) {
+        } else if (workName.equals("schedule")) {
             String contentText = null;
             String bigText = null;
 
@@ -99,7 +99,7 @@ public class NotificationHelper extends ContextWrapper {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(mContext, WORK_B_NOTIFICATION_CODE, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-            notificationBuilder.setContentTitle("오늘의 급식").setContentText(contentText).setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
+            notificationBuilder.setContentTitle("오늘의 시간표").setContentText(contentText).setStyle(new NotificationCompat.BigTextStyle().bigText(bigText))
                     .setContentIntent(pendingIntent);
 
             if (notificationManager != null) {

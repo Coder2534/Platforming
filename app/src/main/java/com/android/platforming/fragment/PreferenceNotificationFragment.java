@@ -25,11 +25,8 @@ public class PreferenceNotificationFragment extends PreferenceFragmentCompat {
 
     Preference selfDiagnosis;
     Preference time_selfDiagnosis;
-    Preference schoolMeal;
-    Preference time_schoolMeal;
-    Preference notice;
-    Preference thumb_up;
-    Preference comment;
+    Preference schedule;
+    Preference time_schedule;
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
@@ -41,11 +38,8 @@ public class PreferenceNotificationFragment extends PreferenceFragmentCompat {
         if (rootKey == null) {
             selfDiagnosis = findPreference("selfDiagnosis");
             time_selfDiagnosis = findPreference("time_selfDiagnosis");
-            schoolMeal = findPreference("schoolMeal");
-            time_schoolMeal = findPreference("time_schoolMeal");
-            notice = findPreference("notice");
-            thumb_up = findPreference("thumb_up");
-            comment = findPreference("comment");
+            schedule = findPreference("schoolMeal");
+            time_schedule = findPreference("time_schoolMeal");
         }
     }
 
@@ -85,15 +79,15 @@ public class PreferenceNotificationFragment extends PreferenceFragmentCompat {
             } else if(key.equals("time_selfDiagnosis")) {
                 Alarm.cancelAlarm(context, AlarmReceiver.NOTIFICATION_SELFDIAGNOSIS_ID);
                 Alarm.setAlarm(context, pref.getLong("time_selfDiagnosis", 0), AlarmReceiver.NOTIFICATION_SELFDIAGNOSIS_ID);
-            } else if(key.equals("schoolMeal")){
-                if(pref.getBoolean("schoolMeal", false)) {
-                    Alarm.setAlarm(context, pref.getLong("time_schoolMeal", 0), AlarmReceiver.NOTIFICATION_SCHOOLMEAL_ID);
+            } else if(key.equals("schedule")){
+                if(pref.getBoolean("schedule", false)) {
+                    Alarm.setAlarm(context, pref.getLong("time_schedule", 0), AlarmReceiver.NOTIFICATION_SCHOOLMEAL_ID);
                 } else{
                     Alarm.cancelAlarm(context, AlarmReceiver.NOTIFICATION_SCHOOLMEAL_ID);
                 }
-            } else if(key.equals("time_schoolMeal")) {
+            } else if(key.equals("time_schedule")) {
                 Alarm.cancelAlarm(context, AlarmReceiver.NOTIFICATION_SCHOOLMEAL_ID);
-                Alarm.setAlarm(context, pref.getLong("time_schoolMeal", 0), AlarmReceiver.NOTIFICATION_SCHOOLMEAL_ID);
+                Alarm.setAlarm(context, pref.getLong("time_schedule", 0), AlarmReceiver.NOTIFICATION_SCHOOLMEAL_ID);
             }
         }
     };
