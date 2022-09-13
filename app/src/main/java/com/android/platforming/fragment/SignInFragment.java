@@ -17,10 +17,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.activity.MainActivity;
-import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.CustomDialog;
-import com.android.platforming.activity.SignInActivity;
+import com.android.platforming.activity.SignActivity;
 import com.android.platforming.clazz.FirestoreManager;
 import com.example.platforming.R;
 import com.facebook.AccessToken;
@@ -38,7 +37,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.regex.Matcher;
@@ -141,7 +139,7 @@ public class SignInFragment extends Fragment{
         }
 
         signInButton.setOnClickListener(v -> {
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(((SignInActivity)getActivity()).getGoogleClient());
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(((SignActivity)getActivity()).getGoogleClient());
             startActivityForResult(signInIntent, RC_SIGN_IN);
         });
     }

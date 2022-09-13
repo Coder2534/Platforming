@@ -47,7 +47,7 @@ public class SignUpFragment extends Fragment {
     //계정 생성
     FirebaseUser tempUser;
     ArrayList<String> ACCESS_CODE = new ArrayList<String>(){{
-        add("1");
+        add("23168");
     }};
 
     private void createAccount(String email, String password, String passwordCheck, String accessCode){
@@ -67,7 +67,7 @@ public class SignUpFragment extends Fragment {
         matcher = pattern.matcher(password);
         if(!matcher.find()){
             Log.w("SignUpFragment", "password form Error");
-            customDialog.messageDialog(getActivity(), "비밀번호가 유효하지 않습니다.\n\n8자리 이상과 두 종류 이상의 문자구성\n※문자종류: 대문자, 소문자, 특수문자, 숫자");
+            customDialog.messageDialog(getActivity(), "비밀번호가 유효하지 않습니다.\n\n  8자리 이상의 문자구성\n※문자종류: 대문자, 소문자, 특수문자, 숫자");
             return;
         }
 
