@@ -14,8 +14,8 @@
     <style name="Galmuri9Font">
         <item name="fontFamily">@font/galmuri93</item>
     </style>
-    <style name="kyoboFont">
-        <item name="fontFamily">@font/kyobohandwriting20204</item>
+    <style name="tokkiFont">
+        <item name="fontFamily">@font/hssantokki4</item>
 
     </style>
 </resources>

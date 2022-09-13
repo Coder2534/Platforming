@@ -6,6 +6,7 @@ import static com.android.platforming.clazz.User.user;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,12 +22,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.android.platforming.InitApplication;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
@@ -44,6 +43,32 @@ import java.util.List;
 
 public class CustomDialog {
     AlertDialog dialog;
+
+    public void banDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_message, null);
+
+        TextView message = view.findViewById(R.id.tv_message_message);
+        message.setText("현재 계정은 차단되었습니다.");
+
+        Button confirm = view.findViewById(R.id.btn_message_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFirebaseAuth().signOut();
+                dialog.dismiss();
+                activity.finish();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
+    }
 
     public void messageDialog(Activity activity, String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -235,7 +260,7 @@ public class CustomDialog {
 
             Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
         if(user.getPoint_receipt() > 0){
-            receipt.setText(user.getPoint_receipt() + "포인트 수령");
+            receipt.setText(user.getPoint_receipt() + "p 수령");
             receipt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -324,12 +349,17 @@ public class CustomDialog {
             @Override
             public void onClick(View view) {
                 int index = radioGroup.getCheckedRadioButtonId() - (int) 500;
-                Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
-                MainActivity.getActivity().recreate();
-                activity.recreate();
 
                 dialog.dismiss();
+
+                //MainActivity.getActivity().recreate();
+                // Refresh main activity upon close of dialog box
+                Intent refresh = new Intent(MainActivity.getActivity(), MainActivity.class);
+                MainActivity.getActivity().startActivity(refresh);
+                MainActivity.getActivity().finish();
+
+                activity.finish();
             }
         });
 
@@ -382,7 +412,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(2L)){
                 radioButton.setId(600+2);
-                radioButton.setText("비트로코어체");
+                radioButton.setText("비트로 코어체");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
@@ -398,7 +428,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(4L)){
                 radioButton.setId(600+4);
-                radioButton.setText("교보손글씨2020체");
+                radioButton.setText("산토끼체");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
@@ -419,10 +449,16 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)600;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("font", index).apply();
-                MainActivity.getActivity().recreate();
-                activity.recreate();
 
                 dialog.dismiss();
+
+                //MainActivity.getActivity().recreate();
+                // Refresh main activity upon close of dialog box
+                Intent refresh = new Intent(MainActivity.getActivity(), MainActivity.class);
+                MainActivity.getActivity().startActivity(refresh);
+                MainActivity.getActivity().finish();
+
+                activity.finish();
             }
         });
 

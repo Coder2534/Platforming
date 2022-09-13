@@ -94,11 +94,16 @@
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_attendancecheck.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/dialog_message.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_bulletinboard_post.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_detail.xml" value="0.49514563106796117" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_noticeboard_list.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/fragment_viewpager_timetable.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_rowdata.xml" value="0.2791666666666667" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_schedule_edit.xml" value="0.2361111111111111" />
+        <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_tableitem.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/view_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.2791666666666667" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_round.xml" value="0.141" />
@@ -155,6 +160,8 @@
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_font.xml" value="0.14666666666666667" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_textcolor.xml" value="0.1" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_pointstore_theme.xml" value="0.16666666666666666" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_schedule_edit.xml" value="0.1" />
+        <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_schedule_expand.xml" value="0.14130434782608695" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_select.xml" value="0.14719202898550723" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_setting_newpassword.xml" value="0.14719202898550723" />
         <entry key="..\:/workspace/Platforming/app/src/main/res/layout/dialog_verification.xml" value="0.14719202898550723" />

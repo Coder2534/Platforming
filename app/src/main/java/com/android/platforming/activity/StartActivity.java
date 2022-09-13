@@ -12,13 +12,10 @@ import android.util.Log;
 import android.view.Window;
 
 import com.android.platforming.InitApplication;
-import com.android.platforming.clazz.SchoolApi;
-import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.FirestoreManager;
 import com.example.platforming.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -48,7 +45,7 @@ public class StartActivity extends AppCompatActivity {
             case 1:setTheme(R.style.pyeongFont);break;
             case 2:setTheme(R.style.vitorFont);break;
             case 3:setTheme(R.style.Galmuri9Font);break;
-            case 4:setTheme(R.style.kyoboFont);break;
+            case 4:setTheme(R.style.tokkiFont);break;
         }
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -86,7 +83,7 @@ public class StartActivity extends AppCompatActivity {
             if(getFirebaseAuth().getCurrentUser() != null)
                 getFirebaseAuth().signOut();
             runnalbe_splash = () -> {
-                Intent loginIntent = new Intent(StartActivity.this, SignInActivity.class);
+                Intent loginIntent = new Intent(StartActivity.this, SignActivity.class);
                 startActivity(loginIntent);
                 finish();
             };

@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:setTheme(R.style.pyeongFont);break;
             case 2:setTheme(R.style.vitorFont);break;
             case 3:setTheme(R.style.Galmuri9Font);break;
-            case 4:setTheme(R.style.kyoboFont);break;
+            case 4:setTheme(R.style.tokkiFont);break;
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -98,8 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(user == null)
             getSupportFragmentManager().beginTransaction().replace(R.id.cl_main, new InitialSettingFragment()).commit();
-        else
-            setting();
+        else setting();
     }
 
     public void setting(){
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     TextView point;
-    private void setHeader(){
+    public void setHeader(){
         View header = navigationView.getHeaderView(0);
         ImageView profile = header.findViewById(R.id.iv_navigation_header_profile);
         profile.setImageResource(user.getProfile());
@@ -251,4 +250,5 @@ public class MainActivity extends AppCompatActivity {
     public void setTitle(String text) {
         title.setText(text);
     }
+
 }

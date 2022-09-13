@@ -3,26 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_myinfo_pagename"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="내 정보"
-        android:textSize="25sp"
-        android:background="?attr/colorOnSecondary"/>
-
     <LinearLayout
-        android:id="@+id/ll_myinfo1"
+        android:id="@+id/ll_myinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_myinfo_pagename"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/ibtn_myinfo_profile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_margin="10dp"
             android:background="?attr/backgroundColor"
             android:scaleType="fitXY" />
@@ -31,40 +22,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/tv_myinfo_uesrname"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_myinfo_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:textSize="35sp" />
-
-                <TextView
-                    android:id="@+id/tv_myinfo_point"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="0"
-                    android:textSize="30dp" />
-
-            </LinearLayout>
-
+                android:hint="이름"
+                android:maxLength="5"
+                android:ems="5"
+                android:maxLines="1"
+                android:textSize="25sp"
+                android:paddingStart="10dp"
+                android:layout_marginTop="5dp" />
 
             <EditText
                 android:id="@+id/et_myinfo_nickname"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="닉네임적는곳"
-                android:maxLength="10"
+                android:hint="별명"
+                android:maxLength="6"
+                android:ems="6"
                 android:maxLines="1"
-                android:singleLine="true"
                 android:textSize="25sp"
-                android:paddingLeft="10dp"/>
+                android:paddingStart="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_myinfo_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="30dp"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
+                />
 
         </LinearLayout>
     </LinearLayout>
@@ -75,7 +66,7 @@
         android:orientation="vertical"
         android:layout_marginTop="30dp"
         android:padding="10dp"
-        android:layout_below="@+id/ll_myinfo1">
+        android:layout_below="@+id/ll_myinfo">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,8 +80,32 @@
                 android:id="@+id/et_myinfo_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="*학년 *반 *번"
+                android:hint="예:1학년 1반 1번->10101"
                 android:textSize="25dp"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호:"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/et_myinfo_phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:hint='"-"없이 입력해주세요.'
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:maxLines="1"
@@ -119,51 +134,28 @@
                 android:maxLines="1"/>
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="전화번호:"
-                android:textSize="25dp" />
-
-            <EditText
-                android:id="@+id/et_myinfo_phonenumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:hint="입력해주세요"
-                android:layout_marginLeft="5dp"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:inputType="number"/>
-
-        </LinearLayout>
-
-
-
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_myinfo_revise"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_myinfo_rivise"
-        android:gravity="center"
-        android:textSize="40dp" />
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:text="수정가능"
+        android:textSize="35dp" />
 
     <Button
         android:id="@+id/btn_myinfo_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tv_myinfo_revise"
+        android:layout_alignParentEnd="true"
         android:layout_above="@+id/btn_myinfo_rivise"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:text="완료"
         android:textSize="20dp"/>
+
     <Button
         android:id="@+id/btn_myinfo_rivise"
         android:layout_width="match_parent"

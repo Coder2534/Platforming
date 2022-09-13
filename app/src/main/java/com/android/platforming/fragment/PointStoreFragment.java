@@ -46,14 +46,14 @@ public class PointStoreFragment extends Fragment {
 
     TextView tv_pointstore_font_point,tv_pointstore_theme_point;
     EditText et_pointstore_testtext;
-    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_pyeong,btn_pointstore_font_vitorcore,btn_pointstore_font_galmuri,btn_pointstore_font_kyobo,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_theme_getout;
+    Button btn_pointstore_font,btn_pointstore_theme,btn_pointstore_font_pyeong,btn_pointstore_font_vitorcore,btn_pointstore_font_galmuri,btn_pointstore_font_tokki,btn_pointstore_getout,btn_pointstore_buyfont,btn_pointstore_theme_pink,btn_pointstore_theme_bule, btn_pointstore_theme_green, btn_pointstore_theme_black,btn_pointstore_buytheme,btn_pointstore_theme_getout;
 
     FirestoreManager firestoreManager = new FirestoreManager();
     HashMap<String,Object> storeMap = new HashMap<>();
     int point;
-    int checkfont;
+    long checkfont;
     List<Long> boughtfont;
-    int themeindex;
+    long themeindex;
     List<Long> boughttheme;
 
     @Nullable
@@ -88,7 +88,7 @@ public class PointStoreFragment extends Fragment {
                     btn_pointstore_font_galmuri.setTextColor(getResources().getColor(R.color.red));
                 }
                 if(boughtfont.contains(4L)){
-                    btn_pointstore_font_kyobo.setTextColor(getResources().getColor(R.color.red));
+                    btn_pointstore_font_tokki.setTextColor(getResources().getColor(R.color.red));
                 }
                 point = user.getPoint();
                 tv_pointstore_font_point.setText(point+ "p");
@@ -115,7 +115,7 @@ public class PointStoreFragment extends Fragment {
                         et_pointstore_testtext.setTypeface(getFont(3));
                     }
                 });
-                btn_pointstore_font_kyobo.setOnClickListener(new View.OnClickListener() {
+                btn_pointstore_font_tokki.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         checkfont = 4;
@@ -131,7 +131,7 @@ public class PointStoreFragment extends Fragment {
                         }
                         else {
                             if(point >=50){
-                                boughtfont.add(checkfont, Long.valueOf(checkfont));
+                                boughtfont.add(Long.valueOf(checkfont));
                                 storeMap.put("point",point - 50);
                                 storeMap.put("fonts",boughtfont);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
@@ -149,7 +149,7 @@ public class PointStoreFragment extends Fragment {
                                             btn_pointstore_font_galmuri.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         else if(checkfont == 4){
-                                            btn_pointstore_font_kyobo.setTextColor(getResources().getColor(R.color.red));
+                                            btn_pointstore_font_tokki.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         customDialog.messageDialog(getActivity(),"구입했습니다.");
                                     }
@@ -278,7 +278,7 @@ public class PointStoreFragment extends Fragment {
             case 1:checkfont = 1;  return getResources().getFont(R.font.pyeongchangpeace1);
             case 2:checkfont = 2;  return getResources().getFont(R.font.vitorcore2);
             case 3:checkfont = 3;  return getResources().getFont(R.font.galmuri93);
-            case 4:checkfont = 4;  return getResources().getFont(R.font.kyobohandwriting20204);
+            case 4:checkfont = 4;  return getResources().getFont(R.font.hssantokki4);
         }
         return null;
     }
@@ -287,7 +287,7 @@ public class PointStoreFragment extends Fragment {
         btn_pointstore_font_pyeong = fontdialog.findViewById(R.id.btn_pointstore_font_pyeong);
         btn_pointstore_font_vitorcore = fontdialog.findViewById(R.id.btn_pointstore_font_vitorcore);
         btn_pointstore_font_galmuri = fontdialog.findViewById(R.id.btn_pointstore_font_galmuri);
-        btn_pointstore_font_kyobo = fontdialog.findViewById(R.id.btn_pointstore_font_kyobo);
+        btn_pointstore_font_tokki = fontdialog.findViewById(R.id.btn_pointstore_font_tokki);
         btn_pointstore_getout = fontdialog.findViewById(R.id.btn_pointstore_getout);
         btn_pointstore_buyfont = fontdialog.findViewById(R.id.btn_pointstore_buyfont);
         et_pointstore_testtext = fontdialog.findViewById(R.id.et_pointstore_testtext);

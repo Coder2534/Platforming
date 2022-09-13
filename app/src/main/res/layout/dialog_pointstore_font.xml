@@ -54,7 +54,7 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="나눔손글씨 느릿느릿체"
+                android:text="평창평화체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
@@ -65,7 +65,7 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="나눔손글씨 다시시작해"
+                android:text="비트로 코어체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
@@ -92,14 +92,14 @@
                 />
 
             <Button
-                android:id="@+id/btn_pointstore_font_kyobo"
+                android:id="@+id/btn_pointstore_font_tokki"
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="무궁화체"
+                android:text="산토끼체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/kyobohandwriting20204"
+                android:fontFamily="@font/hssantokki4"
                 android:backgroundTint="?attr/colorPrimary"
                 />
         </LinearLayout>
@@ -108,7 +108,14 @@
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*각 테마는 50p입니다."
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"
+            />
 
         <Button
             android:id="@+id/btn_pointstore_buyfont"
