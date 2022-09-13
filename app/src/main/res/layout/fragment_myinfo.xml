@@ -48,9 +48,10 @@
 
             <EditText
                 android:id="@+id/et_myinfo_nickname"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="닉네임적는곳"
+                android:hint="별명"
+                android:ems="6"
                 android:maxLength="6"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -82,6 +83,30 @@
                 android:layout_height="wrap_content"
                 android:hint="예:1학년 1반 1번->10101"
                 android:textSize="25dp"
+                android:layout_marginStart="5dp"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호:"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/et_myinfo_phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:hint='"-"없이 입력해주세요.'
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:maxLines="1"
@@ -110,51 +135,26 @@
                 android:maxLines="1"/>
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="전화번호:"
-                android:textSize="25dp" />
-
-            <EditText
-                android:id="@+id/et_myinfo_phonenumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:hint='"-"없이 입력해주세요.'
-                android:layout_marginLeft="5dp"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:inputType="number"/>
-
-        </LinearLayout>
-
-
-
     </LinearLayout>
     <TextView
         android:id="@+id/tv_myinfo_revise"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_myinfo_rivise"
-        android:gravity="center"
-        android:textSize="40dp" />
+        android:layout_centerHorizontal="true"
+        android:text="수정중"
+        android:textSize="40dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_myinfo_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tv_myinfo_revise"
         android:layout_above="@+id/btn_myinfo_rivise"
-        android:visibility="invisible"
+        android:layout_alignParentEnd="true"
         android:text="완료"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:visibility="gone" />
     <Button
         android:id="@+id/btn_myinfo_rivise"
         android:layout_width="match_parent"
