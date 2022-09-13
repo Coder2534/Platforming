@@ -138,21 +138,23 @@
     </LinearLayout>
     <TextView
         android:id="@+id/tv_myinfo_revise"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_myinfo_rivise"
-        android:gravity="center"
-        android:textSize="40dp" />
+        android:layout_centerHorizontal="true"
+        android:text="수정중"
+        android:textSize="40dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_myinfo_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tv_myinfo_revise"
         android:layout_above="@+id/btn_myinfo_rivise"
-        android:visibility="invisible"
+        android:layout_alignParentEnd="true"
         android:text="완료"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:visibility="gone" />
     <Button
         android:id="@+id/btn_myinfo_rivise"
         android:layout_width="match_parent"
