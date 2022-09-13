@@ -109,13 +109,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="*각 테마는 50p입니다."
-            android:padding="10dp"
             android:layout_alignParentBottom="true"
-            />
+            android:padding="10dp"
+            android:text="*각 폰트는 50p입니다." />
 
         <Button
             android:id="@+id/btn_pointstore_buyfont"

@@ -227,15 +227,14 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            if(point >=50){
-                                point-=50;
+                            if(point >=100){
                                 boughttheme.add(Long.valueOf(themeindex));
-                                storeMap.put("point",point);
+                                storeMap.put("point",point - 100);
                                 storeMap.put("themes",boughttheme);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        user.setPoint(point);
+                                        user.setPoint(point - 100);
                                         tv_pointstore_theme_point.setText(point+"p");
                                         if(themeindex==1){
                                             btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));
