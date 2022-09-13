@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:textSize="30dp"
         android:text="회원가입" />
 
     <RelativeLayout
@@ -91,7 +92,6 @@
             android:ems="10"
             android:inputType="number"
             android:maxLines="1" />
-
     </RelativeLayout>
 
     <Button
