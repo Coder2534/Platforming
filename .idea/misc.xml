@@ -54,6 +54,7 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_noticeboard.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_noticeboard_register.xml" value="0.18059777102330293" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_setting.xml" value="0.14842958459979735" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_sign.xml" value="0.32653985507246375" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_start.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/activity_web_view.xml" value="0.18819655521783182" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/customdialog_profile.xml" value="0.14842958459979735" />
@@ -78,8 +79,8 @@
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolintroduce.xml" value="0.25" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolmeal.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_schoolschedule.xml" value="0.32653985507246375" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_signin.xml" value="0.18819655521783182" />
-        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.18819655521783182" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_signin.xml" value="0.33" />
+        <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_signup.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_telephone.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_viewpager_schoolmeal.xml" value="0.14842958459979735" />
         <entry key="..\:/AndroidProject/Platforming/app/src/main/res/layout/fragment_viewpager_schoolschedule.xml" value="0.14842958459979735" />
