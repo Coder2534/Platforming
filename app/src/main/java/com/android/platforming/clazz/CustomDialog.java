@@ -6,6 +6,7 @@ import static com.android.platforming.clazz.User.user;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,8 +58,8 @@ public class CustomDialog {
             @Override
             public void onClick(View view) {
                 getFirebaseAuth().signOut();
-                activity.finish();
                 dialog.dismiss();
+                activity.finish();
             }
         });
 
@@ -350,10 +351,16 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int) 500;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("theme", index).apply();
-                MainActivity.getActivity().recreate();
-                activity.recreate();
 
                 dialog.dismiss();
+
+                //MainActivity.getActivity().recreate();
+                // Refresh main activity upon close of dialog box
+                Intent refresh = new Intent(MainActivity.getActivity(), MainActivity.class);
+                MainActivity.getActivity().startActivity(refresh);
+                MainActivity.getActivity().finish();
+
+                activity.finish();
             }
         });
 
@@ -443,10 +450,16 @@ public class CustomDialog {
                 int index = radioGroup.getCheckedRadioButtonId() - (int)600;
                 Log.d("check_index_", String.valueOf(index));
                 PreferenceManager.getDefaultSharedPreferences(activity).edit().putInt("font", index).apply();
-                MainActivity.getActivity().recreate();
-                activity.recreate();
 
                 dialog.dismiss();
+
+                //MainActivity.getActivity().recreate();
+                // Refresh main activity upon close of dialog box
+                Intent refresh = new Intent(MainActivity.getActivity(), MainActivity.class);
+                MainActivity.getActivity().startActivity(refresh);
+                MainActivity.getActivity().finish();
+
+                activity.finish();
             }
         });
 
