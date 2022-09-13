@@ -120,6 +120,8 @@ public class InitialSettingFragment extends Fragment {
             }
 
             //데이터 입력
+            data.put("ban", false);
+
             data.put("studentId", studentId);
 
             data.put("profileIndex", imageSlider.getPosition());

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:textSize="30dp"
         android:text="회원가입" />
 
     <RelativeLayout
@@ -28,10 +29,11 @@
             android:id="@+id/et_signup_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_signup_email"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            android:layout_below="@id/tv_signup_email"/>
+            android:maxLines="1"
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/tv_signup_password"
@@ -46,10 +48,11 @@
             android:id="@+id/et_signup_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_signup_password"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:inputType="textPassword"
-            android:layout_below="@id/tv_signup_password"/>
+            android:maxLines="1"
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/tv_signup_passwordcheck"
@@ -65,10 +68,11 @@
             android:id="@+id/et_signup_passwordcheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_signup_passwordcheck"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:inputType="textPassword"
-            android:layout_below="@id/tv_signup_passwordcheck"/>
+            android:maxLines="1"
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/tv_signup_accesscode"
@@ -83,11 +87,11 @@
             android:id="@+id/et_signup_accesscode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tv_signup_accesscode"
             android:background="@drawable/box_border"
             android:ems="10"
             android:inputType="number"
-            android:layout_below="@id/tv_signup_accesscode"/>
-
+            android:maxLines="1" />
     </RelativeLayout>
 
     <Button
