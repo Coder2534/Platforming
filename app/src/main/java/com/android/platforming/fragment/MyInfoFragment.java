@@ -142,6 +142,7 @@ public class MyInfoFragment extends Fragment {
                 Map<String,Object> myInfoData = new HashMap<>();
 
                 myInfoData.put("profileIndex",profileIndex);
+                myInfoData.put("username",et_myinfo_username.getText().toString());
                 myInfoData.put("nickname",et_myinfo_nickname.getText().toString());
                 myInfoData.put("studentId",et_myinfo_class.getText().toString());
                 myInfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
