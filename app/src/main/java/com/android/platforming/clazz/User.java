@@ -37,6 +37,9 @@ public class User {
     private int sex; //0: male 1: female
     private String studentId;
 
+    //permission
+    private boolean ban;
+
     //etc
     private int point;
     private String note;
@@ -48,10 +51,10 @@ public class User {
     private int point_receipt;
     private List<Long> dailyTasks;
 
-
     public User(String uid, String email, Map<String, Object> data){
         this.uid = uid;
         this.email = email;
+        ban = (Boolean)data.get("ban");
         username = (String)data.get("username");
         nickname = (String)data.get("nickname");
         telephone = (String)data.get("telephone");
@@ -78,6 +81,10 @@ public class User {
                 dailyTasks = (List<Long>) data.get("dailyTasks");
             }
         });
+    }
+
+    public boolean isBan() {
+        return ban;
     }
 
     public String getUid() {

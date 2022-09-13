@@ -21,12 +21,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.android.platforming.InitApplication;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
@@ -44,6 +42,32 @@ import java.util.List;
 
 public class CustomDialog {
     AlertDialog dialog;
+
+    public void banDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_message, null);
+
+        TextView message = view.findViewById(R.id.tv_message_message);
+        message.setText("현재 계정은 차단되었습니다.");
+
+        Button confirm = view.findViewById(R.id.btn_message_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFirebaseAuth().signOut();
+                activity.finish();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.setCancelable(false);
+        dialog.show();
+    }
 
     public void messageDialog(Activity activity, String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
