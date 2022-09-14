@@ -43,8 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:maxLines="1"
         android:maxLength="20"
+        android:inputType="text"
         android:hint="제목"/>
 
     <EditText
@@ -53,7 +53,6 @@
         android:layout_height="match_parent"
         android:textSize="20dp"
         android:hint="내용을 입력하세요"
-        android:maxLines="5"
         android:maxLength="100"
         android:gravity="top"
         android:layout_weight="1"
