@@ -260,7 +260,7 @@ public class CustomDialog {
 
             Button receipt = view.findViewById(R.id.btn_dailytask_receipt);
         if(user.getPoint_receipt() > 0){
-            receipt.setText(user.getPoint_receipt() + "포인트 수령");
+            receipt.setText(user.getPoint_receipt() + "p 수령");
             receipt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:padding="10dp"
-            android:text="*각 폰트는 50p입니다." />
+            android:text="*폰트: 50p" />
 
         <Button
             android:id="@+id/btn_pointstore_buyfont"

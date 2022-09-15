@@ -5,9 +5,7 @@ import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +14,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.platforming.activity.MainActivity;
-import com.android.platforming.activity.SignInActivity;
+import com.android.platforming.activity.SignActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
@@ -66,7 +64,7 @@ public class PreferenceAccountFragment extends PreferenceFragmentCompat {
                     @Override
                     public void onSuccess() {
                         getFirebaseAuth().signOut();
-                        Intent loginIntent = new Intent(activity, SignInActivity.class);
+                        Intent loginIntent = new Intent(activity, SignActivity.class);
                         activity.startActivity(loginIntent);
                         MainActivity.getActivity().finish();
                         activity.finish();
