@@ -6,6 +6,8 @@ import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -208,6 +210,25 @@ public class BulletinBoardPostFragment extends Fragment {
         firestoreManager.readCommentData(post, listenerInterface);
 
         EditText comment = view.findViewById(R.id.et_bulletinboard_detail_comment);
+        comment.addTextChangedListener(new TextWatcher(){
+            String previousString = "";
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count){}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+                previousString= s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (comment.getLineCount() > 2){
+                    comment.setText(previousString);
+                    comment.setSelection(editText_detail.length());
+                }
+            }
+        });
+
         ImageButton write = view.findViewById(R.id.btn_bulletinboard_detail_write);
         write.setOnClickListener(new View.OnClickListener() {
             @Override
