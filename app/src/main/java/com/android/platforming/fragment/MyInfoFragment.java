@@ -87,19 +87,19 @@ public class MyInfoFragment extends Fragment {
                 et_myinfo_class.setText(studentId);
                 tv_myinfo_rivise.setVisibility(View.VISIBLE);
                 btn_myinfo_finish.setVisibility(View.VISIBLE);
-                et_myinfo_username.setFocusable(true);
-                et_myinfo_nickname.setFocusable(true);
-                et_myinfo_class.setFocusable(true);
-                et_myinfo_phonenumber.setFocusable(true);
+                et_myinfo_phonenumber.setClickable(true);
                 ibtn_myinfo_profile.setClickable(true);
                 et_myinfo_nickname.setClickable(true);
                 et_myinfo_username.setClickable(true);
                 et_myinfo_class.setClickable(true);
-                et_myinfo_phonenumber.setClickable(true);
                 et_myinfo_username.setCursorVisible(true);
                 et_myinfo_nickname.setCursorVisible(true);
                 et_myinfo_class.setCursorVisible(true);
                 et_myinfo_phonenumber.setCursorVisible(true);
+                et_myinfo_username.setFocusable(true);
+                et_myinfo_nickname.setFocusable(true);
+                et_myinfo_class.setFocusable(true);
+                et_myinfo_phonenumber.setFocusable(true);
 
                 et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
                 et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
