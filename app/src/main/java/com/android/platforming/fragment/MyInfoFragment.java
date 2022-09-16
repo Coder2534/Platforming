@@ -24,6 +24,7 @@ import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
+import com.google.protobuf.StringValue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,11 +71,14 @@ public class MyInfoFragment extends Fragment {
         ibtn_myinfo_profile.setImageResource(user.getProfile());
 
         et_myinfo_nickname.setClickable(false);
-        et_myinfo_nickname.setCursorVisible(false);
         et_myinfo_phonenumber.setClickable(false);
-        et_myinfo_phonenumber.setCursorVisible(false);
         et_myinfo_class.setClickable(false);
+        et_myinfo_nickname.setCursorVisible(false);
+        et_myinfo_nickname.setFocusable(false);
+        et_myinfo_phonenumber.setCursorVisible(false);
+        et_myinfo_phonenumber.setFocusable(false);
         et_myinfo_class.setCursorVisible(false);
+        et_myinfo_class.setFocusable(false);
 
         btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,12 +87,21 @@ public class MyInfoFragment extends Fragment {
                 et_myinfo_class.setText(studentId);
                 tv_myinfo_rivise.setVisibility(View.VISIBLE);
                 btn_myinfo_finish.setVisibility(View.VISIBLE);
+                et_myinfo_username.setFocusable(true);
+                et_myinfo_nickname.setFocusable(true);
+                et_myinfo_class.setFocusable(true);
+                et_myinfo_phonenumber.setFocusable(true);
                 ibtn_myinfo_profile.setClickable(true);
+                et_myinfo_nickname.setClickable(true);
+                et_myinfo_username.setClickable(true);
+                et_myinfo_class.setClickable(true);
+                et_myinfo_phonenumber.setClickable(true);
                 et_myinfo_username.setCursorVisible(true);
                 et_myinfo_nickname.setCursorVisible(true);
                 et_myinfo_class.setCursorVisible(true);
-                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
                 et_myinfo_phonenumber.setCursorVisible(true);
+
+                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
                 et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
             }
         });
@@ -147,23 +160,29 @@ public class MyInfoFragment extends Fragment {
                     @Override
                     public void onSuccess() {
                         et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
-                        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3), studentId.substring(3, 5))); //.replaceFirst("^0+(?!$)", "")
+                        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5)))); //.replaceFirst("^0+(?!$)", "")
                         user.setNickName(et_myinfo_nickname.getText().toString());
                         user.setStudentId(studentId);
                         user.setTelephone(et_myinfo_phonenumber.getText().toString());
                         user.setProfileIndex(Math.toIntExact(profileIndex));
-                        ((MainActivity)getActivity()).setHeader();
 
                         btn_myinfo_finish.setVisibility(View.GONE);
                         tv_myinfo_rivise.setVisibility(View.GONE);
                         ibtn_myinfo_profile.setClickable(false);
+                        et_myinfo_username.setFocusable(false);
+                        et_myinfo_nickname.setFocusable(false);
+                        et_myinfo_phonenumber.setFocusable(false);
+                        et_myinfo_class.setFocusable(false);
                         et_myinfo_username.setCursorVisible(false);
-                        et_myinfo_nickname.setClickable(false);
                         et_myinfo_nickname.setCursorVisible(false);
-                        et_myinfo_phonenumber.setClickable(false);
                         et_myinfo_phonenumber.setCursorVisible(false);
-                        et_myinfo_class.setClickable(false);
                         et_myinfo_class.setCursorVisible(false);
+                        et_myinfo_username.setClickable(false);
+                        et_myinfo_nickname.setClickable(false);
+                        et_myinfo_phonenumber.setClickable(false);
+                        et_myinfo_class.setClickable(false);
+
+                        ((MainActivity)getActivity()).setHeader();
                     }
                 });
             }

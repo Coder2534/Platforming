@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         username.setText(user.getUsername());
         TextView info = header.findViewById(R.id.tv_navigation_header_info);
         String studentId = user.getStudentId();
-        info.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
+        info.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
     }
 
     private void setDrawerLayoutView(){
