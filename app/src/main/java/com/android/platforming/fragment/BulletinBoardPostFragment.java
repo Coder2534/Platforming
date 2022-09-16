@@ -224,7 +224,7 @@ public class BulletinBoardPostFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 if (comment.getLineCount() > 2){
                     comment.setText(previousString);
-                    comment.setSelection(editText_detail.length());
+                    comment.setSelection(comment.length());
                 }
             }
         });
@@ -260,6 +260,9 @@ public class BulletinBoardPostFragment extends Fragment {
                                 }
                             });
                         }
+
+                        post.getComments().clear();
+                        commentViewAdapter.notifyDataSetChanged();
 
                         firestoreManager.readCommentSize(post, new ListenerInterface() {
                             @Override

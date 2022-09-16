@@ -169,16 +169,14 @@ public class FirestoreManager {
                     ArrayList<Post> posts = Post.getMyPosts();
 
                     int size = task.getResult().size();
-                    if (size > 0) {
-                        int i = 0;
-                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
-                            posts.add(post);
-                            listenerInterface.onSuccess();
-                            readCommentSize(post, posts.size(), listenerInterface);
-                            if (++i == size)
-                                lastDocument_myPost = documentSnapshot;
-                        }
+                    int i = 0;
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                        posts.add(post);
+                        listenerInterface.onSuccess();
+                        readCommentSize(post, posts.size(), listenerInterface);
+                        if (++i == size)
+                            lastDocument_myPost = documentSnapshot;
                     }
                 }
             }
