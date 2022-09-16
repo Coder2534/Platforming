@@ -58,7 +58,7 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/pyeongchangpeace1"/>
+                android:fontFamily="@font/pyeongchangpeacelight1"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_vitorcore"
@@ -69,7 +69,7 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/vitorcore2"/>
+                android:fontFamily="@font/bmeuljiro10yearslate2"/>
 
 
 
@@ -87,7 +87,7 @@
                 android:text="갈무리9"
                 android:textSize="20dp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/galmuri93"
+                android:fontFamily="@font/establishretrosans3"
                 android:backgroundTint="?attr/colorPrimary"
                 />
 
@@ -99,7 +99,7 @@
                 android:text="산토끼체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/hssantokki4"
+                android:fontFamily="@font/eulyoo1945regular4"
                 android:backgroundTint="?attr/colorPrimary"
                 />
         </LinearLayout>

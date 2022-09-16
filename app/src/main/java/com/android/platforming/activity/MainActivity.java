@@ -72,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
             case 4:setTheme(R.style.BlackTheme);break;
         }
         switch (initApplication.getAppliedFont()){
-            case 0:setTheme(R.style.LeferipointwhiteobliqueFont);break;
+            case 0:setTheme(R.style.pretendardFont);break;
             case 1:setTheme(R.style.pyeongFont);break;
-            case 2:setTheme(R.style.vitorFont);break;
-            case 3:setTheme(R.style.Galmuri9Font);break;
-            case 4:setTheme(R.style.tokkiFont);break;
+            case 2:setTheme(R.style.bmeFont);break;
+            case 3:setTheme(R.style.establishreFont);break;
+            case 4:setTheme(R.style.eulyoo1945Font);break;
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

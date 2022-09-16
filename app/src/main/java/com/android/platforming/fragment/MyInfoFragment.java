@@ -70,11 +70,11 @@ public class MyInfoFragment extends Fragment {
         ibtn_myinfo_profile.setImageResource(user.getProfile());
 
         et_myinfo_nickname.setClickable(false);
-        et_myinfo_nickname.setFocusable(false);
+        et_myinfo_nickname.setCursorVisible(false);
         et_myinfo_phonenumber.setClickable(false);
-        et_myinfo_phonenumber.setFocusable(false);
+        et_myinfo_phonenumber.setCursorVisible(false);
         et_myinfo_class.setClickable(false);
-        et_myinfo_class.setFocusable(false);
+        et_myinfo_class.setCursorVisible(false);
 
         btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,15 +84,11 @@ public class MyInfoFragment extends Fragment {
                 tv_myinfo_rivise.setVisibility(View.VISIBLE);
                 btn_myinfo_finish.setVisibility(View.VISIBLE);
                 ibtn_myinfo_profile.setClickable(true);
-                et_myinfo_username.setFocusableInTouchMode(true);
-                et_myinfo_username.setFocusable(true);
-                et_myinfo_nickname.setFocusableInTouchMode(true);
-                et_myinfo_nickname.setFocusable(true);
-                et_myinfo_class.setFocusableInTouchMode(true);
-                et_myinfo_class.setFocusable(true);
+                et_myinfo_username.setCursorVisible(true);
+                et_myinfo_nickname.setCursorVisible(true);
+                et_myinfo_class.setCursorVisible(true);
                 et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
-                et_myinfo_phonenumber.setFocusableInTouchMode(true);
-                et_myinfo_phonenumber.setFocusable(true);
+                et_myinfo_phonenumber.setCursorVisible(true);
                 et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
             }
         });
@@ -161,14 +157,13 @@ public class MyInfoFragment extends Fragment {
                         btn_myinfo_finish.setVisibility(View.GONE);
                         tv_myinfo_rivise.setVisibility(View.GONE);
                         ibtn_myinfo_profile.setClickable(false);
-                        et_myinfo_username.setFocusableInTouchMode(false);
-                        et_myinfo_username.setFocusable(false);
+                        et_myinfo_username.setCursorVisible(false);
                         et_myinfo_nickname.setClickable(false);
-                        et_myinfo_nickname.setFocusable(false);
+                        et_myinfo_nickname.setCursorVisible(false);
                         et_myinfo_phonenumber.setClickable(false);
-                        et_myinfo_phonenumber.setFocusable(false);
+                        et_myinfo_phonenumber.setCursorVisible(false);
                         et_myinfo_class.setClickable(false);
-                        et_myinfo_class.setFocusable(false);
+                        et_myinfo_class.setCursorVisible(false);
                     }
                 });
             }
