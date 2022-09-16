@@ -227,15 +227,14 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            if(point >=50){
-                                point-=50;
+                            if(point >=100){
                                 boughttheme.add(Long.valueOf(themeindex));
-                                storeMap.put("point",point);
+                                storeMap.put("point",point - 100);
                                 storeMap.put("themes",boughttheme);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        user.setPoint(point);
+                                        user.setPoint(point - 100);
                                         tv_pointstore_theme_point.setText(point+"p");
                                         if(themeindex==1){
                                             btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));
@@ -274,11 +273,11 @@ public class PointStoreFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Typeface getFont(int i){
         switch (i){
-            case 0:checkfont = 0;  return getResources().getFont(R.font.leferipointwhiteoblique0);
-            case 1:checkfont = 1;  return getResources().getFont(R.font.pyeongchangpeace1);
-            case 2:checkfont = 2;  return getResources().getFont(R.font.vitorcore2);
-            case 3:checkfont = 3;  return getResources().getFont(R.font.galmuri93);
-            case 4:checkfont = 4;  return getResources().getFont(R.font.hssantokki4);
+            case 0:checkfont = 0;  return getResources().getFont(R.font.pretendard0);
+            case 1:checkfont = 1;  return getResources().getFont(R.font.pyeongchangpeacelight1);
+            case 2:checkfont = 2;  return getResources().getFont(R.font.bmeuljiro10yearslate2);
+            case 3:checkfont = 3;  return getResources().getFont(R.font.establishretrosans3);
+            case 4:checkfont = 4;  return getResources().getFont(R.font.eulyoo1945regular4);
         }
         return null;
     }

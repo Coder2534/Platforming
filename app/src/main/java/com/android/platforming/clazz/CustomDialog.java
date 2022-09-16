@@ -396,7 +396,7 @@ public class CustomDialog {
             radioButton.setTextColor(Color.BLACK);
             if (fonts.get(i).equals(0L)){
                 radioButton.setId((int)600);
-                radioButton.setText("레페리 포인트(기본)");
+                radioButton.setText("프리텐다드(기본)");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
@@ -412,7 +412,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(2L)){
                 radioButton.setId(600+2);
-                radioButton.setText("비트로 코어체");
+                radioButton.setText("배민10년후체");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
@@ -420,7 +420,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(3L)){
                 radioButton.setId(600+3);
-                radioButton.setText("갈무리9");
+                radioButton.setText("레트로샌즈");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
@@ -428,7 +428,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(4L)){
                 radioButton.setId(600+4);
-                radioButton.setText("산토끼체");
+                radioButton.setText("을유1945");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }
