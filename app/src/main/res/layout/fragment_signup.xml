@@ -32,7 +32,6 @@
             android:layout_below="@id/tv_signup_email"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:maxLines="1"
             android:inputType="textEmailAddress" />
 
         <TextView
@@ -51,7 +50,6 @@
             android:layout_below="@id/tv_signup_password"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:maxLines="1"
             android:inputType="textPassword" />
 
         <TextView
@@ -71,7 +69,6 @@
             android:layout_below="@id/tv_signup_passwordcheck"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:maxLines="1"
             android:inputType="textPassword" />
 
         <TextView
@@ -90,8 +87,7 @@
             android:layout_below="@id/tv_signup_accesscode"
             android:background="@drawable/box_border"
             android:ems="10"
-            android:inputType="number"
-            android:maxLines="1" />
+            android:inputType="number" />
     </RelativeLayout>
 
     <Button

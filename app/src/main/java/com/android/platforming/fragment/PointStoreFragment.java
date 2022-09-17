@@ -273,11 +273,11 @@ public class PointStoreFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private Typeface getFont(int i){
         switch (i){
-            case 0:checkfont = 0;  return getResources().getFont(R.font.leferipointwhiteoblique0);
-            case 1:checkfont = 1;  return getResources().getFont(R.font.pyeongchangpeace1);
-            case 2:checkfont = 2;  return getResources().getFont(R.font.vitorcore2);
-            case 3:checkfont = 3;  return getResources().getFont(R.font.galmuri93);
-            case 4:checkfont = 4;  return getResources().getFont(R.font.hssantokki4);
+            case 0:checkfont = 0;  return getResources().getFont(R.font.pretendard0);
+            case 1:checkfont = 1;  return getResources().getFont(R.font.pyeongchangpeacelight1);
+            case 2:checkfont = 2;  return getResources().getFont(R.font.bmeuljiro10yearslate2);
+            case 3:checkfont = 3;  return getResources().getFont(R.font.establishretrosans3);
+            case 4:checkfont = 4;  return getResources().getFont(R.font.eulyoo1945regular4);
         }
         return null;
     }

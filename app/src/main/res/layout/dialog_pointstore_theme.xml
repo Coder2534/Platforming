@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:padding="10dp"
-            android:text="*각 테마는 100p입니다." />
+            android:text="*테마: 100p." />
 
         <Button
             android:id="@+id/btn_pointstore_buytheme"

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="LeferipointwhiteobliqueFont">
-        <item name="fontFamily">@font/leferipointwhiteoblique0</item>
+    <style name="pretendardFont">
+        <item name="fontFamily">@font/pretendard0</item>
     </style>
     <style name="pyeongFont">
-        <item name="fontFamily">@font/pyeongchangpeace1</item>
+        <item name="fontFamily">@font/pyeongchangpeacelight1</item>
 
     </style>
-    <style name="vitorFont">
-        <item name="fontFamily">@font/vitorcore2</item>
+    <style name="bmeFont">
+        <item name="fontFamily">@font/bmeuljiro10yearslate2</item>
 
     </style>
-    <style name="Galmuri9Font">
-        <item name="fontFamily">@font/galmuri93</item>
+    <style name="establishreFont">
+        <item name="fontFamily">@font/establishretrosans3</item>
     </style>
-    <style name="tokkiFont">
-        <item name="fontFamily">@font/hssantokki4</item>
+    <style name="eulyoo1945Font">
+        <item name="fontFamily">@font/eulyoo1945regular4</item>
 
     </style>
 </resources>

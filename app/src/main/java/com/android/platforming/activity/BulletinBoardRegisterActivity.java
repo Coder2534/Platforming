@@ -5,6 +5,8 @@ import static com.android.platforming.clazz.User.user;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,16 +36,37 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
             case 4:setTheme(R.style.BlackTheme);break;
         }
         switch (initApplication.getAppliedFont()){
-            case 0:setTheme(R.style.LeferipointwhiteobliqueFont);break;
+            case 0:setTheme(R.style.pretendardFont);break;
             case 1:setTheme(R.style.pyeongFont);break;
-            case 2:setTheme(R.style.vitorFont);break;
-            case 3:setTheme(R.style.Galmuri9Font);break;
-            case 4:setTheme(R.style.tokkiFont);break;
+            case 2:setTheme(R.style.bmeFont);break;
+            case 3:setTheme(R.style.establishreFont);break;
+            case 4:setTheme(R.style.eulyoo1945Font);break;
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeboard_register);
 
         int type = getIntent().getIntExtra("type", 0);
+
+        EditText editText_title = findViewById(R.id.et_noticeboard_register_title);
+        EditText editText_detail = findViewById(R.id.et_noticeboard_register_detail);
+        editText_detail.addTextChangedListener(new TextWatcher(){
+            String previousString = "";
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count){}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+                previousString= s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (editText_detail.getLineCount() > 5){
+                    editText_detail.setText(previousString);
+                    editText_detail.setSelection(editText_detail.length());
+                }
+            }
+        });
 
         ImageButton button_back = findViewById(R.id.btn_noticeboard_register_back);
         button_back.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +81,10 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 button_confirm.setClickable(false);
-                EditText editText_title = findViewById(R.id.et_noticeboard_register_title);
-                EditText editText_detail = findViewById(R.id.et_noticeboard_register_detail);
+
+                if(editText_title.getText().toString().equals("") || editText_detail.getText().toString().equals(""))
+                    return;
+
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", user.getUid());
                 data.put("type", type);

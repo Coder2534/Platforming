@@ -3,26 +3,26 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/leferipointwhiteoblique0"
+        android:font="@font/pretendard0"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/pyeongchangpeace1"
+        android:font="@font/pyeongchangpeacelight1"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/vitorcore2"
+        android:font="@font/bmeuljiro10yearslate2"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/galmuri93"
+        android:font="@font/establishretrosans3"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/hssantokki4"
+        android:font="@font/eulyoo1945regular4"
         />
 </font-family>

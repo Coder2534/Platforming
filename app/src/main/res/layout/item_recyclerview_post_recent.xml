@@ -9,12 +9,14 @@
     <TextView
         android:id="@+id/tv_recyclerview_post_recent_type"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/tv_recyclerview_post_recent_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:layout_toEndOf="@id/tv_recyclerview_post_recent_type"
         android:layout_marginStart="10dp"/>
 
@@ -23,5 +25,6 @@
         android:id="@+id/tv_recyclerview_post_recent_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:layout_alignParentRight="true"/>
 </RelativeLayout>
