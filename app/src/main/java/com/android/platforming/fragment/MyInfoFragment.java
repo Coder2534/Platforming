@@ -133,6 +133,7 @@ public class MyInfoFragment extends Fragment {
                                 Log.d("onsuccess","success");
                                 et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
                                 et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
+                                user.setUsername(et_myinfo_username.getText().toString());
                                 user.setNickName(et_myinfo_nickname.getText().toString());
                                 user.setStudentId(studentId);
                                 user.setTelephone(et_myinfo_phonenumber.getText().toString());
