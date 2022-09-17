@@ -48,8 +48,9 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
                     int pos = getAdapterPosition() ;
                     if (pos != RecyclerView.NO_POSITION) {
                         tableItems.remove(pos);
-                        viewHolders.remove(pos);
                         notifyDataSetChanged();
+                        Log.d("delete", String.format("tableItems : %s / viewHolders : %s", tableItems.size(), viewHolders.size()));
+                        //Log.d("delete", String.format("main : %s / sub : %s", tableItems.get(pos).getMainText(), tableItems.get(pos).getSubText()));
                     }
                 }
             });
@@ -66,8 +67,9 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_recyclerview_schedule_edit, parent, false);
-        viewHolders.add(new ViewHolder(view));
-        return viewHolders.get(viewHolders.size() - 1);
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolders.add(viewHolder);
+        return viewHolder;
     }
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
@@ -84,15 +86,15 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
         return tableItems.size() ;
     }
 
-
     public void saveTableItems(){
+        Log.d("save", String.format("tableItems : %s / viewHolders : %s", tableItems.size(), viewHolders.size()));
         for(int i = 0; i < Math.min(viewHolders.size(), tableItems.size()); ++i){
             TableItem tableItem = tableItems.get(i);
             ViewHolder viewHolder = viewHolders.get(i);
-            String subject = viewHolder.subject.getText().toString();
-            tableItem.setMainText(subject);
-            if(!subject.equals(""))
-                tableItem.setSubText(viewHolder.teacher.getText().toString());
+            tableItem.setMainText(viewHolder.subject.getText().toString());
+            tableItem.setSubText(viewHolder.teacher.getText().toString());
+
+            Log.d("save", String.format("i : %d / main : %s / sub : %s", i, viewHolder.subject.getText().toString(), viewHolder.teacher.getText().toString()));
         }
     }
 }

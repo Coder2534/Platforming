@@ -37,6 +37,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ScheduleEditAdapter scheduleEditAdapter = new ScheduleEditAdapter(schedules.get(position));
+        scheduleEditAdapter.setHasStableIds(true);
         scheduleEditAdapters.add(scheduleEditAdapter);
         holder.mRecyclerView.setAdapter(scheduleEditAdapter);
     }
@@ -60,8 +61,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     public void addSchedule(int position){
         if(schedules.get(position).size() < 8){
             schedules.get(position).add(new TableItem());
-            notifyItemChanged(position);
-            scheduleEditAdapters.get(position).notifyItemInserted(schedules.size() - 1);
+            scheduleEditAdapters.get(position).notifyItemInserted(schedules.get(position).size() - 1);
         }
     }
 
