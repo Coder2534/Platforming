@@ -17,9 +17,9 @@
         android:id="@+id/tv_noticeboard_comment_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1"
         android:layout_alignTop="@+id/iv_noticeboard_comment_profile"
         android:layout_toEndOf="@id/iv_noticeboard_comment_profile"
+        android:maxLines="1"
         android:text="null"
         android:textSize="25dp" />
 
@@ -33,9 +33,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
+        android:breakStrategy="balanced"
         android:text="대충 댓글이라는 글"
-        android:textSize="15dp"
-        android:breakStrategy="balanced"/>
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/tv_noticeboard_comment_date"
