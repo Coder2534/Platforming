@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,67 +50,38 @@ public class MyInfoFragment extends Fragment {
         ((MainActivity)getActivity()).setTitle("내 정보");
 
         firestoreManager = new FirestoreManager();
-        et_myinfo_username = view.findViewById(R.id.tv_myinfo_uesrname);
-        tv_myinfo_email = view.findViewById(R.id.tv_myinfo_email);
-        tv_myinfo_point = view.findViewById(R.id.tv_myinfo_point);
-        tv_myinfo_rivise = view.findViewById(R.id.tv_myinfo_revise);
-        ibtn_myinfo_profile = view.findViewById(R.id.ibtn_myinfo_profile);
-        btn_myinfo_rivise = view.findViewById(R.id.btn_myinfo_rivise);
-        btn_myinfo_finish = view.findViewById(R.id.btn_myinfo_finish);
-        et_myinfo_nickname = view.findViewById(R.id.et_myinfo_nickname);
-        et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
-        et_myinfo_phonenumber = view.findViewById(R.id.et_myinfo_phonenumber);
+        setView(view);
 
         et_myinfo_username.setText(user.getUsername());
-        tv_myinfo_point.setText(user.getPoint() + "p");
         et_myinfo_nickname.setText(user.getNickname());
+        tv_myinfo_point.setText(user.getPoint() + "p");
         studentId = user.getStudentId();
-        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), studentId.substring(1, 3).replaceFirst("^0+(?!$)", ""), studentId.substring(3, 5).replaceFirst("^0+(?!$)", "")));
-        tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
-
+        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
         et_myinfo_phonenumber.setText(user.getTelephone());
+        tv_myinfo_email.setText(FirestoreManager.getFirebaseAuth().getCurrentUser().getEmail());
         ibtn_myinfo_profile.setImageResource(user.getProfile());
 
-        et_myinfo_nickname.setClickable(false);
-        et_myinfo_phonenumber.setClickable(false);
-        et_myinfo_class.setClickable(false);
-        et_myinfo_nickname.setCursorVisible(false);
-        et_myinfo_nickname.setFocusable(false);
-        et_myinfo_phonenumber.setCursorVisible(false);
-        et_myinfo_phonenumber.setFocusable(false);
-        et_myinfo_class.setCursorVisible(false);
-        et_myinfo_class.setFocusable(false);
-
-        btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                et_myinfo_class.setText(studentId);
-                tv_myinfo_rivise.setVisibility(View.VISIBLE);
-                btn_myinfo_finish.setVisibility(View.VISIBLE);
-                et_myinfo_username.setFocusable(true);
-                et_myinfo_nickname.setFocusable(true);
-                et_myinfo_class.setFocusable(true);
-                et_myinfo_phonenumber.setFocusable(true);
-                ibtn_myinfo_profile.setClickable(true);
-                et_myinfo_nickname.setClickable(true);
-                et_myinfo_username.setClickable(true);
-                et_myinfo_class.setClickable(true);
-                et_myinfo_phonenumber.setClickable(true);
-                et_myinfo_username.setCursorVisible(true);
-                et_myinfo_nickname.setCursorVisible(true);
-                et_myinfo_class.setCursorVisible(true);
-                et_myinfo_phonenumber.setCursorVisible(true);
-
-                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
-                et_myinfo_phonenumber.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
-            }
-        });
+        TorF(false);
 
         ibtn_myinfo_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setDialog(getActivity());
+            }
+        });
+
+        btn_myinfo_rivise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btn_myinfo_rivise.setClickable(false);
+                btn_myinfo_rivise.setVisibility(View.GONE);
+                btn_myinfo_finish.setVisibility(View.VISIBLE);
+                tv_myinfo_rivise.setVisibility(View.VISIBLE);
+                et_myinfo_class.setText(studentId);
+
+                TorF(true);
+                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(5)});
+
             }
         });
 
@@ -146,50 +118,58 @@ public class MyInfoFragment extends Fragment {
                         customDialog.messageDialog(getActivity(),"옳지 않은 학번입니다.");
                         return;
                     }
+                    else{
+                        Map<String,Object> myInfoData = new HashMap<>();
+
+                        myInfoData.put("profileIndex",profileIndex);
+                        myInfoData.put("username",et_myinfo_username.getText().toString());
+                        myInfoData.put("nickname",et_myinfo_nickname.getText().toString());
+                        myInfoData.put("studentId",et_myinfo_class.getText().toString());
+                        myInfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
+
+                        firestoreManager.updateUserData(myInfoData, new ListenerInterface() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("onsuccess","success");
+                                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+                                et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
+                                user.setUsername(et_myinfo_username.getText().toString());
+                                user.setNickName(et_myinfo_nickname.getText().toString());
+                                user.setStudentId(studentId);
+                                user.setTelephone(et_myinfo_phonenumber.getText().toString());
+                                user.setProfileIndex(Math.toIntExact(profileIndex));
+
+                                TorF(false);
+                                btn_myinfo_rivise.setClickable(true);
+                                btn_myinfo_rivise.setVisibility(View.VISIBLE);
+                                btn_myinfo_finish.setVisibility(View.GONE);
+                                tv_myinfo_rivise.setVisibility(View.GONE);
+
+                                ((MainActivity)getActivity()).setHeader();
+                            }
+                        });
+                    }
                 }
 
-                Map<String,Object> myInfoData = new HashMap<>();
-
-                myInfoData.put("profileIndex",profileIndex);
-                myInfoData.put("username",et_myinfo_username.getText().toString());
-                myInfoData.put("nickname",et_myinfo_nickname.getText().toString());
-                myInfoData.put("studentId",et_myinfo_class.getText().toString());
-                myInfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
-
-                firestoreManager.updateUserData(myInfoData, new ListenerInterface() {
-                    @Override
-                    public void onSuccess() {
-                        et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
-                        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5)))); //.replaceFirst("^0+(?!$)", "")
-                        user.setNickName(et_myinfo_nickname.getText().toString());
-                        user.setStudentId(studentId);
-                        user.setTelephone(et_myinfo_phonenumber.getText().toString());
-                        user.setProfileIndex(Math.toIntExact(profileIndex));
-
-                        btn_myinfo_finish.setVisibility(View.GONE);
-                        tv_myinfo_rivise.setVisibility(View.GONE);
-                        ibtn_myinfo_profile.setClickable(false);
-                        et_myinfo_username.setFocusable(false);
-                        et_myinfo_nickname.setFocusable(false);
-                        et_myinfo_phonenumber.setFocusable(false);
-                        et_myinfo_class.setFocusable(false);
-                        et_myinfo_username.setCursorVisible(false);
-                        et_myinfo_nickname.setCursorVisible(false);
-                        et_myinfo_phonenumber.setCursorVisible(false);
-                        et_myinfo_class.setCursorVisible(false);
-                        et_myinfo_username.setClickable(false);
-                        et_myinfo_nickname.setClickable(false);
-                        et_myinfo_phonenumber.setClickable(false);
-                        et_myinfo_class.setClickable(false);
-
-                        ((MainActivity)getActivity()).setHeader();
-                    }
-                });
             }
         });
         return view;
 
     }
+
+    private void setView(View view){
+        tv_myinfo_email = view.findViewById(R.id.tv_myinfo_email);
+        tv_myinfo_point = view.findViewById(R.id.tv_myinfo_point);
+        tv_myinfo_rivise = view.findViewById(R.id.tv_myinfo_revise);
+        ibtn_myinfo_profile = view.findViewById(R.id.ibtn_myinfo_profile);
+        btn_myinfo_rivise = view.findViewById(R.id.btn_myinfo_rivise);
+        btn_myinfo_finish = view.findViewById(R.id.btn_myinfo_finish);
+        et_myinfo_username = view.findViewById(R.id.tv_myinfo_uesrname);
+        et_myinfo_nickname = view.findViewById(R.id.et_myinfo_nickname);
+        et_myinfo_class = view.findViewById(R.id.et_myinfo_class);
+        et_myinfo_phonenumber = view.findViewById(R.id.et_myinfo_phonenumber);
+    }
+
     AlertDialog dialog;
     private void setDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -236,5 +216,32 @@ public class MyInfoFragment extends Fragment {
         dialog.show();
     }
 
+    private void  TorF(boolean prover){
+        Log.d("ok", String.valueOf(prover));
+        ibtn_myinfo_profile.setFocusable(prover);
+        et_myinfo_username.setFocusable(prover);
+        et_myinfo_nickname.setFocusable(prover);
+        et_myinfo_class.setFocusable(prover);
+        et_myinfo_phonenumber.setFocusable(prover);
+
+        ibtn_myinfo_profile.setFocusableInTouchMode(prover);
+        et_myinfo_username.setFocusableInTouchMode(prover);
+        et_myinfo_nickname.setFocusableInTouchMode(prover);
+        et_myinfo_class.setFocusableInTouchMode(prover);
+        et_myinfo_phonenumber.setFocusableInTouchMode(prover);
+
+        ibtn_myinfo_profile.setClickable(prover);
+        et_myinfo_username.setClickable(prover);
+        et_myinfo_nickname.setClickable(prover);
+        et_myinfo_class.setClickable(prover);
+        et_myinfo_phonenumber.setClickable(prover);
+
+        et_myinfo_username.setCursorVisible(prover);
+        et_myinfo_nickname.setCursorVisible(prover);
+        et_myinfo_class.setCursorVisible(prover);
+        et_myinfo_phonenumber.setCursorVisible(prover);
+
+
+    }
 
 }

@@ -152,6 +152,7 @@ public class PointStoreFragment extends Fragment {
                                             btn_pointstore_font_tokki.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         customDialog.messageDialog(getActivity(),"구입했습니다.");
+                                        ((MainActivity)getActivity()).setHeader();
                                     }
                                 });
                             }
@@ -249,6 +250,7 @@ public class PointStoreFragment extends Fragment {
                                             btn_pointstore_theme_black.setTextColor(getResources().getColor(R.color.red));
                                         }
                                         customDialog.messageDialog(getActivity(),"구입했습니다.");
+                                        ((MainActivity)getActivity()).setHeader();
 
                                     }
                                 });
