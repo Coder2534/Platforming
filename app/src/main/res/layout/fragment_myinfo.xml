@@ -27,7 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="이름"
-                android:cursorVisible="false"
                 android:maxLength="5"
                 android:maxLines="1"
                 android:ems="5"
@@ -41,7 +40,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="별명"
-                android:cursorVisible="false"
                 android:maxLength="6"
                 android:maxLines="1"
                 android:ems="6"
@@ -84,9 +82,9 @@
                 android:id="@+id/et_myinfo_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="11"
                 android:maxLines="1"
                 android:hint="예:1학년 1반 1번->10101"
-                android:cursorVisible="false"
                 android:textSize="25dp"
                 android:layout_marginLeft="5dp"
                 android:inputType="number"/>
@@ -108,10 +106,10 @@
                 android:id="@+id/et_myinfo_phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="11"
                 android:maxLines="1"
                 android:textSize="25dp"
                 android:hint='"-"없이 입력해주세요.'
-                android:cursorVisible="false"
                 android:layout_marginLeft="5dp"
                 android:inputType="number"/>
 
@@ -143,18 +141,18 @@
         android:id="@+id/tv_myinfo_revise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_myinfo_rivise"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="gone"
-        android:text="수정가능"
+        android:text="수정중"
         android:textSize="35dp" />
 
     <Button
         android:id="@+id/btn_myinfo_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/btn_myinfo_rivise"
         android:visibility="gone"
         android:text="완료"
         android:textSize="20dp"/>
