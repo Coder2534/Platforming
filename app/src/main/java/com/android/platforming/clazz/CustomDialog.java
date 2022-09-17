@@ -484,13 +484,13 @@ public class CustomDialog {
 
         TextView dayOfWeek = view.findViewById(R.id.tv_schedule_edit_dayofweek);
 
-        ArrayList<ArrayList<TableItem>> schedules = new ArrayList<>();
+        ArrayList<ArrayList<TableItem>> schedules_adapter = new ArrayList<>();
         for (ArrayList<TableItem> tableItems : schedules_)
-            schedules.add(new ArrayList<>(tableItems));
+            schedules_adapter.add(new ArrayList<>(tableItems));
 
 
         ViewPager2 viewPager = view.findViewById(R.id.vp_schedule_edit);
-        RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(schedules);
+        RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(schedules_adapter);
         viewPager.setAdapter(sliderAdapter);
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -535,11 +535,16 @@ public class CustomDialog {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int i = 0; i < schedules_adapter.get(0).size(); ++i){
+                    Log.d("customDialog", String.format("main : %s / sub : %s", schedules_adapter.get(0).get(i).getMainText(), schedules_adapter.get(0).get(i).getSubText()));
+                }
+
                 sliderAdapter.saveSchedules();
+
                 for(int i = 0; i < schedules_.size(); ++i){
                     ArrayList<TableItem> tableItems = schedules_.get(i);
                     tableItems.clear();
-                    tableItems.addAll(schedules.get(i));
+                    tableItems.addAll(schedules_adapter.get(i));
                 }
                 listenerInterface.onSuccess();
                 dialog.dismiss();

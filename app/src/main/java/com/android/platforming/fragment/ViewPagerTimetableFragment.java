@@ -47,7 +47,8 @@ public class ViewPagerTimetableFragment extends Fragment {
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
         for(String key : keys){
-            schedules.add(decodeSchedule(pref.getString(key, null)));
+            Log.d("timetableFragment", key + " : " + pref.getString(key, ""));
+            schedules.add(decodeSchedule(pref.getString(key, "")));
         }
 
         timetable = view.findViewById(R.id.gv_timetable);

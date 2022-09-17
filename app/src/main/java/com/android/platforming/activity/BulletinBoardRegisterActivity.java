@@ -82,8 +82,11 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 button_confirm.setClickable(false);
 
-                if(editText_title.getText().toString().equals("") || editText_detail.getText().toString().equals(""))
+                if(editText_title.getText().toString().equals("") || editText_detail.getText().toString().equals("")){
+                    button_confirm.setClickable(true);
                     return;
+                }
+
 
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", user.getUid());
