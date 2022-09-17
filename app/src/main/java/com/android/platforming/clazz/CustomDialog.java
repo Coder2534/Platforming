@@ -404,7 +404,7 @@ public class CustomDialog {
             }
             else if(fonts.get(i).equals(1L)){
                 radioButton.setId(600+1);
-                radioButton.setText("평창평화체");
+                radioButton.setText("힘찬체");
                 if (applytheme == 4){
                     radioButton.setTextColor(Color.WHITE);
                 }

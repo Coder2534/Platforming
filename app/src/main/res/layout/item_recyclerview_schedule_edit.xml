@@ -20,7 +20,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_marginEnd="5dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/et_schedule_edit_teacher"
@@ -29,7 +30,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_marginEnd="5dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/iv_schedule_edit_delete"

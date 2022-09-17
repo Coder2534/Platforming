@@ -3,14 +3,17 @@
 
     <style name="WhiteTheme">
         <item name="colorPrimary">#B6B6B6</item>
+        <item name="colorOnPrimary">#000000</item>
         <item name="colorOnSecondary">#C5C5C5</item>
         <item name="colorPrimaryDark">#A5A5A5</item>
         <item name="colorAccent">#8F8F8F</item>
+        <item name="android:colorBackground">#FFFFFF</item>
         <item name="colorControlHighlight">#C6C6C6</item>
         <item name="colorControlActivated">#CACACA</item>
 
         <item name="android:navigationBarColor">#000000</item>
         <item name="android:statusBarColor">#000000</item>
+        <item name="android:textColorAlertDialogListItem">#000000</item>
         <item name="android:textColor">#000000</item>
         <item name="android:editTextColor">#000000</item>
         <item name="android:textColorPrimary">#000000</item>
@@ -19,21 +22,22 @@
 
         <item name="backgroundColor">#FFFFFF</item>
 
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
 
     <style name="PinkTheme">
         <item name="colorPrimary">#FAA4A4</item>
+        <item name="colorOnPrimary">#000000</item>
         <item name="colorOnSecondary">#FBBABA</item>
         <item name="colorPrimaryDark">#FF8787</item>
         <item name="colorAccent">#FF7B7B</item>
+        <item name="android:colorBackground">#FDCBCB</item>
         <item name="colorControlHighlight">#FFACAC</item>
         <item name="colorControlActivated">#FFACAC</item>
 
         <item name="android:navigationBarColor">#FF7D7D</item>
         <item name="android:statusBarColor">#FF7D7D</item>
         <item name="android:textColor">#000000</item>
+        <item name="android:textColorAlertDialogListItem">#000000</item>
         <item name="android:editTextColor">#000000</item>
         <item name="android:textColorPrimary">#000000</item>
         <item name="hintTextColor">#2C2C2C</item>
@@ -41,19 +45,19 @@
 
         <item name="backgroundColor">#FDCBCB</item>
 
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
     <style name="BuleTheme">
         <item name="colorPrimary">#A3E5FB</item>
         <item name="colorOnSecondary">#B0EBFD</item>
         <item name="colorPrimaryDark">#85E1FF</item>
         <item name="colorAccent">#8EE0FB</item>
+        <item name="android:colorBackground">#BFF5FF</item>
         <item name="colorControlHighlight">#9BD9ED</item>
         <item name="colorControlActivated">#9BD9ED</item>
 
         <item name="android:navigationBarColor">#6EDCFD</item>
         <item name="android:statusBarColor">#6EDCFD</item>
+        <item name="android:textColorAlertDialogListItem">#000000</item>
         <item name="android:textColor">#000000</item>
         <item name="android:editTextColor">#000000</item>
         <item name="android:textColorPrimary">#000000</item>
@@ -62,19 +66,20 @@
 
         <item name="backgroundColor">#BFF5FF</item>
 
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
     <style name="GreenTheme">
         <item name="colorPrimary">#98D8AD</item>
+        <item name="colorOnPrimary">#000000</item>
         <item name="colorOnSecondary">#A4DFAD</item>
         <item name="colorPrimaryDark">#6FBC7A</item>
         <item name="colorAccent">#70BD7C</item>
+        <item name="android:colorBackground">#CEFBC9</item>
         <item name="colorControlHighlight">#86BA8E</item>
         <item name="colorControlActivated">#86BA8E</item>
 
         <item name="android:navigationBarColor">#50B360</item>
         <item name="android:statusBarColor">#50B360</item>
+        <item name="android:textColorAlertDialogListItem">#000000</item>
         <item name="android:textColor">#000000</item>
         <item name="android:editTextColor">#000000</item>
         <item name="android:textColorPrimary">#000000</item>
@@ -83,13 +88,12 @@
 
         <item name="backgroundColor">#CEFBC9</item>
 
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
 
-    <style name="BlackTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="BlackTheme">
 
         <item name="colorPrimary">#434343</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
         <item name="colorOnSecondary">#474747</item>
         <item name="colorPrimaryDark">#232323</item>
         <item name="colorAccent">#888787</item>

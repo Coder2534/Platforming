@@ -276,7 +276,7 @@ public class PointStoreFragment extends Fragment {
     private Typeface getFont(int i){
         switch (i){
             case 0:checkfont = 0;  return getResources().getFont(R.font.pretendard0);
-            case 1:checkfont = 1;  return getResources().getFont(R.font.pyeongchangpeacelight1);
+            case 1:checkfont = 1;  return getResources().getFont(R.font.power1);
             case 2:checkfont = 2;  return getResources().getFont(R.font.bmeuljiro10yearslate2);
             case 3:checkfont = 3;  return getResources().getFont(R.font.establishretrosans3);
             case 4:checkfont = 4;  return getResources().getFont(R.font.eulyoo1945regular4);
