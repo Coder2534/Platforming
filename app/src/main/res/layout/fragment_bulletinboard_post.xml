@@ -55,7 +55,7 @@
             android:layout_alignLeft="@+id/iv_bulletinboard_detail_profile"
             android:layout_marginTop="10dp"
             android:text="대충 글이라는 글"
-            android:textSize="15dp"
+            android:textSize="18dp"
             android:breakStrategy="high_quality"/>
 
         <TextView
