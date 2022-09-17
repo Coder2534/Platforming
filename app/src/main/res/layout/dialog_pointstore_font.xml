@@ -54,11 +54,11 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="평창평화체"
+                android:text="힘찬체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/pyeongchangpeacelight1"/>
+                android:fontFamily="@font/power1"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_vitorcore"
@@ -130,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
             android:backgroundTint="?attr/colorPrimary"
             android:text="나가기" />
     </RelativeLayout>

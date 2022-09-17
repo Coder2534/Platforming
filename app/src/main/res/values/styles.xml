@@ -3,8 +3,8 @@
     <style name="pretendardFont">
         <item name="fontFamily">@font/pretendard0</item>
     </style>
-    <style name="pyeongFont">
-        <item name="fontFamily">@font/pyeongchangpeacelight1</item>
+    <style name="powerFont">
+        <item name="fontFamily">@font/power1</item>
 
     </style>
     <style name="bmeFont">
