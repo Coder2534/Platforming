@@ -30,7 +30,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
-import com.android.platforming.fragment.EmailAlarmFragment;
+import com.android.platforming.fragment.SignUpFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -113,14 +113,12 @@ public class CustomDialog {
             }
         });
 
+        EditText enter = view.findViewById(R.id.et_password_reset_enter);
         Button btn_password_reset_check = view.findViewById(R.id.btn_password_reset_check);
         btn_password_reset_check.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-
-                EditText et_password_reset_enter = view.findViewById(R.id.et_password_reset_enter);
-                String email = et_password_reset_enter.getText().toString();
+            public void onClick(View view) {
+                String email = enter.getText().toString();
                 if(email.equals("")){
                     CustomDialog customDialog = new CustomDialog();
                     customDialog.messageDialog(activity, "이메일이 유효하지 않습니다.");
@@ -142,6 +140,43 @@ public class CustomDialog {
         });
         builder.setView(view);
         dialog=builder.create();
+        dialog.show();
+    }
+
+    public void schoolCodeDialog(Activity activity, ListenerInterface listenerInterface){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_schoolcode, null);
+
+        Button cancel = view.findViewById(R.id.btn_schoolcode_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        EditText enter = view.findViewById(R.id.et_schoolcode_enter);
+        Button confirm = view.findViewById(R.id.btn_schoolcode_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(SignUpFragment.ACCESS_CODE.contains(enter.getText().toString())){
+                    listenerInterface.onSuccess();
+                    dialog.dismiss();
+                }
+                else{
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.messageDialog(activity, "학교코드가 유효하지 않습니다.");
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
         dialog.show();
     }
 
