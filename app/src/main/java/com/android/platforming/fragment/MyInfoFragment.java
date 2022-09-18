@@ -23,6 +23,7 @@ import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
+import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.protobuf.StringValue;
@@ -88,12 +89,14 @@ public class MyInfoFragment extends Fragment {
         btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_myinfo_finish.setClickable(false);
                 CustomDialog customDialog = new CustomDialog();
 
                 //이름
                 String userName = et_myinfo_username.getText().toString();
                 if(userName.equals("") && !userName.matches("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$")){
                     customDialog.messageDialog(getActivity(), "옳지 않은 이름입니다.");
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
 
@@ -101,6 +104,14 @@ public class MyInfoFragment extends Fragment {
                 String nickName = et_myinfo_nickname.getText().toString();
                 if(nickName.equals("") && !nickName.matches("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$")){
                     customDialog.messageDialog(getActivity(), "옳지 않은 별명입니다.");
+                    btn_myinfo_finish.setClickable(true);
+                    return;
+                }
+
+                WordFilter wordFilter = new WordFilter();
+                if(wordFilter.isForbiddenWords(nickName)){
+                    customDialog.messageDialog(getActivity(), "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
 
@@ -108,6 +119,7 @@ public class MyInfoFragment extends Fragment {
                 studentId = et_myinfo_class.getText().toString();
                 if (studentId.length() != 5){
                     customDialog.messageDialog(getActivity(),"학번 5자리를 정확히 입력해주세요.");
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
 
@@ -116,6 +128,7 @@ public class MyInfoFragment extends Fragment {
                 int number = Integer.parseInt(studentId.substring(3, 5));
                 if(grade < 0 || grade > 3 || clazz < 0 || clazz > 10 || number < 0 || number > 30){
                     customDialog.messageDialog(getActivity(),"옳지 않은 학번입니다.");
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
 
@@ -140,10 +153,11 @@ public class MyInfoFragment extends Fragment {
                         ((MainActivity)getActivity()).setHeader();
 
                         TorF(false);
-                        btn_myinfo_rivise.setClickable(true);
-                        btn_myinfo_rivise.setVisibility(View.VISIBLE);
-                        btn_myinfo_finish.setVisibility(View.GONE);
                         tv_myinfo_rivise.setVisibility(View.GONE);
+                        btn_myinfo_finish.setVisibility(View.GONE);
+                        btn_myinfo_finish.setClickable(true);
+                        btn_myinfo_rivise.setVisibility(View.VISIBLE);
+                        btn_myinfo_rivise.setClickable(true);
                     }
                 });
             }

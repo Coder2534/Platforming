@@ -18,8 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/vp_mainpage"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_round"
+        android:backgroundTint="?attr/colorOnSecondary"
         android:scaleType="fitXY"
         android:src="@drawable/img_self_diagnosis_banner_invisible" />
 
@@ -27,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/iv_mainpage_selfdiagnosis"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="?attr/colorOnSecondary"
         android:paddingLeft="10dp"
         android:paddingTop="20dp"
