@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WordFilter {
-    public static List<String> forbiddenWords = Arrays.asList(
+    private static final List<String> forbiddenWords = Arrays.asList(
             "느금마", "니애미", "니어미", "니엄마", "니애비", "느그애비", "느그애미", "애미터", "애미뒤", "앰뒤", "앰창", "갈보",
             "강간", "개같", "개년", "개뇬", "개미친", "개부랄", "개불알", "개빠구리", "개뼉다구", "개새", "개색", "개쌔끼", "개자석",
             "개자슥", "개자식", "지랄", "꼴통", "느그엄마", "느검마", "니기미", "니미", "대가리", "대갈", "대갈빡", "대갈통", "대굴빡",
@@ -24,32 +24,38 @@ public class WordFilter {
             "씌팍", "씌팔", "씌팡", "씌펄", "씌퐈", "씌퐝", "씨발", "씨1발", "씨팔", "씹", "아가리", "아가지", "아갈", "아괄", "아구리",
             "아구지", "아구창", "아굴창", "자쥐", "자즤", "조까", "조옷", "좆", "주둥아리", "주둥이", "창녀", "창년", "후레", "후장");
 
-    public static boolean isForbiddenWords(String word) {
-        Set<String> filteredBlackWords = getFiteredForbiddenWords(word);
-        return (filteredBlackWords.size() > 0) ? true : false;
+    private final Set<String> filteredForbiddenWords = new HashSet<>();
+
+    public boolean isForbiddenWords(String word) {
+        Set<String> filteredBlackWords = getFilteredForbiddenWords(word);
+        return filteredBlackWords.size() > 0;
     }
 
-    public static Set<String> getFiteredForbiddenWords(String word) {
+    public Set<String> getFilteredForbiddenWords(String word) {
         if(word == null) {
             return new HashSet<>();
         }
 
-        String blackWordsRegEx = "";
+        StringBuilder blackWordsRegEx = new StringBuilder();
         for(String bWord : forbiddenWords) {
-            blackWordsRegEx +=  bWord + "|";
+            blackWordsRegEx.append(bWord).append("|");
         }
 
         if(blackWordsRegEx.length() > 0) {
-            blackWordsRegEx = blackWordsRegEx.substring(0, blackWordsRegEx.length() - 1);
+            blackWordsRegEx = new StringBuilder(blackWordsRegEx.substring(0, blackWordsRegEx.length() - 1));
         }
 
-        Set<String> fiteredForbiddenWords = new HashSet<>();
-        Pattern p = Pattern.compile(blackWordsRegEx, Pattern.CASE_INSENSITIVE);
+
+        Pattern p = Pattern.compile(blackWordsRegEx.toString(), Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(word);
         while(m.find()) {
-            fiteredForbiddenWords.add(m.group());
+            filteredForbiddenWords.add(m.group());
         }
 
-        return fiteredForbiddenWords;
+        return filteredForbiddenWords;
+    }
+
+    public Set<String> getFilteredForbiddenWords() {
+        return filteredForbiddenWords;
     }
 }

@@ -24,9 +24,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.adapter.PostCommentViewAdapter;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.clazz.User;
+import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
@@ -234,12 +236,27 @@ public class BulletinBoardPostFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 write.setClickable(false);
+
+                String comment_ = comment.getText().toString();
+                if(comment_.equals("")){
+                    write.setClickable(true);
+                    return;
+                }
+
+                WordFilter wordFilter = new WordFilter();
+                if(wordFilter.isForbiddenWords(comment_)){
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.messageDialog(getActivity(), "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
+                    write.setClickable(true);
+                    return;
+                }
+
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", user.getUid());
                 data.put("profileIndex", user.getProfileIndex());
                 data.put("nickname", user.getNickname());
                 data.put("date", System.currentTimeMillis());
-                data.put("comment", comment.getText().toString());
+                data.put("comment", comment_);
 
                 FirestoreManager firestoreManager = new FirestoreManager();
                 firestoreManager.writeCommentData(post.getId(), data, new ListenerInterface() {
