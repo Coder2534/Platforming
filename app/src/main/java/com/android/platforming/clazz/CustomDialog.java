@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
+import com.android.platforming.fragment.EmailAlarmFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -93,21 +95,52 @@ public class CustomDialog {
         dialog.show();
     }
 
-    public void passwordResetDialog(Context context, ListenerInterface listenerInterface){
-        final EditText editText = new EditText(context);
+    public void passwordResetDialog(Activity activity, ListenerInterface listenerInterface){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        AlertDialog.Builder ad = new AlertDialog.Builder(context);
-        ad.setTitle("비밀번호 찾기");
-        ad.setMessage("이메일을 입력해 주세요.");
-        ad.setView(editText);
-        ad.setPositiveButton("입력", (dialog, which) -> {
-            String email= editText.getText().toString();
-            listenerInterface.onSuccess(email);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_password_reset, null);
+        builder.setTitle("비밀번호 찾기");
+
+
+        Button btn_password_reset_cancel = view.findViewById(R.id.btn_password_reset_cancel);
+        btn_password_reset_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
         });
-        ad.setNegativeButton("최소", (dialog, which) -> {
-            listenerInterface.onFail();
+
+        Button btn_password_reset_check = view.findViewById(R.id.btn_password_reset_check);
+        btn_password_reset_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                EditText et_password_reset_enter = view.findViewById(R.id.et_password_reset_enter);
+                String email = et_password_reset_enter.getText().toString();
+                if(email.equals("")){
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.messageDialog(activity, "이메일이 유효하지 않습니다.");
+                }
+
+
+                if(!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$")){
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.messageDialog(activity, "이메일이 유효하지 않습니다.");
+                }
+                else {
+                    listenerInterface.onSuccess(email);
+                    dialog.dismiss();
+                }
+
+
+
+            }
         });
-        ad.show();
+        builder.setView(view);
+        dialog=builder.create();
+        dialog.show();
     }
 
     public void selectDialog(Activity activity, String title, ListenerInterface listenerInterface){

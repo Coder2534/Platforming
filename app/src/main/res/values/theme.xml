@@ -100,6 +100,7 @@
         <item name="android:colorBackground">#515151</item>
         <item name="colorControlHighlight">#888787</item>
         <item name="colorControlActivated">#888787</item>
+        <item name="alertDialogTheme">@style/BlackTheme</item>
 
         <item name="android:navigationBarColor">#000000</item>
         <item name="android:statusBarColor">#000000</item>
@@ -111,6 +112,9 @@
         <item name="android:textColorHighlight">#686868</item>
 
         <item name="backgroundColor">#515151</item>
+        <item name="colorOnBackground">#515151</item>
+        <item name="boxBackgroundColor">#515151</item>
+        <item name="titleTextColor">#000000</item>
     </style>
 
 </resources>
