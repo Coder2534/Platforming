@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnSecondary">
+    android:background="@drawable/bg_more"
+    android:backgroundTint="?attr/colorOnSecondary">
 
     <GridView
         android:id="@+id/gv_timetable"
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:srcCompat="@drawable/ic_baseline_edit_24"
-        android:background="?attr/colorPrimary" />
+        android:background="@drawable/bg_more"
+        android:backgroundTint="?attr/colorPrimary" />
 
     <ImageButton
         android:id="@+id/btn_timetable_expand"
@@ -29,5 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         app:srcCompat="@drawable/ic_baseline_crop_free_24"
-        android:background="?attr/colorPrimary" />
+        android:background="@drawable/bg_more"
+        android:backgroundTint="?attr/colorPrimary" />
 </FrameLayout>

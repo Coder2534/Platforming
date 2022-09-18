@@ -115,6 +115,7 @@
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/item_recyclerview_tableitem.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/layout/view_noticeboard_comment.xml" value="0.2791666666666667" />
         <entry key="..\:/Project/Android_Project/Platforming/app/src/main/res/xml/fragment_setting.xml" value="0.2791666666666667" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_more.xml" value="0.437" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_round.xml" value="0.141" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/bg_underline.xml" value="0.141" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_baseline_crop_free_24.xml" value="0.292" />
@@ -133,6 +134,7 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_schoolcode.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_setting_newpassword.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_bulletinboard_list.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_bulletinboard_post.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_initialsetting.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_mainpage.xml" value="0.5" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/fragment_myinfo.xml" value="0.5536458333333333" />
@@ -147,7 +149,7 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.15" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_listview_schoolintroduce.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.25" />
-        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.15" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.67" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post_comment.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_schedule_edit.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_slider.xml" value="0.4981481481481482" />

@@ -3,9 +3,9 @@
     android:id="@+id/tester"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="?attr/colorOnSecondary"
-    >
+    android:layout_margin="2dp"
+    android:background="@drawable/bg_more"
+    android:backgroundTint="?attr/colorOnSecondary">
 
     <TextView
         android:id="@+id/tv_recyclerview_post_title"

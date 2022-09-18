@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="5dp"
     android:orientation="vertical"
     android:background="?attr/backgroundColor">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorOnSecondary">
+        android:background="@drawable/bg_more"
+        android:backgroundTint="?attr/colorOnSecondary">
 
         <ImageView
             android:id="@+id/iv_bulletinboard_detail_profile"
@@ -85,14 +86,15 @@
         android:id="@+id/rv_bulletinboard_detail_coment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:background="?attr/colorPrimary">
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_round"
+        android:backgroundTint="?attr/colorPrimary">
 
         <EditText
             android:id="@+id/et_bulletinboard_detail_comment"
@@ -106,7 +108,9 @@
             android:id="@+id/btn_bulletinboard_detail_write"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_send_24" />
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_baseline_send_24"
+            android:backgroundTint="?attr/colorPrimary" />
 
     </LinearLayout>
 </LinearLayout>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
@@ -29,7 +27,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/iv_mainpage_selfdiagnosis"
         android:layout_marginTop="5dp"
-        android:background="?attr/colorOnSecondary"
+        android:background="@drawable/bg_more"
+        android:backgroundTint="?attr/colorOnSecondary"
         android:paddingLeft="10dp"
         android:paddingTop="20dp"
         android:paddingRight="10dp"

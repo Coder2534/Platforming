@@ -62,5 +62,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="※ 커뮤니티 이용규칙\n- 욕설·비방 관련 행위 금지" />
+        android:text="※ 커뮤니티 이용규칙\n- 욕설·비방 관련 행위 금지\n- 다른 사람을 사칭하는 행위 금지\n- 광고·도배 금지" />
 </LinearLayout>
