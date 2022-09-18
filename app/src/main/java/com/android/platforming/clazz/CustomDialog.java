@@ -47,11 +47,13 @@ public class CustomDialog {
     public void banDialog(Activity activity){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
+        builder.setTitle("차단된 계정");
+        
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_message, null);
 
         TextView message = view.findViewById(R.id.tv_message_message);
-        message.setText("현재 계정은 차단되었습니다.");
+        message.setText(" 아래 메일로 문의해주세요.\n:ssak2534@gmail.com");
 
         Button confirm = view.findViewById(R.id.btn_message_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
