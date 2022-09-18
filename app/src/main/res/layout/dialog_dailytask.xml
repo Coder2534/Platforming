@@ -67,5 +67,5 @@
         android:layout_below="@id/cb_dailytask_writecomment"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="포인트 수령" />
+        android:text="0p 수령" />
 </RelativeLayout>
