@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.android.platforming.InitApplication;
 import com.android.platforming.fragment.SignInFragment;
 import com.example.platforming.R;
 import com.google.android.gms.auth.api.Auth;
@@ -17,6 +18,16 @@ public class SignActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        InitApplication initApplication = ((InitApplication)getApplication());
+        initApplication.refreshAppliedTheme();
+
+        switch (initApplication.getAppliedTheme()){
+            case 0:setTheme(R.style.WhiteTheme);break;
+            case 1:setTheme(R.style.PinkTheme);break;
+            case 2:setTheme(R.style.BuleTheme);break;
+            case 3:setTheme(R.style.GreenTheme);break;
+            case 4:setTheme(R.style.BlackTheme);break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 

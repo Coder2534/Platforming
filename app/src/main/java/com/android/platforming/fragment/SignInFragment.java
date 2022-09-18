@@ -69,21 +69,14 @@ public class SignInFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 CustomDialog customDialog = new CustomDialog();
-                customDialog.passwordResetDialog(getContext(), new ListenerInterface() {
+                customDialog.passwordResetDialog(getActivity(), new ListenerInterface() {
                     @Override
                     public void onSuccess(String msg) {
                         String email = msg;
-                        if(email.equals(""))
-                            return;
-
-                        if(!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$")){
-                            CustomDialog customDialog = new CustomDialog();
-                            customDialog.messageDialog(getActivity(), "이메일이 유효하지 않습니다.");
-                        }
-
                         getFirebaseAuth().sendPasswordResetEmail(email).addOnCompleteListener(task -> {
                             if(task.isSuccessful()){
                                 Log.w("EmailAlarmFragment", "sendPasswordResetEmail success");
+
 
                                 Bundle bundle = new Bundle();
                                 bundle.putString("Type", "findPassword");
@@ -93,6 +86,7 @@ public class SignInFragment extends Fragment{
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.cl_sign, emailAlarmFragment).addToBackStack(null).commit();
                             }else{
                                 Log.w("EmailAlarmFragment", "sendPasswordResetEmail fail");
+                                customDialog.messageDialog(getActivity(),"실패했습니다.");
                             }
                         });
                     }
