@@ -73,11 +73,10 @@ public class SignInFragment extends Fragment{
                     @Override
                     public void onSuccess(String msg) {
                         String email = msg;
+                        if(email.equals(""))
+                            return;
 
-                        Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$");
-                        Matcher matcher = pattern.matcher(email);
-
-                        if(!matcher.find()){
+                        if(!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$")){
                             Log.w("EmailAlarmFragment", "email form Error");
                             customDialog.messageDialog(getActivity(), "이메일이 유효하지 않습니다.");
                         }
