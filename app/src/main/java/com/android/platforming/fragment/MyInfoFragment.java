@@ -23,6 +23,7 @@ import com.android.platforming.activity.MainActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
+import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 import com.google.protobuf.StringValue;
@@ -88,12 +89,14 @@ public class MyInfoFragment extends Fragment {
         btn_myinfo_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_myinfo_finish.setClickable(false);
                 CustomDialog customDialog = new CustomDialog();
 
                 //이름
                 String userName = et_myinfo_username.getText().toString();
                 if(userName.equals("") && !userName.matches("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$")){
                     customDialog.messageDialog(getActivity(), "옳지 않은 이름입니다.");
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
 
@@ -101,6 +104,14 @@ public class MyInfoFragment extends Fragment {
                 String nickName = et_myinfo_nickname.getText().toString();
                 if(nickName.equals("") && !nickName.matches("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$")){
                     customDialog.messageDialog(getActivity(), "옳지 않은 별명입니다.");
+                    btn_myinfo_finish.setClickable(true);
+                    return;
+                }
+
+                WordFilter wordFilter = new WordFilter();
+                if(wordFilter.isForbiddenWords(nickName)){
+                    customDialog.messageDialog(getActivity(), "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
 
@@ -108,49 +119,47 @@ public class MyInfoFragment extends Fragment {
                 studentId = et_myinfo_class.getText().toString();
                 if (studentId.length() != 5){
                     customDialog.messageDialog(getActivity(),"학번 5자리를 정확히 입력해주세요.");
+                    btn_myinfo_finish.setClickable(true);
                     return;
                 }
-                else {
-                    int grade = Integer.parseInt(String.valueOf(studentId.charAt(0)));
-                    int clazz = Integer.parseInt(studentId.substring(1, 3));
-                    int number = Integer.parseInt(studentId.substring(3, 5));
-                    if(grade < 0 || grade > 3 || clazz < 0 || clazz > 10 || number < 0 || number > 30){
-                        customDialog.messageDialog(getActivity(),"옳지 않은 학번입니다.");
-                        return;
-                    }
-                    else{
-                        Map<String,Object> myInfoData = new HashMap<>();
 
-                        myInfoData.put("profileIndex",profileIndex);
-                        myInfoData.put("username",et_myinfo_username.getText().toString());
-                        myInfoData.put("nickname",et_myinfo_nickname.getText().toString());
-                        myInfoData.put("studentId",et_myinfo_class.getText().toString());
-                        myInfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
-
-                        firestoreManager.updateUserData(myInfoData, new ListenerInterface() {
-                            @Override
-                            public void onSuccess() {
-                                Log.d("onsuccess","success");
-                                et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
-                                et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
-                                user.setUsername(et_myinfo_username.getText().toString());
-                                user.setNickName(et_myinfo_nickname.getText().toString());
-                                user.setStudentId(studentId);
-                                user.setTelephone(et_myinfo_phonenumber.getText().toString());
-                                user.setProfileIndex(Math.toIntExact(profileIndex));
-
-                                TorF(false);
-                                btn_myinfo_rivise.setClickable(true);
-                                btn_myinfo_rivise.setVisibility(View.VISIBLE);
-                                btn_myinfo_finish.setVisibility(View.GONE);
-                                tv_myinfo_rivise.setVisibility(View.GONE);
-
-                                ((MainActivity)getActivity()).setHeader();
-                            }
-                        });
-                    }
+                int grade = Integer.parseInt(String.valueOf(studentId.charAt(0)));
+                int clazz = Integer.parseInt(studentId.substring(1, 3));
+                int number = Integer.parseInt(studentId.substring(3, 5));
+                if(grade < 0 || grade > 3 || clazz < 0 || clazz > 10 || number < 0 || number > 30){
+                    customDialog.messageDialog(getActivity(),"옳지 않은 학번입니다.");
+                    btn_myinfo_finish.setClickable(true);
+                    return;
                 }
 
+                Map<String,Object> myInfoData = new HashMap<>();
+
+                myInfoData.put("profileIndex",profileIndex);
+                myInfoData.put("username",et_myinfo_username.getText().toString());
+                myInfoData.put("nickname",et_myinfo_nickname.getText().toString());
+                myInfoData.put("studentId",et_myinfo_class.getText().toString());
+                myInfoData.put("telephone",et_myinfo_phonenumber.getText().toString());
+
+                firestoreManager.updateUserData(myInfoData, new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+                        et_myinfo_class.setFilters(new InputFilter[] {new InputFilter.LengthFilter(11)});
+                        et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
+                        user.setUsername(et_myinfo_username.getText().toString());
+                        user.setNickName(et_myinfo_nickname.getText().toString());
+                        user.setStudentId(studentId);
+                        user.setTelephone(et_myinfo_phonenumber.getText().toString());
+                        user.setProfileIndex(Math.toIntExact(profileIndex));
+                        ((MainActivity)getActivity()).setHeader();
+
+                        TorF(false);
+                        tv_myinfo_rivise.setVisibility(View.GONE);
+                        btn_myinfo_finish.setVisibility(View.GONE);
+                        btn_myinfo_finish.setClickable(true);
+                        btn_myinfo_rivise.setVisibility(View.VISIBLE);
+                        btn_myinfo_rivise.setClickable(true);
+                    }
+                });
             }
         });
         return view;

@@ -135,7 +135,7 @@ public class MainPageFragment extends Fragment {
             }
         });
 
-        if(false){
+        if(user.isBan()){
             CustomDialog customDialog = new CustomDialog();
             customDialog.banDialog(getActivity());
         }

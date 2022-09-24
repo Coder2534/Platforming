@@ -28,7 +28,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -39,8 +38,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class SignInFragment extends Fragment{
     @Nullable
@@ -132,8 +130,14 @@ public class SignInFragment extends Fragment{
         }
 
         signInButton.setOnClickListener(v -> {
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(((SignActivity)getActivity()).getGoogleClient());
-            startActivityForResult(signInIntent, RC_SIGN_IN);
+            CustomDialog customDialog = new CustomDialog();
+            customDialog.schoolCodeDialog(getActivity(), new ListenerInterface() {
+                @Override
+                public void onSuccess() {
+                    Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(((SignActivity)getActivity()).getGoogleClient());
+                    startActivityForResult(signInIntent, RC_SIGN_IN);
+                }
+            });
         });
     }
 
@@ -161,34 +165,43 @@ public class SignInFragment extends Fragment{
 
     //로그인(Facebook)
     private CallbackManager callbackManager;
-    LoginButton loginButton_facebook;
+    Button loginButton_facebook;
     private void setFacebook(View view){
 
         callbackManager = CallbackManager.Factory.create();
 
-        //callbackManager
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        signInWithFacebook(loginResult.getAccessToken());
+                        Log.w("SignInActivity", "Facebook SignIn onSuccess");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.w("SignInActivity", "Facebook SignIn onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.w("SignInActivity", "Facebook SignIn onError");
+                    }
+                });
+
+
         loginButton_facebook = view.findViewById(R.id.lbtn_signin_facebook);
-        loginButton_facebook.setFragment(this);// If you are using in a fragment, call loginButton.setFragment(this);
-
-        // Callback registration
-        loginButton_facebook.setReadPermissions("email", "public_profile");
-        loginButton_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginButton_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-                signInWithFacebook(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-                Log.w("SignInActivity", "Facebook SignIn onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-                Log.w("SignInActivity", "Facebook SignIn onError");
+            public void onClick(View v) {
+                //LoginManager - 요청된 읽기 또는 게시 권한으로 로그인 절차를 시작합니다.
+                CustomDialog customDialog = new CustomDialog();
+                customDialog.schoolCodeDialog(getActivity(), new ListenerInterface() {
+                    @Override
+                    public void onSuccess() {
+                        LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("email", "public_profile"));
+                    }
+                });
             }
         });
     }

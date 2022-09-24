@@ -4,6 +4,7 @@ import static com.android.platforming.clazz.User.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.android.platforming.InitApplication;
+import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
+import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.example.platforming.R;
 
@@ -24,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 public class BulletinBoardRegisterActivity extends AppCompatActivity {
+
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeboard_register);
+
+        activity = this;
 
         int type = getIntent().getIntExtra("type", 0);
 
@@ -82,7 +89,17 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 button_confirm.setClickable(false);
 
-                if(editText_title.getText().toString().equals("") || editText_detail.getText().toString().equals("")){
+                String title = editText_title.getText().toString();
+                String detail = editText_detail.getText().toString();
+                if(title.equals("") || detail.equals("")){
+                    button_confirm.setClickable(true);
+                    return;
+                }
+
+                WordFilter wordFilter = new WordFilter();
+                if(wordFilter.isForbiddenWords(title + detail)){
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.messageDialog(activity, "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
                     button_confirm.setClickable(true);
                     return;
                 }

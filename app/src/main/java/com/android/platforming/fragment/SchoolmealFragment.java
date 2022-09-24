@@ -77,21 +77,15 @@ public class SchoolmealFragment extends Fragment {
         btn_calender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InitApplication initApplication = ((InitApplication)getActivity().getApplication());
-                showDate(initApplication.getAppliedTheme());
+                showDate();
             }
         });
 
         return view;
     }
 
-    public void showDate(int applytheme) {
-        int dialogtheme;
-        if (applytheme==4){
-            dialogtheme = 4;
-        }
-        else dialogtheme=5;
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),dialogtheme, new DatePickerDialog.OnDateSetListener() {
+    public void showDate() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 

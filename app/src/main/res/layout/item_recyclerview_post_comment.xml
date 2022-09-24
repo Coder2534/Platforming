@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:layout_margin="5dp"
-    android:background="?attr/colorOnSecondary">
+    android:layout_margin="2dp"
+    android:background="@drawable/bg_more"
+    android:backgroundTint="?attr/colorOnSecondary">
 
     <ImageView
         android:id="@+id/iv_noticeboard_comment_profile"
