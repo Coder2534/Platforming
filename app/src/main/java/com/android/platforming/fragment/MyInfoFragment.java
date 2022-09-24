@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,9 +56,9 @@ public class MyInfoFragment extends Fragment {
         setView(view);
 
         et_myinfo_username.setText(user.getUsername());
-        et_myinfo_username.setFilters(new InputFilter[]{textSetFilter("kor")});
+        et_myinfo_username.setFilters(new InputFilter[]{filterAlphaNum, new InputFilter.LengthFilter(5)});
         et_myinfo_nickname.setText(user.getNickname());
-        et_myinfo_nickname.setFilters(new InputFilter[]{textSetFilter("kor")});
+        et_myinfo_nickname.setFilters(new InputFilter[]{filterAlphaNum, new InputFilter.LengthFilter(6)});
         tv_myinfo_point.setText(user.getPoint() + "p");
         studentId = user.getStudentId();
         et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
@@ -229,7 +230,6 @@ public class MyInfoFragment extends Fragment {
     }
 
     private void  TorF(boolean prover){
-        Log.d("ok", String.valueOf(prover));
         ibtn_myinfo_profile.setFocusable(prover);
         et_myinfo_username.setFocusable(prover);
         et_myinfo_nickname.setFocusable(prover);
@@ -253,23 +253,12 @@ public class MyInfoFragment extends Fragment {
         et_myinfo_class.setCursorVisible(prover);
         et_myinfo_phonenumber.setCursorVisible(prover);
     }
-    public InputFilter textSetFilter(String lang) {
-        Pattern ps;
 
-        if (lang.equals("kor")) {
-            ps = Pattern.compile("^[a-zA-Z0-9ㄱ-ㅎ가-흐]+$"); //한글 및 공백문자만 허용
-        } else {
-            ps = Pattern.compile("[a-zA-Z\\s-]*$"); //영어 및 하이픈 문자만 허용
+    public InputFilter filterAlphaNum = (source, start, end, dest, dstart, dend) -> {
+        Pattern ps = Pattern.compile("^[a-zA-Z0-9ㄱ-ㅎ가-흐\u318D\u119E\u11A2\u2022\u2025\u00B7\uFE55\u4E10\u3163\u3161]*$");
+        if (!ps.matcher(source).matches()) {
+            return "";
         }
-
-        InputFilter filter = (source, start, end, dest, dstart, dend) -> {
-            if (!ps.matcher(source).matches()) {
-                return "";
-            }
-            return null;
-        };
-
-        return filter;
-    }
-
+        return null;
+    };
 }
