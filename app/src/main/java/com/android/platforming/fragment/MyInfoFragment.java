@@ -30,6 +30,7 @@ import com.google.protobuf.StringValue;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class MyInfoFragment extends Fragment {
     FirestoreManager firestoreManager;
@@ -54,7 +55,9 @@ public class MyInfoFragment extends Fragment {
         setView(view);
 
         et_myinfo_username.setText(user.getUsername());
+        et_myinfo_username.setFilters(new InputFilter[]{textSetFilter("kor")});
         et_myinfo_nickname.setText(user.getNickname());
+        et_myinfo_nickname.setFilters(new InputFilter[]{textSetFilter("kor")});
         tv_myinfo_point.setText(user.getPoint() + "p");
         studentId = user.getStudentId();
         et_myinfo_class.setText(String.format("%c학년 %s반 %s번", studentId.charAt(0), Integer.parseInt(studentId.substring(1, 3)), Integer.parseInt(studentId.substring(3, 5))));
@@ -249,8 +252,24 @@ public class MyInfoFragment extends Fragment {
         et_myinfo_nickname.setCursorVisible(prover);
         et_myinfo_class.setCursorVisible(prover);
         et_myinfo_phonenumber.setCursorVisible(prover);
+    }
+    public InputFilter textSetFilter(String lang) {
+        Pattern ps;
 
+        if (lang.equals("kor")) {
+            ps = Pattern.compile("^[a-zA-Z0-9ㄱ-ㅎ가-흐]+$"); //한글 및 공백문자만 허용
+        } else {
+            ps = Pattern.compile("[a-zA-Z\\s-]*$"); //영어 및 하이픈 문자만 허용
+        }
 
+        InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+            if (!ps.matcher(source).matches()) {
+                return "";
+            }
+            return null;
+        };
+
+        return filter;
     }
 
 }
