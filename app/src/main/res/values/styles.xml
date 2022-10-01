@@ -3,8 +3,8 @@
     <style name="pretendardFont">
         <item name="fontFamily">@font/pretendard0</item>
     </style>
-    <style name="powerFont">
-        <item name="fontFamily">@font/power1</item>
+    <style name="snowFont">
+        <item name="fontFamily">@font/snow1</item>
 
     </style>
     <style name="bmeFont">

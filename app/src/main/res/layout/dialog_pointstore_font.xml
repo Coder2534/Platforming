@@ -11,9 +11,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:text="폰트"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
 
         <TextView
             android:id="@+id/tv_pointstore_font_point"
@@ -23,7 +24,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:text="0p"
-            android:textSize="25dp"/>
+            android:textSize="25dp" />
+
     </RelativeLayout>
 
 
@@ -59,7 +61,7 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/power1"
+                android:fontFamily="@font/snow1"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"/>
 
