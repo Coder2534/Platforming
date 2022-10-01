@@ -79,6 +79,11 @@ public class ScheduleEditAdapter extends RecyclerView.Adapter<ScheduleEditAdapte
         holder.teacher.setText(tableItems.get(position).getSubText());
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override
     public int getItemCount() {

@@ -561,6 +561,7 @@ public class CustomDialog {
 
         ViewPager2 viewPager = view.findViewById(R.id.vp_schedule_edit);
         RecyclerViewSliderAdapter sliderAdapter = new RecyclerViewSliderAdapter(schedules_adapter);
+        sliderAdapter.setHasStableIds(true);
         viewPager.setAdapter(sliderAdapter);
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

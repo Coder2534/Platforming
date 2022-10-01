@@ -1,6 +1,7 @@
 package com.android.platforming.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,11 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         return schedules.size();
     }
@@ -61,7 +67,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     public void addSchedule(int position){
         if(schedules.get(position).size() < 8){
             schedules.get(position).add(new TableItem());
-            scheduleEditAdapters.get(position).notifyItemInserted(schedules.get(position).size() - 1);
+            scheduleEditAdapters.get(position).notifyItemInserted(schedules.get(position).size());
         }
     }
 
