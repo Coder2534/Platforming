@@ -8,7 +8,7 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/power1"
+        android:font="@font/snow1"
         />
     <font
         android:fontStyle="normal"

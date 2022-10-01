@@ -42,7 +42,7 @@ public class StartActivity extends AppCompatActivity {
         }
         switch (initApplication.getAppliedFont()){
             case 0:setTheme(R.style.pretendardFont);break;
-            case 1:setTheme(R.style.powerFont);break;
+            case 1:setTheme(R.style.snowFont);break;
             case 2:setTheme(R.style.bmeFont);break;
             case 3:setTheme(R.style.establishreFont);break;
             case 4:setTheme(R.style.eulyoo1945Font);break;
