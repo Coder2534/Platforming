@@ -57,7 +57,7 @@
                 android:layout_width="400dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="힘찬체"
+                android:text="함박눈체"
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"

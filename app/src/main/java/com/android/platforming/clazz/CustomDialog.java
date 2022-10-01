@@ -5,10 +5,8 @@ import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -358,7 +356,7 @@ public class CustomDialog {
         else dialogtheme=5;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity,dialogtheme);
         LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_design_theme, null);
+        View view = inflater.inflate(R.layout.dialog_design, null);
         builder.setTitle("테마");
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
@@ -455,7 +453,7 @@ public class CustomDialog {
         else dialogtheme=5;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity,dialogtheme);
         LayoutInflater inflater = activity.getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_design_theme, null);
+        View view = inflater.inflate(R.layout.dialog_design, null);
         builder.setTitle("폰트");
 
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
