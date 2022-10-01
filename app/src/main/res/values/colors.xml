@@ -6,11 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="pink">#FF8FB1</color>
-    <color name="darkgreen">#63A479</color>
-    <color name="bule">#90D8F0</color>
     <color name="red">#FF0005</color>
-    <color name="green">#07FF15</color>
 
     <color name="white">#ffffff</color>
     <color name="colorPrimary">@color/white</color>
