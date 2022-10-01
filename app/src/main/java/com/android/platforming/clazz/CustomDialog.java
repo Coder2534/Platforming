@@ -362,7 +362,7 @@ public class CustomDialog {
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[themes.size()];
 
-        for(int i = 0; i< themes.size();i++){
+        for(int i = 0; i< themes.size();++i){
             RadioButton radioButton = new RadioButton(activity);
             radioButton.setTextColor(Color.BLACK);
             if (themes.get(i).equals(0L)){
@@ -459,7 +459,7 @@ public class CustomDialog {
         RadioGroup radioGroup = view.findViewById(R.id.rg_dialog_theme);
         RadioButton[] radioThemeList = new RadioButton[fonts.size()];
 
-        for(int i = 0; i< fonts.size();i++){
+        for(int i = 0; i< fonts.size();++i){
             RadioButton radioButton = new RadioButton(activity);
             radioButton.setTextColor(Color.BLACK);
             if (fonts.get(i).equals(0L)){
