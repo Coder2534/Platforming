@@ -47,7 +47,7 @@ public class SignUpFragment extends Fragment {
     //계정 생성
     FirebaseUser tempUser;
     public static ArrayList<String> ACCESS_CODE = new ArrayList<String>(){{
-        add("23168");
+        add("60259");
     }};
 
     private void createAccount(String email, String password, String passwordCheck, String accessCode){

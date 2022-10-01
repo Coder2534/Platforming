@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.ImageSliderAdapter;
 import com.android.platforming.clazz.CustomDialog;
+import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
@@ -80,6 +81,12 @@ public class InitialSettingFragment extends Fragment {
             String nickName = ((EditText)view.findViewById(R.id.et_initialsetting_nickname)).getText().toString();
             if(nickName.equals("") && !nickName.matches("^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$")){
                 customDialog.messageDialog(getActivity(), "옳지 않은 별명입니다.");
+                confirm.setClickable(true);
+                return;
+            }
+            WordFilter wordFilter = new WordFilter();
+            if(wordFilter.isForbiddenWords(nickName)){
+                customDialog.messageDialog(getActivity(), "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
                 confirm.setClickable(true);
                 return;
             }

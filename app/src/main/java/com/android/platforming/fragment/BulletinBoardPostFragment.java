@@ -244,7 +244,7 @@ public class BulletinBoardPostFragment extends Fragment {
                 }
 
                 WordFilter wordFilter = new WordFilter();
-                if(wordFilter.isForbiddenWords(comment_)){
+                if(wordFilter.isSwearWords(comment_)){
                     CustomDialog customDialog = new CustomDialog();
                     customDialog.messageDialog(getActivity(), "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
                     write.setClickable(true);

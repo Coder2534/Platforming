@@ -97,7 +97,7 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
                 }
 
                 WordFilter wordFilter = new WordFilter();
-                if(wordFilter.isForbiddenWords(title + detail)){
+                if(wordFilter.isSwearWords(title + detail)){
                     CustomDialog customDialog = new CustomDialog();
                     customDialog.messageDialog(activity, "금지어가 포함되어있습니다.\n" + wordFilter.getFilteredForbiddenWords().toString());
                     button_confirm.setClickable(true);

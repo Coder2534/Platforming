@@ -2,13 +2,15 @@ package com.android.platforming.clazz;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class WordFilter {
-    private static final List<String> forbiddenWords = Arrays.asList(
+    private static final List<String> forbiddenWords_swear = Arrays.asList(
             "느금마", "니애미", "니어미", "니엄마", "니애비", "느그애비", "느그애미", "애미터", "애미뒤", "앰뒤", "앰창", "갈보",
             "강간", "개같", "개년", "개뇬", "개미친", "개부랄", "개불알", "개빠구리", "개뼉다구", "개새", "개색", "개쌔끼", "개자석",
             "개자슥", "개자식", "지랄", "꼴통", "느그엄마", "느검마", "니기미", "니미", "대가리", "대갈", "대갈빡", "대갈통", "대굴빡",
@@ -24,16 +26,26 @@ public class WordFilter {
             "씌팍", "씌팔", "씌팡", "씌펄", "씌퐈", "씌퐝", "씨발", "씨1발", "씨팔", "씹", "아가리", "아가지", "아갈", "아괄", "아구리",
             "아구지", "아구창", "아굴창", "자쥐", "자즤", "조까", "조옷", "좆", "주둥아리", "주둥이", "창녀", "창년", "후레", "후장");
 
+    private static final List<String> forbiddenWords_etc = Arrays.asList(
+            "관리자", "어드민", "개발자");
+
     private final Set<String> filteredForbiddenWords = new HashSet<>();
 
-    public boolean isForbiddenWords(String word) {
-        Set<String> filteredBlackWords = getFilteredForbiddenWords(word);
-        return filteredBlackWords.size() > 0;
+    public boolean isSwearWords(String word) {
+        getFilteredWords(word, forbiddenWords_swear);
+        return filteredForbiddenWords.size() > 0;
     }
 
-    public Set<String> getFilteredForbiddenWords(String word) {
+    public boolean isForbiddenWords(String word) {
+        List<String> forbiddenWords = new LinkedList<>(forbiddenWords_swear);
+        forbiddenWords.addAll(forbiddenWords_etc);
+        getFilteredWords(word, forbiddenWords);
+        return filteredForbiddenWords.size() > 0;
+    }
+
+    private void getFilteredWords(String word, List<String> forbiddenWords) {
         if(word == null) {
-            return new HashSet<>();
+            return;
         }
 
         StringBuilder blackWordsRegEx = new StringBuilder();
@@ -51,8 +63,6 @@ public class WordFilter {
         while(m.find()) {
             filteredForbiddenWords.add(m.group());
         }
-
-        return filteredForbiddenWords;
     }
 
     public Set<String> getFilteredForbiddenWords() {
