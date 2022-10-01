@@ -133,7 +133,7 @@ public class InitialSettingFragment extends Fragment {
 
             data.put("profileIndex", imageSlider.getPosition());
 
-            data.put("point", 600);
+            data.put("point", 0);
 
             List<Long> list_design = Collections.singletonList(0L);
             data.put("themes", list_design);
