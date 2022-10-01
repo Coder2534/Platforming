@@ -20,11 +20,13 @@
             android:id="@+id/tv_pointstore_theme_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
             android:text="0p"
             android:textSize="25dp" />
-
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,7 +39,9 @@
             android:text="핑크테마"
             android:textSize="30dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/pink"/>
+            android:backgroundTint="#FF8787"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
 
         <Button
             android:id="@+id/btn_pointstore_theme_bule"
@@ -47,10 +51,12 @@
             android:text="블루테마"
             android:textSize="30dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/bule"
-            />
+            android:backgroundTint="#85E1FF"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +69,10 @@
             android:text="그린테마"
             android:textSize="30dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/darkgreen"/>
+            android:backgroundTint="#6FBC7A"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
         <Button
             android:id="@+id/btn_pointstore_theme_black"
             android:layout_width="match_parent"
@@ -72,8 +81,11 @@
             android:text="다크테마"
             android:textSize="30dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/black"/>
+            android:backgroundTint="#232323"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
     </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp">
@@ -90,18 +102,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_toLeftOf="@+id/btn_pointstore_theme_getout"
+            android:layout_toStartOf="@+id/btn_pointstore_theme_getout"
+            android:layout_marginEnd="5dp"
             android:backgroundTint="?attr/colorPrimary"
             android:text="구매하기" />
+
         <Button
             android:id="@+id/btn_pointstore_theme_getout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginEnd="5dp"
             android:backgroundTint="?attr/colorPrimary"
-            android:text="나가기"
-            />
+            android:text="나가기" />
     </RelativeLayout>
 </LinearLayout>

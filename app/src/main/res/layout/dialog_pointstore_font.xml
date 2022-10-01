@@ -4,26 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="?attr/backgroundColor">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="폰트"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:layout_marginLeft="170dp"/>
+            android:textSize="30dp"/>
+
         <TextView
             android:id="@+id/tv_pointstore_font_point"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="25dp"
-            android:gravity="right"/>
-
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="0p"
+            android:textSize="25dp"/>
+    </RelativeLayout>
 
 
 
@@ -35,9 +36,9 @@
         android:textSize="40dp"
         android:textColorHint="?attr/hintTextColor"
         android:typeface="normal"
-        android:gravity="left"
-        android:paddingLeft="10dp"
-        android:background="?attr/colorPrimary"/>
+        android:layout_margin="5dp"
+        android:background="@drawable/bg_more"
+        android:backgroundTint="?attr/colorPrimary"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +59,9 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/power1"/>
+                android:fontFamily="@font/power1"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_vitorcore"
@@ -69,7 +72,9 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:backgroundTint="?attr/colorPrimary"
-                android:fontFamily="@font/bmeuljiro10yearslate2"/>
+                android:fontFamily="@font/bmeuljiro10yearslate2"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
 
 
 
@@ -89,7 +94,8 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/establishretrosans3"
                 android:backgroundTint="?attr/colorPrimary"
-                />
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
 
             <Button
                 android:id="@+id/btn_pointstore_font_tokki"
@@ -101,7 +107,8 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/eulyoo1945regular4"
                 android:backgroundTint="?attr/colorPrimary"
-                />
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"/>
         </LinearLayout>
 
 
@@ -121,7 +128,8 @@
             android:id="@+id/btn_pointstore_buyfont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/btn_pointstore_getout"
+            android:layout_toStartOf="@+id/btn_pointstore_getout"
+            android:layout_marginEnd="5dp"
             android:backgroundTint="?attr/colorPrimary"
             android:text="구매하기" />
 
@@ -129,8 +137,8 @@
             android:id="@+id/btn_pointstore_getout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
             android:backgroundTint="?attr/colorPrimary"
             android:text="나가기" />
     </RelativeLayout>

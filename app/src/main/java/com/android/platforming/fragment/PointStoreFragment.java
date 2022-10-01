@@ -50,7 +50,6 @@ public class PointStoreFragment extends Fragment {
 
     FirestoreManager firestoreManager = new FirestoreManager();
     HashMap<String,Object> storeMap = new HashMap<>();
-    int point;
     long checkfont;
     List<Long> boughtfont;
     long themeindex;
@@ -90,8 +89,8 @@ public class PointStoreFragment extends Fragment {
                 if(boughtfont.contains(4L)){
                     btn_pointstore_font_tokki.setTextColor(getResources().getColor(R.color.red));
                 }
-                point = user.getPoint();
-                tv_pointstore_font_point.setText(point+ "p");
+
+                tv_pointstore_font_point.setText(user.getPoint()+ "p");
                 fontdialog.show();
 
                 btn_pointstore_font_pyeong.setOnClickListener(new View.OnClickListener() {
@@ -130,15 +129,15 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            if(point >=50){
-                                boughtfont.add(Long.valueOf(checkfont));
-                                storeMap.put("point",point - 50);
+                            if(user.getPoint() >=50){
+                                boughtfont.add(checkfont);
+                                storeMap.put("point",user.getPoint() - 50);
                                 storeMap.put("fonts",boughtfont);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        user.setPoint(point - 50);
-                                        tv_pointstore_font_point.setText(point+"p");
+                                        user.setPoint(user.getPoint() - 50);
+                                        tv_pointstore_font_point.setText(user.getPoint() +"p");
                                         if (checkfont == 1){
                                             btn_pointstore_font_pyeong.setTextColor(getResources().getColor(R.color.red));
                                         }
@@ -188,15 +187,14 @@ public class PointStoreFragment extends Fragment {
                 if(boughttheme.contains(4L)){
                     btn_pointstore_theme_black.setTextColor(getResources().getColor(R.color.red));
                 }
-                point = user.getPoint();
-                tv_pointstore_theme_point.setText(point + "p");
+
+                tv_pointstore_theme_point.setText(user.getPoint() + "p");
                 themedialog.show();
 
                 btn_pointstore_theme_pink.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         themeindex = 1;
-                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
 
                     }
                 });
@@ -204,14 +202,12 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         themeindex = 2;
-                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
                     }
                 });
                 btn_pointstore_theme_green.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         themeindex = 3;
-                        //변수에 테마 저장해서 저장이나 살때 테마 확인해야함
                     }
                 });
                 btn_pointstore_theme_black.setOnClickListener(new View.OnClickListener() {
@@ -228,15 +224,15 @@ public class PointStoreFragment extends Fragment {
                             customDialog.messageDialog(getActivity(),"이미 구입한 상품입니다.");
                         }
                         else {
-                            if(point >=100){
-                                boughttheme.add(Long.valueOf(themeindex));
-                                storeMap.put("point",point - 100);
+                            if(user.getPoint() >=100){
+                                boughttheme.add(themeindex);
+                                storeMap.put("point",user.getPoint() - 100);
                                 storeMap.put("themes",boughttheme);
                                 firestoreManager.updateUserData(storeMap, new ListenerInterface() {
                                     @Override
                                     public void onSuccess() {
-                                        user.setPoint(point - 100);
-                                        tv_pointstore_theme_point.setText(point+"p");
+                                        user.setPoint(user.getPoint() - 100);
+                                        tv_pointstore_theme_point.setText(user.getPoint() + "p");
                                         if(themeindex==1){
                                             btn_pointstore_theme_pink.setTextColor(getResources().getColor(R.color.red));
                                         }
