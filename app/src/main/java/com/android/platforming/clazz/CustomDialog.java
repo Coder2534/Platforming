@@ -53,7 +53,7 @@ public class CustomDialog {
         View view = inflater.inflate(R.layout.dialog_message, null);
 
         TextView message = view.findViewById(R.id.tv_message_message);
-        message.setText(" 아래 메일로 문의해주세요.\n: ssak2534@gmail.com");
+        message.setText(" 아래 메일로 문의해주세요.\n: pathfinder2534@gmail.com");
 
         Button confirm = view.findViewById(R.id.btn_message_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
