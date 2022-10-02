@@ -1,22 +1,16 @@
 package com.android.platforming.clazz;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.ListviewAdapter;
 import com.android.platforming.interfaze.OnChildClickInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 

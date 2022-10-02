@@ -1,7 +1,5 @@
 package com.android.platforming.fragment;
 
-import static com.android.platforming.clazz.User.user;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,10 +18,9 @@ import com.android.platforming.adapter.TableAdapter;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.TableItem;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class ViewPagerTimetableFragment extends Fragment {
 

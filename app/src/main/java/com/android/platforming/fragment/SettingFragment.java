@@ -6,7 +6,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import androidx.annotation.Nullable;
 
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class SettingFragment extends PreferenceFragmentCompat {
     @Override

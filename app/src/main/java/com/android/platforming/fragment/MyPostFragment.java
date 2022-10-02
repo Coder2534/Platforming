@@ -5,7 +5,6 @@ import static com.android.platforming.clazz.Post.POST_MY;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,7 @@ import com.android.platforming.adapter.PostViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
-
-import java.util.ArrayList;
+import com.android.platforming.R;
 
 public class MyPostFragment extends Fragment {
 

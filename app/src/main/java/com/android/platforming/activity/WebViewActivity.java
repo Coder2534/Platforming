@@ -11,9 +11,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
@@ -22,15 +19,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.cookie.Cookie;
+import com.android.platforming.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

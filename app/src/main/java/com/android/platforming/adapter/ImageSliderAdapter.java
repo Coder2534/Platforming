@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 

@@ -1,14 +1,11 @@
 package com.android.platforming.fragment;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,16 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.activity.MainActivity;
-import com.android.platforming.clazz.JsonParser;
 import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class SchoolScheduleFragment extends Fragment {

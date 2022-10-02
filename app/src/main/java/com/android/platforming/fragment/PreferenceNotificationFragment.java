@@ -16,7 +16,7 @@ import com.android.platforming.clazz.Alarm;
 import com.android.platforming.recevier.AlarmReceiver;
 import com.android.platforming.view.TimePreference;
 import com.android.platforming.view.TimePreferenceCompat;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class PreferenceNotificationFragment extends PreferenceFragmentCompat {
 

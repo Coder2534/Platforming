@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.platforming.activity.MainActivity;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class EmailAlarmFragment extends Fragment {
 

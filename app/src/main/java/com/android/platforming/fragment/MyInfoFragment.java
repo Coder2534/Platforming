@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.text.Spanned;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +24,7 @@ import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
-import com.google.protobuf.StringValue;
+import com.android.platforming.R;
 
 import java.util.HashMap;
 import java.util.Map;

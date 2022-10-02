@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.widget.Toast;
 
@@ -15,7 +14,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.activity.WebViewActivity;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class NotificationHelper extends ContextWrapper {
     private static final Integer WORK_A_NOTIFICATION_CODE = 0;

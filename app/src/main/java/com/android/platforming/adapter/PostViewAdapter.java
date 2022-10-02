@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.Post;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 

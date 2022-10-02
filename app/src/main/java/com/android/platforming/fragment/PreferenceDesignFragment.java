@@ -4,7 +4,6 @@ package com.android.platforming.fragment;
 import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
-import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.android.platforming.InitApplication;
 import com.android.platforming.clazz.CustomDialog;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
     CustomDialog customDialog;

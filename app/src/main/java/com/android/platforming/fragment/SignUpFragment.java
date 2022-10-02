@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.platforming.clazz.CustomDialog;
-import com.example.platforming.R;
+import com.android.platforming.R;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;

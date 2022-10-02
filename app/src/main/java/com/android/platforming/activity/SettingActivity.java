@@ -2,14 +2,13 @@ package com.android.platforming.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.android.platforming.InitApplication;
 import com.android.platforming.fragment.SettingFragment;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class SettingActivity extends AppCompatActivity {
 

@@ -4,14 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.platforming.clazz.Post;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 

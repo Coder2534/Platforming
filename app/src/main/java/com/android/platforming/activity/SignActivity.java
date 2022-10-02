@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.android.platforming.InitApplication;
 import com.android.platforming.fragment.SignInFragment;
-import com.example.platforming.R;
+import com.android.platforming.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;

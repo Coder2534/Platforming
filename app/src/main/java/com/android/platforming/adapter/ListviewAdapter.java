@@ -8,9 +8,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.platforming.clazz.ExpandableList;
 import com.android.platforming.clazz.ExpandableListItem;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 

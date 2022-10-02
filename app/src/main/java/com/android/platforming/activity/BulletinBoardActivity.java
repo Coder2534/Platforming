@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.android.platforming.InitApplication;
 import com.android.platforming.fragment.BulletinBoardListFragment;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class BulletinBoardActivity extends AppCompatActivity {
 

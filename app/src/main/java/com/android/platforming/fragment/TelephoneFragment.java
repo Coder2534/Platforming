@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.android.platforming.activity.MainActivity;
 import com.android.platforming.adapter.TelephoneAdapter;
 import com.android.platforming.clazz.TelephoneItem;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class TelephoneFragment extends Fragment {
 

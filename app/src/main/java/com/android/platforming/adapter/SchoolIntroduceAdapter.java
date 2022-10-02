@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.platforming.clazz.SchoolIntroduceItem;
-import com.android.platforming.clazz.TelephoneItem;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 

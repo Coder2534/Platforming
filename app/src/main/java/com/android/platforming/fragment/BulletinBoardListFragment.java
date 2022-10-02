@@ -2,14 +2,12 @@ package com.android.platforming.fragment;
 
 import static android.app.Activity.RESULT_OK;
 import static com.android.platforming.clazz.Post.POST;
-import static com.android.platforming.clazz.Post.POST_MY;
 import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +26,7 @@ import com.android.platforming.adapter.PostViewAdapter;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;

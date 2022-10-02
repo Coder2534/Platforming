@@ -14,7 +14,7 @@ import android.view.Window;
 import com.android.platforming.InitApplication;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.FirestoreManager;
-import com.example.platforming.R;
+import com.android.platforming.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.atomic.AtomicBoolean;

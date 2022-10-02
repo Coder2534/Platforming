@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.platforming.clazz.SchoolApi;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;

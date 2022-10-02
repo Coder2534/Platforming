@@ -6,8 +6,6 @@ import static com.android.platforming.clazz.User.user;
 
 import android.os.Bundle;
 
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +25,7 @@ import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.User;
 import com.android.platforming.view.ImageSlider;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +33,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class InitialSettingFragment extends Fragment {
     ImageSlider imageSlider;

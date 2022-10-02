@@ -1,10 +1,9 @@
 package com.android.platforming.clazz;
 
-import android.app.Activity;
 import android.util.Log;
 
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;

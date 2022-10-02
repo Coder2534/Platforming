@@ -1,4 +1,4 @@
-package com.example.platforming;
+package com.android.platforming;
 
 import android.content.Context;
 

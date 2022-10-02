@@ -8,7 +8,6 @@ import static com.android.platforming.clazz.User.user;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ import com.android.platforming.clazz.Post;
 import com.android.platforming.clazz.User;
 import com.android.platforming.clazz.WordFilter;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.platforming.adapter.ImageSliderAdapter;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 public class ImageSlider {
 

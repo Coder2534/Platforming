@@ -30,7 +30,7 @@ import com.android.platforming.adapter.RecyclerViewSliderAdapter;
 import com.android.platforming.adapter.TableAdapter;
 import com.android.platforming.fragment.SignUpFragment;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;

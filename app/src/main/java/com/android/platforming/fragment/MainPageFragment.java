@@ -5,16 +5,11 @@ import static com.android.platforming.clazz.Post.POST_RECENT;
 import static com.android.platforming.clazz.User.user;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -32,19 +27,9 @@ import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.clazz.FirestoreManager;
 import com.android.platforming.clazz.Post;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 
-import org.apache.commons.net.ntp.NTPUDPClient;
-import org.apache.commons.net.ntp.TimeInfo;
-
-import java.net.InetAddress;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainPageFragment extends Fragment {
     ViewPager2 viewPager;

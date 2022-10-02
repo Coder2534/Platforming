@@ -16,7 +16,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,7 +38,7 @@ import com.android.platforming.fragment.SchoolmealFragment;
 import com.android.platforming.fragment.TelephoneFragment;
 import com.android.platforming.interfaze.ListenerInterface;
 import com.android.platforming.interfaze.OnChildClickInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 import com.android.platforming.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
 

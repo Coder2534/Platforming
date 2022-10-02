@@ -17,7 +17,7 @@ import com.android.platforming.activity.MainActivity;
 import com.android.platforming.activity.SignActivity;
 import com.android.platforming.clazz.CustomDialog;
 import com.android.platforming.interfaze.ListenerInterface;
-import com.example.platforming.R;
+import com.android.platforming.R;
 import com.google.firebase.auth.UserInfo;
 
 public class PreferenceAccountFragment extends PreferenceFragmentCompat {

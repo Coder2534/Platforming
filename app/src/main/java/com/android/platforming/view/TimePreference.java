@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 import androidx.preference.DialogPreference;
 
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.Calendar;
 import java.util.Date;

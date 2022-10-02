@@ -1,11 +1,10 @@
 package com.android.platforming.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
-import com.example.platforming.R;
+import com.android.platforming.R;
 
 import java.util.Calendar;
 
