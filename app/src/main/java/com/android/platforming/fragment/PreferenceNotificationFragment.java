@@ -58,13 +58,13 @@ public class PreferenceNotificationFragment extends PreferenceFragmentCompat {
     @Override
     public void onPause() {
         super.onPause();
-        pref.unregisterOnSharedPreferenceChangeListener(listener);
+        ///pref.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        pref.unregisterOnSharedPreferenceChangeListener(listener);
+        //pref.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
