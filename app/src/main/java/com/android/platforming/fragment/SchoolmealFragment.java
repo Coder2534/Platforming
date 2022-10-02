@@ -2,6 +2,7 @@ package com.android.platforming.fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,7 +86,11 @@ public class SchoolmealFragment extends Fragment {
     }
 
     public void showDate() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        int[] styles = {R.style.datepicker_white, R.style.datepicker_pink, R.style.datepicker_blue, R.style.datepicker_green, R.style.datepicker_black};
+
+        int appliedTheme = ((InitApplication)getActivity().getApplication()).getAppliedTheme();
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), styles[appliedTheme], new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -99,7 +104,6 @@ public class SchoolmealFragment extends Fragment {
         }, Integer.parseInt(api.getYear()), Integer.parseInt(api.getMonth()) - 1, Integer.parseInt(api.getDay()));
 
         minDate.set(2020,0,1);
-        datePickerDialog.setTitle("날짜선택");
         datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
         datePickerDialog.show();
     }

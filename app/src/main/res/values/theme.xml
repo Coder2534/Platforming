@@ -117,4 +117,44 @@
         <item name="titleTextColor">#000000</item>
     </style>
 
+    <style name="datepicker_white" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">#8F8F8F</item>                   <!--header background-->
+        <item name="android:windowBackground">#FFFFFF</item>     <!--calendar background-->
+        <!-- <item name="android:colorControlActivated">#000000</item> --> <!--selected day-->
+        <item name="android:textColorPrimary">#8F8F8F</item> <!--days of the month-->
+        <item name="android:textColorSecondary">#8F8F8F</item>    <!--days of the week-->
+    </style>
+
+    <style name="datepicker_pink" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">#FF7B7B</item>                   <!--header background-->
+        <item name="android:windowBackground">#FFFFFF</item>     <!--calendar background-->
+        <!-- <item name="android:colorControlActivated">#000000</item> --> <!--selected day-->
+        <item name="android:textColorPrimary">#FF7B7B</item> <!--days of the month-->
+        <item name="android:textColorSecondary">#FF7B7B</item>    <!--days of the week-->
+    </style>
+
+    <style name="datepicker_blue" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">#8EE0FB</item>                   <!--header background-->
+        <item name="android:windowBackground">#FFFFFF</item>     <!--calendar background-->
+        <!-- <item name="android:colorControlActivated">#000000</item> --> <!--selected day-->
+        <item name="android:textColorPrimary">#8EE0FB</item> <!--days of the month-->
+        <item name="android:textColorSecondary">#8EE0FB</item>    <!--days of the week-->
+    </style>
+
+    <style name="datepicker_green" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">#70BD7C</item>                   <!--header background-->
+        <item name="android:windowBackground">#FFFFFF</item>     <!--calendar background-->
+        <!-- <item name="android:colorControlActivated">#000000</item> --> <!--selected day-->
+        <item name="android:textColorPrimary">#70BD7C</item> <!--days of the month-->
+        <item name="android:textColorSecondary">#70BD7C</item>    <!--days of the week-->
+    </style>
+
+    <style name="datepicker_black" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">#232323</item>                   <!--header background-->
+        <item name="android:windowBackground">#FFFFFF</item>     <!--calendar background-->
+        <!-- <item name="android:colorControlActivated">#000000</item> --> <!--selected day-->
+        <item name="android:textColorPrimary">#232323</item> <!--days of the month-->
+        <item name="android:textColorSecondary">#232323</item>    <!--days of the week-->
+    </style>
+
 </resources>
