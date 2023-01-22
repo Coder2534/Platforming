@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.android.platforming.activity.SettingActivity"
+    tools:context="com.platforming.autonomy.activity.SettingActivity"
     android:background="?attr/backgroundColor">
 
     <androidx.appcompat.widget.Toolbar

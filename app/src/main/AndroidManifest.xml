@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.platforming">
+    package="com.android.autonomy">
     <!-- add permission -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.DIAL_PHONE" />
 
     <application
-        android:name="com.android.platforming.InitApplication"
+        android:name="com.android.autonomy.com.platforming.autonomy.InitApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_autonomy"
         android:label="@string/app_name"
@@ -19,23 +19,23 @@
         android:theme="@style/Theme.Platforming"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.android.platforming.activity.BulletinBoardRegisterActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.BulletinBoardRegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.android.platforming.activity.BulletinBoardActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.BulletinBoardActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.android.platforming.activity.WebViewActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.WebViewActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
         <receiver
-            android:name="com.android.platforming.recevier.AlarmReceiver"
+            android:name="com.android.autonomy.com.platforming.autonomy.recevier.AlarmReceiver"
             android:exported="false" />
         <receiver
-            android:name="com.android.platforming.recevier.BootReceiver"
+            android:name="com.android.autonomy.com.platforming.autonomy.recevier.BootReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -43,11 +43,11 @@
         </receiver>
 
         <activity
-            android:name="com.android.platforming.activity.SettingActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.SettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.android.platforming.activity.StartActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.StartActivity"
             android:configChanges="uiMode"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -58,13 +58,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.platforming.activity.MainActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.MainActivity"
             android:configChanges="uiMode"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.android.platforming.activity.SignActivity"
+            android:name="com.android.autonomy.com.platforming.autonomy.activity.SignActivity"
             android:configChanges="uiMode"
             android:exported="false"
             android:screenOrientation="portrait"/>

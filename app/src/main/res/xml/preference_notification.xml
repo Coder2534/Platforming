@@ -12,7 +12,7 @@
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <com.android.platforming.view.TimePreference
+        <com.platforming.autonomy.view.TimePreference
             android:dependency="selfDiagnosis"
             android:key="time_selfDiagnosis"
             android:title="시간" />
@@ -24,7 +24,7 @@
             android:title="오늘의 시간표 알림"
             app:iconSpaceReserved="false" />
 
-        <com.android.platforming.view.TimePreference
+        <com.platforming.autonomy.view.TimePreference
             android:dependency="schedule"
             android:key="time_schedule"
             android:title="시간" />
