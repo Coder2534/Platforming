@@ -1,6 +1,7 @@
 package com.platforming.autonomy.fragment;
 
 import android.app.Dialog;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -89,6 +90,10 @@ public class PointStoreFragment extends Fragment {
                     public void onClick(View view) {
                         checkfont = 1;
                         et_pointstore_testtext.setTypeface(getFont(1));
+                        btn_pointstore_font_pyeong.setPaintFlags(btn_pointstore_font_pyeong.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+                        btn_pointstore_font_galmuri.setPaintFlags(0);
+                        btn_pointstore_font_tokki.setPaintFlags(0);
+                        btn_pointstore_font_vitorcore.setPaintFlags(0);
                     }
                 });
                 btn_pointstore_font_vitorcore.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +101,10 @@ public class PointStoreFragment extends Fragment {
                     public void onClick(View view) {
                         checkfont = 2;
                         et_pointstore_testtext.setTypeface(getFont(2));
+                        btn_pointstore_font_pyeong.setPaintFlags(0);
+                        btn_pointstore_font_galmuri.setPaintFlags(0);
+                        btn_pointstore_font_tokki.setPaintFlags(0);
+                        btn_pointstore_font_vitorcore.setPaintFlags(btn_pointstore_font_vitorcore.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
                     }
                 });
                 btn_pointstore_font_galmuri.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +112,10 @@ public class PointStoreFragment extends Fragment {
                     public void onClick(View view) {
                         checkfont = 3;
                         et_pointstore_testtext.setTypeface(getFont(3));
+                        btn_pointstore_font_pyeong.setPaintFlags(0);
+                        btn_pointstore_font_galmuri.setPaintFlags(btn_pointstore_font_galmuri.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+                        btn_pointstore_font_tokki.setPaintFlags(0);
+                        btn_pointstore_font_vitorcore.setPaintFlags(0);
                     }
                 });
                 btn_pointstore_font_tokki.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +123,10 @@ public class PointStoreFragment extends Fragment {
                     public void onClick(View v) {
                         checkfont = 4;
                         et_pointstore_testtext.setTypeface(getFont(4));
+                        btn_pointstore_font_pyeong.setPaintFlags(0);
+                        btn_pointstore_font_galmuri.setPaintFlags(0);
+                        btn_pointstore_font_tokki.setPaintFlags(btn_pointstore_font_tokki.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+                        btn_pointstore_font_vitorcore.setPaintFlags(0);
                     }
                 });
                 btn_pointstore_buyfont.setOnClickListener(new View.OnClickListener() {
@@ -186,24 +203,41 @@ public class PointStoreFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         themeindex = 1;
+                        btn_pointstore_theme_pink.setPaintFlags(btn_pointstore_theme_pink.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+                        btn_pointstore_theme_bule.setPaintFlags(0);
+                        btn_pointstore_theme_black.setPaintFlags(0);
+                        btn_pointstore_theme_green.setPaintFlags(0);
+
                     }
                 });
                 btn_pointstore_theme_bule.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         themeindex = 2;
+                        btn_pointstore_theme_pink.setPaintFlags(0);
+                        btn_pointstore_theme_bule.setPaintFlags(btn_pointstore_theme_bule.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+                        btn_pointstore_theme_black.setPaintFlags(0);
+                        btn_pointstore_theme_green.setPaintFlags(0);
                     }
                 });
                 btn_pointstore_theme_green.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         themeindex = 3;
+                        btn_pointstore_theme_pink.setPaintFlags(0);
+                        btn_pointstore_theme_bule.setPaintFlags(0);
+                        btn_pointstore_theme_black.setPaintFlags(0);
+                        btn_pointstore_theme_green.setPaintFlags(btn_pointstore_theme_green.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
                     }
                 });
                 btn_pointstore_theme_black.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         themeindex = 4;
+                        btn_pointstore_theme_pink.setPaintFlags(0);
+                        btn_pointstore_theme_bule.setPaintFlags(0);
+                        btn_pointstore_theme_black.setPaintFlags(btn_pointstore_theme_black.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+                        btn_pointstore_theme_green.setPaintFlags(0);
                     }
                 });
                 btn_pointstore_buytheme.setOnClickListener(new View.OnClickListener() {

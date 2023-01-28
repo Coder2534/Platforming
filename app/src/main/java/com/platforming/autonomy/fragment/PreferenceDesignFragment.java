@@ -4,6 +4,7 @@ package com.platforming.autonomy.fragment;
 import static com.platforming.autonomy.clazz.User.user;
 
 import android.os.Bundle;
+import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public class PreferenceDesignFragment  extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.preference_design, rootKey);
+        Log.d("preference:","ㅇ나ㅓㅗㅇ ㅏㅓㅣㅁ농ㅁㄴ회ㅏㅓㅁㄴ ㅣㅗㅓ누확인");
         InitApplication initApplication = ((InitApplication)getActivity().getApplication());
 
         Preference font = findPreference("font");

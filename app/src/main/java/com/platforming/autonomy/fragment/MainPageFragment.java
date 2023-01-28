@@ -119,10 +119,10 @@ public class MainPageFragment extends Fragment {
             }
         });
 
-        if(user.isBan()){
+        /*if(user.isBan()){
             CustomDialog customDialog = new CustomDialog();
             customDialog.banDialog(getActivity());
-        }
+        }*/
 
         return view;
     }

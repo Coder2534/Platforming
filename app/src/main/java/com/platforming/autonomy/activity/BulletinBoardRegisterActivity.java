@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import com.platforming.autonomy.InitApplication;
 import com.platforming.autonomy.clazz.CustomDialog;
 import com.platforming.autonomy.clazz.FirestoreManager;
+import com.platforming.autonomy.clazz.ThemeManager;
 import com.platforming.autonomy.clazz.WordFilter;
 import com.platforming.autonomy.interfaze.ListenerInterface;
 import com.android.autonomy.R;
@@ -32,21 +33,8 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        InitApplication initApplication = ((InitApplication)getApplication());
-        switch (initApplication.getAppliedTheme()){
-            case 0:setTheme(R.style.WhiteTheme);break;
-            case 1:setTheme(R.style.PinkTheme);break;
-            case 2:setTheme(R.style.BuleTheme);break;
-            case 3:setTheme(R.style.GreenTheme);break;
-            case 4:setTheme(R.style.BlackTheme);break;
-        }
-        switch (initApplication.getAppliedFont()){
-            case 0:setTheme(R.style.pretendardFont);break;
-            case 1:setTheme(R.style.snowFont);break;
-            case 2:setTheme(R.style.bmeFont);break;
-            case 3:setTheme(R.style.establishreFont);break;
-            case 4:setTheme(R.style.eulyoo1945Font);break;
-        }
+        ThemeManager.TFCall(this, (InitApplication)getApplication());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeboard_register);
 
