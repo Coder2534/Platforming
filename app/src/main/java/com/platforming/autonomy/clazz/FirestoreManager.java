@@ -39,17 +39,17 @@ public class FirestoreManager {
                 DocumentSnapshot documentSnapshot = task.getResult();
 
                 if(documentSnapshot.exists()){
-                    Log.w("setUserData", "Document exist",task.getException());
+                    Log.w("readUserData", "Document exist",task.getException());
                     Map<String, Object> data = documentSnapshot.getData();
                     user = new User(firebaseAuth.getCurrentUser().getUid(), firebaseAuth.getCurrentUser().getEmail(), data);
                 }
                 else{
-                    Log.w("setUserData", "Document doesn't exist");
+                    Log.w("readUserData", "Document doesn't exist");
                 }
 
                 interfaze.onSuccess();
             }else{
-                Log.w("setUserData", "Failed with: ",task.getException());
+                Log.w("readUserData", "Failed with: ",task.getException());
                 interfaze.onFail();
             }
         });
@@ -88,17 +88,39 @@ public class FirestoreManager {
         });
     }
 
-    //Post
+    //BulletinBoard
+    public void getBulletinBoardIds(ListenerInterface interfaze){
+        FirebaseFirestore.getInstance().collection("posts").document("settings").get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot documentSnapshot = task.getResult();
+
+                if(documentSnapshot.exists()){
+                    Log.w("getBulletinBoardIds", "Document exist",task.getException());
+                    Map<String, Object> data = documentSnapshot.getData();
+                    BulletinBoard.Manager.ids = (ArrayList<String>) data.get("bulletinIds");
+                }
+                else{
+                    Log.w("getBulletinBoardIds", "Document doesn't exist");
+                }
+
+                interfaze.onSuccess();
+            }else{
+                Log.w("getBulletinBoardIds", "Failed with: ",task.getException());
+                interfaze.onFail();
+            }
+        });
+    }
+
     public void readRecentPostData(ListenerInterface interfaze){
         FirebaseFirestore.getInstance().collection("posts").orderBy("date", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getRecentPosts();
+                    ArrayList<BulletinBoard.Post> posts = BulletinBoard.Manager.bulletinBoards.get("_RECENT").getPosts();
                     posts.clear();
 
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        posts.add(new Post(documentSnapshot.getId(), documentSnapshot.getData()));
+                        posts.add(new BulletinBoard.Post(documentSnapshot.getId(), documentSnapshot.getData()));
                     }
                     interfaze.onSuccess();
                 }
@@ -107,13 +129,13 @@ public class FirestoreManager {
     }
 
     private static QueryDocumentSnapshot lastDocument_post;
-    public void readPostData(int type, ListenerInterface listenerInterface){
-        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).limit(15).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void readPostData(String bulletinId, ListenerInterface listenerInterface){
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("bulletinId", bulletinId).orderBy("date", Query.Direction.DESCENDING).limit(15).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
-
+                    BulletinBoard.Manager.bulletinBoards.put(bulletinId, new BulletinBoard(bulletinId));
+                    ArrayList<BulletinBoard.Post> posts = BulletinBoard.Manager.bulletinBoards.get(bulletinId).getPosts();
                     int size = task.getResult().size();
                     if(size == 0){
                         listenerInterface.onSuccess();
@@ -121,8 +143,10 @@ public class FirestoreManager {
                     else{
                         int i = 0;
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            BulletinBoard.Post post = new BulletinBoard.Post(documentSnapshot.getId(), documentSnapshot.getData());
                             posts.add(post);
+                            Log.d("test1", String.valueOf(posts.size()));
+                            Log.d("test2", String.valueOf(BulletinBoard.Manager.bulletinBoards.get(bulletinId).getPosts().size()));
                             listenerInterface.onSuccess();
                             readCommentSize(post, posts.size(), listenerInterface);
                             if (++i == size)
@@ -134,18 +158,18 @@ public class FirestoreManager {
         });
     }
 
-    public void readExtraPostData(int type, ListenerInterface listenerInterface){
-        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("type", type).orderBy("date", Query.Direction.DESCENDING).limit(15).startAfter(lastDocument_post).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public void readExtraPostData(String bulletinId, ListenerInterface listenerInterface){
+        FirebaseFirestore.getInstance().collection("posts").whereEqualTo("bulletinId", bulletinId).orderBy("date", Query.Direction.DESCENDING).limit(15).startAfter(lastDocument_post).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Post> posts = Post.getPosts();
+                    ArrayList<BulletinBoard.Post> posts = BulletinBoard.Manager.bulletinBoards.get(bulletinId).getPosts();
 
                     int size = task.getResult().size();
                     if(size > 0){
                         int i = 0;
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            BulletinBoard.Post post = new BulletinBoard.Post(documentSnapshot.getId(), documentSnapshot.getData());
                             posts.add(post);
                             listenerInterface.onSuccess();
                             readCommentSize(post, posts.size(), listenerInterface);
@@ -164,12 +188,12 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
-                    ArrayList<Post> posts = Post.getMyPosts();
+                    ArrayList<BulletinBoard.Post> posts = BulletinBoard.Manager.bulletinBoards.get("_MY").getPosts();
 
                     int size = task.getResult().size();
                     int i = 0;
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                        BulletinBoard.Post post = new BulletinBoard.Post(documentSnapshot.getId(), documentSnapshot.getData());
                         posts.add(post);
                         listenerInterface.onSuccess();
                         readCommentSize(post, posts.size(), listenerInterface);
@@ -186,13 +210,13 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
-                    ArrayList<Post> posts = Post.getMyPosts();
+                    ArrayList<BulletinBoard.Post> posts = BulletinBoard.Manager.bulletinBoards.get("_MY").getPosts();
 
                     int size = task.getResult().size();
                     if (size > 0) {
                         int i = 0;
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            Post post = new Post(documentSnapshot.getId(), documentSnapshot.getData());
+                            BulletinBoard.Post post = new BulletinBoard.Post(documentSnapshot.getId(), documentSnapshot.getData());
                             posts.add(post);
                             listenerInterface.onSuccess();
                             readCommentSize(post, posts.size(), listenerInterface);
@@ -236,7 +260,7 @@ public class FirestoreManager {
     }
 
     //Comment
-    public void readCommentSize(Post post, ListenerInterface listenerInterface){
+    public void readCommentSize(BulletinBoard.Post post, ListenerInterface listenerInterface){
         FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 post.setCommentSize(task.getResult().size());
@@ -245,7 +269,7 @@ public class FirestoreManager {
         });
     }
 
-    public void readCommentSize(Post post, int postion, ListenerInterface listenerInterface){
+    public void readCommentSize(BulletinBoard.Post post, int postion, ListenerInterface listenerInterface){
         FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 post.setCommentSize(task.getResult().size());
@@ -255,19 +279,19 @@ public class FirestoreManager {
     }
 
     private static QueryDocumentSnapshot lastDocument_comment;
-    public void readCommentData(Post post, ListenerInterface listenerInterface){
+    public void readCommentData(BulletinBoard.Post post, ListenerInterface listenerInterface){
         FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").orderBy("date", Query.Direction.DESCENDING).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Comment> comments = post.getComments();
+                    ArrayList<BulletinBoard.Comment> comments = post.getComments();
                     comments.clear();
 
                     int size = task.getResult().size();
                     if(size > 0){
                         int i = 0;
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                            comments.add(new Comment(documentSnapshot.getId(), documentSnapshot.getData()));
+                            comments.add(new BulletinBoard.Comment(documentSnapshot.getId(), documentSnapshot.getData()));
                             if(++i == size)
                                 lastDocument_comment = documentSnapshot;
                         }
@@ -278,18 +302,18 @@ public class FirestoreManager {
         });
     }
 
-    public void readExtraCommentData(Post post, ListenerInterface listenerInterface){
+    public void readExtraCommentData(BulletinBoard.Post post, ListenerInterface listenerInterface){
         FirebaseFirestore.getInstance().collection("posts").document(post.getId()).collection("comments").orderBy("date", Query.Direction.DESCENDING).limit(5).startAfter(lastDocument_comment).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    ArrayList<Comment> comments = post.getComments();
+                    ArrayList<BulletinBoard.Comment> comments = post.getComments();
 
                     int size = task.getResult().size();
                     if(size > 0){
                         int i = 0;
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                            comments.add(new Comment(documentSnapshot.getId(), documentSnapshot.getData()));
+                            comments.add(new BulletinBoard.Comment(documentSnapshot.getId(), documentSnapshot.getData()));
                             if(++i == size)
                                 lastDocument_comment = documentSnapshot;
                         }

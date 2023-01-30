@@ -3,6 +3,7 @@ package com.platforming.autonomy.fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.platforming.autonomy.adapter.PostCommentViewAdapter;
 import com.platforming.autonomy.clazz.CustomDialog;
 import com.platforming.autonomy.clazz.FirestoreManager;
-import com.platforming.autonomy.clazz.Post;
+import com.platforming.autonomy.clazz.BulletinBoard;
 import com.platforming.autonomy.clazz.User;
 import com.platforming.autonomy.clazz.WordFilter;
 import com.platforming.autonomy.interfaze.ListenerInterface;
@@ -36,7 +37,7 @@ import java.util.Map;
 public class BulletinBoardPostFragment extends Fragment {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
-    Post post;
+    BulletinBoard.Post post;
 
     ListenerInterface listenerInterface;
 
@@ -45,21 +46,8 @@ public class BulletinBoardPostFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bulletinboard_post, container, false);
         Bundle args = getArguments();
-
-        switch (args.getInt("post", 0)){
-            case Post.POST:
-                post = Post.getPosts().get(args.getInt("position", 0));
-                break;
-
-            case Post.POST_RECENT:
-                post = Post.getRecentPosts().get(args.getInt("position", 0));
-                break;
-
-            case Post.POST_MY:
-                post = Post.getMyPosts().get(args.getInt("position", 0));
-                break;
-        }
-
+        Log.d("BulletinBoardPost", String.valueOf(BulletinBoard.Manager.bulletinBoards.get("_RECENT").getPosts().size()));
+        post = BulletinBoard.Manager.bulletinBoards.get(args.getString("bulletinId")).getPosts().get(args.getInt("position"));
 
         ImageView profile = view.findViewById(R.id.iv_bulletinboard_detail_profile);
         profile.setImageResource(User.getProfiles().get(post.getProfileIndex()));

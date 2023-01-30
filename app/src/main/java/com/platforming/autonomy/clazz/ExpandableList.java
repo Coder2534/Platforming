@@ -91,4 +91,7 @@ public class ExpandableList extends ExpandableListView {
             }
         });
     }
+    public void updateAdapter(){
+        adapter.notifyDataSetChanged();
+    }
 }

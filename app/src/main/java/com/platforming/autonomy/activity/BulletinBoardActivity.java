@@ -1,9 +1,5 @@
 package com.platforming.autonomy.activity;
 
-import static com.platforming.autonomy.clazz.Post.FREE_BULLETIN_BOARD;
-import static com.platforming.autonomy.clazz.Post.QUESTION_BULLETIN_BOARD;
-import static com.platforming.autonomy.clazz.Post.SCHOOL_BULLETIN_BOARD;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -47,30 +43,14 @@ public class BulletinBoardActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 왼쪽 상단 버튼 만들기
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24); //왼쪽 상단 버튼 아이콘 지정
 
-        int type = getIntent().getIntExtra("type", 0);
-        String id = getIntent().getStringExtra("id");
-
-        TextView title = findViewById(R.id.tv_noticeboard_title);
-        switch (type){
-            case FREE_BULLETIN_BOARD:
-                title.setText("자유게시판");
-                break;
-
-            case QUESTION_BULLETIN_BOARD:
-                title.setText("질문게시판");
-                break;
-
-            case SCHOOL_BULLETIN_BOARD:
-                title.setText("학교게시판");
-                break;
-        }
+        String bulletinId = getIntent().getStringExtra("bulletinId");
+        String postId = getIntent().getStringExtra("postId");
 
         BulletinBoardListFragment fragment = new BulletinBoardListFragment();
         Bundle args = new Bundle();
-        args.putInt("post", getIntent().getIntExtra("post", 0));
-        args.putInt("type", type);
-        if(id != null)
-            args.putString("id", id);
+        args.putString("bulletinId", bulletinId);
+        if(postId != null)
+            args.putString("postId", postId);
         fragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.cl_noticeboard, fragment, "NoticeBoardList").commit();
     }

@@ -12,10 +12,6 @@ public class InitApplication extends Application {
     private int appliedTheme;
     private int appliedFont;
 
-    public static final int HOMEPAGE = 0;
-    public static final int RIROSCHOOL = 1;
-    public static final int SELFDIAGNOSIS = 2;
-
     @Override
     public void onCreate() {
         super.onCreate();

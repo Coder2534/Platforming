@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.platforming.autonomy.clazz.Comment;
+import com.platforming.autonomy.clazz.BulletinBoard;
 import com.platforming.autonomy.clazz.CustomDialog;
 import com.platforming.autonomy.clazz.FirestoreManager;
 import com.platforming.autonomy.clazz.User;
@@ -35,7 +35,7 @@ public class PostCommentViewAdapter extends RecyclerView.Adapter<PostCommentView
     }
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
-    private ArrayList<Comment> mData = null ;
+    private ArrayList<BulletinBoard.Comment> mData = null ;
 
     public void removeData(int index){
         mData.remove(index);
@@ -79,7 +79,7 @@ public class PostCommentViewAdapter extends RecyclerView.Adapter<PostCommentView
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public PostCommentViewAdapter(Activity activity, String postId, ArrayList<Comment> list) {
+    public PostCommentViewAdapter(Activity activity, String postId, ArrayList<BulletinBoard.Comment> list) {
         this.activity = activity;
         this.postId = postId;
         mData = list;

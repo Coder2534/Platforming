@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.platforming.autonomy.InitApplication;
 import com.platforming.autonomy.clazz.CustomDialog;
 import com.platforming.autonomy.clazz.ExpandableList;
+import com.platforming.autonomy.clazz.FirestoreManager;
 import com.platforming.autonomy.fragment.MainPageFragment;
 import com.platforming.autonomy.fragment.MyInfoFragment;
 import com.platforming.autonomy.fragment.MyPostFragment;
@@ -36,7 +37,7 @@ import com.platforming.autonomy.interfaze.OnChildClickInterface;
 import com.android.autonomy.R;
 import com.platforming.autonomy.fragment.InitialSettingFragment;
 import com.google.android.material.navigation.NavigationView;
-import com.platforming.autonomy.clazz.Post;
+import com.platforming.autonomy.clazz.BulletinBoard;
 
 import java.util.Arrays;
 
@@ -133,16 +134,24 @@ public class MainActivity extends AppCompatActivity {
         mainExpandableList.addChild(1, "학사일정", new SchoolScheduleFragment());
 
         mainExpandableList.addParent("게시판", R.drawable.ic_baseline_format_list_bulleted_24);
-        mainExpandableList.addChild(2, "자유게시판", toggleActivity(BulletinBoardActivity.class, Post.FREE_BULLETIN_BOARD));
-        mainExpandableList.addChild(2, "질문게시판", toggleActivity(BulletinBoardActivity.class, Post.QUESTION_BULLETIN_BOARD));
-        mainExpandableList.addChild(2, "학교게시판", toggleActivity(BulletinBoardActivity.class, Post.SCHOOL_BULLETIN_BOARD));
+        FirestoreManager firestoreManager = new FirestoreManager();
+        firestoreManager.getBulletinBoardIds(new ListenerInterface() {
+            @Override
+            public void onSuccess() {
+                for(String id : BulletinBoard.Manager.ids) {
+                    mainExpandableList.addChild(2, id, toggleActivity(BulletinBoardActivity.class, "bulletinId", id));
+                    BulletinBoard.Manager.bulletinBoards.put(id, new BulletinBoard(id));
+                }
+                mainExpandableList.updateAdapter();
+            }
+        });
 
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
         mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_web_24);
-        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, InitApplication.HOMEPAGE));
-        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, InitApplication.RIROSCHOOL));
+        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, "tag", "HOMEPAGE"));
+        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, "tag", "RIROSCHOOL"));
 
         mainExpandableList.setAdapter();
 
@@ -156,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private OnChildClickInterface toggleActivity(Class clazz, int type){
+    private OnChildClickInterface toggleActivity(Class clazz, String name, String value){
         return () -> {
             Intent intent = new Intent(this, clazz);
-            intent.putExtra("type", type);
+            intent.putExtra(name, value);
             startActivity(intent);
             overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
         };

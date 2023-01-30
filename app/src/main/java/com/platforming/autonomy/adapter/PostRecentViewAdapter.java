@@ -1,6 +1,7 @@
 package com.platforming.autonomy.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.platforming.autonomy.clazz.Post;
+import com.platforming.autonomy.clazz.BulletinBoard;
 import com.platforming.autonomy.interfaze.ListenerInterface;
 import com.android.autonomy.R;
 
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 
 public class PostRecentViewAdapter extends RecyclerView.Adapter<PostRecentViewAdapter.ViewHolder> {
 
-    private ArrayList<Post> mData;
-    private ArrayList<String> mTypes;
+    private BulletinBoard mData;
 
     ListenerInterface listenerInterface;
 
@@ -52,9 +52,8 @@ public class PostRecentViewAdapter extends RecyclerView.Adapter<PostRecentViewAd
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public PostRecentViewAdapter(ArrayList<Post> data) {
+    public PostRecentViewAdapter(BulletinBoard data) {
         mData = data;
-        mTypes = Post.getTypes();
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
@@ -71,8 +70,8 @@ public class PostRecentViewAdapter extends RecyclerView.Adapter<PostRecentViewAd
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(PostRecentViewAdapter.ViewHolder holder, int position) {
-        Post post = mData.get(position);
-        holder.type.setText(mTypes.get(post.getType()));
+        BulletinBoard.Post post = mData.getPosts().get(position);
+        holder.type.setText(post.getBulletinId());
         holder.title.setText(post.getTitle());
         holder.date.setText(formatTimeString(post.getDate()));
     }
@@ -80,7 +79,7 @@ public class PostRecentViewAdapter extends RecyclerView.Adapter<PostRecentViewAd
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override
     public int getItemCount() {
-        return mData.size() ;
+        return mData.getPosts().size() ;
     }
 
     public static String formatTimeString(long regTime) {

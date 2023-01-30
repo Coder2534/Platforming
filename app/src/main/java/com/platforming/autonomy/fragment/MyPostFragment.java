@@ -17,7 +17,7 @@ import com.platforming.autonomy.activity.BulletinBoardActivity;
 import com.platforming.autonomy.activity.MainActivity;
 import com.platforming.autonomy.adapter.PostViewAdapter;
 import com.platforming.autonomy.clazz.FirestoreManager;
-import com.platforming.autonomy.clazz.Post;
+import com.platforming.autonomy.clazz.BulletinBoard;
 import com.platforming.autonomy.interfaze.ListenerInterface;
 import com.android.autonomy.R;
 
@@ -30,19 +30,19 @@ public class MyPostFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypost, container, false);
 
-        ((MainActivity)getActivity()).setTitle("나의 게시물");
+        ((MainActivity)getActivity()).setTitle("내 게시물");
+        BulletinBoard bulletinBoard = BulletinBoard.Manager.bulletinBoards.get("_MY");
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_mypost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        postViewAdapter = new PostViewAdapter(Post.getMyPosts(), Post.getTypes());
+        postViewAdapter = new PostViewAdapter(bulletinBoard);
         postViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
-                Post post = Post.getMyPosts().get(position);
+                BulletinBoard.Post post = bulletinBoard.getPosts().get(position);
                 Activity activity = getActivity();
                 Intent intent = new Intent(activity, BulletinBoardActivity.class);
-                intent.putExtra("post", Post.POST_MY);
-                intent.putExtra("type", post.getType());
+                intent.putExtra("bulletinId", "_MY");
                 intent.putExtra("id", post.getId());
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
@@ -53,17 +53,17 @@ public class MyPostFragment extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                int start = Post.getMyPosts().size();
+                int start = bulletinBoard.getPosts().size();
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
                     FirestoreManager firestoreManager = new FirestoreManager();
                     if(start == 0){
-                        Post.getMyPosts().clear();
+                        bulletinBoard.getPosts().clear();
                         postViewAdapter.notifyDataSetChanged();
 
                         firestoreManager.readMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                                postViewAdapter.notifyItemInserted(bulletinBoard.getPosts().size() - 1);
                             }
 
                             @Override
@@ -76,7 +76,7 @@ public class MyPostFragment extends Fragment {
                         firestoreManager.readExtraMyPostData(new ListenerInterface() {
                             @Override
                             public void onSuccess() {
-                                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                                postViewAdapter.notifyItemInserted(bulletinBoard.getPosts().size() - 1);
                             }
 
                             @Override
@@ -89,13 +89,13 @@ public class MyPostFragment extends Fragment {
             }
         });
 
-        Post.getMyPosts().clear();
+        bulletinBoard.getPosts().clear();
         postViewAdapter.notifyDataSetChanged();
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readMyPostData(new ListenerInterface() {
             @Override
             public void onSuccess() {
-                postViewAdapter.notifyItemInserted(Post.getMyPosts().size() - 1);
+                postViewAdapter.notifyItemInserted(bulletinBoard.getPosts().size() - 1);
             }
 
             @Override

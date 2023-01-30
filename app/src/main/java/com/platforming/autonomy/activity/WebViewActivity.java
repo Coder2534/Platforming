@@ -24,6 +24,7 @@ import com.platforming.autonomy.clazz.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -49,13 +50,13 @@ public class WebViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web_view);
 
         Intent intent = getIntent();
-        int type = intent.getIntExtra("type", 0);
+        String tag = intent.getStringExtra("tag");
 
-        if(type == InitApplication.HOMEPAGE){
+        if(Objects.equals(tag, "HOMEPAGE")){
             setListener();
             loadWeb("http://school.gyo6.net/geumohs");
         }
-        else if(type == InitApplication.RIROSCHOOL){
+        else if(Objects.equals(tag, "RIROSCHOOL")){
             try{
                 startActivity(getPackageManager().getLaunchIntentForPackage("com.rirosoft.riroschool"));
                 finish();
@@ -64,7 +65,7 @@ public class WebViewActivity extends AppCompatActivity {
                 loadWeb("http://geumo.riroschool.kr/");
             }
         }
-        else if(type == InitApplication.SELFDIAGNOSIS){
+        else if(Objects.equals(tag, "SELFDIAGNOSIS")){
             if(User.user.getDailyTasks().get(1) < 1){
                 List<Long> dailyTasks = new LinkedList<>(User.user.getDailyTasks());
                 dailyTasks.set(1, 1L);

@@ -5,6 +5,7 @@ import static com.platforming.autonomy.clazz.User.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import com.platforming.autonomy.adapter.FragmentSliderAdapter;
 import com.platforming.autonomy.adapter.PostRecentViewAdapter;
 import com.platforming.autonomy.clazz.CustomDialog;
 import com.platforming.autonomy.clazz.FirestoreManager;
-import com.platforming.autonomy.clazz.Post;
+import com.platforming.autonomy.clazz.BulletinBoard;
 import com.platforming.autonomy.interfaze.ListenerInterface;
 import com.android.autonomy.R;
 import com.platforming.autonomy.InitApplication;
@@ -86,25 +87,25 @@ public class MainPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("type", InitApplication.SELFDIAGNOSIS);
+                intent.putExtra("tag", "SELFDIAGNOSIS");
                 startActivity(intent);
             }
         });
 
         //최근 게시물
+        BulletinBoard.Manager.bulletinBoards.put("_RECENT", new BulletinBoard("_RECENT"));
+        BulletinBoard bulletinBoard = BulletinBoard.Manager.bulletinBoards.get("_RECENT");
         RecyclerView recyclerView = view.findViewById(R.id.rv_mainpage_recentpost);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        PostRecentViewAdapter recentViewAdapter = new PostRecentViewAdapter(Post.getRecentPosts());
+        PostRecentViewAdapter recentViewAdapter = new PostRecentViewAdapter(bulletinBoard);
         recentViewAdapter.setListenerInterface(new ListenerInterface() {
             @Override
             public void onSuccess(int position) {
-                Post post = Post.getRecentPosts().get(position);
                 Activity activity = getActivity();
 
                 Intent intent = new Intent(activity, BulletinBoardActivity.class);
-                intent.putExtra("post", Post.POST_RECENT);
-                intent.putExtra("type", post.getType());
-                intent.putExtra("id", post.getId());
+                intent.putExtra("bulletinId", bulletinBoard.getId());
+                intent.putExtra("postId", bulletinBoard.getPosts().get(position).getId());
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
             }

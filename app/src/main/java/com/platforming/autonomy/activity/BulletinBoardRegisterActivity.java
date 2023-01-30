@@ -52,7 +52,7 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
 
         activity = this;
 
-        int type = getIntent().getIntExtra("type", 0);
+        String bulletinId = getIntent().getStringExtra("bulletinId");
 
         EditText editText_title = findViewById(R.id.et_noticeboard_register_title);
         EditText editText_detail = findViewById(R.id.et_noticeboard_register_detail);
@@ -107,7 +107,7 @@ public class BulletinBoardRegisterActivity extends AppCompatActivity {
 
                 Map<String, Object> data = new HashMap<>();
                 data.put("uid", user.getUid());
-                data.put("type", type);
+                data.put("bulletinId", bulletinId);
                 data.put("profileIndex", user.getProfileIndex());
                 data.put("nickname", user.getNickname());
                 data.put("date", System.currentTimeMillis());

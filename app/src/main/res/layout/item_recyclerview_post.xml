@@ -36,7 +36,7 @@
         android:text="시간 | 이름" />
 
     <TextView
-        android:id="@+id/tv_recyclerview_post_type"
+        android:id="@+id/tv_recyclerview_post_bulletin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"

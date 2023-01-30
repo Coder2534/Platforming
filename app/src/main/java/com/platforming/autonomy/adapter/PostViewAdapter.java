@@ -9,16 +9,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.platforming.autonomy.clazz.Post;
+import com.platforming.autonomy.clazz.BulletinBoard;
 import com.platforming.autonomy.interfaze.ListenerInterface;
 import com.android.autonomy.R;
 
-import java.util.ArrayList;
-
 public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHolder> {
 
-    private ArrayList<Post> mData;
-    private ArrayList<String> mTypes = null;
+    private final BulletinBoard mData;
 
     ListenerInterface listenerInterface;
 
@@ -33,7 +30,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
         TextView info;
         TextView like;
         TextView comment;
-        TextView type;
+        TextView bulletin;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -44,7 +41,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
             info = itemView.findViewById(R.id.tv_recyclerview_post_info);
             like = itemView.findViewById(R.id.tv_recyclerview_post_like);
             comment = itemView.findViewById(R.id.tv_recyclerview_post_comment);
-            type = itemView.findViewById(R.id.tv_recyclerview_post_type);
+            bulletin = itemView.findViewById(R.id.tv_recyclerview_post_bulletin);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,13 +56,8 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    public PostViewAdapter(ArrayList<Post> data) {
+    public PostViewAdapter(BulletinBoard data) {
         mData = data;
-    }
-
-    public PostViewAdapter(ArrayList<Post> list, ArrayList<String> types) {
-        mData = list ;
-        mTypes = types;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
@@ -82,25 +74,25 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.ViewHo
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
     public void onBindViewHolder(PostViewAdapter.ViewHolder holder, int position) {
-        Post post = mData.get(position);
+        BulletinBoard.Post post = mData.getPosts().get(position);
         holder.title.setText(post.getTitle());
         holder.detail.setText(post.getDetail());
         holder.info.setText(formatTimeString(post.getDate()) + " | " + post.getNickname());
         holder.like.setText(String.valueOf(post.getLikes().size()));
         holder.comment.setText(String.valueOf(post.getCommentSize()));
-        if(mTypes != null){
+        if(BulletinBoard.Manager.ids != null){
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.like.getLayoutParams();
-            params.addRule(RelativeLayout.ALIGN_BASELINE, R.id.tv_recyclerview_post_type);
+            params.addRule(RelativeLayout.ALIGN_BASELINE, R.id.tv_recyclerview_post_bulletin);
             holder.like.setLayoutParams(params);
-            holder.type.setText(mTypes.get(post.getType()));
-            holder.type.setVisibility(View.VISIBLE);
+            holder.bulletin.setText(post.getBulletinId());
+            holder.bulletin.setVisibility(View.VISIBLE);
         }
     }
 
     // getItemCount() - 전체 데이터 갯수 리턴.
     @Override
     public int getItemCount() {
-        return mData.size() ;
+        return mData.getPosts().size();
     }
 
     public static String formatTimeString(long regTime) {
