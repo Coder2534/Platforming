@@ -134,8 +134,9 @@ public class FirestoreManager {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    BulletinBoard.Manager.bulletinBoards.put(bulletinId, new BulletinBoard(bulletinId));
                     ArrayList<BulletinBoard.Post> posts = BulletinBoard.Manager.bulletinBoards.get(bulletinId).getPosts();
+                    posts.clear();
+
                     int size = task.getResult().size();
                     if(size == 0){
                         listenerInterface.onSuccess();
@@ -145,8 +146,6 @@ public class FirestoreManager {
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                             BulletinBoard.Post post = new BulletinBoard.Post(documentSnapshot.getId(), documentSnapshot.getData());
                             posts.add(post);
-                            Log.d("test1", String.valueOf(posts.size()));
-                            Log.d("test2", String.valueOf(BulletinBoard.Manager.bulletinBoards.get(bulletinId).getPosts().size()));
                             listenerInterface.onSuccess();
                             readCommentSize(post, posts.size(), listenerInterface);
                             if (++i == size)

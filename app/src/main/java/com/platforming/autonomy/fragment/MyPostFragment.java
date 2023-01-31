@@ -30,7 +30,7 @@ public class MyPostFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypost, container, false);
 
-        ((MainActivity)getActivity()).setTitle("내 게시물");
+        ((MainActivity)getActivity()).setTitle("나의 게시물");
         BulletinBoard bulletinBoard = BulletinBoard.Manager.bulletinBoards.get("_MY");
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_mypost);
@@ -43,7 +43,7 @@ public class MyPostFragment extends Fragment {
                 Activity activity = getActivity();
                 Intent intent = new Intent(activity, BulletinBoardActivity.class);
                 intent.putExtra("bulletinId", "_MY");
-                intent.putExtra("id", post.getId());
+                intent.putExtra("postId", post.getId());
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.start_activity_noticeboard, R.anim.none);
             }

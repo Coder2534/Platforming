@@ -42,7 +42,6 @@ public class BulletinBoardListFragment extends Fragment {
     ListenerInterface listenerInterface = new ListenerInterface() {
         @Override
         public void onSuccess() {
-            Log.d("Test", String.valueOf(bulletinBoard.getPosts().size() - 1));
             postViewAdapter.notifyItemInserted(bulletinBoard.getPosts().size() - 1);
         }
 
@@ -62,7 +61,6 @@ public class BulletinBoardListFragment extends Fragment {
         String postId = args.getString("postId");
 
         bulletinBoard = BulletinBoard.Manager.bulletinBoards.get(bulletinId);
-        Log.d("test3", bulletinBoard.getId());
         RecyclerView recyclerView = view.findViewById(R.id.rv_bulletinboard_list_post);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         postViewAdapter = new PostViewAdapter(bulletinBoard);
@@ -163,6 +161,8 @@ public class BulletinBoardListFragment extends Fragment {
     }
 
     private void refreshPostList(String bulletinId){
+        bulletinBoard.getPosts().clear();
+        postViewAdapter.notifyDataSetChanged();
         FirestoreManager firestoreManager = new FirestoreManager();
         firestoreManager.readPostData(bulletinId, listenerInterface);
     }
