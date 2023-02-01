@@ -124,7 +124,9 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_profile_cat_background.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_profile_dog_background.xml" value="0.4185" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/drawable/ic_profile_rabbit_background.xml" value="0.4185" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/activity_chat_room.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/activity_noticeboard.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/activity_noticeboard_register.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/customdialog_profile.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/dialog_attendancecheck.xml" value="0.5536458333333333" />
@@ -156,6 +158,7 @@
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_listview_child.xml" value="0.15" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_listview_schoolintroduce.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_noticeboard_comment.xml" value="0.25" />
+        <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_chat.xml" value="0.5451282051282051" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post.xml" value="0.67" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_post_comment.xml" value="0.5536458333333333" />
         <entry key="..\:/Projects/AndroidStudio/Platforming/app/src/main/res/layout/item_recyclerview_schedule_edit.xml" value="0.5536458333333333" />

@@ -146,12 +146,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_comment_24);
+        mainExpandableList.addChild(5, "공식 홈페이지", toggleActivity(ChatRoomActivity.class, "tag", "HOMEPAGE"));
+
         mainExpandableList.addParent("포인트 상점", R.drawable.ic_baseline_shopping_cart_24);
-        mainExpandableList.addChild(3, "디자인", new PointStoreFragment());
+        mainExpandableList.addChild(4, "디자인", new PointStoreFragment());
 
         mainExpandableList.addParent("학교 홈페이지", R.drawable.ic_baseline_web_24);
-        mainExpandableList.addChild(4, "공식 홈페이지", toggleActivity(WebViewActivity.class, "tag", "HOMEPAGE"));
-        mainExpandableList.addChild(4, "리로스쿨", toggleActivity(WebViewActivity.class, "tag", "RIROSCHOOL"));
+        mainExpandableList.addChild(5, "공식 홈페이지", toggleActivity(WebViewActivity.class, "tag", "HOMEPAGE"));
+        mainExpandableList.addChild(5, "리로스쿨", toggleActivity(WebViewActivity.class, "tag", "RIROSCHOOL"));
 
         mainExpandableList.setAdapter();
 
